@@ -7,20 +7,22 @@
   </head>
 
   <body>
-    <h1>I.Sicily token ID resolver</h1>
+    <h1>I.Sicily element ID resolver</h1>
     <ul>
       <li>Uncompressed ID: ISic012345-6789, e.g. ISic000002-0010</li>
       <li>Compressed ID: ABCDE, where each digit may be any character a-z or A-Z, e.g. zzzzz = ISic038020-4031</li>
     </ul>
 
-    <h2>Operation</h2>
-    <div>
-      <input id="compressionRad" type="radio" name="operation" checked/>
-      <label for="compressionRad">Compress/Decompress</label>
-      <input id="midpointRad" type="radio" name="operation"/>
-      <label for="midpointRad">Find midpoint</label>
-    </div>
-
+    <form id="operationForm">
+      <fieldset id="radioFieldSet">
+        <legend>What would you like to do?</legend>
+        <input id="compressionRad" type="radio" name="operation" checked/>
+        <label for="compressionRad"><b>Compress/decompress</b> an I.Sicily element ID</label>
+        <br>
+        <input id="midpointRad" type="radio" name="operation"/>
+        <label for="midpointRad">Find the <b>midpoint</b> between two IDs</label>
+      </fieldset>
+    </form>
 
     <h2>IDs:</h2>
     <input id="text-input1" type="text"/>

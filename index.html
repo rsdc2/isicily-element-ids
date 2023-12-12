@@ -16,23 +16,25 @@
     <form id="operationForm">
       <fieldset id="radioFieldSet">
         <legend>What would you like to do?</legend>
-        <input id="compressionRad" type="radio" name="operation" checked/>
+        <input id="compressionRad" type="radio" name="operation" value="compression" checked/>
         <label for="compressionRad"><b>Compress/decompress</b> an I.Sicily element ID</label>
         <br>
-        <input id="midpointRad" type="radio" name="operation"/>
+        <input id="midpointRad" type="radio" name="operation" value="midpoint"/>
         <label for="midpointRad">Find the <b>midpoint</b> between two IDs</label>
       </fieldset>
     </form>
 
-    <h2>IDs:</h2>
-    <input id="text-input1" type="text"/>
-    <input id="text-input2" type="text"/>
+    <h2>IDs</h2>
+    <div id="textInputDiv">
+      <input id="text-input1" type="text"/>
+      <input id="text-input2" type="text" hidden/>
 
-    <button id="compress-btn">Compress</button>
-    <button id="decompress-btn">Decompress</button>
-    <button id="midpoint-btn">Midpoint</button>
+      <button id="compress-btn">Compress</button>
+      <button id="decompress-btn">Decompress</button>
+      <button id="midpoint-btn" hidden>Midpoint</button>
+    </div>
 
-    <h2>Result:</h2>
+    <h2>Result</h2>
     <p id="result"></p>
     <script src="./src/utils.js"></script>
     <script src="./src/formatting.js"></script>

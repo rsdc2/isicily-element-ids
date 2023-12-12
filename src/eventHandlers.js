@@ -4,7 +4,7 @@
  */
 
 const handleCompress = (ev) => {
-    document.getElementById("result").textContent = 
+    result.textContent = 
         decToBase(idToConvert(), BASE100)
 }
 
@@ -13,7 +13,7 @@ const handleCompress = (ev) => {
  * @param {MouseEvent} ev 
  */
 const handleDecompress = (ev) => {
-    document.getElementById("result").textContent = 
+    result.textContent = 
         insertISic(String(baseToDec(inputIdElem1.value, BASE100)))
 }
 
@@ -22,6 +22,38 @@ const handleDecompress = (ev) => {
  * @param {MouseEvent} ev 
  */
 const handleMidPoint = (ev) => {
-    document.getElementById("result").textContent = 
-        midPointBetweenValues(inputIdElem1.value, inputIdElem2.value, BASE100)
+    result.textContent = 
+        midPointBetweenValues(
+            inputIdElem1.value, 
+            inputIdElem2.value, 
+            BASE100
+        )
+}
+
+
+const handleRadio = () => {
+    const sel = 
+        /** @type {string} */
+        operationForm.elements['operation'].value
+
+    textInputDiv.hidden = true
+
+    switch (sel) {
+        case "compression":
+            inputIdElem2.hidden = true
+            midPointBtn.hidden = true
+
+            compressBtn.hidden = false
+            decompressBtn.hidden = false
+            break;            
+        case "midpoint":
+            inputIdElem2.hidden = false
+            midPointBtn.hidden = false
+
+            compressBtn.hidden = true
+            decompressBtn.hidden = true
+            break;
+    }
+
+    textInputDiv.hidden = false
 }

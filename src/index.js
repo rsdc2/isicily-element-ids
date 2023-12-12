@@ -2,8 +2,7 @@
 const idToConvert = () => BigInt(inputIdElem1.value)
 
 function addListeners() {
-    compressBtn.addEventListener("click", handleCompress)
-    decompressBtn.addEventListener("click", handleDecompress)
+    compressBtn.addEventListener("click", handleCompression)
     midPointBtn.addEventListener("click", handleMidPoint)
     compressionRad.addEventListener("click", handleRadio)
     midpointRad.addEventListener("click", handleRadio)

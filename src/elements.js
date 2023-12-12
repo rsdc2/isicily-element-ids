@@ -7,9 +7,9 @@ const compressionRad =
     /** @type {HTMLInputElement} */ 
     (document.getElementById("compressionRad"))
 
-const decompressBtn = 
-    /** @type {HTMLButtonElement} */ 
-    (document.getElementById("decompress-btn"))
+// const decompressBtn = 
+//     /** @type {HTMLButtonElement} */ 
+//     (document.getElementById("decompress-btn"))
 
 const inputIdElem1 = 
     /** @type {HTMLInputElement} */ 

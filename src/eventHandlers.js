@@ -21,6 +21,22 @@ const handleDecompress = (ev) => {
  * 
  * @param {MouseEvent} ev 
  */
+const handleCompression = (ev) => {
+    const inpt = removeISic(inputIdElem1.value)
+
+    if (isDecimal(inpt)) {
+        result.textContent = decToBase(BigInt(inpt), BASE100)
+    } else {
+        result.textContent = insertISic(String(baseToDec(inpt, BASE100)))
+    }
+
+    // console.error();
+}
+
+/**
+ * 
+ * @param {MouseEvent} ev 
+ */
 const handleMidPoint = (ev) => {
     result.textContent = 
         midPointBetweenValues(
@@ -44,14 +60,12 @@ const handleRadio = () => {
             midPointBtn.hidden = true
 
             compressBtn.hidden = false
-            decompressBtn.hidden = false
             break;            
         case "midpoint":
             inputIdElem2.hidden = false
             midPointBtn.hidden = false
 
             compressBtn.hidden = true
-            decompressBtn.hidden = true
             break;
     }
 

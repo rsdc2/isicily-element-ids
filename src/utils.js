@@ -7,6 +7,25 @@
 
 const toUpper = (s) => s.toUpperCase() 
 
+/**
+ * Returns true if the string is composed only of 
+ * characters 0-9
+ * @param {string} s 
+ * @returns {boolean}
+ */
+const isDecimal = (s) => {
+    
+    const matches = s.match(/[0-9]+/g)
+
+    if (matches == null || matches.length === 0) {
+        return false
+    }
+    
+    return s
+        .match(/[0-9]+/g)[0]
+        .length == s.length
+}
+
 // /** 
 //  * @param {Iterable.<HTMLInputElement>} l
 //  * @returns {string}: the ID of the currently selected radio element

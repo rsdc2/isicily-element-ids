@@ -60,7 +60,7 @@ function baseToDec(baseVal, base) {
 
 
 /**
- * 
+ * Finds the midpoint between two values in a given base
  * @param {string} val1 
  * @param {string} val2 
  * @param {Array.<string>} baseChars

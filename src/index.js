@@ -1,17 +1,38 @@
-
+    
 /**
  * @returns {bigint}
  */
-const idToConvert = () => BigInt(getInputIdElem1().value)
+const idToConvert = () => BigInt(inputIdElem1().value)
 
-const compress = () => {
+/**
+ * 
+ * @param {MouseEvent} ev 
+ */
+
+const handleCompress = (ev) => {
     document.getElementById("result").textContent = decToBase(idToConvert(), BASE100)
 }
 
-const decompress = () => {
-    document.getElementById("result").textContent = insertISic(String(baseToDec(getInputIdElem1().value, BASE100)))
+/**
+ * 
+ * @param {MouseEvent} ev 
+ */
+const handleDecompress = (ev) => {
+    document.getElementById("result").textContent = insertISic(String(baseToDec(inputIdElem1().value, BASE100)))
 }
 
-const getMidPoint = () => {
-    document.getElementById("result").textContent = midPointBetweenValues(getInputIdElem1().value, getInputIdElem2().value, BASE100)
+/**
+ * 
+ * @param {MouseEvent} ev 
+ */
+const handleMidPoint = (ev) => {
+    document.getElementById("result").textContent = midPointBetweenValues(inputIdElem1().value, inputIdElem2().value, BASE100)
 }
+
+function addListeners() {
+    compressBtn().addEventListener("click", handleCompress)
+    decompressBtn().addEventListener("click", handleDecompress)
+    midPointBtn().addEventListener("click", handleMidPoint)
+}
+
+addListeners()

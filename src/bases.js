@@ -55,7 +55,7 @@ function baseToDec(baseVal, base) {
     const getDecValue = (acc, v, idx) => 
         acc + BigInt(base.indexOf(v)) * BigInt(Math.pow(base.length, idx))
 
-    return BigInt(chars.reduceRight(getDecValue, 0n))
+    return chars.reduceRight(getDecValue, 0n)
 }
 
 

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="UTF-8">
+    <title>Convert I.Sicily ID</title>-
+  </head>
+
+  <body>
+    <h1>I.Sicily token ID resolver</h1>
+    <ul>
+      <li>Uncompressed ID: ISic012345-6789, e.g. ISic000002-0010</li>
+      <li>Compressed ID: ABCDE, where each digit may be any character a-z or A-Z, e.g. zzzzz = ISic038020-4031</li>
+    </ul>
+
+    <h2>IDs:</h2>
+    <input id="text-input1" type="text"/>
+    <input id="text-input2" type="text"/>
+    <button id="compress-btn" onclick="compress()">Compress</button>
+    <button id="decompress-btn" onclick="decompress()">Decompress</button>
+    <button id="mid-btn" onclick="getMidPoint()">Midpoint</button>
+
+    <h2>Result:</h2>
+    <p id="result"></p>
+    <script src="./src/utils.js"></script>
+    <script src="./src/formatting.js"></script>
+    <script src="./src/constants.js"></script>
+    <script src="./src/bases.js"></script>
+    <script src="./src/frontend.js"></script>
+    <script src="./src/index.js"></script>
+
+    <footer>
+        <div class="footer">
+            <p>This software was written by Robert Crellin as part of the Crossreads project at the Faculty of Classics, University of Oxford, and is licensed under the BSD 3-clause license. This project has received funding from the European Research Council (ERC) under the European Union’s Horizon 2020 research and innovation programme (grant agreement No 885040, “Crossreads”). For further details see <a href="https://github.com/rsdc2/ISicID" target="_blank">the source code on Github</a>.</p> 
+        </div>
+    </footer>
+
+  </body>
+
+</html>

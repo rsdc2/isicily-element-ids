@@ -13,6 +13,15 @@
       <li>Compressed ID: ABCDE, where each digit may be any character a-z or A-Z, e.g. zzzzz = ISic038020-4031</li>
     </ul>
 
+    <h2>Operation</h2>
+    <div>
+      <input id="compressionRad" type="radio" name="operation" checked/>
+      <label for="compressionRad">Compress/Decompress</label>
+      <input id="midpointRad" type="radio" name="operation"/>
+      <label for="midpointRad">Find midpoint</label>
+    </div>
+
+
     <h2>IDs:</h2>
     <input id="text-input1" type="text"/>
     <input id="text-input2" type="text"/>
@@ -27,7 +36,7 @@
     <script src="./src/formatting.js"></script>
     <script src="./src/constants.js"></script>
     <script src="./src/bases.js"></script>
-    <script src="./src/frontend.js"></script>
+    <script src="./src/elements.js"></script>
     <script src="./src/eventHandlers.js"></script>
     <script src="./src/index.js"></script>
 

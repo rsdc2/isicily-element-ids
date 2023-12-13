@@ -30,7 +30,7 @@ function decToBase(dec, baseChars) {
         return (q < base ? [q, r] : [...f(q), r])
     }
 
-    const l = f(dec).map( (value) => baseChars[Number(value)] )
+    const l = f(dec).reverse().map( (value) => baseChars[Number(value)] )
     return l.join("")
 
 }
@@ -71,5 +71,6 @@ function midPointBetweenValues(val1, val2, baseChars) {
     const baseVal1Dec = baseToDec(val1, baseChars)
     const baseVal2Dec = baseToDec(val2, baseChars)
     const mid = (baseVal1Dec + baseVal2Dec) / 2n
+    console.log(mid)
     return decToBase(mid, baseChars)
 }

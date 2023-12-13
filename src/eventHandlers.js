@@ -24,10 +24,10 @@ const handleDecompress = (ev) => {
 const handleCompression = (ev) => {
     const inpt = inputIdElem1.value
 
-    const validateLong = STRICT ? validateLongID : isDecimal
+    const validateLong = STRICT ? validateLongID : (x /** @type {string} */) => isDecimal(removeISic(x))
     const validateShort = STRICT ? validateShortID : identity
 
-    if (validateLong(removeISic(inpt))) {
+    if (validateLong(inpt)) {
         result.textContent = decToBase(BigInt(removeISic(inpt)), BASE100)
     } else if (validateShort(inpt)) {
         result.textContent = insertISic(String(baseToDec(inpt, BASE100)))

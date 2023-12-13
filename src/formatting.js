@@ -16,6 +16,6 @@ function insertISic(s) {
  * @param {string} s 
  * @returns {string}
  */
-function removeISic(s) {
+const removeISic = (s) => {
     return s.replace("ISic", "").replace("-", "")
 }

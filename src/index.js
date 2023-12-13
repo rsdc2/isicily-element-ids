@@ -6,6 +6,8 @@ function addListeners() {
     midPointBtn.addEventListener("click", handleMidPoint)
     compressionRad.addEventListener("click", handleRadio)
     midpointRad.addEventListener("click", handleRadio)
+    flipBtn.addEventListener("click", handleFlip)
 }
 
 addListeners()
+handleRadio()

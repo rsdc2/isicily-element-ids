@@ -29,6 +29,18 @@ const handleCompression = (ev) => {
  * 
  * @param {MouseEvent} ev 
  */
+const handleFlip = (ev) => {
+    const inpt = inputIdElem1.value
+    const res = result.textContent
+
+    result.textContent = inpt.replace("= ", "").replace("?", "")
+    inputIdElem1.value = res.replace("= ", "").replace("?", "")
+}
+
+/**
+ * 
+ * @param {MouseEvent} ev 
+ */
 const handleMidPoint = (ev) => {
 
     const v1 = inputIdElem1.value
@@ -44,7 +56,7 @@ const handleMidPoint = (ev) => {
         return
     }
 
-    
+
 
     result.textContent = 
         "... ".concat(
@@ -76,6 +88,7 @@ const handleRadio = () => {
             result.textContent = "= ?"
 
             compressBtn.hidden = false
+            flipBtn.hidden = false
             break;            
         case "midpoint":
             inputIdElem2.hidden = false
@@ -83,6 +96,7 @@ const handleRadio = () => {
             result.textContent = "... ? ..."
 
             compressBtn.hidden = true
+            flipBtn.hidden = true
             break;
     }
 

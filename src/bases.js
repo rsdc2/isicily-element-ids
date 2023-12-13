@@ -30,7 +30,7 @@ function decToBase(dec, baseChars) {
         return (q < base ? [q, r] : [...f(q), r])
     }
 
-    const l = f(dec).reverse().map( (value) => baseChars[Number(value)] )
+    const l = f(dec).map( (value) => baseChars[Number(value)] )
     return l.join("")
 
 }
@@ -50,13 +50,16 @@ function baseToDec(baseVal, base) {
      * @param {bigint} acc 
      * @param {string} v 
      * @param {number} idx 
+     * @param {Array.<string>} arr
      * @returns {bigint}
      */
-    const getDecValue = (acc, v, idx) => 
-        acc + BigInt(base.indexOf(v)) * BigInt(base.length ** idx)
+    const getDecValue = (acc, v, idx, arr) => {
+        const idx_ = arr.length - 1 - idx
+        return acc + BigInt(base.indexOf(v)) * BigInt(base.length ** idx_)
+    }
 
-    return chars.reduceRight(getDecValue, 0n)
-}
+    return chars.reduce(getDecValue, 0n)
+}   
 
 
 /**
@@ -73,9 +76,19 @@ function midPointBetweenValues(val1, val2, baseChars) {
 
     if (baseVal1Dec > baseVal2Dec) {
         alert("First ID is after second ID")
-        return
+        return "?"
     }
-    
+
+    if (baseVal1Dec === baseVal2Dec) {
+        alert("IDs are equal")
+        return "?"
+    }
+
+    if (baseVal1Dec === baseVal2Dec + 1n || baseVal1Dec === baseVal2Dec - 1n) {
+        alert("No spare slots between values")
+        return "?"
+    }
+
     const mid = (baseVal1Dec + baseVal2Dec) / 2n
     return decToBase(mid, baseChars)
 }

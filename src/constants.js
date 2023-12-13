@@ -56,3 +56,5 @@ const LOWERCASEGREEK = [
 
 const UPPERCASELATIN = LOWERCASELATIN.map(toUpper)
 const UPPERCASEGREEK = LOWERCASEGREEK.map(toUpper)
+
+const STRICT = false

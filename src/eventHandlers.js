@@ -24,15 +24,16 @@ const handleDecompress = (ev) => {
 const handleCompression = (ev) => {
     const inpt = inputIdElem1.value
 
-    if (validateLongID(inpt)) {
+    const validateLong = STRICT ? validateLongID : isDecimal
+    const validateShort = STRICT ? validateShortID : identity
+
+    if (validateLong(removeISic(inpt))) {
         result.textContent = decToBase(BigInt(removeISic(inpt)), BASE100)
-    } else if (validateShortID(inpt)) {
+    } else if (validateShort(inpt)) {
         result.textContent = insertISic(String(baseToDec(inpt, BASE100)))
     } else {
         result.textContent = "Invalid compressed or uncompressed ID"
     }
-
-    // console.error();
 }
 
 /**

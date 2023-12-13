@@ -9,8 +9,8 @@
   <body>
     <h1>I.Sicily element ID resolver</h1>
     <ul>
-      <li>Uncompressed ID: ISic012345-6789, e.g. ISic000002-0010</li>
-      <li>Compressed ID: ABCDE, where each digit may be any character a-z or A-Z, e.g. zzzzz = ISic038020-4031</li>
+      <li>Uncompressed ID: ISic012345-01234, e.g. ISic000002-00100</li>
+      <li>Compressed ID: ABCDE, where each digit may be any character a-z, A-Z, α-ω, Α-Ω, e.g. zzzzz = ISic051515-15151</li>
     </ul>
 
     <form id="operationForm">
@@ -24,17 +24,20 @@
       </fieldset>
     </form>
 
-    <h2>IDs</h2>
-    <div id="textInputDiv">
-      <input id="text-input1" type="text"/>
-      <input id="text-input2" type="text" hidden/>
+    <br>
 
-      <button id="compress-btn">Compress/Decompress</button>
-      <button id="midpoint-btn" hidden>Midpoint</button>
-    </div>
+    <fieldset id="inputFieldSet">
+      <legend><button id="midpoint-btn" hidden>Find midpoint</button><button id="compress-btn">Compress/Decompress</button></legend>
+      <div id="textInputDiv">
+        <input id="text-input1" type="text"/>
+        <span id="result">= ?</span>
+        <input id="text-input2" type="text" hidden/>
 
-    <h2>Result</h2>
-    <p id="result"></p>
+        <br>
+        
+      </div>
+    </fieldset>
+
     <script src="./src/utils.js"></script>
     <script src="./src/formatting.js"></script>
     <script src="./src/validate.js"></script>

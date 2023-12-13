@@ -1,21 +1,12 @@
 /**
  * 
- * @param {MouseEvent} ev 
+ * @param {string} x 
+ * @returns {boolean}
  */
 
-const handleCompress = (ev) => {
-    result.textContent = 
-        decToBase(idToConvert(), BASE100)
-}
 
-/**
- * 
- * @param {MouseEvent} ev 
- */
-const handleDecompress = (ev) => {
-    result.textContent = 
-        insertISic(String(baseToDec(inputIdElem1.value, BASE100)))
-}
+const validateLongID = STRICT ? validateLongIDStrict : validateLongIdNonStrict
+const validateShortID = STRICT ? validateShortIDStrict : validateShortIdNonStrict
 
 /**
  * 
@@ -24,28 +15,42 @@ const handleDecompress = (ev) => {
 const handleCompression = (ev) => {
     const inpt = inputIdElem1.value
 
-    const validateLong = STRICT ? validateLongID : (x /** @type {string} */) => isDecimal(removeISic(x))
-    const validateShort = STRICT ? validateShortID : identity
-
-    if (validateLong(inpt)) {
-        result.textContent = decToBase(BigInt(removeISic(inpt)), BASE100)
-    } else if (validateShort(inpt)) {
-        result.textContent = insertISic(String(baseToDec(inpt, BASE100)))
+    if (validateLongID(inpt)) {
+        result.innerHTML = "= ".concat(decToBase(BigInt(removeISic(inpt)), BASE100))
+    } else if (validateShortID(inpt)) {
+        result.innerHTML = "= ".concat(insertISic(String(baseToDec(inpt, BASE100))))
     } else {
-        result.textContent = "Invalid compressed or uncompressed ID"
+        alert("Invalid compressed or uncompressed ID")
     }
 }
+
 
 /**
  * 
  * @param {MouseEvent} ev 
  */
 const handleMidPoint = (ev) => {
+
+    const v1 = inputIdElem1.value
+    const v2 = inputIdElem2.value
+
+    if (!validateShortID(v1)) {
+        alert('First ID is not valid')
+        return
+    }
+
+    if (!validateShortID(v2)) {
+        alert("Second ID is not valid")
+        return
+    }
+
     result.textContent = 
-        midPointBetweenValues(
-            inputIdElem1.value, 
-            inputIdElem2.value, 
-            BASE100
+        "... ".concat(
+            midPointBetweenValues(
+                inputIdElem1.value, 
+                inputIdElem2.value, 
+                BASE100
+            ), " ..."
         )
 }
 
@@ -57,16 +62,23 @@ const handleRadio = () => {
 
     textInputDiv.hidden = true
 
+
+    inputIdElem1.value = ""
+    inputIdElem2.value = ""
+
+
     switch (sel) {
         case "compression":
             inputIdElem2.hidden = true
             midPointBtn.hidden = true
+            result.textContent = "= ?"
 
             compressBtn.hidden = false
             break;            
         case "midpoint":
             inputIdElem2.hidden = false
             midPointBtn.hidden = false
+            result.textContent = "... ? ..."
 
             compressBtn.hidden = true
             break;

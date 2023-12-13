@@ -44,11 +44,13 @@ const handleMidPoint = (ev) => {
         return
     }
 
+    
+
     result.textContent = 
         "... ".concat(
             midPointBetweenValues(
-                inputIdElem1.value, 
-                inputIdElem2.value, 
+                v1, 
+                v2, 
                 BASE100
             ), " ..."
         )

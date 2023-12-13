@@ -70,7 +70,12 @@ function baseToDec(baseVal, base) {
 function midPointBetweenValues(val1, val2, baseChars) {
     const baseVal1Dec = baseToDec(val1, baseChars)
     const baseVal2Dec = baseToDec(val2, baseChars)
+
+    if (baseVal1Dec > baseVal2Dec) {
+        alert("First ID is after second ID")
+        return
+    }
+    
     const mid = (baseVal1Dec + baseVal2Dec) / 2n
-    console.log(mid)
     return decToBase(mid, baseChars)
 }

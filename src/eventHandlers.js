@@ -22,12 +22,14 @@ const handleDecompress = (ev) => {
  * @param {MouseEvent} ev 
  */
 const handleCompression = (ev) => {
-    const inpt = removeISic(inputIdElem1.value)
+    const inpt = inputIdElem1.value
 
-    if (isDecimal(inpt)) {
-        result.textContent = decToBase(BigInt(inpt), BASE100)
-    } else {
+    if (validateLongID(inpt)) {
+        result.textContent = decToBase(BigInt(removeISic(inpt)), BASE100)
+    } else if (validateShortID(inpt)) {
         result.textContent = insertISic(String(baseToDec(inpt, BASE100)))
+    } else {
+        result.textContent = "Invalid compressed or uncompressed ID"
     }
 
     // console.error();

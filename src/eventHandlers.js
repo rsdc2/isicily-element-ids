@@ -10,9 +10,8 @@ const validateShortID = STRICT ? validateShortIDStrict : validateShortIdNonStric
 
 /**
  * 
- * @param {MouseEvent} ev 
  */
-const handleCompression = (ev) => {
+const handleCompression = () => {
     const inpt = inputIdElem1.value
 
     if (validateLongID(inpt)) {
@@ -33,8 +32,8 @@ const handleFlip = (ev) => {
     const inpt = inputIdElem1.value
     const res = result.textContent
 
-    result.textContent = inpt.replace("= ", "").replace("?", "")
     inputIdElem1.value = res.replace("= ", "").replace("?", "")
+    handleCompression()
 }
 
 /**
@@ -55,8 +54,6 @@ const handleMidPoint = (ev) => {
         alert("Second ID is not valid")
         return
     }
-
-
 
     result.textContent = 
         "... ".concat(

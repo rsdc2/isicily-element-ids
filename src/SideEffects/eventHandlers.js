@@ -44,10 +44,14 @@ const handleKeyUpEvent = (ev) => {
 
     if (targetInput === null) return;
 
-    console.log(targetInput)
-    console.log(validate(targetInput))
-
-    validate(targetInput) ? targetInput.classList.add("valid") : targetInput.classList.remove("valid")
+    if (validate(targetInput)) {
+        targetInput.classList.add("valid")
+        enable(compressBtn, midPointBtn, flipBtn)
+    }
+    else {
+        targetInput.classList.remove("valid")
+        disable(compressBtn, midPointBtn, flipBtn)
+    }
 }
 
 
@@ -106,6 +110,18 @@ const handleRadio = () => {
 
     show(textInputDiv)
 }
+
+/**
+ * @param {Array.<HTMLButtonElement>} elems 
+ */
+
+const disable = (...elems) => elems.forEach( elem => elem.disabled = true )
+
+/**
+ * @param {Array.<HTMLButtonElement>} elems 
+ */
+
+const enable = (...elems) => elems.forEach( elem => elem.disabled = false )
 
 /**
  * @param {Array.<HTMLElement>} elems

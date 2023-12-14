@@ -15,8 +15,6 @@ const handleCompression = () => {
         result.innerHTML = `${EQ}`.concat(padShortID(BASE100, decToBase(BigInt(removeISic(inpt)), BASE100)))
     } else if (validateShortID(inpt)) {
         result.innerHTML = `${EQ}`.concat(insertISic(String(baseToDec(inpt, BASE100))))
-    } else {
-        alert("Invalid compressed or uncompressed ID")
     }
 }
 
@@ -33,9 +31,9 @@ const handleFlip = (ev) => {
 
 /**
  * 
- * @param {KeyboardEvent} ev 
+ * @param {InputEvent} ev 
  */
-const handleKeyUpEvent = (ev) => {
+const handleChangeEvent = (ev) => {
     const target = /** @type {HTMLElement} */ (ev.target) 
 
     const targetInput = target.id === inputIdElem1.id ? inputIdElem1 : 
@@ -44,14 +42,23 @@ const handleKeyUpEvent = (ev) => {
 
     if (targetInput === null) return;
 
-    if (validate(targetInput)) {
-        targetInput.classList.add("valid")
-        enable(compressBtn, midPointBtn, flipBtn)
+    switch (selectionMode()) {
+        case "compression":
+            if (validate(targetInput)) {
+                targetInput.classList.add("valid")
+                enable(compressBtn, midPointBtn, flipBtn)
+                handleCompression()
+            }
+            else {
+                targetInput.classList.remove("valid")
+                disable(compressBtn, midPointBtn, flipBtn)
+                handleCompression()
+            }
+        
+        case "midpoint":
+            
     }
-    else {
-        targetInput.classList.remove("valid")
-        disable(compressBtn, midPointBtn, flipBtn)
-    }
+
 }
 
 
@@ -75,27 +82,24 @@ const handleMidPoint = (ev) => {
     }
 
     result.textContent = 
-        " ... ".concat(
+        `${REST}`.concat(
             midPointBetweenValues(
                 v1, 
                 v2, 
                 BASE100
-            ), " ... "
+            ), `${REST}`
         )
 }
 
 
 const handleRadio = () => {
-    const sel = 
-        /** @type {string} */
-        operationForm.elements['operation'].value
 
     hide(textInputDiv)
 
     inputIdElem1.value = ""
     inputIdElem2.value = ""
 
-    switch (sel) {
+    switch (selectionMode()) {
         case "compression":
             result.textContent = BLANKCOMPRESSION;
             show(compressBtn, flipBtn)

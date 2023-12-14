@@ -8,6 +8,7 @@ function addListeners() {
     midpointRad.addEventListener("click", handleRadio)
     flipBtn.addEventListener("click", handleFlip)
     inputIdElem1.addEventListener("keyup", handleKeyUpEvent)
+    inputIdElem2.addEventListener("keyup", handleKeyUpEvent)
 }
 
 addListeners()

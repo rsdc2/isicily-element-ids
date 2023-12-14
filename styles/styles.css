@@ -32,7 +32,16 @@ div {
   padding: 0px
 }
 
-input {
+input.text {
   font-family: monospace;
-  font-size: large;
+  font-size: larger;
+  text-align: center;
+  size: 16;
+  width: 16ch;
+}
+
+span.result {
+  font-family: monospace;
+  font-size: larger;
+  text-align: center;
 }

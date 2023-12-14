@@ -77,8 +77,8 @@ const handleRadio = () => {
     switch (sel) {
         case "compression":
             result.textContent = BLANKCOMPRESSION;
-            show(compressBtn)
-            hide(inputIdElem2, flipBtn, resolvedID1, midPointBtn)
+            show(compressBtn, flipBtn)
+            hide(inputIdElem2, resolvedID1, midPointBtn)
             break;            
         case "midpoint":
             result.textContent = BLANKMIDPOINT
@@ -93,14 +93,9 @@ const handleRadio = () => {
 /**
  * @param {Array.<HTMLElement>} elems
  */
-const hide = (...elems) => {
-    elems.forEach( elem => elem.hidden = true )
-}
-
+const hide = (...elems) => elems.forEach( elem => elem.hidden = true )
 
 /**
  * @param {Array.<HTMLElement>} elems
  */
-const show = (...elems) => {
-    elems.forEach( elem => elem.hidden = false )
-}
+const show = (...elems) => elems.forEach( elem => elem.hidden = false )

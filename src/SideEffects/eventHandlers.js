@@ -9,7 +9,7 @@
  * 
  */
 const handleCompression = () => {
-    const inpt = inputIdElem1.value
+    const inpt = textInput1.value
 
     if (validateLongID(inpt)) {
         result.innerHTML = `${EQ}`.concat(padShortID(BASE100, decToBase(BigInt(removeISic(inpt)), BASE100)))
@@ -25,7 +25,7 @@ const handleCompression = () => {
  */
 const handleFlip = (ev) => {
     const res = result.textContent
-    inputIdElem1.value = res.replace(`${EQ}`, "").replace("?", "")
+    textInput1.value = res.replace(`${EQ}`, "").replace("?", "")
     handleCompression()
 }
 
@@ -36,27 +36,46 @@ const handleFlip = (ev) => {
 const handleChangeEvent = (ev) => {
     const target = /** @type {HTMLElement} */ (ev.target) 
 
-    const targetInput = target.id === inputIdElem1.id ? inputIdElem1 : 
-                                        target.id === inputIdElem2.id ? inputIdElem2 :
+    const targetInput = target.id === textInput1.id ? textInput1 : 
+                                        target.id === textInput2.id ? textInput2 :
                                             null 
 
     if (targetInput === null) return;
 
+
     switch (selectionMode()) {
         case "compression":
+
             if (validate(targetInput)) {
-                targetInput.classList.add("valid")
-                enable(compressBtn, midPointBtn, flipBtn)
-                handleCompression()
+                targetInput.classList.add("valid");
+                enable(compressBtn, midPointBtn, flipBtn);
+                handleCompression();
             }
             else {
-                targetInput.classList.remove("valid")
-                disable(compressBtn, midPointBtn, flipBtn)
-                handleCompression()
-            }
-        
+                targetInput.classList.remove("valid");
+                disable(compressBtn, midPointBtn, flipBtn);
+                handleCompression();
+            }            
+            break;
+
         case "midpoint":
-            
+            if (validate(targetInput)) {
+                targetInput.classList.add("valid");
+                enable(compressBtn, midPointBtn, flipBtn);
+            }
+            else {
+                targetInput.classList.remove("valid");
+                disable(compressBtn, midPointBtn, flipBtn);
+            }     
+
+            if (validate(textInput1) && validate(textInput2)) {
+                enable(midPointBtn)
+                handleMidpoint()
+            } else {
+                disable(midPointBtn)
+                result.textContent = `${REST}?${REST}`
+            }
+            break;
     }
 
 }
@@ -64,22 +83,11 @@ const handleChangeEvent = (ev) => {
 
 /**
  * 
- * @param {MouseEvent} ev 
  */
-const handleMidPoint = (ev) => {
+const handleMidpoint = () => {
 
-    const v1 = inputIdElem1.value
-    const v2 = inputIdElem2.value
-
-    if (!validateShortID(v1)) {
-        alert('First ID is not valid')
-        return
-    }
-
-    if (!validateShortID(v2)) {
-        alert("Second ID is not valid")
-        return
-    }
+    const v1 = textInput1.value
+    const v2 = textInput2.value
 
     result.textContent = 
         `${REST}`.concat(
@@ -96,18 +104,18 @@ const handleRadio = () => {
 
     hide(textInputDiv)
 
-    inputIdElem1.value = ""
-    inputIdElem2.value = ""
+    textInput1.value = ""
+    textInput2.value = ""
 
     switch (selectionMode()) {
         case "compression":
             result.textContent = BLANKCOMPRESSION;
             show(compressBtn, flipBtn)
-            hide(inputIdElem2, resolvedID1, midPointBtn)
+            hide(textInput2, resolvedID1, midPointBtn)
             break;            
         case "midpoint":
             result.textContent = BLANKMIDPOINT
-            show(inputIdElem2, midPointBtn)
+            show(textInput2, midPointBtn)
             hide(compressBtn, flipBtn)
             break;
     }

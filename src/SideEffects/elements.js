@@ -11,11 +11,11 @@ const flipBtn =
     /** @type {HTMLButtonElement} */ 
     (document.getElementById("flip-btn"))
 
-const inputIdElem1 = 
+const textInput1 = 
     /** @type {HTMLInputElement} */ 
     (document.getElementById("text-input1"))
 
-const inputIdElem2 =
+const textInput2 =
     /** @type {HTMLInputElement} */ 
     (document.getElementById("text-input2"))
 

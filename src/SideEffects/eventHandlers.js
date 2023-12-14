@@ -5,9 +5,6 @@
  */
 
 
-const validateLongID = STRICT ? validateLongIDStrict : validateLongIdNonStrict
-const validateShortID = STRICT ? validateShortIDStrict : validateShortIdNonStrict
-
 /**
  * 
  */
@@ -33,6 +30,26 @@ const handleFlip = (ev) => {
     inputIdElem1.value = res.replace(`${EQ}`, "").replace("?", "")
     handleCompression()
 }
+
+/**
+ * 
+ * @param {KeyboardEvent} ev 
+ */
+const handleKeyUpEvent = (ev) => {
+    const target = /** @type {HTMLElement} */ (ev.target) 
+
+    const targetInput = target.id === inputIdElem1.id ? inputIdElem1 : 
+                                        target.id === inputIdElem2.id ? inputIdElem2 :
+                                            null 
+
+    if (targetInput === null) return;
+
+    console.log(targetInput)
+    console.log(validate(targetInput))
+
+    validate(targetInput) ? targetInput.classList.add("valid") : targetInput.classList.remove("valid")
+}
+
 
 /**
  * 

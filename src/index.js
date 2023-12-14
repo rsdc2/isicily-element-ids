@@ -7,6 +7,7 @@ function addListeners() {
     compressionRad.addEventListener("click", handleRadio)
     midpointRad.addEventListener("click", handleRadio)
     flipBtn.addEventListener("click", handleFlip)
+    inputIdElem1.addEventListener("keyup", handleKeyUpEvent)
 }
 
 addListeners()

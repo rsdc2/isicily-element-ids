@@ -17,6 +17,7 @@ const isDecimal = (s) => {
         .length == s.length
 }
 
+
 /**
  * Returns true if @param s is a valid I.Sicily element ID
  * @param {string} s
@@ -56,3 +57,11 @@ function validateShortIdNonStrict(s) {
     const m = s.match(/^[A-Za-zΑ-Ωα-ω]$/)
     return m != null
 }
+
+const validateLongID = STRICT ? validateLongIDStrict : validateLongIdNonStrict
+const validateShortID = STRICT ? validateShortIDStrict : validateShortIdNonStrict
+
+/**
+ * @param {HTMLInputElement} input
+ */
+const validate = input => validateLongID(input.value) || validateShortID(input.value) 

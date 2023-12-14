@@ -38,6 +38,11 @@ input.text {
   text-align: center;
   size: 16;
   width: 16ch;
+  color: red
+}
+
+input.text.valid {
+  color: green
 }
 
 span.result {

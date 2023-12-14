@@ -11,6 +11,16 @@ function insertISic(s) {
 }
 
 /**
+ * Pads out a short ID with zero value for that base
+ * @param {Array.<string>} base
+ * @param {string} s 
+ * @returns {string}
+ */
+
+const padShortID = (base, s) => s.padStart(5, zero(base))
+
+
+/**
  * Removes string elements from a number corresponding to an
  * ISicily ID + 5 digit element id
  * @param {string} s 

@@ -15,7 +15,7 @@ const handleCompression = () => {
     const inpt = inputIdElem1.value
 
     if (validateLongID(inpt)) {
-        result.innerHTML = "= ".concat(decToBase(BigInt(removeISic(inpt)), BASE100))
+        result.innerHTML = "= ".concat(padShortID(BASE100, decToBase(BigInt(removeISic(inpt)), BASE100)))
     } else if (validateShortID(inpt)) {
         result.innerHTML = "= ".concat(insertISic(String(baseToDec(inpt, BASE100))))
     } else {

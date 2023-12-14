@@ -3,6 +3,11 @@ const BASE52 = UPPERCASELATIN.concat(LOWERCASELATIN)
 const BASE100 = BASE52.concat(UPPERCASEGREEK)
                       .concat(LOWERCASEGREEK)
 
+/**
+ * @param {Array.<string>} base
+ * @returns {string}
+ */                      
+const zero = base => base[0]
 
 /**
  * Convert a decimal value to a value in the base passed

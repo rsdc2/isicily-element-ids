@@ -1,3 +1,10 @@
+
+const REST = " ... "
+const EQ = " = "
+
+const BLANKCOMPRESSION = `${EQ}?`
+const BLANKMIDPOINT = `${REST}?${REST}`
+
 const LOWERCASELATIN = [
     'a', 
     'b', 
@@ -54,7 +61,8 @@ const LOWERCASEGREEK = [
     'ω'
 ]
 
-const UPPERCASELATIN = LOWERCASELATIN.map(toUpper)
-const UPPERCASEGREEK = LOWERCASEGREEK.map(toUpper)
 
 const STRICT = true
+
+const UPPERCASELATIN = LOWERCASELATIN.map(toUpper)
+const UPPERCASEGREEK = LOWERCASEGREEK.map(toUpper)

@@ -4,13 +4,6 @@ body {
   margin: 0px;
 }
 
-div {
-  margin-left: 1vw;
-  margin-right: 1vw;
-  margin-top: 0.5vw;
-  margin-bottom: 0.5vw;
-  padding: 0px
-}
 
 button {
   background-color: blue;
@@ -29,4 +22,17 @@ button:hover {
 button:active {
   background-color: red;
   color: whitesmoke
+}
+
+div {
+  margin-left: 1vw;
+  margin-right: 1vw;
+  margin-top: 0.5vw;
+  margin-bottom: 0.5vw;
+  padding: 0px
+}
+
+input {
+  font-family: monospace;
+  font-size: large;
 }

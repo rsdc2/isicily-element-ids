@@ -24,7 +24,6 @@
         </fieldset>
       </form>
     </div>
-
     
     <div class="input">
       <fieldset id="inputFieldSet">
@@ -34,9 +33,18 @@
           <button id="flip-btn">Flip</button>
         </legend>
         <div id="textInputDiv">
-          <input id="text-input1" type="text"/>
-          <span id="result">= ?</span>
-          <input id="text-input2" type="text" hidden/>
+          <table>
+            <tr>
+              <input id="text-input1" type="text"/>
+              <span id="result">= ?</span>
+              <input id="text-input2" type="text" hidden/>
+            </tr>
+            <tr>
+              <span id="resolved-id-1" hidden></span>
+              <span id="resolved-midpoint-id" hidden></span>
+              <span id="resolved-id-2" hidden></span>
+            </tr>
+          </table>
         </div>
       </fieldset>
     </div>
@@ -54,8 +62,8 @@
     <script src="./src/validate.js"></script>
     <script src="./src/constants.js"></script>
     <script src="./src/bases.js"></script>
-    <script src="./src/elements.js"></script>
-    <script src="./src/eventHandlers.js"></script>
+    <script src="./src/SideEffects/elements.js"></script>
+    <script src="./src/SideEffects/eventHandlers.js"></script>
     <script src="./src/index.js"></script>
 
     <footer>

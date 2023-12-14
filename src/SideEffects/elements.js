@@ -35,9 +35,37 @@ const radioFieldSet =
     /** @type {HTMLFieldSetElement} */
     (document.getElementById("radioFieldSet"))
 
+const resolvedID1 = 
+    /** @type {HTMLSpanElement} */
+    (document.getElementById("resolved-id-1"))
+
+const resolvedID2 = 
+    /** @type {HTMLSpanElement} */
+    (document.getElementById("resolved-id-2"))
+
+const resolvedMidpointID = 
+    /** @type {HTMLSpanElement} */
+    (document.getElementById("resolved-midpoint-id"))
+
 const result =  
     /** @type {HTMLInputElement} */
     document.getElementById("result")
+
+/**
+ * @param {string} query
+ * @return {HTMLSpanElement}
+ */
+const span = query => {
+    return document.querySelector(query)
+}
+
+/**
+ * @param {string} query
+ * @return {Array.<HTMLSpanElement>}
+ */
+const spans = query => {
+    return Array.from(document.querySelectorAll(query))
+}
 
 const textInputDiv = 
     /** @type {HTMLDivElement} */

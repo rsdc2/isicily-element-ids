@@ -15,9 +15,9 @@ const handleCompression = () => {
     const inpt = inputIdElem1.value
 
     if (validateLongID(inpt)) {
-        result.innerHTML = "= ".concat(padShortID(BASE100, decToBase(BigInt(removeISic(inpt)), BASE100)))
+        result.innerHTML = `${EQ}`.concat(padShortID(BASE100, decToBase(BigInt(removeISic(inpt)), BASE100)))
     } else if (validateShortID(inpt)) {
-        result.innerHTML = "= ".concat(insertISic(String(baseToDec(inpt, BASE100))))
+        result.innerHTML = `${EQ}`.concat(insertISic(String(baseToDec(inpt, BASE100))))
     } else {
         alert("Invalid compressed or uncompressed ID")
     }
@@ -29,10 +29,8 @@ const handleCompression = () => {
  * @param {MouseEvent} ev 
  */
 const handleFlip = (ev) => {
-    const inpt = inputIdElem1.value
     const res = result.textContent
-
-    inputIdElem1.value = res.replace("= ", "").replace("?", "")
+    inputIdElem1.value = res.replace(`${EQ}`, "").replace("?", "")
     handleCompression()
 }
 
@@ -56,12 +54,12 @@ const handleMidPoint = (ev) => {
     }
 
     result.textContent = 
-        "... ".concat(
+        " ... ".concat(
             midPointBetweenValues(
                 v1, 
                 v2, 
                 BASE100
-            ), " ..."
+            ), " ... "
         )
 }
 
@@ -71,31 +69,38 @@ const handleRadio = () => {
         /** @type {string} */
         operationForm.elements['operation'].value
 
-    textInputDiv.hidden = true
-
+    hide(textInputDiv)
 
     inputIdElem1.value = ""
     inputIdElem2.value = ""
 
-
     switch (sel) {
         case "compression":
-            inputIdElem2.hidden = true
-            midPointBtn.hidden = true
-            result.textContent = "= ?"
-
-            compressBtn.hidden = false
-            flipBtn.hidden = false
+            result.textContent = BLANKCOMPRESSION;
+            show(compressBtn)
+            hide(inputIdElem2, flipBtn, resolvedID1, midPointBtn)
             break;            
         case "midpoint":
-            inputIdElem2.hidden = false
-            midPointBtn.hidden = false
-            result.textContent = "... ? ..."
-
-            compressBtn.hidden = true
-            flipBtn.hidden = true
+            result.textContent = BLANKMIDPOINT
+            show(inputIdElem2, midPointBtn)
+            hide(compressBtn, flipBtn)
             break;
     }
 
-    textInputDiv.hidden = false
+    show(textInputDiv)
+}
+
+/**
+ * @param {Array.<HTMLElement>} elems
+ */
+const hide = (...elems) => {
+    elems.forEach( elem => elem.hidden = true )
+}
+
+
+/**
+ * @param {Array.<HTMLElement>} elems
+ */
+const show = (...elems) => {
+    elems.forEach( elem => elem.hidden = false )
 }

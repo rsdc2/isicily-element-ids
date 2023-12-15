@@ -54,7 +54,7 @@ function validateShortIDStrict(s) {
  * @returns {boolean} 
  */
 function validateShortIdNonStrict(s) {
-    const m = s.match(/^[A-Za-zΑ-Ωα-ω]$/)
+    const m = s.match(/^[A-Za-zΑ-Ωα-ω]+$/)
     return m != null
 }
 
@@ -65,3 +65,4 @@ const validateShortID = STRICT ? validateShortIDStrict : validateShortIdNonStric
  * @param {HTMLInputElement} input
  */
 const validate = input => validateLongID(input.value) || validateShortID(input.value) 
+

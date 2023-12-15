@@ -30,23 +30,14 @@ const handleFlip = (e) => {
 
 
 const handleHover = () => {
-
-
     switch (selectionMode()) {
         case "compression":
-            let v1StatusComp = ""
-
-            if (validate(textInput1)) {
-                v1StatusComp = "This ID is valid"
-            } else {
-                v1StatusComp = "This ID is not valid"
-            }
-
-            textInput1.setAttribute("title", v1StatusComp)
+            handleValidateCompression()
             break;
 
         case "midpoint":
             handleValidateMidpoint()
+            break;
     }
 
 }
@@ -83,26 +74,39 @@ const handleSelection = () => {
             hide(textInput2, resolvedID1)
             show(flipBtn)
 
+            removeClasses(textInput1, textInput2)("five")
+            addClasses(textInput1, textInput2)("sixteen")
+
             return
 
         case "midpoint":
             handleMidpoint()
             hide(flipBtn)
             show(textInput2)
-            return
-
-        default:
+            removeClasses(textInput1, textInput2)("sixteen")
+            addClasses(textInput1, textInput2)("five")
             return
 
     }
 }
 
 
+const handleNotes = () => {
+    switch (hasClass("activated")(button("#notes-btn"))) {
+        case true:
+            show(div(".notes"))
+            break;
+        case false:
+            hide(div(".notes"))
+            break;
+    } 
+}
+
 /**
  * 
  * @param {MouseEvent} e 
  */
-const handleToggle = (e) => {
+const handleToggleMode = (e) => {
 
     const target = /** @type {HTMLElement} */ (e.target)  
 
@@ -116,6 +120,11 @@ const handleToggle = (e) => {
         case midPointBtn.id:
             activate(midPointBtn)
             deactivate(compressBtn)
+            break;
+
+        case button("#notes-btn").id:
+            toggle("activated")(button("#notes-btn"))
+            handleNotes()
             break;
 
         default:
@@ -147,13 +156,21 @@ const handleUpdateInput = (e) => {
             if (validate(targetInput)) {
                 addClasses(targetInput, result)("valid")
                 enable(flipBtn);
+
                 handleCompression();
             }
             else {
                 removeClasses(targetInput, result)("valid")
                 disable(flipBtn);
                 handleCompression();
-            }            
+                if (validateShortIdNonStrict(targetInput.value)) {
+                    targetInput.setAttribute("maxlength", "5")
+                } else {
+                    targetInput.setAttribute("maxlength", "16")
+                }
+            }     
+            
+            handleValidateCompression();
             break;
 
         case "midpoint":
@@ -173,6 +190,18 @@ const handleUpdateInput = (e) => {
             handleValidateMidpoint()
             break;
     }
+}
+
+const handleValidateCompression = () => {
+    let v1StatusComp = ""
+
+    if (validate(textInput1)) {
+        v1StatusComp = "This ID is valid"
+    } else {
+        v1StatusComp = "This ID is not valid"
+    }
+
+    textInput1.setAttribute("title", v1StatusComp)
 }
 
 const handleValidateMidpoint = () => {

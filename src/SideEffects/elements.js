@@ -1,9 +1,17 @@
 /**
  * @param {string} query
+ * @return {HTMLButtonElement}
+ */
+const button = query => {
+    return document.querySelector("button" + query)
+}
+
+/**
+ * @param {string} query
  * @return {HTMLDivElement}
  */
 const div = query => {
-    return document.querySelector(query)
+    return document.querySelector("div" + query)
 }
 
 
@@ -12,7 +20,7 @@ const div = query => {
  * @return {HTMLSpanElement}
  */
 const span = query => {
-    return document.querySelector(query)
+    return document.querySelector("span" + query)
 }
 
 /**
@@ -20,9 +28,20 @@ const span = query => {
  * @return {Array.<HTMLSpanElement>}
  */
 const spans = query => {
-    return Array.from(document.querySelectorAll(query))
+    return Array.from(document.querySelectorAll("span" + query))
 }
 
+/**
+ * Toggles class of element
+ * @param {string} cls
+ */
+const toggle = cls => (/** @type {HTMLElement}*/ elem) => {
+    if (hasClass(cls)(elem)) {
+        removeClasses(elem)(cls)
+    } else {
+        addClasses(elem)(cls)
+    }
+}
 
 
 const compressBtn = 

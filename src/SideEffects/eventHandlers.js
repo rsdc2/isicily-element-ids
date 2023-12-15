@@ -53,17 +53,14 @@ const handleRadio = () => {
 
     hide(textInputDiv)
 
-    // textInput1.value = ""
-    textInput2.value = ""
-
     switch (selectionMode()) {
         case "compression":
-            result.textContent = BLANKCOMPRESSION;
+            handleCompression()
             show(compressBtn, flipBtn)
             hide(textInput2, resolvedID1, midPointBtn)
             break;            
         case "midpoint":
-            result.textContent = BLANKMIDPOINT
+            handleMidpoint()
             show(textInput2, midPointBtn)
             hide(compressBtn, flipBtn)
             break;
@@ -116,7 +113,7 @@ const handleUpdateInput = (e) => {
                 handleMidpoint()
             } else {
                 disable(midPointBtn)
-                result.textContent = `${REST}?${REST}`
+                result.textContent = BLANKMIDPOINT
             }
             break;
     }

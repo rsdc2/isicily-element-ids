@@ -3,7 +3,7 @@ const REST = " ... "
 const EQ = " = "
 
 const BLANKCOMPRESSION = `${EQ}?`
-const BLANKMIDPOINT = `${REST}?${REST}`
+const BLANKMIDPOINT = `${REST}?????${REST}`
 
 const LOWERCASELATIN = [
     'a', 

@@ -76,22 +76,27 @@ function baseToDec(baseVal, base) {
  */
 
 function midPointBetweenValues(val1, val2, baseChars) {
+    if (!validateLongID(val1) && !validateShortID(val1)) {
+        return "?????"
+    }
+
+    if (!validateLongID(val2) && !validateShortID(val2)) {
+        return "?????"
+    }
+
     const baseVal1Dec = baseToDec(val1, baseChars)
     const baseVal2Dec = baseToDec(val2, baseChars)
 
     if (baseVal1Dec > baseVal2Dec) {
-        Message.alert("Error: First ID is after second ID in sequence")
-        return "?"
+        return "?????"
     }
 
     if (baseVal1Dec === baseVal2Dec) {
-        Message.alert("Error: IDs are equal, so no midpoint")
-        return "?" 
+        return "?????" 
     }
 
     if (baseVal1Dec === baseVal2Dec + 1n || baseVal1Dec === baseVal2Dec - 1n) {
-        Message.alert("Error: Second ID is immediately sequential to first ID, so no midpoint")
-        return "?" 
+        return "?????" 
     }
 
     const mid = (baseVal1Dec + baseVal2Dec) / 2n

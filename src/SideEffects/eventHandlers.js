@@ -86,7 +86,7 @@ const handleRadio = () => {
 }
 
 /**
- * 
+ * Event may be either MouseEvent or InputEvent
  * @param {Event} e
  */
 
@@ -97,19 +97,18 @@ const handleUpdateInput = (e) => {
     const targetInput = target.id === textInput1.id ? textInput1 : 
                                         target.id === textInput2.id ? textInput2 :
                                             null 
-    console.log(targetInput)
     if (targetInput === null) return;
 
     switch (selectionMode()) {
         case "compression":
 
             if (validate(targetInput)) {
-                targetInput.classList.add("valid");
+                addClasses(targetInput)("valid")
                 enable(compressBtn, midPointBtn, flipBtn);
                 handleCompression();
             }
             else {
-                targetInput.classList.remove("valid");
+                removeClasses(targetInput)("valid")
                 disable(compressBtn, midPointBtn, flipBtn);
                 handleCompression();
             }            
@@ -117,11 +116,11 @@ const handleUpdateInput = (e) => {
 
         case "midpoint":
             if (validate(targetInput)) {
-                targetInput.classList.add("valid");
+                addClasses(targetInput)("valid")
                 enable(compressBtn, midPointBtn, flipBtn);
             }
             else {
-                targetInput.classList.remove("valid");
+                removeClasses(targetInput)("valid")
                 disable(compressBtn, midPointBtn, flipBtn);
             }     
 

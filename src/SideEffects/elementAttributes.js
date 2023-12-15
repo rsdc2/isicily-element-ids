@@ -1,3 +1,17 @@
+
+const addClasses = 
+    (/** @type {Array.<HTMLElement>} */ ...elems) => 
+    (/** @type {Array.<string>} */ ...classes) => 
+    elems.forEach( elem => elem.classList.add(...classes))
+
+
+
+const removeClasses = 
+    (/** @type {Array.<HTMLElement>} */ ...elems) => 
+    (/** @type {Array.<string>} */ ...classes) => 
+    elems.forEach( elem => elem.classList.remove(...classes))
+
+
 /**
  * @param {Array.<HTMLButtonElement>} elems 
  */

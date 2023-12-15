@@ -6,7 +6,7 @@ function addListeners() {
     textInput2.addEventListener("input", handleUpdateInput)
     textInput1.addEventListener("click", handleUpdateInput)
     textInput2.addEventListener("click", handleUpdateInput)
-    // textInput1.addEventListener("mouseover", handleHover)
-    // textInput2.addEventListener("mouseover", handleHover)
+    // textInput1.addEventListener("mouseover", handleUpdateInput)
+    // textInput2.addEventListener("mouseover", handleUpdateInput)
 
 }

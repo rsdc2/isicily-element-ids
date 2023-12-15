@@ -13,7 +13,6 @@ const handleCompression = () => {
         Message.hide()
         result.innerHTML = `${EQ}`.concat(insertISic(String(baseToDec(inpt, BASE100))))
     } else {
-        Message.alert("Error: Invalid compressed or uncompressed ID")
         result.innerHTML = BLANKCOMPRESSION
     }
 }
@@ -146,12 +145,12 @@ const handleUpdateInput = (e) => {
         case "compression":
 
             if (validate(targetInput)) {
-                addClasses(targetInput)("valid")
+                addClasses(targetInput, result)("valid")
                 enable(flipBtn);
                 handleCompression();
             }
             else {
-                removeClasses(targetInput)("valid")
+                removeClasses(targetInput, result)("valid")
                 disable(flipBtn);
                 handleCompression();
             }            

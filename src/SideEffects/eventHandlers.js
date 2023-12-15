@@ -1,8 +1,5 @@
-/**
- * 
- * @param {string} x 
- * @returns {boolean}
- */
+
+
 
 
 /**
@@ -21,9 +18,9 @@ const handleCompression = () => {
 
 /**
  * 
- * @param {MouseEvent} ev 
+ * @param {MouseEvent} e 
  */
-const handleFlip = (ev) => {
+const handleFlip = (e) => {
     const res = result.textContent
     textInput1.value = res.replace(`${EQ}`, "").replace("?", "")
     handleCompression()
@@ -31,53 +28,18 @@ const handleFlip = (ev) => {
 
 /**
  * 
- * @param {InputEvent} ev 
+ * @param {InputEvent} e 
  */
-const handleChangeEvent = (ev) => {
-    const target = /** @type {HTMLElement} */ (ev.target) 
+const handleChangeEvent = (e) => {
+    handleUpdateInput(e)
+}
 
-    const targetInput = target.id === textInput1.id ? textInput1 : 
-                                        target.id === textInput2.id ? textInput2 :
-                                            null 
+/**
+ * @param {MouseEvent} e
+ */
 
-    if (targetInput === null) return;
-
-
-    switch (selectionMode()) {
-        case "compression":
-
-            if (validate(targetInput)) {
-                targetInput.classList.add("valid");
-                enable(compressBtn, midPointBtn, flipBtn);
-                handleCompression();
-            }
-            else {
-                targetInput.classList.remove("valid");
-                disable(compressBtn, midPointBtn, flipBtn);
-                handleCompression();
-            }            
-            break;
-
-        case "midpoint":
-            if (validate(targetInput)) {
-                targetInput.classList.add("valid");
-                enable(compressBtn, midPointBtn, flipBtn);
-            }
-            else {
-                targetInput.classList.remove("valid");
-                disable(compressBtn, midPointBtn, flipBtn);
-            }     
-
-            if (validate(textInput1) && validate(textInput2)) {
-                enable(midPointBtn)
-                handleMidpoint()
-            } else {
-                disable(midPointBtn)
-                result.textContent = `${REST}?${REST}`
-            }
-            break;
-    }
-
+const handleClickEvent = (e) => {
+    handleUpdateInput(e)
 }
 
 
@@ -124,23 +86,52 @@ const handleRadio = () => {
 }
 
 /**
- * @param {Array.<HTMLButtonElement>} elems 
+ * 
+ * @param {Event} e
  */
 
-const disable = (...elems) => elems.forEach( elem => elem.disabled = true )
+const handleUpdateInput = (e) => {
 
-/**
- * @param {Array.<HTMLButtonElement>} elems 
- */
+    const target = /** @type {HTMLElement} */ (e.target) 
 
-const enable = (...elems) => elems.forEach( elem => elem.disabled = false )
+    const targetInput = target.id === textInput1.id ? textInput1 : 
+                                        target.id === textInput2.id ? textInput2 :
+                                            null 
+    console.log(targetInput)
+    if (targetInput === null) return;
 
-/**
- * @param {Array.<HTMLElement>} elems
- */
-const hide = (...elems) => elems.forEach( elem => elem.hidden = true )
+    switch (selectionMode()) {
+        case "compression":
 
-/**
- * @param {Array.<HTMLElement>} elems
- */
-const show = (...elems) => elems.forEach( elem => elem.hidden = false )
+            if (validate(targetInput)) {
+                targetInput.classList.add("valid");
+                enable(compressBtn, midPointBtn, flipBtn);
+                handleCompression();
+            }
+            else {
+                targetInput.classList.remove("valid");
+                disable(compressBtn, midPointBtn, flipBtn);
+                handleCompression();
+            }            
+            break;
+
+        case "midpoint":
+            if (validate(targetInput)) {
+                targetInput.classList.add("valid");
+                enable(compressBtn, midPointBtn, flipBtn);
+            }
+            else {
+                targetInput.classList.remove("valid");
+                disable(compressBtn, midPointBtn, flipBtn);
+            }     
+
+            if (validate(textInput1) && validate(textInput2)) {
+                enable(midPointBtn)
+                handleMidpoint()
+            } else {
+                disable(midPointBtn)
+                result.textContent = `${REST}?${REST}`
+            }
+            break;
+    }
+}

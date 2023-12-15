@@ -2,11 +2,11 @@
  * @returns {"compression"|"midpoint"} 
  */
 const selectionMode = () => {
-    const sel = 
-        /** @type {string} */
-        operationForm.elements['operation'].value
-    if (includes ("compression", "midpoint") (sel)) {
-        return sel
+
+    if (isActivated(compressBtn) && !isActivated(midPointBtn)) {
+        return "compression"
+    } else if (isActivated(midPointBtn) && !isActivated(compressBtn)) {
+        return "midpoint"
     }
 
     console.error("Invalid selection mode")

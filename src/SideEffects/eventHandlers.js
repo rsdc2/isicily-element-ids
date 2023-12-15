@@ -48,26 +48,33 @@ const handleMidpoint = () => {
         )
 }
 
+/**
+ * 
+ * @returns 
+ */
 
-const handleRadio = () => {
-
-    hide(textInputDiv)
+const handleSelection = () => {
 
     switch (selectionMode()) {
         case "compression":
             handleCompression()
-            show(flipBtn)
             hide(textInput2, resolvedID1)
-            break;            
+            show(flipBtn)
+
+            return
+
         case "midpoint":
             handleMidpoint()
-            show(textInput2)
             hide(flipBtn)
-            break;
-    }
+            show(textInput2)
+            return
 
-    show(textInputDiv)
+        default:
+            return
+
+    }
 }
+
 
 /**
  * 
@@ -79,26 +86,22 @@ const handleToggle = (e) => {
 
     switch (target.id) {
         case compressBtn.id:
-            handleCompression()
             activate(compressBtn)
             deactivate(midPointBtn)
-            hide(textInput2, resolvedID1)
-            show(flipBtn)
 
-            return
+            break;
 
         case midPointBtn.id:
-            handleMidpoint()
             activate(midPointBtn)
             deactivate(compressBtn)
-            hide(flipBtn)
-            show(textInput2)
-            return
+            break;
 
         default:
-            return
-        
-    }
+            break;
+    }    
+
+    handleSelection()
+
 }
 
 

@@ -16,30 +16,17 @@
         This is a message
       </div>
 
-      <div class="operation">
-        <form id="operationForm">
-          <fieldset id="radioFieldSet">
-            <legend>What would you like to do?</legend>
-            <input id="compressionRad" type="radio" name="operation" value="compression" checked/>
-            <label for="compressionRad"><b>Compress/decompress</b> an I.Sicily element ID</label>
-            <br>
-            <input id="midpointRad" type="radio" name="operation" value="midpoint"/>
-            <label for="midpointRad">Find the <b>midpoint</b> between two IDs</label>
-          </fieldset>
-        </form>
-      </div>
-      
       <div class="input">
         <fieldset id="inputFieldSet">
           <legend>
-            <button id="midpoint-btn">Find midpoint</button>
+            <button id="midpoint-btn" class="activated">Find midpoint</button>
             <button id="compress-btn">Compress/Decompress</button>
             <button id="flip-btn" disabled>Flip</button>
           </legend>
           <div id="textInputDiv">
             <table>
               <tr>
-                <input id="text-input1" class="text" type="text" autocomplete="off" spellcheck="false"/>
+                <input id="text-input1" class="text" type="text" autocomplete="off" spellcheck="false" title="There is a problem"/>
                 <span id="result" class="result"></span>
                 <input id="text-input2" class="text" type="text" hidden autocomplete="off" spellcheck="false"/>
               </tr>

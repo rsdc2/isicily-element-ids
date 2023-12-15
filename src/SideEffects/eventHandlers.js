@@ -56,18 +56,51 @@ const handleRadio = () => {
     switch (selectionMode()) {
         case "compression":
             handleCompression()
-            show(compressBtn, flipBtn)
-            hide(textInput2, resolvedID1, midPointBtn)
+            show(flipBtn)
+            hide(textInput2, resolvedID1)
             break;            
         case "midpoint":
             handleMidpoint()
-            show(textInput2, midPointBtn)
-            hide(compressBtn, flipBtn)
+            show(textInput2)
+            hide(flipBtn)
             break;
     }
 
     show(textInputDiv)
 }
+
+/**
+ * 
+ * @param {MouseEvent} e 
+ */
+const handleToggle = (e) => {
+
+    const target = /** @type {HTMLElement} */ (e.target)  
+
+    switch (target.id) {
+        case compressBtn.id:
+            handleCompression()
+            activate(compressBtn)
+            deactivate(midPointBtn)
+            hide(textInput2, resolvedID1)
+            show(flipBtn)
+
+            return
+
+        case midPointBtn.id:
+            handleMidpoint()
+            activate(midPointBtn)
+            deactivate(compressBtn)
+            hide(flipBtn)
+            show(textInput2)
+            return
+
+        default:
+            return
+        
+    }
+}
+
 
 /**
  * Event may be either MouseEvent or InputEvent
@@ -88,12 +121,12 @@ const handleUpdateInput = (e) => {
 
             if (validate(targetInput)) {
                 addClasses(targetInput)("valid")
-                enable(compressBtn, midPointBtn, flipBtn);
+                enable(flipBtn);
                 handleCompression();
             }
             else {
                 removeClasses(targetInput)("valid")
-                disable(compressBtn, midPointBtn, flipBtn);
+                disable(flipBtn);
                 handleCompression();
             }            
             break;
@@ -101,18 +134,14 @@ const handleUpdateInput = (e) => {
         case "midpoint":
             if (validate(targetInput)) {
                 addClasses(targetInput)("valid")
-                enable(compressBtn, midPointBtn, flipBtn);
             }
             else {
                 removeClasses(targetInput)("valid")
-                disable(compressBtn, midPointBtn, flipBtn);
             }     
 
             if (validate(textInput1) && validate(textInput2)) {
-                enable(midPointBtn)
                 handleMidpoint()
             } else {
-                disable(midPointBtn)
                 result.textContent = BLANKMIDPOINT
             }
             break;

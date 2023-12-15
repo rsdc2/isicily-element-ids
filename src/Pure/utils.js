@@ -13,7 +13,7 @@ const identity = (val) => val
  * @returns 
  */
 const includes = 
-    (/** @template T @type {Array.<T>} */ ...arr) => 
+    (...arr) => 
     (/** @type {T} */ item) => {
 
         return arr.includes(item)

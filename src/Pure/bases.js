@@ -77,26 +77,26 @@ function baseToDec(baseVal, base) {
 
 function midPointBetweenValues(val1, val2, baseChars) {
     if (!validateLongID(val1) && !validateShortID(val1)) {
-        return "?????"
+        return FIVEBLANKS
     }
 
     if (!validateLongID(val2) && !validateShortID(val2)) {
-        return "?????"
+        return FIVEBLANKS
     }
 
     const baseVal1Dec = baseToDec(val1, baseChars)
     const baseVal2Dec = baseToDec(val2, baseChars)
 
     if (baseVal1Dec > baseVal2Dec) {
-        return "?????"
+        return FIVEBLANKS
     }
 
     if (baseVal1Dec === baseVal2Dec) {
-        return "?????" 
+        return FIVEBLANKS
     }
 
     if (baseVal1Dec === baseVal2Dec + 1n || baseVal1Dec === baseVal2Dec - 1n) {
-        return "?????" 
+        return FIVEBLANKS
     }
 
     const mid = (baseVal1Dec + baseVal2Dec) / 2n

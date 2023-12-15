@@ -31,8 +31,7 @@ const handleFlip = (e) => {
 
 
 const handleHover = () => {
-    const v1Dec = baseToDec(textInput1.value, BASE100)
-    const v2Dec = baseToDec(textInput2.value, BASE100)
+
 
     switch (selectionMode()) {
         case "compression":
@@ -48,39 +47,7 @@ const handleHover = () => {
             break;
 
         case "midpoint":
-            let v1StatusMid = ""
-            let v2StatusMid = ""
-            if (validate(textInput1)) {
-                v1StatusMid = "This ID is valid"
-            } else {
-                v1StatusMid = "ERROR: This ID is not valid"
-            }
-
-            if (validate(textInput2)) {
-                v2StatusMid = "This ID is valid"
-            } else {
-                v2StatusMid = "ERROR: This ID is not valid"
-            }
-
-            if (v1Dec > v2Dec) {
-                v1StatusMid = v1StatusMid.concat("\nERROR: This ID comes after the second ID")
-                v2StatusMid = v2StatusMid.concat("\nERROR: This ID comes before the first ID")
-
-            }
-        
-            if (v1Dec === v2Dec) {
-                v1StatusMid = v1StatusMid.concat("\nERROR: This ID is equal to the second ID")
-                v2StatusMid = v2StatusMid.concat("\nERROR: This ID is equal to the first ID.")
-            }
-        
-            if (v1Dec === v2Dec + 1n || v1Dec === v2Dec - 1n) {
-                v1StatusMid = v1StatusMid.concat("\nERROR: There are no positions in between these IDs")
-                v2StatusMid = v2StatusMid.concat("\nERROR: There are no positions in between these IDs")
-            }
-
-            textInput1.setAttribute("title", v1StatusMid)
-            textInput2.setAttribute("title", v2StatusMid)
-                        
+            handleValidateMidpoint()
     }
 
 }
@@ -203,6 +170,68 @@ const handleUpdateInput = (e) => {
             } else {
                 result.textContent = BLANKMIDPOINT
             }
+
+            handleValidateMidpoint()
             break;
     }
+}
+
+const handleValidateMidpoint = () => {
+    const v1Dec = baseToDec(textInput1.value, BASE100)
+    const v2Dec = baseToDec(textInput2.value, BASE100)
+    
+    let v1StatusMid = ""
+    let v2StatusMid = ""
+    let midpointValid = true
+    
+    if (validate(textInput1)) {
+        v1StatusMid = "This ID is valid"
+    } else {
+        v1StatusMid = "ERROR: This ID is not valid"
+        midpointValid = false
+    }
+
+    if (validate(textInput2)) {
+        v2StatusMid = "This ID is valid"
+    } else {
+        v2StatusMid = "ERROR: This ID is not valid"
+        midpointValid = false
+    }
+
+    if (v1Dec > v2Dec) {
+        v1StatusMid = v1StatusMid.concat("\nERROR: This ID comes after the second ID")
+        v2StatusMid = v2StatusMid.concat("\nERROR: This ID comes before the first ID")
+        if (validate(textInput1) && validate(textInput2)) {
+            Message.alert("First ID comes after second ID")
+        }
+        midpointValid = false
+    }
+
+    if (v1Dec === v2Dec) {
+        v1StatusMid = v1StatusMid.concat("\nERROR: This ID is equal to the second ID")
+        v2StatusMid = v2StatusMid.concat("\nERROR: This ID is equal to the first ID.")
+        if (validate(textInput1) && validate(textInput2)) {
+            Message.alert("IDs are equal")
+        }
+        midpointValid = false
+    }
+
+    if (v1Dec === v2Dec + 1n || v1Dec === v2Dec - 1n) {
+        v1StatusMid = v1StatusMid.concat("\nERROR: There are no positions in between these IDs")
+        v2StatusMid = v2StatusMid.concat("\nERROR: There are no positions in between these IDs")
+        if (validate(textInput1) && validate(textInput2)) {
+            Message.alert("No IDs between the two values")
+        }
+        midpointValid = false
+    }
+
+    textInput1.setAttribute("title", v1StatusMid)
+    textInput2.setAttribute("title", v2StatusMid)
+    if (midpointValid) {
+        addClasses(result)("valid")
+        Message.hide()
+    } else {
+        removeClasses(result)("valid")
+    }
+
 }

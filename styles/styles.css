@@ -87,4 +87,9 @@ span.result {
   font-family: monospace;
   font-size: larger;
   text-align: center;
+  color: red;
+}
+
+span.result.valid {
+  color: black
 }

@@ -1,3 +1,29 @@
+/**
+ * @param {string} query
+ * @return {HTMLDivElement}
+ */
+const div = query => {
+    return document.querySelector(query)
+}
+
+
+/**
+ * @param {string} query
+ * @return {HTMLSpanElement}
+ */
+const span = query => {
+    return document.querySelector(query)
+}
+
+/**
+ * @param {string} query
+ * @return {Array.<HTMLSpanElement>}
+ */
+const spans = query => {
+    return Array.from(document.querySelectorAll(query))
+}
+
+
 
 const compressBtn = 
     /** @type {HTMLButtonElement} */ 
@@ -18,6 +44,8 @@ const textInput1 =
 const textInput2 =
     /** @type {HTMLInputElement} */ 
     (document.getElementById("text-input2"))
+
+const messageDiv = div("#message")
 
 const midPointBtn = 
     /** @type {HTMLButtonElement} */ 
@@ -43,29 +71,12 @@ const resolvedID2 =
     /** @type {HTMLSpanElement} */
     (document.getElementById("resolved-id-2"))
 
-const resolvedMidpointID = 
-    /** @type {HTMLSpanElement} */
-    (document.getElementById("resolved-midpoint-id"))
+const resolvedMidpointID = span("#resolved-midpoint-id")
 
 const result =  
     /** @type {HTMLInputElement} */
     document.getElementById("result")
 
-/**
- * @param {string} query
- * @return {HTMLSpanElement}
- */
-const span = query => {
-    return document.querySelector(query)
-}
-
-/**
- * @param {string} query
- * @return {Array.<HTMLSpanElement>}
- */
-const spans = query => {
-    return Array.from(document.querySelectorAll(query))
-}
 
 const textInputDiv = 
     /** @type {HTMLDivElement} */

@@ -80,15 +80,18 @@ function midPointBetweenValues(val1, val2, baseChars) {
     const baseVal2Dec = baseToDec(val2, baseChars)
 
     if (baseVal1Dec > baseVal2Dec) {
-        return "[ERROR: first ID after second ID]"
+        Message.alert("Error: First ID is after second ID in sequence")
+        return "?"
     }
 
     if (baseVal1Dec === baseVal2Dec) {
-        return "[ERROR: IDs are equal]"
+        Message.alert("Error: IDs are equal, so no midpoint")
+        return "?" 
     }
 
     if (baseVal1Dec === baseVal2Dec + 1n || baseVal1Dec === baseVal2Dec - 1n) {
-        return "[ERROR: Difference of 1 between IDs]"
+        Message.alert("Error: Second ID is immediately sequential to first ID, so no midpoint")
+        return "?" 
     }
 
     const mid = (baseVal1Dec + baseVal2Dec) / 2n

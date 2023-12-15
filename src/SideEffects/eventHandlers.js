@@ -1,7 +1,5 @@
 
 
-
-
 /**
  * 
  */
@@ -9,12 +7,16 @@ const handleCompression = () => {
     const inpt = textInput1.value
 
     if (validateLongID(inpt)) {
+        Message.hide()
         result.innerHTML = `${EQ}`.concat(padShortID(BASE100, decToBase(BigInt(removeISic(inpt)), BASE100)))
     } else if (validateShortID(inpt)) {
+        Message.hide()
         result.innerHTML = `${EQ}`.concat(insertISic(String(baseToDec(inpt, BASE100))))
+    } else {
+        Message.alert("Error: Invalid compressed or uncompressed ID")
+        result.innerHTML = BLANKCOMPRESSION
     }
 }
-
 
 /**
  * 
@@ -22,24 +24,9 @@ const handleCompression = () => {
  */
 const handleFlip = (e) => {
     const res = result.textContent
-    textInput1.value = res.replace(`${EQ}`, "").replace("?", "")
+    textInput1.value = res.replace(`${EQ}`, "")
+                            .replace("?", "")
     handleCompression()
-}
-
-/**
- * 
- * @param {InputEvent} e 
- */
-const handleChangeEvent = (e) => {
-    handleUpdateInput(e)
-}
-
-/**
- * @param {MouseEvent} e
- */
-
-const handleClickEvent = (e) => {
-    handleUpdateInput(e)
 }
 
 
@@ -66,7 +53,7 @@ const handleRadio = () => {
 
     hide(textInputDiv)
 
-    textInput1.value = ""
+    // textInput1.value = ""
     textInput2.value = ""
 
     switch (selectionMode()) {

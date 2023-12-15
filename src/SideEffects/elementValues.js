@@ -5,7 +5,7 @@ const selectionMode = () => {
     const sel = 
         /** @type {string} */
         operationForm.elements['operation'].value
-    if (["compression", "midpoint"].includes(sel)) {
+    if (includes ("compression", "midpoint") (sel)) {
         return sel
     }
 

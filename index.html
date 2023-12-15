@@ -7,67 +7,60 @@
   </head>
 
   <body>
+    <div class="body">
+      <div class="heading">
+        <h1>I.Sicily element ID resolver</h1>
+      </div>
 
-    <div class="heading">
-      <h1>I.Sicily element ID resolver</h1>
-    </div>
+      <div id="message" class="message hidden">
+        This is a message
+      </div>
 
-    <div class="operation">
-      <form id="operationForm">
-        <fieldset id="radioFieldSet">
-          <legend>What would you like to do?</legend>
-          <input id="compressionRad" type="radio" name="operation" value="compression" checked/>
-          <label for="compressionRad"><b>Compress/decompress</b> an I.Sicily element ID</label>
-          <br>
-          <input id="midpointRad" type="radio" name="operation" value="midpoint"/>
-          <label for="midpointRad">Find the <b>midpoint</b> between two IDs</label>
+      <div class="operation">
+        <form id="operationForm">
+          <fieldset id="radioFieldSet">
+            <legend>What would you like to do?</legend>
+            <input id="compressionRad" type="radio" name="operation" value="compression" checked/>
+            <label for="compressionRad"><b>Compress/decompress</b> an I.Sicily element ID</label>
+            <br>
+            <input id="midpointRad" type="radio" name="operation" value="midpoint"/>
+            <label for="midpointRad">Find the <b>midpoint</b> between two IDs</label>
+          </fieldset>
+        </form>
+      </div>
+      
+      <div class="input">
+        <fieldset id="inputFieldSet">
+          <legend>
+            <button id="midpoint-btn" disabled hidden>Find midpoint</button>
+            <button id="compress-btn" disabled>Compress/Decompress</button>
+            <button id="flip-btn" disabled>Flip</button>
+          </legend>
+          <div id="textInputDiv">
+            <table>
+              <tr>
+                <input id="text-input1" class="text" type="text" autocomplete="off" spellcheck="false"/>
+                <span id="result" class="result"></span>
+                <input id="text-input2" class="text" type="text" hidden autocomplete="off" spellcheck="false"/>
+              </tr>
+              <tr>
+                <span id="resolved-id-1" class="result" hidden></span>
+                <span id="resolved-midpoint-id" class="result" hidden></span>
+                <span id="resolved-id-2" class="result" hidden></span>
+              </tr>
+            </table>
+          </div>
         </fieldset>
-      </form>
-    </div>
-    
-    <div class="input">
-      <fieldset id="inputFieldSet">
-        <legend>
-          <button id="midpoint-btn" disabled hidden>Find midpoint</button>
-          <button id="compress-btn" disabled>Compress/Decompress</button>
-          <button id="flip-btn" disabled>Flip</button>
-        </legend>
-        <div id="textInputDiv">
-          <table>
-            <tr>
-              <input id="text-input1" class="text" type="text" autocomplete="off" spellcheck="false"/>
-              <span id="result" class="result"></span>
-              <input id="text-input2" class="text" type="text" hidden autocomplete="off" spellcheck="false"/>
-            </tr>
-            <tr>
-              <span id="resolved-id-1" class="result" hidden></span>
-              <span id="resolved-midpoint-id" class="result" hidden></span>
-              <span id="resolved-id-2" class="result" hidden></span>
-            </tr>
-          </table>
-        </div>
-      </fieldset>
-    </div>
+      </div>
 
-    <div class="notes">
-      <h3>Notes</h3>
-      <ul>
-        <li>Uncompressed ID: ISic012345-01234, e.g. ISic000002-00100</li>
-        <li>Compressed ID: ABCDE, where each digit may be any character a-z, A-Z, α-ω, Α-Ω, e.g. zzzzz = ISic051515-15151</li>
-      </ul>
+      <div class="notes">
+        <h3>Notes</h3>
+        <ul>
+          <li>Uncompressed ID: ISic012345-01234, e.g. ISic000002-00100</li>
+          <li>Compressed ID: ABCDE, where each digit may be any character a-z, A-Z, α-ω, Α-Ω, e.g. zzzzz = ISic051515-15151</li>
+        </ul>
     </div>
-
-    <script src="./src/utils.js"></script>
-    <script src="./src/constants.js"></script>
-    <script src="./src/SideEffects/elementAttributes.js"></script>
-    <script src="./src/formatting.js"></script>
-    <script src="./src/validate.js"></script>
-    <script src="./src/bases.js"></script>
-    <script src="./src/SideEffects/elements.js"></script>
-    <script src="./src/SideEffects/elementValues.js"></script>
-    <script src="./src/SideEffects/eventHandlers.js"></script>
-    <script src="./src/SideEffects/eventListeners.js"></script>
-    <script src="./src/index.js"></script>
+    </div>
 
     <footer>
         <div class="footer">
@@ -76,5 +69,18 @@
     </footer>
 
   </body>
+  <script src="./src/Pure/utils.js"></script>
+  <script src="./src/Pure/constants.js"></script>
+  <script src="./src/Pure/formatting.js"></script>
+  <script src="./src/Pure/validate.js"></script>
+  <script src="./src/Pure/bases.js"></script>
+  <script src="./src/SideEffects/messageAlert.js"></script>
+  <script src="./src/SideEffects/elementAttributes.js"></script>
+  <script src="./src/SideEffects/elements.js"></script>
+  <script src="./src/SideEffects/elementValues.js"></script>
+  <script src="./src/SideEffects/eventHandlers.js"></script>
+  <script src="./src/SideEffects/eventListeners.js"></script>
+  <script src="./src/index.js"></script>
+
 
 </html>

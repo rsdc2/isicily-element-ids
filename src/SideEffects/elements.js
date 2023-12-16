@@ -8,6 +8,15 @@ const button = query => {
 
 /**
  * @param {string} query
+ * @return {Array.<HTMLButtonElement>}
+ */
+const buttons = query => {
+    return Array.from(document.querySelectorAll("button" + query))
+}
+
+
+/**
+ * @param {string} query
  * @return {HTMLDivElement}
  */
 const div = query => {

@@ -1,3 +1,19 @@
+/**
+ * @param {MouseEvent} e
+ */
+const handleBtnMousedown = (e) => {
+    const target = /** @type {HTMLElement} */ (e.target) 
+
+}
+
+
+/**
+ * @param {MouseEvent} e
+ */
+const handleBtnMouseup = (e) => {
+    const target = /** @type {HTMLElement} */ (e.target) 
+
+}
 
 
 /**

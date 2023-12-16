@@ -21,7 +21,22 @@ button.activated {
   background-color: red;
 }
 
+button.activated:hover {
+  background-color: darkred;
+  color: whitesmoke;
+}
+
 button:active {
+  background-color: red;
+  color: whitesmoke
+}
+
+button:active:hover {
+  background-color: darkred;
+  color: whitesmoke
+}
+
+button.activated:active:hover {
   background-color: red;
   color: whitesmoke
 }

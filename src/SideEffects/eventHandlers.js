@@ -221,6 +221,10 @@ const handleUpdateInput = (e) => {
             handleValidateMidpoint()
             break;
     }
+
+    targetInput.innerHTML = formatGreek(targetInput.textContent)
+    setCaretEnd(targetInput)
+    result.innerHTML = formatGreek(result.textContent)
 }
 
 const handleValidateCompression = () => {

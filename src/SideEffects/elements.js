@@ -66,11 +66,11 @@ const flipBtn =
     (document.getElementById("flip-btn"))
 
 const textInput1 = 
-    /** @type {HTMLSpanElement} */ 
+    /** @type {HTMLDivElement} */ 
     (document.getElementById("text-input1"))
 
 const textInput2 =
-    /** @type {HTMLSpanElement} */ 
+    /** @type {HTMLDivElement} */ 
     (document.getElementById("text-input2"))
 
 const messageDiv = div("#message")

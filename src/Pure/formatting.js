@@ -1,4 +1,13 @@
 /**
+ * 
+ * @param {string} s 
+ * @returns {string}
+ */
+const formatGreek = (s) => {
+    return s.replace(/([α-ωΑ-Ω]+)/g, "<u>$1</u>")
+}
+
+/**
  * Inserts string elements into a number corresponding to an
  * ISicily ID + 5 digit element id
  * @param {string} s 

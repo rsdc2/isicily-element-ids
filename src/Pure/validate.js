@@ -21,7 +21,11 @@ const isDecimal = (s) => {
  */
 function validateISicilyNumber(s) {
     const m = s.match(/^ISic0[0-9]{5,5}$/)
-    if (m!=null) console.log("valid")
+    return m != null
+}
+
+function validateISicilyTokenNumber(s) {
+    const m = s.match(/^[0-9]{5,5}$/)
     return m != null
 }
 

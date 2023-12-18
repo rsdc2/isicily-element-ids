@@ -4,18 +4,21 @@
  * @param {KeyboardEvent} ev 
  */
 const handleChangeFocus = (ev) => {
-    console.log('focus')
-    const target = /** @type {HTMLElement} */ (ev.target)
-    if (target.id === textInput1.id) {
-        if (validateISicilyNumber(textInput1.textContent) && selectionMode() === "compression") {
-            textInput1.blur()
-            textInput2.focus()
-        } else if (validateShortID(textInput1.textContent) && selectionMode() === "midpoint") {
-            textInput1.blur()
-            textInput2.focus()
-        }
-    } 
 
+    const target = /** @type {HTMLElement} */ (ev.target)
+
+    const changeFocus = () => {textInput1.blur(); textInput2.focus()}
+
+    switch (target.id) {
+        case textInput1.id:
+            if (validateISicilyNumber(textInput1.textContent) && selectionMode() === "compression") changeFocus()
+            if (validateShortID(textInput1.textContent) && selectionMode() === "midpoint") changeFocus()
+
+            break;
+        case textInput2.id:
+            if (validateISicilyTokenNumber(textInput2.textContent) && selectionMode() === "compression") textInput2.blur()
+            if (validateShortID(textInput2.textContent) && selectionMode() === "midpoint") textInput2.blur()
+    }
 }
 
 /**
@@ -26,6 +29,7 @@ const handleCompression = () => {
     if (validateShortID(textInput1.textContent)) {
         Message.hide()
         span("#resolved-id-1").innerHTML = insertISic(String(baseToDec(textInput1.textContent, BASE100)))
+
     } else if (isDecimal(textInput1.textContent)) {
         Message.hide()
         textInput1.textContent = "ISic" + textInput1.textContent
@@ -36,9 +40,8 @@ const handleCompression = () => {
         Message.hide()
         result.textContent = "-"
         const inpt = textInput1.textContent + "-" + textInput2.textContent
-        show(result, textInput2)
         addClasses(result, textInput2)("five")
-        removeClasses(result, textInput2)("sixteen")
+        show(result, textInput2)
 
         if (validateLongID(inpt)) {
             span("#resolved-id-1").innerHTML = formatGreek(padShortID(BASE100, decToBase(BigInt(removeISic(inpt)), BASE100)))
@@ -48,10 +51,8 @@ const handleCompression = () => {
     } else {
         span("#resolved-id-1").innerHTML = BLANKCOMPRESSION
         hide(result, textInput2) 
-        // addClasses(result, textInput2)("five")
-        // removeClasses(result, textInput2)("sixteen")
+        removeClasses(result, textInput2)("five")
     }
-
 }
 
 /**
@@ -81,6 +82,8 @@ const handleHover = () => {
 }
 
 const handleMidpoint = () => {
+
+
     const v1Dec = baseToDec(textInput1.textContent, BASE100)
     const v2Dec = baseToDec(textInput2.textContent, BASE100)
     
@@ -187,7 +190,6 @@ const handleSelection = () => {
             enable(flipBtn)
 
             removeClasses(textInput1, textInput2)("five")
-            addClasses(textInput1, textInput2)("sixteen")
 
             break
 
@@ -195,7 +197,6 @@ const handleSelection = () => {
             handleMidpoint()
             show(textInput2, result, resolvedID2, span("#resolved-midpoint-id"))
             disable(flipBtn)
-            removeClasses(textInput1, textInput2)("sixteen")
             addClasses(textInput1, textInput2)("five")
             break
 
@@ -220,6 +221,7 @@ const handleToggleMode = (e) => {
                 deactivate(midPointBtn)
                 textInput1.focus()
                 setCaretEnd(textInput1)
+                addClasses(result, textInput2)("five")
             }
             else {
                 textInput1.textContent = ""
@@ -237,6 +239,7 @@ const handleToggleMode = (e) => {
                 deactivate(compressBtn)    
                 textInput1.focus()
                 setCaretEnd(textInput1)
+                removeClasses(result)("five")
             } 
             else {
                 textInput1.textContent = ""
@@ -275,20 +278,33 @@ const handleUpdateInput = (e) => {
     switch (selectionMode()) {
         case "compression":
 
-            if (validate(targetInput)) {
-                addClasses(targetInput, result)("valid")
+            switch (targetInput.id) {
+                case textInput1.id:
+                    if (validateISicilyNumber(targetInput.textContent) || 
+                        validateShortID(targetInput.textContent)) {
 
-                handleCompression();
+                        addClasses(targetInput)("valid")
+
+                    } else {
+                        removeClasses(targetInput)("valid")
+                    }
+                    break;
+
+                case textInput2.id:
+                    if (validateISicilyTokenNumber(targetInput.textContent)) {
+                        addClasses(targetInput)("valid")             
+                    }  else {
+                        removeClasses(targetInput)("valid")
+                    }
+                    break;
+
+                default:
+                    removeClasses(targetInput, result)("valid")
+                    handleCompression();
+                    break;
             }
-            else {
-                removeClasses(targetInput, result)("valid")
-                handleCompression();
-                if (validateShortIdNonStrict(targetInput.textContent)) {
-                    targetInput.setAttribute("maxlength", "5")
-                } else {
-                    targetInput.setAttribute("maxlength", "16")
-                }
-            }     
+
+            handleCompression()
 
             if (validate(targetInput) && validate(resolvedID1)) {
                 enable(flipBtn)

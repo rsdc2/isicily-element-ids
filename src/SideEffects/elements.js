@@ -83,6 +83,10 @@ const midpointRad =
     /** @type {HTMLInputElement} */ 
     (document.getElementById("midpointRad"))
 
+const notesBtn = button("#notes")
+
+const notesDiv = div("#notes")
+
 const operationForm = 
     /** @type {HTMLFormElement} */ 
     (document.getElementById("operationForm"))

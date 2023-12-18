@@ -92,6 +92,18 @@ div.message.hidden {
   transition: 0.5;
 }
 
+div.notes {
+  position: absolute;
+  background-color: lightgray;
+  left: 10vw;
+  right: 10vw;
+  top: 5vw;
+  height: fit-content;
+  box-shadow: 5px 5px 5px black;
+  margin: 10px;
+  padding: 10px;
+}
+
 fieldset {
   width: fit-content;
 }

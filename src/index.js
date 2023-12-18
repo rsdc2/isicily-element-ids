@@ -2,5 +2,5 @@
 
 addListeners()
 handleSelection()
-handleNotes()
+handleToggleShowNotes()
 textInput1.focus()

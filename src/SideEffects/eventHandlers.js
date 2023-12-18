@@ -195,18 +195,6 @@ const handleMidpoint = () => {
 }
 
 
-const handleNotes = () => {
-    switch (hasClass("activated")(button("#notes-btn"))) {
-        case true:
-            show(div(".notes"))
-            break;
-        case false:
-            hide(div(".notes"))
-            break;
-    } 
-}
-
-
 /**
  * 
  * @returns 
@@ -279,17 +267,22 @@ const handleToggleMode = (e) => {
             }
             break;
 
-        case button("#notes-btn").id:
-            toggle("activated")(button("#notes-btn"))
-            handleNotes()
-            break;
-
         default:
             break;
     }    
 
     handleSelection()
 
+}
+
+const handleToggleShowNotes = () => {
+    if (hasClass("hidden")(notesDiv)) {
+        removeClasses(notesDiv)("hidden")
+        activate(notesBtn)
+    } else {
+        addClasses(notesDiv)("hidden")
+        deactivate(notesBtn)
+    }
 }
 
 

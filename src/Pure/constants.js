@@ -68,7 +68,7 @@ const ABOUTTEXT = `
 University of Oxford, and is licensed under the MIT license. This project has received funding from 
 the European Research Council (ERC) under the European Union’s Horizon 2020 research and innovation programme 
 (grant agreement No 885040, “Crossreads”). For further details see 
-<a href="https://github.com/rsdc2/ISicID" target="_blank">the source code on Github</a>.</p> 
+<a href="https://github.com/rsdc2/isicily-element-ids" target="_blank">the source code on Github</a>.</p> 
 `
 
 const NOTESTEXT = `

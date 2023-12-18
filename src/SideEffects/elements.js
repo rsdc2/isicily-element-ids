@@ -60,6 +60,8 @@ const compressBtn =
     /** @type {HTMLButtonElement} */ 
     (document.getElementById("compress-btn"))
 
+const bodyDiv = div("#body")
+
 const compressionRad = 
     /** @type {HTMLInputElement} */ 
     (document.getElementById("compressionRad"))

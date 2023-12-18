@@ -143,6 +143,10 @@ div#textInputDiv {
   height: auto;
 }
 
+fieldset {
+  border: none
+}
+
 span.result.hidden {
   width: 0px;
   min-width: 0px;

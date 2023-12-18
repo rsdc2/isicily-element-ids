@@ -21,6 +21,11 @@ const handleChangeFocus = (ev) => {
     }
 }
 
+const hideAllPopups = () => {
+    deactivate(aboutBtn, notesBtn)
+    hide(aboutDiv, notesDiv)
+}
+
 /**
  * 
  */
@@ -275,7 +280,13 @@ const handleToggleMode = (e) => {
 
 }
 
-const handleToggleShowAbout = () => {
+/**
+ * 
+ * @param {Event} e 
+ */
+const handleToggleShowAbout = (e) => {
+    e.stopPropagation()
+
     if (hasClass("hidden")(aboutDiv)) {
         aboutDiv.innerHTML = ABOUTTEXT
         removeClasses(aboutDiv)("hidden")
@@ -286,7 +297,12 @@ const handleToggleShowAbout = () => {
     }
 }
 
-const handleToggleShowNotes = () => {
+/**
+ * 
+ * @param {Event} e 
+ */
+const handleToggleShowNotes = (e) => {
+    e.stopPropagation()
     if (hasClass("hidden")(notesDiv)) {
         notesDiv.innerHTML = NOTESTEXT
         removeClasses(notesDiv)("hidden")

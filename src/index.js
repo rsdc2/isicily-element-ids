@@ -2,6 +2,5 @@
 
 addListeners()
 handleSelection()
-handleToggleShowNotes()
-handleToggleShowAbout()
+hideAllPopups()
 textInput1.focus()

@@ -71,7 +71,9 @@ const validateLongID = STRICT ? validateLongIDStrict : validateLongIdNonStrict
 const validateShortID = STRICT ? validateShortIDStrict : validateShortIdNonStrict
 
 /**
- * @param {HTMLDivElement} input
+ * @param {HTMLDivElement | HTMLSpanElement} elem
  */
-const validate = input => validateLongID(input.textContent) || validateShortID(input.textContent) 
+const validate = elem => validateLongID(elem.textContent) || 
+                            validateShortID(elem.textContent) ||
+                            validateLongID(elem.textContent.replace(/[= ]/g, ""))
 

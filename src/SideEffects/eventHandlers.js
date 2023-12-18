@@ -188,13 +188,11 @@ const handleUpdateInput = (e) => {
 
             if (validate(targetInput)) {
                 addClasses(targetInput, result)("valid")
-                enable(flipBtn);
 
                 handleCompression();
             }
             else {
                 removeClasses(targetInput, result)("valid")
-                disable(flipBtn);
                 handleCompression();
                 if (validateShortIdNonStrict(targetInput.textContent)) {
                     targetInput.setAttribute("maxlength", "5")
@@ -202,6 +200,12 @@ const handleUpdateInput = (e) => {
                     targetInput.setAttribute("maxlength", "16")
                 }
             }     
+
+            if (validate(targetInput) && validate(result)) {
+                enable(flipBtn)
+            } else {
+                disable(flipBtn)
+            }
             
             handleValidateCompression();
             break;

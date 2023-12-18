@@ -51,7 +51,7 @@ const handleMidpoint = () => {
     let v2StatusMid = ""
     let midpointValid = true
     
-    if (validate(textInput1)) {
+    if (validateShortID(textInput1.textContent)) {
         v1StatusMid = "This ID is valid"
         span("#resolved-id-1").textContent = insertISic(String(v1Dec))
     } else {
@@ -61,7 +61,7 @@ const handleMidpoint = () => {
         Message.hide()
     }
 
-    if (validate(textInput2)) {
+    if (validateShortID(textInput2.textContent)) {
         v2StatusMid = "This ID is valid"
         span("#resolved-id-2").textContent = insertISic(String(v2Dec))
     } else {
@@ -121,9 +121,6 @@ const handleMidpoint = () => {
     }
 
 }
-
-
-
 
 
 const handleNotes = () => {
@@ -266,7 +263,7 @@ const handleUpdateInput = (e) => {
             break;
 
         case "midpoint":
-            if (validate(targetInput)) {
+            if (validateShortID(targetInput.textContent)) {
                 addClasses(targetInput)("valid")
             }
             else {

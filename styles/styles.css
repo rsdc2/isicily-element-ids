@@ -134,6 +134,15 @@ div#textInputDiv {
   height: auto;
 }
 
+span.result.hidden {
+  width: 0px;
+  min-width: 0px;
+  height: 0px;
+  min-height: 0px;
+  padding: 0px;
+  margin: 0px;
+}
+
 span.result {
   font-family: monospace;
   font-size: x-large;

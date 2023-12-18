@@ -16,3 +16,7 @@ const setCaretEnd = elem => {
     }
     
 }
+
+const setCaretAfterNewChar = elem => {
+
+}

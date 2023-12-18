@@ -28,7 +28,7 @@ const handleCompression = () => {
 
     if (validateShortID(textInput1.textContent)) {
         Message.hide()
-        span("#resolved-id-1").innerHTML = insertISic(String(baseToDec(textInput1.textContent, BASE100)))
+        resolvedID1.innerHTML = insertISic(String(baseToDec(textInput1.textContent, BASE100)))
 
     } else if (isDecimal(textInput1.textContent)) {
         Message.hide()
@@ -41,15 +41,16 @@ const handleCompression = () => {
         result.textContent = "-"
         const inpt = textInput1.textContent + "-" + textInput2.textContent
         addClasses(result, textInput2)("five")
+        addClasses(result)("valid")
         show(result, textInput2)
 
         if (validateLongID(inpt)) {
-            span("#resolved-id-1").innerHTML = formatGreek(padShortID(BASE100, decToBase(BigInt(removeISic(inpt)), BASE100)))
+            resolvedID1.innerHTML = formatGreek(padShortID(BASE100, decToBase(BigInt(removeISic(inpt)), BASE100)))
         } else {
-            span("#resolved-id-1").innerHTML = BLANKCOMPRESSION
+            resolvedID1.innerHTML = BLANKCOMPRESSION
         }
     } else {
-        span("#resolved-id-1").innerHTML = BLANKCOMPRESSION
+        resolvedID1.innerHTML = BLANKCOMPRESSION
         hide(result, textInput2) 
         removeClasses(result, textInput2)("five")
     }
@@ -136,6 +137,7 @@ const handleMidpoint = () => {
 
     if (textInput1Err === Err.CONTAINSNUMERAL || textInput2Err === Err.CONTAINSNUMERAL) {
         Message.alert(containsNumeralErr(""))
+        midpointValid = false
     } else {
         Message.hide()
     }
@@ -192,7 +194,7 @@ const handleMidpoint = () => {
 
 }
 
-    
+
 const handleNotes = () => {
     switch (hasClass("activated")(button("#notes-btn"))) {
         case true:

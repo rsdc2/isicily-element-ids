@@ -60,9 +60,26 @@ const handleCompression = () => {
  */
 const handleFlip = () => {
     if (selectionMode() === "compression") {
-        const res = resolvedID1.textContent
-        textInput1.textContent = res.replace(`${EQ}`, "")
-                                .replace("?", "")
+        const resolved = resolvedID1
+            .textContent
+            .replace(`${EQ}`, "")
+            .replace("?", "")
+
+        if (validateShortID(resolved)) {
+            textInput1.textContent = resolved
+            textInput2.textContent = ""
+            hide(textInput2, result)
+        } else
+
+        if (validateLongID(resolved)) {
+            const matches = resolved.matchAll(/(^ISic0[0-9]{5,5})-([0-9]{5,5})$/g).next()
+            if (matches) {
+                textInput1.textContent = matches.value[1]
+                textInput2.textContent = matches.value[2]    
+            }
+            show(textInput2, result)
+        }
+                                    
         handleCompression()    
     }
 }

@@ -81,6 +81,12 @@ div.info {
   padding: 10px;
 }
 
+div.input {
+  margin-top: 20px;
+  align-items: center;
+  align-content: center;
+}
+
 
 div.message {
   box-shadow: 5px 5px 5px black;

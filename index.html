@@ -13,26 +13,25 @@
       </div>
 
 
-      <div class="input">
-        <fieldset id="inputFieldSet">
-          <legend>
+      <div class="input hidden">
+          <div class=buttons>
             <button id="midpoint-btn" class="activated" title="Find the ID at the midpoint between two IDs">Find midpoint</button>
             <button id="compress-btn" title="Compress or decompress an I.Sicily element ID">Compress/Decompress</button>
             <button id="flip-btn" disabled title="Swap positions of the compressed / decompressed IDs">Flip</button>
             <button id="notes" title="Display notes">Notes</button>
             <button id="about" title="Display about">About</button>
-          </legend>
-          <div id="textInputDiv">
+          </div>
+          <div id="textInputDiv" class="input">
             <table>
               <tr>
                 <td>
                   <div id="text-input1" class="text-input" contenteditable="true" autocomplete="off" spellcheck="false" max="5"></div>
                 </td>
                 <td>
-                  <span id="result" class="result"></span>
+                  <span id="result" class="result hidden"></span>
                 </td>
                 <td>
-                  <div id="text-input2" class="text-input" contenteditable="true" autocomplete="off" spellcheck="false"></div>
+                  <div id="text-input2" class="text-input hidden" contenteditable="true" autocomplete="off" spellcheck="false"></div>
                 </td>
               </tr>
               <tr>
@@ -55,11 +54,11 @@
         </fieldset>
       </div>
 
-      <div id="notes" class="info">
+      <div id="notes" class="info hidden">
 
       </div>
 
-      <div id="about" class="info">
+      <div id="about" class="info hidden">
 
       </div>
     </div>

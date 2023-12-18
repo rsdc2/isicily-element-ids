@@ -56,7 +56,9 @@ const handleCompression = () => {
         }
     } else {
         resolvedID1.innerHTML = BLANKCOMPRESSION
-        hide(result, textInput2) 
+        hide(result, textInput2)
+        textInput2.textContent = ""
+        result.textContent = "" 
         removeClasses(result, textInput2)("five", "one")
     }
 }

@@ -34,7 +34,7 @@ The maximum Base 1000 number is ```ωωωωω```, which corresponds to ```999999
 
 Follow this link:
 
-[https://rsdc2.github.io/isicily-element-ids/](https://rsdc2.github.io/isicly-element-ids/)
+[https://rsdc2.github.io/isicily-element-ids/](https://rsdc2.github.io/isicily-element-ids/)
 
 ### Running
 

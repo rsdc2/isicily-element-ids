@@ -25,7 +25,7 @@ const isDecimal = (s) => {
  */
 
 function validateLongIDStrict(s) {
-    const m = s.match(/^ISic[0-9]{6,6}-[0-9]{5,5}$/)
+    const m = s.match(/^ISic0[0-9]{5,5}-[0-9]{5,5}$/)
     return m != null
 }
 

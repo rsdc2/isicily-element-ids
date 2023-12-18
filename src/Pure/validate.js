@@ -1,4 +1,14 @@
 /**
+ * 
+ * @param {string} s 
+ */
+
+const containsNumerals = s => {
+    const matches = s.match(/[0-9]/g) 
+    return matches !== null
+}
+
+/**
  * Returns true if the string is composed only of 
  * characters 0-9
  * @param {string} s 

@@ -95,68 +95,81 @@ const handleHover = () => {
             handleMidpoint()
             break;
     }
-
 }
 
+
 const handleMidpoint = () => {
+    const text1 = textInput1.textContent
+    const text2 = textInput2.textContent
 
-
-    const v1Dec = baseToDec(textInput1.textContent, BASE100)
-    const v2Dec = baseToDec(textInput2.textContent, BASE100)
+    const text1Dec = baseToDec(text1, BASE100)
+    const text2Dec = baseToDec(text2, BASE100)
     
-    let v1StatusMid = ""
-    let v2StatusMid = ""
     let midpointValid = true
     
-    if (validateShortID(textInput1.textContent)) {
-        v1StatusMid = "This ID is valid"
-        span("#resolved-id-1").textContent = insertISic(String(v1Dec))
+    let [textInput1Err, text1Status] = getShortIDValidationIndividual(text1)
+    let [textInput2Err, text2Status] = getShortIDValidationIndividual(text2)
+    if (textInput1Err) resolvedID1.textContent = insertISic(String(text1Dec))
+    if (textInput2Err) resolvedID1.textContent = insertISic(String(text2Dec))
+
+    if (textInput1Err === Err.ISVALID) {
+        resolvedID1.textContent = insertISic(String(text1Dec))
+        Message.hide()
     } else {
-        v1StatusMid = "ERROR: This ID is not valid"
+        resolvedID1.textContent = ""
+        resolvedMidpointID.textContent = ""
         midpointValid = false
-        span("#resolved-id-1").textContent = ""
+
+        if (textInput1Err === Err.CONTAINSNUMERAL) {
+            Message.alert(containsNumeralErr("1"))
+        }
+    }
+
+    if (textInput2Err === Err.ISVALID) {
+        resolvedID2.textContent = insertISic(String(text2Dec))
+        Message.hide()
+    } else {
+        resolvedID2.textContent = ""
+        resolvedMidpointID.textContent = ""
+        midpointValid = false
+    }
+
+    if (textInput1Err === Err.CONTAINSNUMERAL || textInput2Err === Err.CONTAINSNUMERAL) {
+        Message.alert(containsNumeralErr(""))
+    } else {
         Message.hide()
     }
 
-    if (validateShortID(textInput2.textContent)) {
-        v2StatusMid = "This ID is valid"
-        span("#resolved-id-2").textContent = insertISic(String(v2Dec))
-    } else {
-        v2StatusMid = "ERROR: This ID is not valid"
-        midpointValid = false
-        span("#resolved-id-2").textContent = ""
-        Message.hide()
-    }
-
-    if (v1Dec > v2Dec) {
-        v1StatusMid = v1StatusMid.concat("\nERROR: This ID comes after the second ID")
-        v2StatusMid = v2StatusMid.concat("\nERROR: This ID comes before the first ID")
+    if (text1Dec > text2Dec) {
+        text1Status = text1Status.concat("\nThis ID comes after the second ID")
+        text2Status = text2Status.concat("\nThis ID comes before the first ID")
         if (validate(textInput1) && validate(textInput2)) {
             Message.alert("First ID comes after second ID")
         }
         midpointValid = false
     }
 
-    if (v1Dec === v2Dec) {
-        v1StatusMid = v1StatusMid.concat("\nERROR: This ID is equal to the second ID")
-        v2StatusMid = v2StatusMid.concat("\nERROR: This ID is equal to the first ID.")
+    if (text1Dec === text2Dec) {
+        text1Status = text1Status.concat("\nERROR: This ID is equal to the second ID")
+        text2Status = text2Status.concat("\nERROR: This ID is equal to the first ID.")
         if (validate(textInput1) && validate(textInput2)) {
             Message.alert("IDs are equal")
         }
         midpointValid = false
     }
 
-    if (v1Dec === v2Dec + 1n || v1Dec === v2Dec - 1n) {
-        v1StatusMid = v1StatusMid.concat("\nERROR: There are no positions in between these IDs")
-        v2StatusMid = v2StatusMid.concat("\nERROR: There are no positions in between these IDs")
+    if (text1Dec === text2Dec + 1n || text1Dec === text2Dec - 1n) {
+        text1Status = text1Status.concat("\nERROR: There are no positions in between these IDs")
+        text2Status = text2Status.concat("\nERROR: There are no positions in between these IDs")
         if (validate(textInput1) && validate(textInput2)) {
             Message.alert("No IDs between the two values")
         }
         midpointValid = false
     }
 
-    textInput1.setAttribute("title", v1StatusMid)
-    textInput2.setAttribute("title", v2StatusMid)
+    textInput1.setAttribute("title", text1Status)
+    textInput2.setAttribute("title", text2Status)
+
     if (midpointValid) {
         addClasses(result)("valid")
 
@@ -169,7 +182,7 @@ const handleMidpoint = () => {
             `${REST}`.concat(formatGreek(midpoint), `${REST}`
             )
         
-        span("#resolved-midpoint-id").textContent = insertISic(String(baseToDec(midpoint, BASE100)))
+        resolvedMidpointID.textContent = insertISic(String(baseToDec(midpoint, BASE100)))
 
     } else {
         removeClasses(result)("valid")
@@ -179,7 +192,7 @@ const handleMidpoint = () => {
 
 }
 
-
+    
 const handleNotes = () => {
     switch (hasClass("activated")(button("#notes-btn"))) {
         case true:

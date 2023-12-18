@@ -87,6 +87,7 @@ const handleFlip = () => {
         }
                                     
         handleCompression()    
+        handleValidateCompression()
     }
 }
 
@@ -211,16 +212,14 @@ const handleSelection = () => {
     switch (selectionMode()) {
         case "compression":
             handleCompression()
-            hide(textInput2, result, resolvedID2, span("#resolved-midpoint-id"))
-            enable(flipBtn)
-
+            hide(textInput2, result, resolvedID2, resolvedMidpointID)
             removeClasses(textInput1, textInput2)("five")
 
             break
 
         case "midpoint":
             handleMidpoint()
-            show(textInput2, result, resolvedID2, span("#resolved-midpoint-id"))
+            show(textInput2, result, resolvedID2, resolvedMidpointID)
             disable(flipBtn)
             addClasses(textInput1, textInput2)("five")
             break
@@ -331,40 +330,15 @@ const handleUpdateInput = (e) => {
     switch (selectionMode()) {
         case "compression":
 
-            switch (targetInput.id) {
-                case textInput1.id:
-                    if (validateISicilyNumber(targetInput.textContent) || 
-                        validateShortID(targetInput.textContent)) {
-
-                        addClasses(targetInput)("valid")
-
-                    } else {
-                        removeClasses(targetInput)("valid")
-                    }
-                    break;
-
-                case textInput2.id:
-                    if (validateISicilyTokenNumber(targetInput.textContent)) {
-                        addClasses(targetInput)("valid")             
-                    }  else {
-                        removeClasses(targetInput)("valid")
-                    }
-                    break;
-
-                default:
-                    removeClasses(targetInput, result)("valid")
-                    handleCompression();
-                    break;
-            }
-
             handleCompression()
+            handleValidateCompression()
 
-            if (validate(targetInput) && validate(resolvedID1)) {
+            if ((validate(textInput1) || validateLongID(textInput1.textContent + "-" + textInput2.textContent)) && validate(resolvedID1)) {
                 enable(flipBtn)
             } else {
                 disable(flipBtn)
             }
-            
+
             handleValidateCompression();
             break;
 
@@ -392,6 +366,21 @@ const handleValidateCompression = () => {
         v1StatusComp = "This ID is valid"
     } else {
         v1StatusComp = "This ID is not valid"
+    }
+
+    if (validateISicilyNumber(textInput1.textContent) || 
+        validateShortID(textInput1.textContent)) {
+
+        addClasses(textInput1)("valid")
+
+    } else {
+        removeClasses(textInput1)("valid")
+    }
+
+    if (validateISicilyTokenNumber(textInput2.textContent)) {
+        addClasses(textInput2)("valid")             
+    }  else {
+        removeClasses(textInput2)("valid")
     }
 
     textInput1.setAttribute("title", v1StatusComp)

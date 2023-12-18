@@ -71,7 +71,6 @@ the European Research Council (ERC) under the European Union’s Horizon 2020 re
 `
 
 const NOTESTEXT = `
-<h3>Notes</h3>
 <ul>
   <li>Uncompressed ID: ISic012345-01234, e.g. ISic000002-00100</li>
   <li>Compressed ID: ABCDE, where each digit may be any character a-z, A-Z, α-ω, Α-Ω, e.g. zzzzz = ISic051515-15151</li>

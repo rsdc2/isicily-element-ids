@@ -76,8 +76,8 @@ const handleFlip = () => {
             if (matches) {
                 textInput1.textContent = matches.value[1]
                 textInput2.textContent = matches.value[2]    
+                show(textInput2, result)
             }
-            show(textInput2, result)
         }
                                     
         handleCompression()    

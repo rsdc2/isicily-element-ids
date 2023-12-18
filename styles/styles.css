@@ -1,5 +1,8 @@
 .hidden {
   visibility: hidden;
+  min-width: 0ch;
+  width: 0ch;
+  height: 0ch;
 }
 
 body {
@@ -113,12 +116,22 @@ div.text-input.sixteen {
   min-width: 16ch;
 }
 
+div.text-input.hidden {
+  width: 0px;
+  min-width: 0px;
+  height: 0px;
+  min-height: 0px;
+  padding: 0px;
+  margin: 0px;
+}
+
 div.text-input.valid {
   color: green
 }
 
 div#textInputDiv {
   width: auto;
+  height: auto;
 }
 
 span.result {

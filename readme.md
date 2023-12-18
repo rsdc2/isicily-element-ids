@@ -1,4 +1,4 @@
-# Element ID resolver and generator for I.Sicily
+# Element ID generator and resolver for I.Sicily
 
 This is a resolver for token IDs on token elements in the [I.Sicily](https://github.com/ISicily/ISicily) corpus of inscriptions from ancient Sicily.
 
@@ -28,7 +28,7 @@ A consequence of limiting the Base 100 representation to 5 digits is that the ma
 
 The maximum Base 1000 number is ```ωωωωω```, which corresponds to ```9999999999 -> ISic099999-99999```.
 
-## Running and building the ID resolver
+## Running and building
 
 ### On Github Pages
 

@@ -52,6 +52,9 @@ const toggle = cls => (/** @type {HTMLElement}*/ elem) => {
     }
 }
 
+const aboutBtn = button("#about")
+
+const aboutDiv = div("#about")
 
 const compressBtn = 
     /** @type {HTMLButtonElement} */ 

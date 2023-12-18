@@ -92,7 +92,7 @@ div.message.hidden {
   transition: 0.5;
 }
 
-div.notes {
+div.info {
   position: absolute;
   background-color: lightgray;
   left: 10vw;

@@ -275,8 +275,20 @@ const handleToggleMode = (e) => {
 
 }
 
+const handleToggleShowAbout = () => {
+    if (hasClass("hidden")(aboutDiv)) {
+        aboutDiv.innerHTML = ABOUTTEXT
+        removeClasses(aboutDiv)("hidden")
+        activate(aboutBtn)
+    } else {
+        addClasses(aboutDiv)("hidden")
+        deactivate(aboutBtn)
+    }
+}
+
 const handleToggleShowNotes = () => {
     if (hasClass("hidden")(notesDiv)) {
+        notesDiv.innerHTML = NOTESTEXT
         removeClasses(notesDiv)("hidden")
         activate(notesBtn)
     } else {

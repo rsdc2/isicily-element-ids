@@ -45,8 +45,8 @@ const handleCompression = () => {
         Message.hide()
         result.textContent = "-"
         const inpt = textInput1.textContent + "-" + textInput2.textContent
-        addClasses(result, textInput2)("five")
-        addClasses(result)("valid")
+        addClasses(textInput2)("five")
+        addClasses(result)("valid", "one")
         show(result, textInput2)
 
         if (validateLongID(inpt)) {
@@ -57,7 +57,7 @@ const handleCompression = () => {
     } else {
         resolvedID1.innerHTML = BLANKCOMPRESSION
         hide(result, textInput2) 
-        removeClasses(result, textInput2)("five")
+        removeClasses(result, textInput2)("five", "one")
     }
 }
 
@@ -123,8 +123,8 @@ const handleMidpoint = () => {
         resolvedID1.textContent = insertISic(String(text1Dec))
         Message.hide()
     } else {
-        resolvedID1.textContent = ""
-        resolvedMidpointID.textContent = ""
+        resolvedID1.textContent = BLANKISIC
+        resolvedMidpointID.textContent = BLANKISIC
         midpointValid = false
 
         if (textInput1Err === Err.CONTAINSNUMERAL) {
@@ -136,8 +136,8 @@ const handleMidpoint = () => {
         resolvedID2.textContent = insertISic(String(text2Dec))
         Message.hide()
     } else {
-        resolvedID2.textContent = ""
-        resolvedMidpointID.textContent = ""
+        resolvedID2.textContent = BLANKISIC
+        resolvedMidpointID.textContent = BLANKISIC
         midpointValid = false
     }
 
@@ -195,7 +195,7 @@ const handleMidpoint = () => {
     } else {
         removeClasses(result)("valid")
         result.textContent = BLANKMIDPOINT
-        span("#resolved-midpoint-id").textContent = ""
+        resolvedMidpointID.textContent = BLANKISIC
     }
 
 }
@@ -245,7 +245,7 @@ const handleToggleMode = (e) => {
                 deactivate(midPointBtn)
                 textInput1.focus()
                 setCaretEnd(textInput1)
-                addClasses(result, textInput2)("five")
+                addClasses(result, textInput2)("five", "one")
             }
             else {
                 textInput1.textContent = ""
@@ -263,7 +263,7 @@ const handleToggleMode = (e) => {
                 deactivate(compressBtn)    
                 textInput1.focus()
                 setCaretEnd(textInput1)
-                removeClasses(result)("five")
+                removeClasses(result)("five", "one")
             } 
             else {
                 textInput1.textContent = ""

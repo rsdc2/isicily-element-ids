@@ -69,9 +69,22 @@ div {
   padding: 0px
 }
 
-div.message {
-  top: 0px;
+div.info {
+  position: absolute;
+  background-color: lightgray;
+  left: 10vw;
+  right: 10vw;
+  top: 5vw;
+  height: fit-content;
   box-shadow: 5px 5px 5px black;
+  margin: 10px;
+  padding: 10px;
+}
+
+
+div.message {
+  box-shadow: 5px 5px 5px black;
+  margin-top: 10px;
   left: 10vw;
   right: 10vw;
   height: fit-content;
@@ -92,17 +105,6 @@ div.message.hidden {
   transition: 0.5;
 }
 
-div.info {
-  position: absolute;
-  background-color: lightgray;
-  left: 10vw;
-  right: 10vw;
-  top: 5vw;
-  height: fit-content;
-  box-shadow: 5px 5px 5px black;
-  margin: 10px;
-  padding: 10px;
-}
 
 fieldset {
   width: fit-content;
@@ -167,6 +169,10 @@ span.result {
 
 span.result.five {
   width: 5ch
+}
+
+span.result.one {
+  width: 1ch
 }
 
 span.result.valid {

@@ -3,8 +3,9 @@ const REST = " ... "
 const EQ = " = "
 
 const FIVEBLANKS = "?????"
-const BLANKCOMPRESSION = `${EQ}?`
+const BLANKCOMPRESSION = "ISic??????-?????"
 const BLANKMIDPOINT = `${REST}${FIVEBLANKS}${REST}`
+const BLANKISIC = "ISic??????-?????"
 
 const LOWERCASELATIN = [
     'a', 

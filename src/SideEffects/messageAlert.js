@@ -8,9 +8,6 @@ const Message = {
     alert : s => {
         messageDiv.textContent = s
         Message.show()
-        // setTimeout(() => {
-        //     Message.hide()
-        // }, 4000);
     },
 
     hide : () => {

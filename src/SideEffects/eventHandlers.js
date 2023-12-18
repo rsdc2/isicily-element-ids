@@ -131,11 +131,12 @@ const handleToggleMode = (e) => {
 
     switch (target.id) {
         case compressBtn.id:
-
+            textInput2.innerHTML = ""
             if (selectionMode() == "midpoint") {
                 activate(compressBtn)
                 deactivate(midPointBtn)
                 textInput1.focus()
+                setCaretEnd(textInput1)
             }
             break;
 
@@ -150,6 +151,7 @@ const handleToggleMode = (e) => {
                 activate(midPointBtn)
                 deactivate(compressBtn)    
                 textInput1.focus()
+                setCaretEnd(textInput1)
             }
             break;
 

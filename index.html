@@ -12,17 +12,14 @@
         <h1>I.Sicily element ID resolver</h1>
       </div>
 
-      <div id="message" class="message hidden">
-        This is a message
-      </div>
 
       <div class="input">
         <fieldset id="inputFieldSet">
           <legend>
-            <button id="midpoint-btn" class="activated">Find midpoint</button>
-            <button id="compress-btn">Compress/Decompress</button>
-            <button id="flip-btn" disabled>Flip</button>
-            <button id="notes-btn">Notes</button>
+            <button id="midpoint-btn" class="activated" title="Find the ID at the midpoint between two IDs">Find midpoint</button>
+            <button id="compress-btn" title="Compress or decompress an I.Sicily element ID">Compress/Decompress</button>
+            <button id="flip-btn" disabled title="Swap positions of the compressed / decompressed IDs">Flip</button>
+            <button id="notes-btn" title="Display notes">Notes</button>
           </legend>
           <div id="textInputDiv">
             <table>
@@ -38,6 +35,10 @@
               </tr>
             </table>
           </div>
+
+        <div id="message" class="message hidden">
+          This is a message
+        </div>
         </fieldset>
       </div>
 

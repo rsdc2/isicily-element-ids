@@ -83,6 +83,7 @@ const handleMidpoint = () => {
  */
 
 const handleSelection = () => {
+    hide(div(".input"))
 
     switch (selectionMode()) {
         case "compression":
@@ -93,7 +94,7 @@ const handleSelection = () => {
             removeClasses(textInput1, textInput2)("five")
             addClasses(textInput1, textInput2)("sixteen")
 
-            return
+            break
 
         case "midpoint":
             handleMidpoint()
@@ -101,9 +102,11 @@ const handleSelection = () => {
             show(textInput2)
             removeClasses(textInput1, textInput2)("sixteen")
             addClasses(textInput1, textInput2)("five")
-            return
+            break
 
     }
+
+    show(div(".input"))
 }
 
 
@@ -128,14 +131,26 @@ const handleToggleMode = (e) => {
 
     switch (target.id) {
         case compressBtn.id:
-            activate(compressBtn)
-            deactivate(midPointBtn)
 
+            if (selectionMode() == "midpoint") {
+                activate(compressBtn)
+                deactivate(midPointBtn)
+                textInput1.focus()
+            }
             break;
 
         case midPointBtn.id:
-            activate(midPointBtn)
-            deactivate(compressBtn)
+
+            if (selectionMode() == "compression") {
+                console.log("Change mode")
+                if (textInput1.value.match(/[0-9]/)) {
+                    textInput1.value = ""
+                    textInput2.value = ""
+                }
+                activate(midPointBtn)
+                deactivate(compressBtn)    
+                textInput1.focus()
+            }
             break;
 
         case button("#notes-btn").id:
@@ -233,6 +248,7 @@ const handleValidateMidpoint = () => {
     } else {
         v1StatusMid = "ERROR: This ID is not valid"
         midpointValid = false
+        Message.hide()
     }
 
     if (validate(textInput2)) {
@@ -240,6 +256,7 @@ const handleValidateMidpoint = () => {
     } else {
         v2StatusMid = "ERROR: This ID is not valid"
         midpointValid = false
+        Message.hide()
     }
 
     if (v1Dec > v2Dec) {
@@ -273,7 +290,6 @@ const handleValidateMidpoint = () => {
     textInput2.setAttribute("title", v2StatusMid)
     if (midpointValid) {
         addClasses(result)("valid")
-        Message.hide()
     } else {
         removeClasses(result)("valid")
     }

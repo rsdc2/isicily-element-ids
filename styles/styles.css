@@ -67,25 +67,30 @@ div {
 }
 
 div.message {
-  position: absolute;
   top: 0px;
   box-shadow: 5px 5px 5px black;
   left: 10vw;
   right: 10vw;
-  max-width: 80vw;
   height: fit-content;
   max-height: 50vw;
   padding-left: 15px;
   padding-right: 15px;
+  padding-top: 5px;
+  padding-bottom: 5px;
   z-index: 1;
   background-color: whitesmoke    ;
   color: red;
   text-align: center;
-  transition: 0s
+  transition: 0s;
+  width: auto
 }
 
 div.message.hidden {
   transition: 0.5;
+}
+
+fieldset {
+  width: fit-content;
 }
 
 input.text {

@@ -108,7 +108,7 @@ div.text-input {
 
 div.text-input.five {
   width: fit-content;
-  min-width: 5ch;
+  min-width: 16ch;
 }
 
 div.text-input.sixteen {
@@ -139,12 +139,14 @@ span.result {
   font-size: x-large;
   text-align: center;
   color: red;
+  display: inline-block;
+  width: 18ch
 }
 
 span.result.valid {
   color: black
 }
 
-tr {
-  display: inline-block;
+td {
+  text-align: center;
 }

@@ -7,4 +7,5 @@ function addListeners() {
     textInput2.addEventListener("input", handleUpdateInput)
     textInput1.addEventListener("mouseover", handleUpdateInput)
     textInput2.addEventListener("mouseover", handleUpdateInput)
+    resolvedID1.addEventListener("click", handleFlip)
 }

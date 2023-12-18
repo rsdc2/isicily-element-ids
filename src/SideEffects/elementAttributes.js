@@ -51,11 +51,11 @@ const hasClass = (/** @type {string} */ className) => (/** @type {HTMLElement} e
 /**
  * @param {Array.<HTMLElement>} elems
  */
-const hide = (...elems) => elems.forEach( elem => elem.hidden = true )
+const hide = (...elems) => elems.forEach( elem => addClasses(elem)("hidden") )
 
 const isActivated = (/** @type {HTMLButtonElement}*/ elem) => hasClass("activated")(elem)
 
 /**
  * @param {Array.<HTMLElement>} elems
  */
-const show = (...elems) => elems.forEach( elem => elem.hidden = false )
+const show = (...elems) => elems.forEach( elem => removeClasses(elem)("hidden") )

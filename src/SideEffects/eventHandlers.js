@@ -20,7 +20,7 @@ const handleBtnMouseup = (e) => {
  * 
  */
 const handleCompression = () => {
-    const inpt = textInput1.value
+    const inpt = textInput1.textContent
 
     if (validateLongID(inpt)) {
         Message.hide()
@@ -39,7 +39,7 @@ const handleCompression = () => {
  */
 const handleFlip = (e) => {
     const res = result.textContent
-    textInput1.value = res.replace(`${EQ}`, "")
+    textInput1.textContent = res.replace(`${EQ}`, "")
                             .replace("?", "")
     handleCompression()
 }
@@ -63,8 +63,8 @@ const handleHover = () => {
  */
 const handleMidpoint = () => {
 
-    const v1 = textInput1.value
-    const v2 = textInput2.value
+    const v1 = textInput1.textContent
+    const v2 = textInput2.textContent
 
     result.textContent = 
         `${REST}`.concat(
@@ -89,7 +89,7 @@ const handleSelection = () => {
         case "compression":
             handleCompression()
             hide(textInput2, resolvedID1)
-            show(flipBtn)
+            enable(flipBtn)
 
             removeClasses(textInput1, textInput2)("five")
             addClasses(textInput1, textInput2)("sixteen")
@@ -98,8 +98,8 @@ const handleSelection = () => {
 
         case "midpoint":
             handleMidpoint()
-            hide(flipBtn)
             show(textInput2)
+            disable(flipBtn)
             removeClasses(textInput1, textInput2)("sixteen")
             addClasses(textInput1, textInput2)("five")
             break
@@ -143,9 +143,9 @@ const handleToggleMode = (e) => {
 
             if (selectionMode() == "compression") {
                 console.log("Change mode")
-                if (textInput1.value.match(/[0-9]/)) {
-                    textInput1.value = ""
-                    textInput2.value = ""
+                if (textInput1.textContent.match(/[0-9]/)) {
+                    textInput1.textContent = ""
+                    textInput2.textContent = ""
                 }
                 activate(midPointBtn)
                 deactivate(compressBtn)    
@@ -194,7 +194,7 @@ const handleUpdateInput = (e) => {
                 removeClasses(targetInput, result)("valid")
                 disable(flipBtn);
                 handleCompression();
-                if (validateShortIdNonStrict(targetInput.value)) {
+                if (validateShortIdNonStrict(targetInput.textContent)) {
                     targetInput.setAttribute("maxlength", "5")
                 } else {
                     targetInput.setAttribute("maxlength", "16")
@@ -236,8 +236,8 @@ const handleValidateCompression = () => {
 }
 
 const handleValidateMidpoint = () => {
-    const v1Dec = baseToDec(textInput1.value, BASE100)
-    const v2Dec = baseToDec(textInput2.value, BASE100)
+    const v1Dec = baseToDec(textInput1.textContent, BASE100)
+    const v2Dec = baseToDec(textInput2.textContent, BASE100)
     
     let v1StatusMid = ""
     let v2StatusMid = ""

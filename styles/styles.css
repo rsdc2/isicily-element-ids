@@ -93,24 +93,32 @@ fieldset {
   width: fit-content;
 }
 
-input.text {
+div.text-input {
   font-family: monospace;
   font-size: x-large;
   text-align: center;
   color: red;
-  padding: 10px
+  padding: 10px;
+  background-color: whitesmoke;
+  display: inline-block
 }
 
-input.five {
-  width: 5ch;
+div.text-input.five {
+  width: fit-content;
+  min-width: 5ch;
 }
 
-input.sixteen {
-  width: 16ch
+div.text-input.sixteen {
+  width: fit-content;
+  min-width: 16ch;
 }
 
-input.text.valid {
+div.text-input.valid {
   color: green
+}
+
+div#textInputDiv {
+  width: auto;
 }
 
 span.result {
@@ -122,4 +130,8 @@ span.result {
 
 span.result.valid {
   color: black
+}
+
+tr {
+  display: inline-block;
 }

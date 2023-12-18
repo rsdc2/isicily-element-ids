@@ -30,6 +30,15 @@ function validateLongIDStrict(s) {
 }
 
 /**
+ * Returns true if the initial part of the string is consistent
+ * with a long ID
+ * @param {string} s 
+ */
+function validatePartialLongID(s) {
+
+}
+
+/**
  * 
  * @param {string} x 
  * @returns {boolean}
@@ -62,7 +71,7 @@ const validateLongID = STRICT ? validateLongIDStrict : validateLongIdNonStrict
 const validateShortID = STRICT ? validateShortIDStrict : validateShortIdNonStrict
 
 /**
- * @param {HTMLInputElement} input
+ * @param {HTMLSpanElement} input
  */
-const validate = input => validateLongID(input.value) || validateShortID(input.value) 
+const validate = input => validateLongID(input.textContent) || validateShortID(input.textContent) 
 

@@ -1,20 +1,57 @@
 
+/**
+ * 
+ * @param {KeyboardEvent} ev 
+ */
+const handleChangeFocus = (ev) => {
+    console.log('focus')
+    const target = /** @type {HTMLElement} */ (ev.target)
+    if (target.id === textInput1.id) {
+        if (validateISicilyNumber(textInput1.textContent) && selectionMode() === "compression") {
+            textInput1.blur()
+            textInput2.focus()
+        } else if (validateShortID(textInput1.textContent) && selectionMode() === "midpoint") {
+            textInput1.blur()
+            textInput2.focus()
+        }
+    } 
+
+}
 
 /**
  * 
  */
 const handleCompression = () => {
-    const inpt = textInput1.textContent
 
-    if (validateLongID(inpt)) {
+    if (validateShortID(textInput1.textContent)) {
         Message.hide()
-        span("#resolved-id-1").innerHTML = formatGreek(padShortID(BASE100, decToBase(BigInt(removeISic(inpt)), BASE100)))
-    } else if (validateShortID(inpt)) {
+        span("#resolved-id-1").innerHTML = insertISic(String(baseToDec(textInput1.textContent, BASE100)))
+    } else if (isDecimal(textInput1.textContent)) {
         Message.hide()
-        span("#resolved-id-1").innerHTML = insertISic(String(baseToDec(inpt, BASE100)))
+        textInput1.textContent = "ISic" + textInput1.textContent
+        setCaretEnd(textInput1)
+        handleCompression()
+
+    } else if (validatePartialLongID(textInput1.textContent)) {
+        Message.hide()
+        result.textContent = "-"
+        const inpt = textInput1.textContent + "-" + textInput2.textContent
+        show(result, textInput2)
+        addClasses(result, textInput2)("five")
+        removeClasses(result, textInput2)("sixteen")
+
+        if (validateLongID(inpt)) {
+            span("#resolved-id-1").innerHTML = formatGreek(padShortID(BASE100, decToBase(BigInt(removeISic(inpt)), BASE100)))
+        } else {
+            span("#resolved-id-1").innerHTML = BLANKCOMPRESSION
+        }
     } else {
         span("#resolved-id-1").innerHTML = BLANKCOMPRESSION
+        hide(result, textInput2) 
+        // addClasses(result, textInput2)("five")
+        // removeClasses(result, textInput2)("sixteen")
     }
+
 }
 
 /**

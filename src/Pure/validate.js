@@ -6,15 +6,23 @@
  */
 const isDecimal = (s) => {
     
-    const matches = s.match(/[0-9]+/g)
+    const matches = s.match(/^[0-9]+$/g)
 
     if (matches == null || matches.length === 0) {
         return false
     }
     
-    return s
-        .match(/[0-9]+/g)[0]
-        .length == s.length
+    return true
+}
+
+/**
+ * 
+ * @param {string} s 
+ */
+function validateISicilyNumber(s) {
+    const m = s.match(/^ISic0[0-9]{5,5}$/)
+    if (m!=null) console.log("valid")
+    return m != null
 }
 
 
@@ -35,7 +43,8 @@ function validateLongIDStrict(s) {
  * @param {string} s 
  */
 function validatePartialLongID(s) {
-
+    const m = s.match(/^ISic0/)
+    return m != null
 }
 
 /**

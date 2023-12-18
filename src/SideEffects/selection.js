@@ -13,7 +13,7 @@ const setCaretEnd = elem => {
         rng.collapse(false)
         selection.removeAllRanges()
         selection.addRange(rng)
-    }
+    } 
     
 }
 

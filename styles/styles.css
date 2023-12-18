@@ -108,7 +108,7 @@ div.text-input {
 
 div.text-input.five {
   width: fit-content;
-  min-width: 16ch;
+  min-width: 5ch;
 }
 
 div.text-input.sixteen {

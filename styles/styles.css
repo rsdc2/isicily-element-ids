@@ -69,6 +69,14 @@ div {
   padding: 0px
 }
 
+div.buttons {
+  margin: auto
+}
+
+div.container {
+  margin: auto
+}
+
 div.info {
   position: absolute;
   background-color: lightgray;
@@ -82,15 +90,16 @@ div.info {
 }
 
 div.input {
-  margin-top: 20px;
-  align-items: center;
-  align-content: center;
+  margin: auto;
+  margin-top: 20px
 }
+
 
 
 div.message {
   box-shadow: 5px 5px 5px black;
   margin-top: 10px;
+  margin: auto;
   left: 10vw;
   right: 10vw;
   height: fit-content;
@@ -104,16 +113,11 @@ div.message {
   color: red;
   text-align: center;
   transition: 0s;
-  width: auto
+  width: fit-content;
 }
 
 div.message.hidden {
   transition: 0.5;
-}
-
-
-fieldset {
-  width: fit-content;
 }
 
 div.text-input {
@@ -179,6 +183,10 @@ span.result.one {
 
 span.result.valid {
   color: black
+}
+
+table {
+  margin: auto
 }
 
 td {

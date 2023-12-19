@@ -20,7 +20,8 @@ const getTargetInput = (e) => {
             return
         }
 
-        if (keyE.ctrlKey && keyE.key === "v") {
+        if (keyE.ctrlKey && (keyE.key === "v" || keyE.key === "ω")) {
+            // console.log("firing")
             return getTargetInputFromSplittingLongID(targetInput, targetInput.textContent)
         } else if (keyE.ctrlKey) {
             return
@@ -117,19 +118,7 @@ const handleCompression = () => {
     }
 }
 
-/**
- * Underlines Greek text and makes sure that the caret
- * stays in the correct position
- * @param {HTMLDivElement} elem 
- */
-const handleGreekFormatting = (elem) => {
-    const position = getCaretPosition(elem.id)
-    elem.innerHTML = formatGreek(elem.textContent) 
-    const [n, offset] = getNodeAndOffsetFromPosition(elem, position)
-    setCaretFromNodeOffset(n, offset)
 
-    result.innerHTML = formatGreek(result.textContent)
-}
 
 /**
  * Makes sure that the Flip button is disabled / enabled appropriately
@@ -166,9 +155,35 @@ const handleFlip = () => {
                                     
         handleCompression()    
         handleValidateCompression()
+        handleGreekFormatting(textInput1, null)
     }
 }
 
+
+/**
+ * Underlines Greek text and makes sure that the caret
+ * stays in the correct position
+ * @param {HTMLDivElement} elem 
+ * @param {KeyboardEvent | MouseEvent | InputEvent | null} e
+ */
+const handleGreekFormatting = (elem, e) => {
+    result.innerHTML = formatGreek(result.textContent)
+
+    if (e != null && e.type === "keyup") {
+        const keyE = /** @type {KeyboardEvent} */ (e)
+        if (keyE.ctrlKey && (keyE.key === "v" || keyE.key === "ω")) {
+            elem.innerHTML = formatGreek(elem.textContent) 
+            setCaretEnd(elem)
+            return
+        }
+    }
+
+    const position = getCaretPosition(elem.id)
+    elem.innerHTML = formatGreek(elem.textContent) 
+    const [n, offset] = getNodeAndOffsetFromPosition(elem, position)
+    setCaretFromNodeOffset(n, offset)    
+     
+}
 
 const handleHover = () => {
     switch (selectionMode()) {
@@ -433,7 +448,8 @@ const handleUpdateInput = (e) => {
             break;
     }
 
-    handleGreekFormatting(targetInput)
+    handleGreekFormatting(targetInput, e)
+
 
 }
 

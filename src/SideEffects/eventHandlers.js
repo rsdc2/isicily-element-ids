@@ -49,7 +49,7 @@ const getTargetInputFromSplittingLongID = (defaultElem, longID) => {
     }
 
     hide(result, textInput2)
-    textInput2.textContent = ""
+    reset(result, textInput2)
     return defaultElem
 }
 
@@ -113,8 +113,7 @@ const handleCompression = () => {
     } else {
         resolvedID1.innerHTML = BLANKCOMPRESSION
         hide(result, textInput2)
-        textInput2.textContent = ""
-        result.textContent = "" 
+        reset(textInput2, result)
         removeClasses(result, textInput2)("five", "one")
     }
 }
@@ -144,7 +143,7 @@ const handleFlip = () => {
 
         if (validateShortID(resolved)) {
             textInput1.textContent = resolved
-            textInput2.textContent = ""
+            reset(textInput2, result)
             hide(textInput2, result)
         } else
 
@@ -306,7 +305,8 @@ const handleToggleMode = (e) => {
 
     switch (target.id) {
         case compressBtn.id:
-            textInput2.innerHTML = ""
+            reset(textInput2, result)
+            
             if (selectionMode() == "midpoint") {
                 activate(compressBtn)
                 deactivate(midPointBtn)
@@ -451,12 +451,20 @@ const hideAllPopups = () => {
 }
 
 /**
+ * 
+ * @param {Array.<HTMLDivElement> | Array.<HTMLSpanElement>} divs 
+ */
+const reset = (...divs) => {
+
+    divs.forEach ( div => div.innerHTML = "" )
+}
+
+/**
  * Resets the text of the tooltips for the input elements
  */
 const resetInputs = () => {
     resetStatusTips()
-    textInput1.textContent = ""
-    textInput2.textContent = ""
+    reset(textInput1, textInput2, result)
 }
 
 const resetStatusTips = () => {

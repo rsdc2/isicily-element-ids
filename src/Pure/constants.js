@@ -3,7 +3,7 @@ const REST = " ... "
 const EQ = " = "
 
 const FIVEBLANKS = "?????"
-const BLANKCOMPRESSION = "ISic??????-?????"
+const BLANKCOMPRESSION = "?"
 const BLANKMIDPOINT = `${REST}${FIVEBLANKS}${REST}`
 const BLANKISIC = "ISic??????-?????"
 
@@ -63,7 +63,7 @@ const LOWERCASEGREEK = [
     'ω'
 ]
 
-const METAKEYS = ["Alt", "Control", "Shift", "CapsLock", "ArrowDown", "ArrowUp", "ArrowLeft", "ArrowRight"]
+const METAKEYS = ["Alt", "Control", "CapsLock", "ArrowDown", "ArrowUp", "ArrowLeft", "ArrowRight"]
 
 const ABOUTTEXT = `
 <p>This software was written by Robert Crellin as part of the Crossreads project at the Faculty of Classics, 

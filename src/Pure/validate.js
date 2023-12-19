@@ -13,6 +13,17 @@ const containsNumerals = s => {
  * @param {string} s 
  */
 
+const containsOnlyLetters = s => {
+    const matches = s.match(/^[a-zA-Zα-ωΑ-Ω]+$/g) 
+    return matches !== null
+}
+
+
+/**
+ * 
+ * @param {string} s 
+ */
+
 const containsSpecial = s => {
     const matches = s.match(/[./+-;:\[\]\{\}]/g) 
     return matches !== null

@@ -19,12 +19,15 @@ const getTargetInput = (e) => {
         if (METAKEYS.includes(keyE.key)) {
             return
         }
-
-        if (keyE.ctrlKey && (keyE.key === "v" || keyE.key === "ω")) {
-            console.log(targetInput.textContent)
-            return getTargetInputFromSplittingLongID(targetInput, targetInput.textContent)
-        } else if (keyE.ctrlKey) {
-            return
+        
+        if (keyE.ctrlKey) {
+            if (keyE.key === "v" || keyE.key === "ω") {
+                return getTargetInputFromSplittingLongID(targetInput, targetInput.textContent)
+            } else if (keyE.key === "Backspace") {
+                return targetInput
+            } else {
+                return
+            }
         }
     }
 
@@ -90,7 +93,16 @@ const handleCompression = () => {
     if (validateShortID(textInput1.textContent)) {
         Message.hide()
         resolvedID1.innerHTML = insertISic(String(baseToDec(textInput1.textContent, BASE100)))
-
+    } else if (textInput1.textContent.trim() === "") {
+        resolvedID1.innerHTML = BLANKCOMPRESSION
+        hide(result, textInput2)
+        reset(textInput2, result)
+        removeClasses(result, textInput2)("five", "one")  
+    } else if (containsOnlyLetters(textInput1.textContent)) {
+        resolvedID1.innerHTML = BLANKISIC
+        hide(result, textInput2)
+        reset(textInput2, result)
+        removeClasses(result, textInput2)("five", "one")   
     } else if (isDecimal(textInput1.textContent)) {
         Message.hide()
         textInput1.textContent = "ISic" + textInput1.textContent
@@ -108,8 +120,10 @@ const handleCompression = () => {
         if (validateLongID(inpt)) {
             resolvedID1.innerHTML = formatGreek(padShortID(BASE100, decToBase(BigInt(removeISic(inpt)), BASE100)))
         } else {
-            resolvedID1.innerHTML = BLANKCOMPRESSION
+            resolvedID1.innerHTML = FIVEBLANKS
         }
+ 
+ 
     } else {
         resolvedID1.innerHTML = BLANKCOMPRESSION
         hide(result, textInput2)

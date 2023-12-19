@@ -118,6 +118,20 @@ const handleCompression = () => {
 }
 
 /**
+ * Underlines Greek text and makes sure that the caret
+ * stays in the correct position
+ * @param {HTMLDivElement} elem 
+ */
+const handleGreekFormatting = (elem) => {
+    const position = getCaretPosition(elem.id)
+    elem.innerHTML = formatGreek(elem.textContent) 
+    const [n, offset] = getNodeAndOffsetFromPosition(elem, position)
+    setCaretFromNodeOffset(n, offset)
+
+    result.innerHTML = formatGreek(result.textContent)
+}
+
+/**
  * Makes sure that the Flip button is disabled / enabled appropriately
  */
 const handleCheckFlip = () => {
@@ -395,7 +409,6 @@ const handleToggleShowNotes = (e) => {
 const handleUpdateInput = (e) => {
 
     const targetInput = getTargetInput(e)
-    const selectionTarget = document.getSelection()
 
     if (targetInput == null) {
         return
@@ -420,14 +433,7 @@ const handleUpdateInput = (e) => {
             break;
     }
 
-
-    const position = getCaretPosition(targetInput.id)
-    targetInput.innerHTML = formatGreek(targetInput.textContent) 
-    const [n, offset] = getNodeAndOffsetFromPosition(targetInput, position)
-    setCaretFromNodeOffset(n, offset)
-    console.log(n.textContent, offset)
-
-    result.innerHTML = formatGreek(result.textContent)
+    handleGreekFormatting(targetInput)
 
 }
 

@@ -69,14 +69,6 @@ div {
   padding: 0px
 }
 
-div.buttons {
-  margin: auto
-}
-
-div.container {
-  margin: auto
-}
-
 div.info {
   position: absolute;
   background-color: lightgray;
@@ -94,12 +86,10 @@ div.input {
   margin-top: 20px
 }
 
-
-
 div.message {
   box-shadow: 5px 5px 5px black;
-  margin-top: 10px;
   margin: auto;
+  margin-top: 20px;  
   left: 10vw;
   right: 10vw;
   height: fit-content;
@@ -148,11 +138,6 @@ div.text-input.hidden {
 
 div.text-input.valid {
   color: green
-}
-
-div#textInputDiv {
-  width: auto;
-  height: auto;
 }
 
 span.result.hidden {

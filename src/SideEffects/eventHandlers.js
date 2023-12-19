@@ -311,9 +311,10 @@ const handleToggleMode = (e) => {
                 setCaretEnd(textInput1)
                 addClasses(textInput2)("five")
                 addClasses(result)("one")
+                handleValidateCompression()
             }
             else {
-                textInput1.textContent = ""
+                resetInputs()
             }
             break;
 
@@ -321,18 +322,17 @@ const handleToggleMode = (e) => {
 
             if (selectionMode() == "compression") {
                 if (textInput1.textContent.match(/[0-9]/)) {
-                    textInput1.textContent = ""
-                    textInput2.textContent = ""
+                    resetInputs()
                 }
                 activate(midPointBtn)
                 deactivate(compressBtn)    
                 textInput1.focus()
                 setCaretEnd(textInput1)
                 removeClasses(result)("five", "one")
+                resetStatusTips()
             } 
             else {
-                textInput1.textContent = ""
-                textInput2.textContent = ""
+                resetInputs()
             }
             break;
 
@@ -445,4 +445,18 @@ const handleValidateCompression = () => {
 const hideAllPopups = () => {
     deactivate(aboutBtn, notesBtn)
     hide(aboutDiv, notesDiv)
+}
+
+/**
+ * Resets the text of the tooltips for the input elements
+ */
+const resetInputs = () => {
+    resetStatusTips()
+    textInput1.textContent = ""
+    textInput2.textContent = ""
+}
+
+const resetStatusTips = () => {
+    textInput1.setAttribute("title", "")
+    textInput2.setAttribute("title", "")
 }

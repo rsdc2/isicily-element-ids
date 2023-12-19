@@ -21,7 +21,7 @@ const getTargetInput = (e) => {
         }
 
         if (keyE.ctrlKey && (keyE.key === "v" || keyE.key === "ω")) {
-            // console.log("firing")
+            console.log(targetInput.textContent)
             return getTargetInputFromSplittingLongID(targetInput, targetInput.textContent)
         } else if (keyE.ctrlKey) {
             return
@@ -41,7 +41,7 @@ const getTargetInput = (e) => {
  * @returns {HTMLDivElement} new target element
  */
 const getTargetInputFromSplittingLongID = (defaultElem, longID) => {
-    const matches = longID.matchAll(/(^ISic0[0-9]{5,5})-([0-9]{0,5})$/g).next()
+    const matches = longID.trim().matchAll(/(^ISic0[0-9]{5,5})-([0-9]{0,5})$/g).next()
     if (matches.value) {
         textInput1.textContent = matches.value[1]
         textInput2.textContent = matches.value[2]    

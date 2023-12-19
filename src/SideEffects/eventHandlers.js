@@ -1,11 +1,15 @@
 
 /**
  * 
- * @param {KeyboardEvent} ev 
+ * @param {KeyboardEvent} e 
  */
-const handleChangeFocus = (ev) => {
+const handleChangeFocus = (e) => {
 
-    const target = /** @type {HTMLElement} */ (ev.target)
+    const target = /** @type {HTMLElement} */ (e.target)
+
+    if (e.key === "Control" || (e.ctrlKey && e.key !== "v")) {
+        return
+    }
 
     const changeFocus = () => {textInput1.blur(); textInput2.focus()}
 
@@ -339,17 +343,27 @@ const handleToggleShowNotes = (e) => {
 
 /**
  * Event may be either MouseEvent or InputEvent
- * @param {Event} e
+ * @param {MouseEvent | InputEvent | KeyboardEvent} e
  */
 
 const handleUpdateInput = (e) => {
+
+    if (["keydown", "keypress", "keyup"].includes(e.type)) {
+        const keyE = /** @type {KeyboardEvent} */ (e)
+        
+        if (keyE.key === "Control" || (keyE.ctrlKey && keyE.key !== "v")) {
+            return
+        }
+    }
 
     const target = /** @type {HTMLElement} */ (e.target) 
 
     let targetInput = target.id === textInput1.id ? textInput1 : 
                                         target.id === textInput2.id ? textInput2 :
                                             null 
+
     if (targetInput === null) return;
+
 
     switch (selectionMode()) {
         case "compression":

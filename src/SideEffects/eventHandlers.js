@@ -321,7 +321,7 @@ const handleToggleMode = (e) => {
         case midPointBtn.id:
 
             if (selectionMode() == "compression") {
-                if (textInput1.textContent.match(/[0-9]/)) {
+                if (containsNumerals(textInput1.textContent)) {
                     resetInputs()
                 }
                 activate(midPointBtn)

@@ -7,8 +7,6 @@ function addListeners() {
     midPointBtn.addEventListener("click", handleToggleMode)
     notesBtn.addEventListener("click", handleToggleShowNotes)
     notesDiv.addEventListener("click", handleToggleShowNotes)
-    textInput1.addEventListener("input", handleUpdateInput)
-    textInput2.addEventListener("input", handleUpdateInput)
     textInput1.addEventListener("keyup", handleUpdateInput)
     textInput2.addEventListener("keyup", handleUpdateInput)
     textInput1.addEventListener("keyup", handleChangeFocus)

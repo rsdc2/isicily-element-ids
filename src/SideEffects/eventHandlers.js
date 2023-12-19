@@ -1,3 +1,56 @@
+/**
+ * Returns target input from an event:
+ * ignores meta keys
+ * @param {KeyboardEvent | MouseEvent | InputEvent} e 
+ * @returns {HTMLDivElement | null}
+ */
+const getTargetInput = (e) => {
+    const target = /** @type {HTMLElement} */ (e.target) 
+
+    let targetInput = target.id === textInput1.id ? textInput1 : 
+                                        target.id === textInput2.id ? textInput2 :
+                                            null 
+
+    if (targetInput === null) return;
+
+    if (["keydown", "keypress", "keyup"].includes(e.type)) {
+        const keyE = /** @type {KeyboardEvent} */ (e)
+        
+        if (METAKEYS.includes(keyE.key)) {
+            return
+        }
+
+        if (keyE.ctrlKey && keyE.key === "v") {
+            return getTargetInputFromSplittingLongID(targetInput, targetInput.textContent)
+        } else if (keyE.ctrlKey) {
+            return
+        }
+    }
+
+    return targetInput
+
+}
+
+/**
+ * Displays a long ID appropriately in the two textboxes; 
+ * returns the Div that should receive the focus
+ * @param {HTMLDivElement} defaultElem
+ * @param {string} longID with document ID and token ID 
+ * @returns {HTMLDivElement} new target element
+ */
+const getTargetInputFromSplittingLongID = (defaultElem, longID) => {
+    const matches = longID.matchAll(/(^ISic0[0-9]{5,5})-([0-9]{0,5})$/g).next()
+    if (matches.value) {
+        textInput1.textContent = matches.value[1]
+        textInput2.textContent = matches.value[2]    
+        show(textInput2, result)
+        return textInput2
+    }
+
+    return defaultElem
+}
+
+
 
 /**
  * 
@@ -7,7 +60,8 @@ const handleChangeFocus = (e) => {
 
     const target = /** @type {HTMLElement} */ (e.target)
 
-    if (e.key === "Control" || (e.ctrlKey && e.key !== "v")) {
+    if (METAKEYS.includes(e.key) || (e.ctrlKey && e.key !== "v")) {
+        console.log("Cancel change focus")
         return
     }
 
@@ -92,7 +146,7 @@ const handleFlip = () => {
         } else
 
         if (validateLongID(resolved)) {
-            getTargetInputFromSplittingLongID(resolved)
+            getTargetInputFromSplittingLongID(textInput1, resolved)
         }
                                     
         handleCompression()    
@@ -238,23 +292,6 @@ const handleSelection = () => {
     show(div(".input"))
 }
 
-/**
- * Displays a long ID appropriately in the two textboxes; 
- * returns the Div that should receive the focus
- * @param {string} longID with document ID and token ID 
- * @returns {HTMLDivElement} new target element
- */
-const getTargetInputFromSplittingLongID = (longID) => {
-    const matches = longID.matchAll(/(^ISic0[0-9]{5,5})-([0-9]{1,5})$/g).next()
-    if (matches.value) {
-        textInput1.textContent = matches.value[1]
-        textInput2.textContent = matches.value[2]    
-        show(textInput2, result)
-        return textInput2
-    }
-
-    return textInput1
-}
 
 /**
  * 
@@ -348,26 +385,14 @@ const handleToggleShowNotes = (e) => {
 
 const handleUpdateInput = (e) => {
 
-    if (["keydown", "keypress", "keyup"].includes(e.type)) {
-        const keyE = /** @type {KeyboardEvent} */ (e)
-        
-        if (keyE.key === "Control" || (keyE.ctrlKey && keyE.key !== "v")) {
-            return
-        }
+    const targetInput = getTargetInput(e)
+
+    if (targetInput == null) {
+        return
     }
-
-    const target = /** @type {HTMLElement} */ (e.target) 
-
-    let targetInput = target.id === textInput1.id ? textInput1 : 
-                                        target.id === textInput2.id ? textInput2 :
-                                            null 
-
-    if (targetInput === null) return;
-
 
     switch (selectionMode()) {
         case "compression":
-            targetInput = getTargetInputFromSplittingLongID(targetInput.textContent)
             handleCompression()
             handleValidateCompression()
             handleCheckFlip()

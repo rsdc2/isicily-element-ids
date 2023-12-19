@@ -63,6 +63,8 @@ const LOWERCASEGREEK = [
     'ω'
 ]
 
+const METAKEYS = ["Alt", "Control", "Shift", "CapsLock"]
+
 const ABOUTTEXT = `
 <p>This software was written by Robert Crellin as part of the Crossreads project at the Faculty of Classics, 
 University of Oxford, and is licensed under the MIT license. This project has received funding from 

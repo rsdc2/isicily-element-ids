@@ -184,7 +184,7 @@ const handleMidpoint = () => {
     if (textInput1Err) resolvedID1.textContent = insertISic(String(text1Dec))
     if (textInput2Err) resolvedID1.textContent = insertISic(String(text2Dec))
 
-    if (textInput1Err === Err.ISVALID) {
+    if (textInput1Err === ERR.ISVALID) {
         resolvedID1.textContent = insertISic(String(text1Dec))
         Message.hide()
     } else {
@@ -192,12 +192,12 @@ const handleMidpoint = () => {
         resolvedMidpointID.textContent = BLANKISIC
         midpointValid = false
 
-        if (textInput1Err === Err.CONTAINSNUMERAL) {
+        if (textInput1Err === ERR.CONTAINSNUMERAL) {
             Message.alert(containsNumeralErr("1"))
         }
     }
 
-    if (textInput2Err === Err.ISVALID) {
+    if (textInput2Err === ERR.ISVALID) {
         resolvedID2.textContent = insertISic(String(text2Dec))
         Message.hide()
     } else {
@@ -206,10 +206,17 @@ const handleMidpoint = () => {
         midpointValid = false
     }
 
-    if (textInput1Err === Err.CONTAINSNUMERAL || textInput2Err === Err.CONTAINSNUMERAL) {
+    if (textInput1Err === ERR.CONTAINSNUMERAL || textInput2Err === ERR.CONTAINSNUMERAL) {
         Message.alert(containsNumeralErr(""))
         midpointValid = false
-    } else {
+    }
+
+    if (textInput1Err === ERR.CONTAINSSPECIAL || textInput2Err === ERR.CONTAINSSPECIAL) {
+        Message.alert(containsSpecialErr(""))
+        midpointValid = false
+    }
+
+    if (isGenericErr(textInput1Err, textInput2Err)) {
         Message.hide()
     }
 

@@ -9,6 +9,16 @@ const containsNumerals = s => {
 }
 
 /**
+ * 
+ * @param {string} s 
+ */
+
+const containsSpecial = s => {
+    const matches = s.match(/[./+-;:\[\]\{\}]/g) 
+    return matches !== null
+}
+
+/**
  * Returns true if the string is composed only of 
  * characters 0-9
  * @param {string} s 

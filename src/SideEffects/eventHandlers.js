@@ -21,11 +21,6 @@ const handleChangeFocus = (ev) => {
     }
 }
 
-const hideAllPopups = () => {
-    deactivate(aboutBtn, notesBtn)
-    hide(aboutDiv, notesDiv)
-}
-
 /**
  * 
  */
@@ -64,6 +59,19 @@ const handleCompression = () => {
 }
 
 /**
+ * Makes sure that the Flip button is disabled / enabled appropriately
+ */
+const handleCheckFlip = () => {
+    if ((validate(textInput1) || 
+        validateLongID(textInput1.textContent + "-" + textInput2.textContent)) && validate(resolvedID1)) {
+
+        enable(flipBtn)
+    } else {
+        disable(flipBtn)
+    }
+}
+
+/**
  * 
  */
 const handleFlip = () => {
@@ -80,12 +88,7 @@ const handleFlip = () => {
         } else
 
         if (validateLongID(resolved)) {
-            const matches = resolved.matchAll(/(^ISic0[0-9]{5,5})-([0-9]{5,5})$/g).next()
-            if (matches) {
-                textInput1.textContent = matches.value[1]
-                textInput2.textContent = matches.value[2]    
-                show(textInput2, result)
-            }
+            getTargetInputFromSplittingLongID(resolved)
         }
                                     
         handleCompression()    
@@ -216,7 +219,7 @@ const handleSelection = () => {
             handleCompression()
             hide(textInput2, result, resolvedID2, resolvedMidpointID)
             removeClasses(textInput1, textInput2)("five")
-
+            handleCheckFlip()
             break
 
         case "midpoint":
@@ -229,6 +232,24 @@ const handleSelection = () => {
     }
 
     show(div(".input"))
+}
+
+/**
+ * Displays a long ID appropriately in the two textboxes; 
+ * returns the Div that should receive the focus
+ * @param {string} longID with document ID and token ID 
+ * @returns {HTMLDivElement} new target element
+ */
+const getTargetInputFromSplittingLongID = (longID) => {
+    const matches = longID.matchAll(/(^ISic0[0-9]{5,5})-([0-9]{1,5})$/g).next()
+    if (matches.value) {
+        textInput1.textContent = matches.value[1]
+        textInput2.textContent = matches.value[2]    
+        show(textInput2, result)
+        return textInput2
+    }
+
+    return textInput1
 }
 
 /**
@@ -247,7 +268,8 @@ const handleToggleMode = (e) => {
                 deactivate(midPointBtn)
                 textInput1.focus()
                 setCaretEnd(textInput1)
-                addClasses(result, textInput2)("five", "one")
+                addClasses(textInput2)("five")
+                addClasses(result)("one")
             }
             else {
                 textInput1.textContent = ""
@@ -324,24 +346,17 @@ const handleUpdateInput = (e) => {
 
     const target = /** @type {HTMLElement} */ (e.target) 
 
-    const targetInput = target.id === textInput1.id ? textInput1 : 
+    let targetInput = target.id === textInput1.id ? textInput1 : 
                                         target.id === textInput2.id ? textInput2 :
                                             null 
     if (targetInput === null) return;
 
     switch (selectionMode()) {
         case "compression":
-
+            targetInput = getTargetInputFromSplittingLongID(targetInput.textContent)
             handleCompression()
             handleValidateCompression()
-
-            if ((validate(textInput1) || validateLongID(textInput1.textContent + "-" + textInput2.textContent)) && validate(resolvedID1)) {
-                enable(flipBtn)
-            } else {
-                disable(flipBtn)
-            }
-
-            handleValidateCompression();
+            handleCheckFlip()
             break;
 
         case "midpoint":
@@ -388,3 +403,7 @@ const handleValidateCompression = () => {
     textInput1.setAttribute("title", v1StatusComp)
 }
 
+const hideAllPopups = () => {
+    deactivate(aboutBtn, notesBtn)
+    hide(aboutDiv, notesDiv)
+}

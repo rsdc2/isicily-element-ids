@@ -11,7 +11,5 @@ function addListeners() {
     textInput1.addEventListener("input", handleUpdateInput)
     textInput2.addEventListener("input", handleUpdateInput)
     textInput1.addEventListener("keyup", handleChangeFocus)
-    textInput1.addEventListener("mouseover", handleUpdateInput)
-    textInput2.addEventListener("mouseover", handleUpdateInput)
     window.addEventListener("click", hideAllPopups)
 }

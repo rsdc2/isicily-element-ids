@@ -64,7 +64,6 @@ const handleChangeFocus = (e) => {
     const target = /** @type {HTMLElement} */ (e.target)
 
     if (METAKEYS.includes(e.key) || (e.ctrlKey && e.key !== "v")) {
-        console.log("Cancel change focus")
         return
     }
 
@@ -396,6 +395,7 @@ const handleToggleShowNotes = (e) => {
 const handleUpdateInput = (e) => {
 
     const targetInput = getTargetInput(e)
+    const selectionTarget = document.getSelection()
 
     if (targetInput == null) {
         return
@@ -420,9 +420,15 @@ const handleUpdateInput = (e) => {
             break;
     }
 
-    targetInput.innerHTML = formatGreek(targetInput.textContent)
-    setCaretEnd(targetInput)
+
+    const position = getCaretPosition(targetInput.id)
+    targetInput.innerHTML = formatGreek(targetInput.textContent) 
+    const [n, offset] = getNodeAndOffsetFromPosition(targetInput, position)
+    setCaretFromNodeOffset(n, offset)
+    console.log(n.textContent, offset)
+
     result.innerHTML = formatGreek(result.textContent)
+
 }
 
 const handleValidateCompression = () => {

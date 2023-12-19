@@ -9,6 +9,7 @@ function addListeners() {
     notesDiv.addEventListener("click", handleToggleShowNotes)
     textInput1.addEventListener("keyup", handleUpdateInput)
     textInput2.addEventListener("keyup", handleUpdateInput)
+
     textInput1.addEventListener("keyup", handleChangeFocus)
     window.addEventListener("click", hideAllPopups)
 }

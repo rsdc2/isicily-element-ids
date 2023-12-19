@@ -33,7 +33,8 @@ const getTargetInput = (e) => {
 
 /**
  * Displays a long ID appropriately in the two textboxes; 
- * returns the Div that should receive the focus
+ * returns the Div that should receive the focus;
+ * NB: this has side effects
  * @param {HTMLDivElement} defaultElem
  * @param {string} longID with document ID and token ID 
  * @returns {HTMLDivElement} new target element
@@ -47,6 +48,8 @@ const getTargetInputFromSplittingLongID = (defaultElem, longID) => {
         return textInput2
     }
 
+    hide(result, textInput2)
+    textInput2.textContent = ""
     return defaultElem
 }
 

@@ -1,5 +1,6 @@
 const Arr = {
     /**
+     * Return the last element of an array, or null if the array is empty
      * @template T
      * @param {Array.<T>} arr 
      * @returns {T | null}

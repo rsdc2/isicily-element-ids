@@ -32,10 +32,10 @@ function decToBase(dec, baseChars) {
         if (q == 0n) {
             return [r]
         }
-        return (q < base ? [q, r] : [...f(q), r])
+        return q < base ? [q, r] : [...f(q), r]
     }
 
-    const l = f(dec).map( (value) => baseChars[Number(value)] )
+    const l = f(dec).map( value => baseChars[Number(value)] )
     return l.join("")
 
 }

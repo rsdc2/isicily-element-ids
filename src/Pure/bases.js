@@ -41,7 +41,7 @@ function decToBase(dec, baseChars) {
 }
 
 /**
- * Convert a value in the base of @param base to a decimal
+ * Convert a value in the base of "baseVal" to a decimal
  * @param {string} baseVal   
  * @param {Array.<string>} base 
  * @returns {bigint}
@@ -53,14 +53,14 @@ function baseToDec(baseVal, base) {
     /**
      * 
      * @param {bigint} acc 
-     * @param {string} v 
+     * @param {string} baseVal 
      * @param {number} idx 
-     * @param {Array.<string>} arr
+     * @param {Array.<string>} chars
      * @returns {bigint}
      */
-    const getDecValue = (acc, v, idx, arr) => {
-        const idx_ = arr.length - 1 - idx
-        return acc + BigInt(base.indexOf(v)) * BigInt(base.length ** idx_)
+    const getDecValue = (acc, baseVal, idx, chars) => {
+        const reverseIdx = chars.length - 1 - idx // Start at the right end
+        return acc + BigInt(base.indexOf(baseVal)) * BigInt(base.length ** reverseIdx)
     }
 
     return chars.reduce(getDecValue, 0n)

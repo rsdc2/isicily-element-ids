@@ -17,16 +17,19 @@ const getTargetInput = (e) => {
         const keyE = /** @type {KeyboardEvent} */ (e)
         
         if (METAKEYS.includes(keyE.key)) {
-            return
+            return 
         }
         
         if (keyE.ctrlKey) {
             if (keyE.key === "v" || keyE.key === "ω") {
-                return getTargetInputFromSplittingLongID(targetInput, targetInput.textContent)
+                return getTargetInputFromSplittingLongID(
+                    targetInput, 
+                    targetInput.textContent
+                )
             } else if (keyE.key === "Backspace") {
                 return targetInput
             } else {
-                return
+                return 
             }
         }
     }
@@ -38,7 +41,7 @@ const getTargetInput = (e) => {
 /**
  * Displays a long ID appropriately in the two textboxes; 
  * returns the Div that should receive the focus;
- * NB: this has side effects
+ * NB: this has side effects in compression mode
  * @param {HTMLDivElement} defaultElem
  * @param {string} longID with document ID and token ID 
  * @returns {HTMLDivElement} new target element
@@ -48,12 +51,16 @@ const getTargetInputFromSplittingLongID = (defaultElem, longID) => {
     if (matches.value) {
         textInput1.textContent = matches.value[1]
         textInput2.textContent = matches.value[2]    
-        show(textInput2, result)
+        if (selectionMode() == "compression") {
+            show(textInput2, result)
+        }
         return textInput2
     }
 
-    hide(result, textInput2)
-    reset(result, textInput2)
+    if (selectionMode() == "compression") {
+        hide(result, textInput2)
+        reset(result, textInput2)
+    }
     return defaultElem
 }
 

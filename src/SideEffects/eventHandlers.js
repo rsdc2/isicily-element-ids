@@ -140,7 +140,6 @@ const handleCompression = () => {
 }
 
 
-
 /**
  * Makes sure that the Flip button is disabled / enabled appropriately
  */
@@ -153,6 +152,7 @@ const handleCheckFlip = () => {
         disable(flipBtn)
     }
 }
+
 
 /**
  * 

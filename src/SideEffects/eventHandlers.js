@@ -52,13 +52,13 @@ class Handlers {
         if (matches.value) {
             Elems.textInput1.textContent = matches.value[1]
             Elems.textInput2.textContent = matches.value[2]    
-            if (selectionMode() == "compression") {
+            if (Status.selectionMode() == "compression") {
                 Attrs.show(Elems.textInput2, Elems.result)
             }
             return Elems.textInput2
         }
 
-        if (selectionMode() == "compression") {
+        if (Status.selectionMode() == "compression") {
             Attrs.hide(Elems.result, Elems.textInput2)
             Handlers.reset(Elems.result, Elems.textInput2)
         }
@@ -83,13 +83,13 @@ class Handlers {
 
         switch (target.id) {
             case Elems.textInput1.id:
-                if (Validate.validateISicilyNumber(Elems.textInput1.textContent) && selectionMode() === "compression") changeFocus()
-                if (Validate.validateShortID(Elems.textInput1.textContent) && selectionMode() === "midpoint") changeFocus()
+                if (Validate.validateISicilyNumber(Elems.textInput1.textContent) && Status.selectionMode() === "compression") changeFocus()
+                if (Validate.validateShortID(Elems.textInput1.textContent) && Status.selectionMode() === "midpoint") changeFocus()
 
                 break;
             case Elems.textInput2.id:
-                if (Validate.validateISicilyTokenNumber(Elems.textInput2.textContent) && selectionMode() === "compression") Elems.textInput2.blur()
-                if (Validate.validateShortID(Elems.textInput2.textContent) && selectionMode() === "midpoint") Elems.textInput2.blur()
+                if (Validate.validateISicilyTokenNumber(Elems.textInput2.textContent) && Status.selectionMode() === "compression") Elems.textInput2.blur()
+                if (Validate.validateShortID(Elems.textInput2.textContent) && Status.selectionMode() === "midpoint") Elems.textInput2.blur()
         }
     }
 
@@ -168,7 +168,7 @@ class Handlers {
     static handleFlip = () => {
         const { resolvedID1 } = Elems
 
-        if (selectionMode() === "compression") {
+        if (Status.selectionMode() === "compression") {
             const resolved = resolvedID1
                 .textContent
                 .replace(`${EQ}`, "")
@@ -217,7 +217,7 @@ class Handlers {
     }
 
     static  handleHover = () => {
-        switch (selectionMode()) {
+        switch (Status.selectionMode()) {
             case "compression":
                 Handlers.handleValidateCompression()
                 break;
@@ -353,7 +353,7 @@ class Handlers {
 
         Attrs.hide(div(".input"))
 
-        switch (selectionMode()) {
+        switch (Status.selectionMode()) {
             case "compression":
                 Handlers.handleCompression()
                 Attrs.hide(Elems.textInput2, Elems.result, resolvedID2, resolvedMidpointID)
@@ -386,9 +386,9 @@ class Handlers {
             case Elems.compressBtn.id:
                 Handlers.reset(Elems.textInput2, Elems.result)
                 
-                if (selectionMode() == "midpoint") {
+                if (Status.selectionMode() == "midpoint") {
                     Attrs.activate(Elems.compressBtn)
-                    Attrs.activate(Elems.midPointBtn)
+                    Attrs.deactivate(Elems.midPointBtn)
                     Elems.textInput1.focus()
                     Select.setCaretEnd(Elems.textInput1)
                     Attrs.addClasses(Elems.textInput2)("five")
@@ -402,12 +402,12 @@ class Handlers {
 
             case Elems.midPointBtn.id:
 
-                if (selectionMode() == "compression") {
+                if (Status.selectionMode() == "compression") {
                     if (Validate.containsNumerals(Elems.textInput1.textContent)) {
                         Handlers.resetInputs()
                     }
                     Attrs.activate(Elems.midPointBtn)
-                    Attrs.activate(Elems.compressBtn)    
+                    Attrs.deactivate(Elems.compressBtn)    
                     Elems.textInput1.focus()
                     Select.setCaretEnd(Elems.textInput1)
                     Attrs.removeClasses(Elems.result)("five", "one")
@@ -428,10 +428,13 @@ class Handlers {
 
     /**
      * 
-     * @param {Event} e 
+     * @param {Event | undefined} e 
      */
     static handleToggleShowAbout = (e) => {
-        e.stopPropagation()
+
+        if (e != undefined) {
+            e.stopPropagation()
+        }
 
         if (Attrs.hasClass("hidden")(Elems.aboutDiv)) {
             Elems.aboutDiv.innerHTML = ABOUTTEXT
@@ -439,7 +442,7 @@ class Handlers {
             Attrs.activate(Elems.aboutBtn)
         } else {
             Attrs.addClasses(Elems.aboutDiv)("hidden")
-            Attrs.activate(Elems.aboutBtn)
+            Attrs.deactivate(Elems.aboutBtn)
         }
     }
 
@@ -455,7 +458,7 @@ class Handlers {
             Attrs.activate(Elems.notesBtn)
         } else {
             Attrs.addClasses(Elems.notesDiv)("hidden")
-            Attrs.activate(Elems.notesBtn)
+            Attrs.deactivate(Elems.notesBtn)
         }
     }
 
@@ -473,7 +476,7 @@ class Handlers {
             return
         }
 
-        switch (selectionMode()) {
+        switch (Status.selectionMode()) {
             case "compression":
                 Handlers.handleCompression()
                 Handlers.handleValidateCompression()
@@ -527,7 +530,7 @@ class Handlers {
     static hideAllPopups = () => {
         const {aboutBtn, notesBtn, aboutDiv, notesDiv} = Elems
 
-        Attrs.activate(aboutBtn, notesBtn)
+        Attrs.deactivate(aboutBtn, notesBtn)
         Attrs.hide(aboutDiv, notesDiv)
     }
 

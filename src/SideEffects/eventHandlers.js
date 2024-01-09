@@ -105,7 +105,7 @@ class Handlers {
 
         if (Validate.validateShortID(Elems.textInput1.textContent)) {
             Message.hide()
-            Elems.resolvedID1.innerHTML = Format.insertISic(String(baseToDec(Elems.textInput1.textContent, BASE100)))
+            Elems.resolvedID1.innerHTML = Format.insertISic(String(Bases.baseToDec(Elems.textInput1.textContent, BASE100)))
         } else if (Elems.textInput1.textContent.trim() === "") {
             Elems.resolvedID1.innerHTML = BLANKCOMPRESSION
             Attrs.hide(Elems.result, Elems.textInput2)
@@ -131,7 +131,7 @@ class Handlers {
             Attrs.show(Elems.result, Elems.textInput2)
 
             if (Validate.validateLongID(inpt)) {
-                resolvedID1.innerHTML = Format.formatGreek(Format.padShortID(BASE100, decToBase(BigInt(Format.removeISic(inpt)), BASE100)))
+                resolvedID1.innerHTML = Format.formatGreek(Format.padShortID(BASE100, Bases.decToBase(BigInt(Format.removeISic(inpt)), BASE100)))
             } else {
                 resolvedID1.innerHTML = FIVEBLANKS
             }
@@ -244,8 +244,8 @@ class Handlers {
         const text1 = textInput1.textContent
         const text2 = textInput2.textContent
 
-        const text1Dec = baseToDec(text1, BASE100)
-        const text2Dec = baseToDec(text2, BASE100)
+        const text1Dec = Bases.baseToDec(text1, BASE100)
+        const text2Dec = Bases.baseToDec(text2, BASE100)
         
         let midpointValid = true
         
@@ -323,7 +323,7 @@ class Handlers {
         if (midpointValid) {
             Attrs.addClasses(Elems.result)("valid")
 
-            const midpoint = midPointBetweenValues(
+            const midpoint = Bases.midPointBetweenValues(
                 Elems.textInput1.textContent, 
                 Elems.textInput2.textContent, 
                 BASE100
@@ -332,7 +332,7 @@ class Handlers {
                 `${REST}`.concat(Format.formatGreek(midpoint), `${REST}`
                 )
             
-            resolvedMidpointID.textContent = Format.insertISic(String(baseToDec(midpoint, BASE100)))
+            resolvedMidpointID.textContent = Format.insertISic(String(Bases.baseToDec(midpoint, BASE100)))
 
         } else {
             Attrs.removeClasses(Elems.result)("valid")

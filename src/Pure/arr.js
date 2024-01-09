@@ -41,3 +41,5 @@ const Arr = {
         return arr
     }
 }
+
+// module.exports = Arr

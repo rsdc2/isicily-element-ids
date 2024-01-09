@@ -1,11 +1,4 @@
-/**
- * 
- * @param {string} s 
- * @returns {string}
- */
-
-const containsNumeralErr = (s) => `ID ${s} contains at least one numeral. It should contain only Greek or Latin letters.`
-
+import * as Validate from "./validate"
 
 /**
  * 
@@ -13,7 +6,7 @@ const containsNumeralErr = (s) => `ID ${s} contains at least one numeral. It sho
  * @returns {string}
  */
 
-const containsSpecialErr = (s) => `ID ${s} contains at least one special characater. It should contain only Greek or Latin letters.`
+export const containsNumeralErr = (s) => `ID ${s} contains at least one numeral. It should contain only Greek or Latin letters.`
 
 
 /**
@@ -21,9 +14,18 @@ const containsSpecialErr = (s) => `ID ${s} contains at least one special characa
  * @param {string} s 
  * @returns {string}
  */
-const idNotValidErr = (s) => `ID ${s} is not valid`
 
-const ERR = {
+export const containsSpecialErr = (s) => `ID ${s} contains at least one special characater. It should contain only Greek or Latin letters.`
+
+
+/**
+ * 
+ * @param {string} s 
+ * @returns {string}
+ */
+export const idNotValidErr = (s) => `ID ${s} is not valid`
+
+export const ERR = {
     ISVALID: 0n,
     ISINVALID: 1n,
     ISEMPTY: 2n,
@@ -37,18 +39,18 @@ const ERR = {
  * @returns {[bigint, string]} 
  */
 
-const getShortIDValidationIndividual = (text) => {
+export const getShortIDValidationIndividual = (text) => {
     let error = ERR.ISVALID
     let status = ""
-    if (validateShortID(text)) {
+    if (Validate.validateShortID(text)) {
         status = "This ID is valid"
         error = ERR.ISVALID
     } else {
-        if (containsNumerals(text)) {
+        if (Validate.containsNumerals(text)) {
             status = containsNumeralErr("")
             error = ERR.CONTAINSNUMERAL
         }
-        else if (containsSpecial(text)) {
+        else if (Validate.containsSpecial(text)) {
             status = containsSpecialErr("")
             error = ERR.CONTAINSSPECIAL
         }
@@ -69,6 +71,6 @@ const getShortIDValidationIndividual = (text) => {
  * 
  * @param {Array.<bigint>} errNo 
  */
-const isGenericErr = (...errNo) => {
+export const isGenericErr = (...errNo) => {
     return errNo.every( x => x <= 2n )
 }

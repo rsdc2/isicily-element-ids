@@ -1,9 +1,11 @@
+import * as Bases from "./bases"
+
 /**
  * 
  * @param {string} s 
  * @returns {string}
  */
-const formatGreek = (s) => {
+export const formatGreek = (s) => {
     return s.replace(/([α-ωΑ-Ω]+)/g, "<u>$1</u>")
 }
 
@@ -14,7 +16,7 @@ const formatGreek = (s) => {
  * @returns {string}
  */
 
-function insertISic(s) {
+export function insertISic(s) {
     const s_ = s.padStart(11, '0')
     return "ISic" + s_.slice(0, 6) + "-" + s_.slice(6, 11)
 }
@@ -26,7 +28,7 @@ function insertISic(s) {
  * @returns {string}
  */
 
-const padShortID = (base, s) => s.padStart(5, zero(base))
+export const padShortID = (base, s) => s.padStart(5, Bases.zero(base))
 
 
 /**
@@ -35,6 +37,6 @@ const padShortID = (base, s) => s.padStart(5, zero(base))
  * @param {string} s 
  * @returns {string}
  */
-const removeISic = (s) => {
+export const removeISic = (s) => {
     return s.replace("ISic", "").replace("-", "")
 }

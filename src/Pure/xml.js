@@ -1,5 +1,5 @@
 
-const XML = {
+export const XML = {
     /**
      * 
      * @param {XPathResult} xpathresult 

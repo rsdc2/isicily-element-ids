@@ -1,8 +1,9 @@
+import * as Attrs from "./elementAttributes"
 /**
  * @param {string} query
  * @return {HTMLButtonElement}
  */
-const button = query => {
+export const button = query => {
     return document.querySelector("button" + query)
 }
 
@@ -10,7 +11,7 @@ const button = query => {
  * @param {string} query
  * @return {Array.<HTMLButtonElement>}
  */
-const buttons = query => {
+export const buttons = query => {
     return Array.from(document.querySelectorAll("button" + query))
 }
 
@@ -19,7 +20,7 @@ const buttons = query => {
  * @param {string} query
  * @return {HTMLDivElement}
  */
-const div = query => {
+export const div = query => {
     return document.querySelector("div" + query)
 }
 
@@ -28,7 +29,7 @@ const div = query => {
  * @param {string} query
  * @return {HTMLSpanElement}
  */
-const span = query => {
+export const span = query => {
     return document.querySelector("span" + query)
 }
 
@@ -36,7 +37,7 @@ const span = query => {
  * @param {string} query
  * @return {Array.<HTMLSpanElement>}
  */
-const spans = query => {
+export const spans = query => {
     return Array.from(document.querySelectorAll("span" + query))
 }
 
@@ -44,77 +45,76 @@ const spans = query => {
  * Toggles class of element
  * @param {string} cls
  */
-const toggle = cls => (/** @type {HTMLElement}*/ elem) => {
-    if (hasClass(cls)(elem)) {
-        removeClasses(elem)(cls)
+export const toggle = cls => (/** @type {HTMLElement}*/ elem) => {
+    if (Attrs.hasClass(cls)(elem)) {
+        Attrs.removeClasses(elem)(cls)
     } else {
-        addClasses(elem)(cls)
+        Attrs.addClasses(elem)(cls)
     }
 }
 
-const aboutBtn = button("#about")
+export const aboutBtn = button("#about")
 
-const aboutDiv = div("#about")
+export const aboutDiv = div("#about")
 
-const compressBtn = 
+export const compressBtn = 
     /** @type {HTMLButtonElement} */ 
     (document.getElementById("compress-btn"))
 
-const bodyDiv = div("#body")
+export const bodyDiv = div("#body")
 
-const compressionRad = 
+export const compressionRad = 
     /** @type {HTMLInputElement} */ 
     (document.getElementById("compressionRad"))
 
-const flipBtn = 
+export const flipBtn = 
     /** @type {HTMLButtonElement} */ 
     (document.getElementById("flip-btn"))
 
-const textInput1 = 
+export const textInput1 = 
     /** @type {HTMLDivElement} */ 
     (document.getElementById("text-input1"))
 
-const textInput2 =
+export const textInput2 =
     /** @type {HTMLDivElement} */ 
     (document.getElementById("text-input2"))
 
-const messageDiv = div("#message")
+export const messageDiv = div("#message")
 
-const midPointBtn = 
+export const midPointBtn = 
     /** @type {HTMLButtonElement} */ 
     (document.getElementById("midpoint-btn"))
 
-const midpointRad = 
+export const midpointRad = 
     /** @type {HTMLInputElement} */ 
     (document.getElementById("midpointRad"))
 
-const notesBtn = button("#notes")
+export const notesBtn = button("#notes")
 
-const notesDiv = div("#notes")
+export const notesDiv = div("#notes")
 
-const operationForm = 
+export const operationForm = 
     /** @type {HTMLFormElement} */ 
     (document.getElementById("operationForm"))
 
-const radioFieldSet = 
+export const radioFieldSet = 
     /** @type {HTMLFieldSetElement} */
     (document.getElementById("radioFieldSet"))
 
-const resolvedID1 = 
+export const resolvedID1 = 
     /** @type {HTMLSpanElement} */
     (document.getElementById("resolved-id-1"))
 
-const resolvedID2 = 
+export const resolvedID2 = 
     /** @type {HTMLSpanElement} */
     (document.getElementById("resolved-id-2"))
 
-const resolvedMidpointID = span("#resolved-midpoint-id")
+export const resolvedMidpointID = span("#resolved-midpoint-id")
 
-const result =  
+export const result =  
     /** @type {HTMLInputElement} */
     document.getElementById("result")
 
-
-const textInputDiv = 
+export const textInputDiv = 
     /** @type {HTMLDivElement} */
     document.getElementById("textInputDiv")

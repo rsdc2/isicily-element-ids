@@ -1,10 +1,13 @@
+import { Arr } from "../Pure/arr"
+import { XML } from "../Pure/xml"
+
 /**
  * Returns the caret position in a div
  * @param {string} id
  * @returns {number}
  */
 
-const getCaretPosition = (id) => {
+export const getCaretPosition = (id) => {
     const priorTextNodes = XML.xpath(`preceding::text()[ancestor::div[@id="${id}"]]`, document.getSelection().anchorNode)
     return priorTextNodes.map(node => node.textContent).join("").length + document.getSelection().anchorOffset
 }
@@ -19,7 +22,7 @@ const getCaretPosition = (id) => {
  * @returns {[Node, number]}
  */
 
-const getNodeAndOffsetFromPosition = (parent, position) => {
+export const getNodeAndOffsetFromPosition = (parent, position) => {
     const descText = XML.xpath("descendant::text()", parent)
 
     if (descText.length === 0) {
@@ -49,7 +52,7 @@ const getNodeAndOffsetFromPosition = (parent, position) => {
  * @param {HTMLDivElement} elem 
  */
 
-const setCaretEnd = elem => {
+export const setCaretEnd = elem => {
     const s = window.getSelection()
     const rng = document.createRange()
     const descText = XML.xpath("descendant::text()", elem)
@@ -68,7 +71,7 @@ const setCaretEnd = elem => {
  * @param {Node} node
  * @param {number} offset 
  */
-const setCaretFromNodeOffset = (node, offset) => {
+export const setCaretFromNodeOffset = (node, offset) => {
     const s = window.getSelection()
     const rng = document.createRange()
     rng.setStart(node, offset)

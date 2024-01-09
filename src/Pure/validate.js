@@ -1,9 +1,12 @@
+import * as Consts from "./constants"
+import * as Format from "./formatting"
+
 /**
  * 
  * @param {string} s 
  */
 
-const containsNumerals = s => {
+export const containsNumerals = s => {
     const matches = s.match(/[0-9]/g) 
     return matches !== null
 }
@@ -13,7 +16,7 @@ const containsNumerals = s => {
  * @param {string} s 
  */
 
-const containsOnlyLetters = s => {
+export const containsOnlyLetters = s => {
     const matches = s.match(/^[a-zA-Zα-ωΑ-Ω]+$/g) 
     return matches !== null
 }
@@ -24,7 +27,7 @@ const containsOnlyLetters = s => {
  * @param {string} s 
  */
 
-const containsSpecial = s => {
+export const containsSpecial = s => {
     const matches = s.match(/[./+-;:\[\]\{\}]/g) 
     return matches !== null
 }
@@ -35,7 +38,7 @@ const containsSpecial = s => {
  * @param {string} s 
  * @returns {boolean}
  */
-const isDecimal = (s) => {
+export const isDecimal = (s) => {
     
     const matches = s.match(/^[0-9]+$/g)
 
@@ -50,12 +53,12 @@ const isDecimal = (s) => {
  * 
  * @param {string} s 
  */
-function validateISicilyNumber(s) {
+export function validateISicilyNumber(s) {
     const m = s.match(/^ISic0[0-9]{5,5}$/)
     return m != null
 }
 
-function validateISicilyTokenNumber(s) {
+export function validateISicilyTokenNumber(s) {
     const m = s.match(/^[0-9]{5,5}$/)
     return m != null
 }
@@ -67,7 +70,7 @@ function validateISicilyTokenNumber(s) {
  * @returns {boolean} 
  */
 
-function validateLongIDStrict(s) {
+export function validateLongIDStrict(s) {
     const m = s.match(/^ISic0[0-9]{5,5}-[0-9]{5,5}$/)
     return m != null
 }
@@ -77,7 +80,7 @@ function validateLongIDStrict(s) {
  * with a long ID
  * @param {string} s 
  */
-function validatePartialLongID(s) {
+export function validatePartialLongID(s) {
     const m = s.match(/^ISic0/)
     return m != null
 }
@@ -88,7 +91,7 @@ function validatePartialLongID(s) {
  * @returns {boolean}
  */
 
-const validateLongIdNonStrict = (x) => isDecimal(removeISic(x))
+export const validateLongIdNonStrict = (x) => isDecimal(Format.removeISic(x))
 
 /**
  * Returns true if @param s is a valid short ISicily element ID
@@ -96,7 +99,7 @@ const validateLongIdNonStrict = (x) => isDecimal(removeISic(x))
  * @returns {boolean} 
  */
 
-function validateShortIDStrict(s) {
+export function validateShortIDStrict(s) {
     const m = s.match(/^[A-Za-zΑ-Ωα-ω]{5,5}$/)
     return m != null
 }
@@ -106,18 +109,18 @@ function validateShortIDStrict(s) {
  * @param {string} s
  * @returns {boolean} 
  */
-function validateShortIdNonStrict(s) {
+export function validateShortIdNonStrict(s) {
     const m = s.match(/^[A-Za-zΑ-Ωα-ω]+$/)
     return m != null
 }
 
-const validateLongID = STRICT ? validateLongIDStrict : validateLongIdNonStrict
-const validateShortID = STRICT ? validateShortIDStrict : validateShortIdNonStrict
+export const validateLongID = Consts.STRICT ? validateLongIDStrict : validateLongIdNonStrict
+export const validateShortID = Consts.STRICT ? validateShortIDStrict : validateShortIdNonStrict
 
 /**
  * @param {HTMLDivElement | HTMLSpanElement} elem
  */
-const validate = elem => validateLongID(elem.textContent) || 
+export const validate = elem => validateLongID(elem.textContent) || 
                             validateShortID(elem.textContent) ||
                             validateLongID(elem.textContent.replace(/[= ]/g, ""))
 

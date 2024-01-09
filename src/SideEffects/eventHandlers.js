@@ -1,3 +1,61 @@
+import { 
+    ABOUTTEXT,
+    BLANKCOMPRESSION,
+    BLANKISIC, 
+    BLANKMIDPOINT,
+    EQ,
+    FIVEBLANKS,
+    METAKEYS, 
+    NOTESTEXT,
+    REST
+} from "../Pure/constants";
+
+import {
+    BASE100,
+    baseToDec,
+    decToBase,
+    midPointBetweenValues
+} from "../Pure/bases"
+
+import { selectionMode } from "./elementValues";
+
+import * as Select from "./selection.js"
+import * as Es from "./elements.js"
+import * as Validate from "../Pure/validate"
+import * as Err from "../Pure/errors"
+import * as Format from "../Pure/formatting"
+import { 
+    activate, 
+    addClasses, 
+    deactivate, 
+    disable, 
+    enable, 
+    hasClass, 
+    hide, 
+    removeClasses, 
+    show
+} from "./elementAttributes"
+
+import { Message } from "./messageAlert"
+
+import {
+    aboutBtn,
+    aboutDiv,
+    compressBtn,
+    div,
+    flipBtn,
+    midPointBtn,
+    notesBtn,
+    notesDiv,
+    resolvedID1,
+    resolvedID2,
+    resolvedMidpointID,
+    result,
+    textInput1,
+    textInput2,
+
+} from "./elements.js"
+
 /**
  * Returns target input from an event:
  * ignores meta keys
@@ -7,8 +65,8 @@
 const getTargetInput = (e) => {
     const target = /** @type {HTMLElement} */ (e.target) 
 
-    let targetInput = target.id === textInput1.id ? textInput1 : 
-                                        target.id === textInput2.id ? textInput2 :
+    let targetInput = target.id === Es.textInput1.id ? Es.textInput1 : 
+                                        target.id === Es.textInput2.id ? Es.textInput2 :
                                             null 
 
     if (targetInput === null) return;
@@ -49,17 +107,17 @@ const getTargetInput = (e) => {
 const getTargetInputFromSplittingLongID = (defaultElem, longID) => {
     const matches = longID.trim().matchAll(/(^ISic0[0-9]{5,5})-([0-9]{0,5})$/g).next()
     if (matches.value) {
-        textInput1.textContent = matches.value[1]
-        textInput2.textContent = matches.value[2]    
+        Es.textInput1.textContent = matches.value[1]
+        Es.textInput2.textContent = matches.value[2]    
         if (selectionMode() == "compression") {
-            show(textInput2, result)
+            show(Es.textInput2, Es.result)
         }
-        return textInput2
+        return Es.textInput2
     }
 
     if (selectionMode() == "compression") {
-        hide(result, textInput2)
-        reset(result, textInput2)
+        hide(Es.result, Es.textInput2)
+        reset(Es.result, Es.textInput2)
     }
     return defaultElem
 }
@@ -70,7 +128,7 @@ const getTargetInputFromSplittingLongID = (defaultElem, longID) => {
  * 
  * @param {KeyboardEvent} e 
  */
-const handleChangeFocus = (e) => {
+export const handleChangeFocus = (e) => {
 
     const target = /** @type {HTMLElement} */ (e.target)
 
@@ -78,17 +136,17 @@ const handleChangeFocus = (e) => {
         return
     }
 
-    const changeFocus = () => {textInput1.blur(); textInput2.focus()}
+    const changeFocus = () => {Es.textInput1.blur(); Es.textInput2.focus()}
 
     switch (target.id) {
-        case textInput1.id:
-            if (validateISicilyNumber(textInput1.textContent) && selectionMode() === "compression") changeFocus()
-            if (validateShortID(textInput1.textContent) && selectionMode() === "midpoint") changeFocus()
+        case Es.textInput1.id:
+            if (Validate.validateISicilyNumber(Es.textInput1.textContent) && selectionMode() === "compression") changeFocus()
+            if (Validate.validateShortID(Es.textInput1.textContent) && selectionMode() === "midpoint") changeFocus()
 
             break;
-        case textInput2.id:
-            if (validateISicilyTokenNumber(textInput2.textContent) && selectionMode() === "compression") textInput2.blur()
-            if (validateShortID(textInput2.textContent) && selectionMode() === "midpoint") textInput2.blur()
+        case Es.textInput2.id:
+            if (Validate.validateISicilyTokenNumber(Es.textInput2.textContent) && selectionMode() === "compression") Es.textInput2.blur()
+            if (Validate.validateShortID(Es.textInput2.textContent) && selectionMode() === "midpoint") Es.textInput2.blur()
     }
 }
 
@@ -97,26 +155,26 @@ const handleChangeFocus = (e) => {
  */
 const handleCompression = () => {
 
-    if (validateShortID(textInput1.textContent)) {
+    if (Validate.validateShortID(Es.textInput1.textContent)) {
         Message.hide()
-        resolvedID1.innerHTML = insertISic(String(baseToDec(textInput1.textContent, BASE100)))
-    } else if (textInput1.textContent.trim() === "") {
-        resolvedID1.innerHTML = BLANKCOMPRESSION
-        hide(result, textInput2)
-        reset(textInput2, result)
+        Es.resolvedID1.innerHTML = Format.insertISic(String(baseToDec(Es.textInput1.textContent, BASE100)))
+    } else if (Es.textInput1.textContent.trim() === "") {
+        Es.resolvedID1.innerHTML = BLANKCOMPRESSION
+        hide(Es.result, Es.textInput2)
+        reset(Es.textInput2, Es.result)
         removeClasses(result, textInput2)("five", "one")  
-    } else if (containsOnlyLetters(textInput1.textContent)) {
+    } else if (Validate.containsOnlyLetters(textInput1.textContent)) {
         resolvedID1.innerHTML = BLANKISIC
         hide(result, textInput2)
         reset(textInput2, result)
         removeClasses(result, textInput2)("five", "one")   
-    } else if (isDecimal(textInput1.textContent)) {
+    } else if (Validate.isDecimal(textInput1.textContent)) {
         Message.hide()
         textInput1.textContent = "ISic" + textInput1.textContent
-        setCaretEnd(textInput1)
+        Select.setCaretEnd(textInput1)
         handleCompression()
 
-    } else if (validatePartialLongID(textInput1.textContent)) {
+    } else if (Validate.validatePartialLongID(textInput1.textContent)) {
         Message.hide()
         result.textContent = "-"
         const inpt = textInput1.textContent + "-" + textInput2.textContent
@@ -124,8 +182,8 @@ const handleCompression = () => {
         addClasses(result)("valid", "one")
         show(result, textInput2)
 
-        if (validateLongID(inpt)) {
-            resolvedID1.innerHTML = formatGreek(padShortID(BASE100, decToBase(BigInt(removeISic(inpt)), BASE100)))
+        if (Validate.validateLongID(inpt)) {
+            resolvedID1.innerHTML = Format.formatGreek(Format.padShortID(BASE100, decToBase(BigInt(Format.removeISic(inpt)), BASE100)))
         } else {
             resolvedID1.innerHTML = FIVEBLANKS
         }
@@ -144,8 +202,8 @@ const handleCompression = () => {
  * Makes sure that the Flip button is disabled / enabled appropriately
  */
 const handleCheckFlip = () => {
-    if ((validate(textInput1) || 
-        validateLongID(textInput1.textContent + "-" + textInput2.textContent)) && validate(resolvedID1)) {
+    if ((Validate.validate(textInput1) || 
+    Validate.validateLongID(textInput1.textContent + "-" + textInput2.textContent)) && Validate.validate(resolvedID1)) {
 
         enable(flipBtn)
     } else {
@@ -157,20 +215,20 @@ const handleCheckFlip = () => {
 /**
  * 
  */
-const handleFlip = () => {
+export const handleFlip = () => {
     if (selectionMode() === "compression") {
         const resolved = resolvedID1
             .textContent
             .replace(`${EQ}`, "")
             .replace("?", "")
 
-        if (validateShortID(resolved)) {
+        if (Validate.validateShortID(resolved)) {
             textInput1.textContent = resolved
             reset(textInput2, result)
             hide(textInput2, result)
         } else
 
-        if (validateLongID(resolved)) {
+        if (Validate.validateLongID(resolved)) {
             getTargetInputFromSplittingLongID(textInput1, resolved)
         }
                                     
@@ -188,25 +246,25 @@ const handleFlip = () => {
  * @param {KeyboardEvent | MouseEvent | InputEvent | null} e
  */
 const handleGreekFormatting = (elem, e) => {
-    result.innerHTML = formatGreek(result.textContent)
+    result.innerHTML = Format.formatGreek(result.textContent)
 
     if (e != null && e.type === "keyup") {
         const keyE = /** @type {KeyboardEvent} */ (e)
         if (keyE.ctrlKey && (keyE.key === "v" || keyE.key === "ω")) {
-            elem.innerHTML = formatGreek(elem.textContent) 
-            setCaretEnd(elem)
+            elem.innerHTML = Format.formatGreek(elem.textContent) 
+            Select.setCaretEnd(elem)
             return
         }
     }
 
-    const position = getCaretPosition(elem.id)
-    elem.innerHTML = formatGreek(elem.textContent) 
-    const [n, offset] = getNodeAndOffsetFromPosition(elem, position)
-    setCaretFromNodeOffset(n, offset)    
+    const position = Select.getCaretPosition(elem.id)
+    elem.innerHTML = Format.formatGreek(elem.textContent) 
+    const [n, offset] = Select.getNodeAndOffsetFromPosition(elem, position)
+    Select.setCaretFromNodeOffset(n, offset)    
      
 }
 
-const handleHover = () => {
+export const handleHover = () => {
     switch (selectionMode()) {
         case "compression":
             handleValidateCompression()
@@ -219,7 +277,7 @@ const handleHover = () => {
 }
 
 
-const handleMidpoint = () => {
+export const handleMidpoint = () => {
     const text1 = textInput1.textContent
     const text2 = textInput2.textContent
 
@@ -228,26 +286,26 @@ const handleMidpoint = () => {
     
     let midpointValid = true
     
-    let [textInput1Err, text1Status] = getShortIDValidationIndividual(text1)
-    let [textInput2Err, text2Status] = getShortIDValidationIndividual(text2)
-    if (textInput1Err) resolvedID1.textContent = insertISic(String(text1Dec))
-    if (textInput2Err) resolvedID1.textContent = insertISic(String(text2Dec))
+    let [textInput1Err, text1Status] = Err.getShortIDValidationIndividual(text1)
+    let [textInput2Err, text2Status] = Err.getShortIDValidationIndividual(text2)
+    if (textInput1Err) resolvedID1.textContent = Format.insertISic(String(text1Dec))
+    if (textInput2Err) resolvedID1.textContent = Format.insertISic(String(text2Dec))
 
-    if (textInput1Err === ERR.ISVALID) {
-        resolvedID1.textContent = insertISic(String(text1Dec))
+    if (textInput1Err === Err.ERR.ISVALID) {
+        resolvedID1.textContent = Format.insertISic(String(text1Dec))
         Message.hide()
     } else {
         resolvedID1.textContent = BLANKISIC
         resolvedMidpointID.textContent = BLANKISIC
         midpointValid = false
 
-        if (textInput1Err === ERR.CONTAINSNUMERAL) {
-            Message.alert(containsNumeralErr("1"))
+        if (textInput1Err === Err.ERR.CONTAINSNUMERAL) {
+            Message.alert(Err.containsNumeralErr("1"))
         }
     }
 
-    if (textInput2Err === ERR.ISVALID) {
-        resolvedID2.textContent = insertISic(String(text2Dec))
+    if (textInput2Err === Err.ERR.ISVALID) {
+        resolvedID2.textContent = Format.insertISic(String(text2Dec))
         Message.hide()
     } else {
         resolvedID2.textContent = BLANKISIC
@@ -255,24 +313,24 @@ const handleMidpoint = () => {
         midpointValid = false
     }
 
-    if (textInput1Err === ERR.CONTAINSNUMERAL || textInput2Err === ERR.CONTAINSNUMERAL) {
-        Message.alert(containsNumeralErr(""))
+    if (textInput1Err === Err.ERR.CONTAINSNUMERAL || textInput2Err === Err.ERR.CONTAINSNUMERAL) {
+        Message.alert(Err.containsNumeralErr(""))
         midpointValid = false
     }
 
-    if (textInput1Err === ERR.CONTAINSSPECIAL || textInput2Err === ERR.CONTAINSSPECIAL) {
-        Message.alert(containsSpecialErr(""))
+    if (textInput1Err === Err.ERR.CONTAINSSPECIAL || textInput2Err === Err.ERR.CONTAINSSPECIAL) {
+        Message.alert(Err.containsSpecialErr(""))
         midpointValid = false
     }
 
-    if (isGenericErr(textInput1Err, textInput2Err)) {
+    if (Err.isGenericErr(textInput1Err, textInput2Err)) {
         Message.hide()
     }
 
     if (text1Dec > text2Dec) {
         text1Status = text1Status.concat("\nThis ID comes after the second ID")
         text2Status = text2Status.concat("\nThis ID comes before the first ID")
-        if (validate(textInput1) && validate(textInput2)) {
+        if (Validate.validate(textInput1) && Validate.validate(textInput2)) {
             Message.alert("First ID comes after second ID")
         }
         midpointValid = false
@@ -281,7 +339,7 @@ const handleMidpoint = () => {
     if (text1Dec === text2Dec) {
         text1Status = text1Status.concat("\nERROR: This ID is equal to the second ID")
         text2Status = text2Status.concat("\nERROR: This ID is equal to the first ID.")
-        if (validate(textInput1) && validate(textInput2)) {
+        if (Validate.validate(textInput1) && Validate.validate(textInput2)) {
             Message.alert("IDs are equal")
         }
         midpointValid = false
@@ -290,7 +348,7 @@ const handleMidpoint = () => {
     if (text1Dec === text2Dec + 1n || text1Dec === text2Dec - 1n) {
         text1Status = text1Status.concat("\nERROR: There are no positions in between these IDs")
         text2Status = text2Status.concat("\nERROR: There are no positions in between these IDs")
-        if (validate(textInput1) && validate(textInput2)) {
+        if (Validate.validate(textInput1) && Validate.validate(textInput2)) {
             Message.alert("No IDs between the two values")
         }
         midpointValid = false
@@ -308,10 +366,10 @@ const handleMidpoint = () => {
             BASE100
         )
         result.innerHTML = 
-            `${REST}`.concat(formatGreek(midpoint), `${REST}`
+            `${REST}`.concat(Format.formatGreek(midpoint), `${REST}`
             )
         
-        resolvedMidpointID.textContent = insertISic(String(baseToDec(midpoint, BASE100)))
+        resolvedMidpointID.textContent = Format.insertISic(String(baseToDec(midpoint, BASE100)))
 
     } else {
         removeClasses(result)("valid")
@@ -327,7 +385,7 @@ const handleMidpoint = () => {
  * @returns 
  */
 
-const handleSelection = () => {
+export const selection = () => {
     hide(div(".input"))
 
     switch (selectionMode()) {
@@ -355,7 +413,7 @@ const handleSelection = () => {
  * 
  * @param {MouseEvent} e 
  */
-const handleToggleMode = (e) => {
+export const handleToggleMode = (e) => {
 
     const target = /** @type {HTMLElement} */ (e.target)  
 
@@ -367,7 +425,7 @@ const handleToggleMode = (e) => {
                 activate(compressBtn)
                 deactivate(midPointBtn)
                 textInput1.focus()
-                setCaretEnd(textInput1)
+                Select.setCaretEnd(textInput1)
                 addClasses(textInput2)("five")
                 addClasses(result)("one")
                 handleValidateCompression()
@@ -380,13 +438,13 @@ const handleToggleMode = (e) => {
         case midPointBtn.id:
 
             if (selectionMode() == "compression") {
-                if (containsNumerals(textInput1.textContent)) {
+                if (Validate.containsNumerals(textInput1.textContent)) {
                     resetInputs()
                 }
                 activate(midPointBtn)
                 deactivate(compressBtn)    
                 textInput1.focus()
-                setCaretEnd(textInput1)
+                Select.setCaretEnd(textInput1)
                 removeClasses(result)("five", "one")
                 resetStatusTips()
             } 
@@ -399,7 +457,7 @@ const handleToggleMode = (e) => {
             break;
     }    
 
-    handleSelection()
+    selection()
 
 }
 
@@ -407,7 +465,7 @@ const handleToggleMode = (e) => {
  * 
  * @param {Event} e 
  */
-const handleToggleShowAbout = (e) => {
+export const handleToggleShowAbout = (e) => {
     e.stopPropagation()
 
     if (hasClass("hidden")(aboutDiv)) {
@@ -424,7 +482,7 @@ const handleToggleShowAbout = (e) => {
  * 
  * @param {Event} e 
  */
-const handleToggleShowNotes = (e) => {
+export const handleToggleShowNotes = (e) => {
     e.stopPropagation()
     if (hasClass("hidden")(notesDiv)) {
         notesDiv.innerHTML = NOTESTEXT
@@ -442,7 +500,7 @@ const handleToggleShowNotes = (e) => {
  * @param {MouseEvent | InputEvent | KeyboardEvent} e
  */
 
-const handleUpdateInput = (e) => {
+export const handleUpdateInput = (e) => {
 
     const targetInput = getTargetInput(e)
 
@@ -458,7 +516,7 @@ const handleUpdateInput = (e) => {
             break;
 
         case "midpoint":
-            if (validateShortID(targetInput.textContent)) {
+            if (Validate.validateShortID(targetInput.textContent)) {
                 addClasses(targetInput)("valid")
             }
             else {
@@ -477,14 +535,14 @@ const handleUpdateInput = (e) => {
 const handleValidateCompression = () => {
     let v1StatusComp = ""
 
-    if (validate(textInput1)) {
+    if (Validate.validate(textInput1)) {
         v1StatusComp = "This ID is valid"
     } else {
         v1StatusComp = "This ID is not valid"
     }
 
-    if (validateISicilyNumber(textInput1.textContent) || 
-        validateShortID(textInput1.textContent)) {
+    if (Validate.validateISicilyNumber(textInput1.textContent) || 
+    Validate.validateShortID(textInput1.textContent)) {
 
         addClasses(textInput1)("valid")
 
@@ -492,7 +550,7 @@ const handleValidateCompression = () => {
         removeClasses(textInput1)("valid")
     }
 
-    if (validateISicilyTokenNumber(textInput2.textContent)) {
+    if (Validate.validateISicilyTokenNumber(textInput2.textContent)) {
         addClasses(textInput2)("valid")             
     }  else {
         removeClasses(textInput2)("valid")
@@ -501,7 +559,7 @@ const handleValidateCompression = () => {
     textInput1.setAttribute("title", v1StatusComp)
 }
 
-const hideAllPopups = () => {
+export const hideAllPopups = () => {
     deactivate(aboutBtn, notesBtn)
     hide(aboutDiv, notesDiv)
 }

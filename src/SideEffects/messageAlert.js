@@ -1,21 +1,22 @@
-
-const Message = {
+import * as Elements from "./elements"
+import * as Attrs from "./elementAttributes"
+export const Message = {
     /**
      * Broadcasts a message to the user via the top banner
      * @param {string} s  
      * @returns {void}
      */
     alert : s => {
-        messageDiv.textContent = s
+        Elements.messageDiv.textContent = s
         Message.show()
     },
 
     hide : () => {
-        addClasses(messageDiv)("hidden")
+        Attrs.addClasses(Elements.messageDiv)("hidden")
     },
 
     show : () => {
-        removeClasses(messageDiv)("hidden")
+        Attrs.removeClasses(Elements.messageDiv)("hidden")
     }
 }
 

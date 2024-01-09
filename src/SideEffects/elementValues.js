@@ -1,11 +1,13 @@
+import * as Elements from "./elements"
+import * as Attrs from "./elementAttributes"
 /**
  * @returns {"compression"|"midpoint"} 
  */
-const selectionMode = () => {
+export const selectionMode = () => {
 
-    if (isActivated(compressBtn) && !isActivated(midPointBtn)) {
+    if (Attrs.isActivated(Elements.compressBtn) && !Attrs.isActivated(Elements.midPointBtn)) {
         return "compression"
-    } else if (isActivated(midPointBtn) && !isActivated(compressBtn)) {
+    } else if (Attrs.isActivated(Elements.midPointBtn) && !Attrs.isActivated(Elements.compressBtn)) {
         return "midpoint"
     }
 

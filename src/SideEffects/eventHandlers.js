@@ -510,7 +510,7 @@ class Handlers {
         }
 
         if (Validate.validateISicilyNumber(Elems.textInput1.textContent) || 
-        Validate.validateShortID(Elems.textInput1.textContent)) {
+            Validate.validateShortID(Elems.textInput1.textContent)) {
 
             Attrs.addClasses(Elems.textInput1)("valid")
 

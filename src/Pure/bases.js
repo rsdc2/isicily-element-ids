@@ -1,25 +1,18 @@
 
-import { 
-    UPPERCASELATIN, 
-    UPPERCASEGREEK, 
-    LOWERCASEGREEK, 
-    LOWERCASELATIN,
-    FIVEBLANKS
-} from "./constants"
+const BASE52 = UPPERCASELATIN.concat(LOWERCASELATIN)
 
-import { Arr } from "./arr"
-import * as Validate from "./validate"
-
-export const BASE52 = UPPERCASELATIN.concat(LOWERCASELATIN)
-
-export const BASE100 = BASE52.concat(UPPERCASEGREEK)
+const BASE100 = BASE52.concat(UPPERCASEGREEK)
                       .concat(LOWERCASEGREEK)
 
-/**
- * @param {Array.<string>} base
- * @returns {string}
- */                      
-export const zero = base => base[0]
+class Bases {
+    /**
+     * @param {Array.<string>} base
+     * @returns {string}
+     */                      
+    static zero = base => base[0]
+    
+}
+
 
 /**
  * Convert a decimal value to a value in the base passed
@@ -28,7 +21,7 @@ export const zero = base => base[0]
  * @param {Array.<string>} baseChars
  * @returns {string}
  */
-export function decToBase(dec, baseChars) {
+function decToBase(dec, baseChars) {
     
     const base = BigInt(baseChars.length)
 
@@ -59,7 +52,7 @@ export function decToBase(dec, baseChars) {
  * @returns {bigint}
  */
 
-export function baseToDec(baseVal, base) {
+function baseToDec(baseVal, base) {
     const chars = Arr.strToArr(baseVal)
 
     /**
@@ -87,7 +80,7 @@ export function baseToDec(baseVal, base) {
  * @returns {string}
  */
 
-export function midPointBetweenValues(val1, val2, baseChars) {
+function midPointBetweenValues(val1, val2, baseChars) {
     if (!Validate.validateLongID(val1) && !Validate.validateShortID(val1)) {
         return FIVEBLANKS
     }

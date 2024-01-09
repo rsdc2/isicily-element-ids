@@ -5,7 +5,7 @@
  * @returns {T}
  */
 
-export const identity = (val) => val
+const identity = (val) => val
 
 
 

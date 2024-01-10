@@ -1,0 +1,13 @@
+{
+    "name": "isicily-element-ids",
+    "version": "0.0.1",
+    "description": "",
+    "main": "./index.js",
+    "keywords": [],
+    "author": "Robert Crellin",
+    "license": "MIT",
+    "type": "module",
+    "dependencies": {
+        "http-server": "^14.1.1"
+    }
+}

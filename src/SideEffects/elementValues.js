@@ -1,4 +1,7 @@
-class Status {
+import Attrs from "./elementAttributes.js"
+import Elems from "./elements.js"
+
+export default class Status {
     /**
      * @returns {"compression"|"midpoint"} 
      */

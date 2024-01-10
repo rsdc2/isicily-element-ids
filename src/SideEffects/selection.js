@@ -1,4 +1,7 @@
-class Select {
+import { Arr } from "../Pure/arr.js"
+import XML from "../Pure/xml.js"
+
+export default class Select {
 
     /**
      * Returns the caret position in a div

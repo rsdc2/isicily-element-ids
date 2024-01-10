@@ -1,5 +1,5 @@
 
-class Attrs {
+export default class Attrs {
 
     static addClasses = 
     (/** @type {Array.<HTMLElement>} */ ...elems) => 

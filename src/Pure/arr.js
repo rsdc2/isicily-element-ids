@@ -1,4 +1,4 @@
-const Arr = {
+export const Arr = {
     /**
      * Return the last element of an array, or null if the array is empty
      * @template T

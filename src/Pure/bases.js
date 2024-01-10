@@ -1,10 +1,23 @@
 
-const BASE52 = UPPERCASELATIN.concat(LOWERCASELATIN)
+import { Arr } from "./arr.js"
+import Validate from "./validate.js"
+import Const from "./constants.js"
 
-const BASE100 = BASE52.concat(UPPERCASEGREEK)
-                      .concat(LOWERCASEGREEK)
+const {
+    UPPERCASELATIN, 
+    LOWERCASELATIN, 
+    UPPERCASEGREEK, 
+    LOWERCASEGREEK, 
+    FIVEBLANKS
+} = Const
 
-class Bases {
+export default class Bases {
+
+    static BASE52 = UPPERCASELATIN.concat(LOWERCASELATIN)
+
+    static BASE100 = Bases.BASE52.concat(UPPERCASEGREEK)
+            .concat(LOWERCASEGREEK)
+
     /**
      * @param {Array.<string>} base
      * @returns {string}

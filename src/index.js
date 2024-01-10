@@ -1,3 +1,8 @@
+import Handlers from "./SideEffects/eventHandlers.js"
+import Listener from "./SideEffects/eventListeners.js"
+import Elems from "./SideEffects/elements.js"
+import Attrs from "./SideEffects/elementAttributes.js"
+
 Listener.addListeners()
 Handlers.selection()
 Handlers.hideAllPopups()

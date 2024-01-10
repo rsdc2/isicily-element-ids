@@ -1,20 +1,22 @@
+import Attrs from "./elementAttributes.js"
+import Elems from "./elements.js"
 
-const Message = {
+export default class Message {
     /**
      * Broadcasts a message to the user via the top banner
      * @param {string} s  
      * @returns {void}
      */
-    alert : s => {
+    static alert = s => {
         Elems.messageDiv.textContent = s
         Message.show()
-    },
+    }
 
-    hide : () => {
+    static hide = () => {
         Attrs.addClasses(Elems.messageDiv)("hidden")
-    },
+    }
 
-    show : () => {
+    static show = () => {
         Attrs.removeClasses(Elems.messageDiv)("hidden")
     }
 }

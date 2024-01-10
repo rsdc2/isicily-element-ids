@@ -1,5 +1,7 @@
 
-class Format {
+import Bases from "./bases.js"
+
+export default class Format {
     /**
      * 
      * @param {string} s 

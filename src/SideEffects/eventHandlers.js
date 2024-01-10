@@ -1,4 +1,33 @@
-class Handlers {
+import Bases from "../Pure/bases.js"
+import Format from "../Pure/formatting.js"
+import Select from "./selection.js"
+import Validate from "../Pure/validate.js"
+import Const from "../Pure/constants.js"
+import Err from "../Pure/errors.js"
+import Elems from "../SideEffects/elements.js"
+import Attrs from "./elementAttributes.js"
+import Status from "./elementValues.js"
+import Message from "./messageAlert.js"
+
+const {
+    ABOUTTEXT,
+    
+    BLANKCOMPRESSION,
+    BLANKISIC,
+    BLANKMIDPOINT,
+    EQ,
+    NOTESTEXT,
+    REST,
+    UPPERCASELATIN, 
+    LOWERCASELATIN, 
+    UPPERCASEGREEK, 
+    LOWERCASEGREEK, 
+    FIVEBLANKS,
+    METAKEYS,
+
+} = Const
+
+export default class Handlers {
     /**
      * Returns target input from an event:
      * ignores meta keys
@@ -105,7 +134,7 @@ class Handlers {
 
         if (Validate.validateShortID(Elems.textInput1.textContent)) {
             Message.hide()
-            Elems.resolvedID1.innerHTML = Format.insertISic(String(Bases.baseToDec(Elems.textInput1.textContent, BASE100)))
+            Elems.resolvedID1.innerHTML = Format.insertISic(String(Bases.baseToDec(Elems.textInput1.textContent, Bases.BASE100)))
         } else if (Elems.textInput1.textContent.trim() === "") {
             Elems.resolvedID1.innerHTML = BLANKCOMPRESSION
             Attrs.hide(Elems.result, Elems.textInput2)
@@ -131,7 +160,7 @@ class Handlers {
             Attrs.show(Elems.result, Elems.textInput2)
 
             if (Validate.validateLongID(inpt)) {
-                resolvedID1.innerHTML = Format.formatGreek(Format.padShortID(BASE100, Bases.decToBase(BigInt(Format.removeISic(inpt)), BASE100)))
+                resolvedID1.innerHTML = Format.formatGreek(Format.padShortID(Bases.BASE100, Bases.decToBase(BigInt(Format.removeISic(inpt)), Bases.BASE100)))
             } else {
                 resolvedID1.innerHTML = FIVEBLANKS
             }
@@ -244,8 +273,8 @@ class Handlers {
         const text1 = textInput1.textContent
         const text2 = textInput2.textContent
 
-        const text1Dec = Bases.baseToDec(text1, BASE100)
-        const text2Dec = Bases.baseToDec(text2, BASE100)
+        const text1Dec = Bases.baseToDec(text1, Bases.BASE100)
+        const text2Dec = Bases.baseToDec(text2, Bases.BASE100)
         
         let midpointValid = true
         
@@ -326,13 +355,13 @@ class Handlers {
             const midpoint = Bases.midPointBetweenValues(
                 Elems.textInput1.textContent, 
                 Elems.textInput2.textContent, 
-                BASE100
+                Bases.BASE100
             )
             Elems.result.innerHTML = 
                 `${REST}`.concat(Format.formatGreek(midpoint), `${REST}`
                 )
             
-            resolvedMidpointID.textContent = Format.insertISic(String(Bases.baseToDec(midpoint, BASE100)))
+            resolvedMidpointID.textContent = Format.insertISic(String(Bases.baseToDec(midpoint, Bases.BASE100)))
 
         } else {
             Attrs.removeClasses(Elems.result)("valid")

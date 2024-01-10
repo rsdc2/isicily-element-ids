@@ -1,5 +1,7 @@
+import Attrs from "./elementAttributes.js"
 
-class Elems {
+
+export default class Elems {
 
     /**
      * @param {string} query

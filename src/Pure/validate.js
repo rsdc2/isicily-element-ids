@@ -1,4 +1,7 @@
-class Validate {
+import Format from "./formatting.js"
+import Const from "./constants.js"
+
+export default class Validate {
     /**
      * 
      * @param {string} s 
@@ -117,8 +120,8 @@ class Validate {
         return m != null
     }
 
-    static validateLongID = STRICT ? Validate.validateLongIDStrict : Validate.validateLongIdNonStrict
-    static validateShortID = STRICT ? Validate.validateShortIDStrict : Validate.validateShortIdNonStrict
+    static validateLongID = Const.STRICT ? Validate.validateLongIDStrict : Validate.validateLongIdNonStrict
+    static validateShortID = Const.STRICT ? Validate.validateShortIDStrict : Validate.validateShortIdNonStrict
 
     /**
      * @param {HTMLDivElement | HTMLSpanElement} elem

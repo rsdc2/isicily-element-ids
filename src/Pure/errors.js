@@ -1,4 +1,6 @@
-class Err {
+import Validate from "./validate.js"
+
+export default class Err {
     /**
      * 
      * @param {string} s 

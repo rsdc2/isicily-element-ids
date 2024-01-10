@@ -36,7 +36,7 @@ Follow this link:
 
 [https://rsdc2.github.io/isicily-element-ids/](https://rsdc2.github.io/isicily-element-ids/)
 
-### Running
+### Running locally
 
 - Clone the repository:
 
@@ -44,7 +44,26 @@ Follow this link:
 git clone https://github.com/rsdc2/isicily-element-ids.git
 ```
 
-- Open ```index.html``` in a browser
+- Cd into the cloned directory:
+
+```
+cd isicily-element-ids
+```
+
+- Install dependency ([```http-server```](https://www.npmjs.com/package/http-server)):
+
+```
+npm install
+```
+
+- Run the server locally:
+
+```
+npx http-server
+```
+
+- Open localhost according to the message provided by ```http-server```, e.g. http://127.0.0.1:8080 
+
 
 ### Building
 
@@ -52,7 +71,7 @@ The ID resolver is written in Vanilla JavaScript. No building is required.
 
 ## Dependencies
 
-There are no dependencies.
+The ID generator requires [```http-server```](https://www.npmjs.com/package/http-server) (MIT) to run locally.
 
 ## Acknowledgements
 

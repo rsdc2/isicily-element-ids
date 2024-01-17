@@ -1,13 +1,18 @@
-/**
- * @returns {"compression"|"midpoint"} 
- */
-const selectionMode = () => {
+import Attrs from "./elementAttributes.js"
+import Elems from "./elements.js"
 
-    if (isActivated(compressBtn) && !isActivated(midPointBtn)) {
-        return "compression"
-    } else if (isActivated(midPointBtn) && !isActivated(compressBtn)) {
-        return "midpoint"
+export default class Status {
+    /**
+     * @returns {"compression"|"midpoint"} 
+     */
+    static selectionMode = () => {
+
+        if (Attrs.isActivated(Elems.compressBtn) && !Attrs.isActivated(Elems.midPointBtn)) {
+            return "compression"
+        } else if (Attrs.isActivated(Elems.midPointBtn) && !Attrs.isActivated(Elems.compressBtn)) {
+            return "midpoint"
+        }
+
+        console.error("Invalid selection mode")
     }
-
-    console.error("Invalid selection mode")
 }

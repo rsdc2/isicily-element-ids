@@ -1,74 +1,79 @@
-/**
- * 
- * @param {string} s 
- * @returns {string}
- */
+import Validate from "./validate.js"
 
-const containsNumeralErr = (s) => `ID ${s} contains at least one numeral. It should contain only Greek or Latin letters.`
+export default class Err {
+    /**
+     * 
+     * @param {string} s 
+     * @returns {string}
+     */
 
-
-/**
- * 
- * @param {string} s 
- * @returns {string}
- */
-
-const containsSpecialErr = (s) => `ID ${s} contains at least one special characater. It should contain only Greek or Latin letters.`
+    static containsNumeralErr = (s) => `ID ${s} contains at least one numeral. It should contain only Greek or Latin letters.`
 
 
-/**
- * 
- * @param {string} s 
- * @returns {string}
- */
-const idNotValidErr = (s) => `ID ${s} is not valid`
+    /**
+     * 
+     * @param {string} s 
+     * @returns {string}
+     */
 
-const ERR = {
-    ISVALID: 0n,
-    ISINVALID: 1n,
-    ISEMPTY: 2n,
-    CONTAINSNUMERAL: 3n,
-    CONTAINSSPECIAL: 4n
-}
+    static containsSpecialErr = (s) => `ID ${s} contains at least one special characater. It should contain only Greek or Latin letters.`
 
-/**
- * 
- * @param {string} text 
- * @returns {[bigint, string]} 
- */
 
-const getShortIDValidationIndividual = (text) => {
-    let error = ERR.ISVALID
-    let status = ""
-    if (validateShortID(text)) {
-        status = "This ID is valid"
-        error = ERR.ISVALID
-    } else {
-        if (containsNumerals(text)) {
-            status = containsNumeralErr("")
-            error = ERR.CONTAINSNUMERAL
-        }
-        else if (containsSpecial(text)) {
-            status = containsSpecialErr("")
-            error = ERR.CONTAINSSPECIAL
-        }
-        else if (text === "") {
-            error = ERR.ISEMPTY
-        }
+    /**
+     * 
+     * @param {string} s 
+     * @returns {string}
+     */
+    static idNotValidErr = (s) => `ID ${s} is not valid`
 
-        else {
-            status = idNotValidErr("")
-            error = ERR.ISINVALID
-        }
+    static ERR = {
+        ISVALID: 0n,
+        ISINVALID: 1n,
+        ISEMPTY: 2n,
+        CONTAINSNUMERAL: 3n,
+        CONTAINSSPECIAL: 4n
     }
 
-    return [error, status]
+    /**
+     * 
+     * @param {string} text 
+     * @returns {[bigint, string]} 
+     */
 
+    static getShortIDValidationIndividual = (text) => {
+        let error = Err.ERR.ISVALID
+        let status = ""
+        if (Validate.validateShortID(text)) {
+            status = "This ID is valid"
+            error = Err.ERR.ISVALID
+        } else {
+            if (Validate.containsNumerals(text)) {
+                status = Err.containsNumeralErr("")
+                error = Err.ERR.CONTAINSNUMERAL
+            }
+            else if (Validate.containsSpecial(text)) {
+                status = Err.containsSpecialErr("")
+                error = Err.ERR.CONTAINSSPECIAL
+            }
+            else if (text === "") {
+                error = Err.ERR.ISEMPTY
+            }
+
+            else {
+                status = Err.idNotValidErr("")
+                error = Err.ERR.ISINVALID
+            }
+        }
+
+        return [error, status]
+
+    }
+    /**
+     * 
+     * @param {Array.<bigint>} errNo 
+     */
+    static isGenericErr = (...errNo) => {
+        return errNo.every( x => x <= 2n )
+    }
 }
-/**
- * 
- * @param {Array.<bigint>} errNo 
- */
-const isGenericErr = (...errNo) => {
-    return errNo.every( x => x <= 2n )
-}
+

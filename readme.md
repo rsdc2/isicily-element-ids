@@ -1,6 +1,6 @@
 # Element ID generator and resolver for I.Sicily (α, currently under active development)
 
-This is a resolver for token IDs on token elements in the [I.Sicily](https://github.com/ISicily/ISicily) corpus of inscriptions from ancient Sicily.
+This is a resolver and generator for token IDs on token elements in the [I.Sicily](https://github.com/ISicily/ISicily) corpus of inscriptions from ancient Sicily.
 
 ## I.Sicily token IDs
 
@@ -36,7 +36,7 @@ Follow this link:
 
 [https://rsdc2.github.io/isicily-element-ids/](https://rsdc2.github.io/isicily-element-ids/)
 
-### Running
+### Running locally
 
 - Clone the repository:
 
@@ -44,16 +44,35 @@ Follow this link:
 git clone https://github.com/rsdc2/isicily-element-ids.git
 ```
 
-- Open ```index.html``` in a browser
+- Cd into the cloned directory:
+
+```
+cd isicily-element-ids
+```
+
+- Install dependency ([```http-server```](https://www.npmjs.com/package/http-server)):
+
+```
+npm install
+```
+
+- Run the server locally:
+
+```
+npx http-server
+```
+
+- Open localhost according to the message provided by ```http-server```, e.g. http://127.0.0.1:8080 
+
 
 ### Building
 
-The ID resolver is written in Vanilla JavaScript. No building is required.
+The Element ID resolver / generator is written in Vanilla JavaScript. No building is required.
 
 ## Dependencies
 
-There are no dependencies.
+The Element ID resolver / generator requires [```http-server```](https://www.npmjs.com/package/http-server) (MIT, see LICENSES folder) to run locally.
 
 ## Acknowledgements
 
-The software for the Token ID resolver was written by Robert Crellin as part of the Crossreads project at the Faculty of Classics, University of Oxford, and is licensed under the BSD 3-clause license. This project has received funding from the European Research Council (ERC) under the European Union’s Horizon 2020 research and innovation programme (grant agreement No 885040, “Crossreads”).
+The software for the Token ID resolver / generator was written by Robert Crellin as part of the Crossreads project at the Faculty of Classics, University of Oxford, and is licensed under the BSD 3-clause license. This project has received funding from the European Research Council (ERC) under the European Union’s Horizon 2020 research and innovation programme (grant agreement No 885040, “Crossreads”).

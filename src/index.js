@@ -1,7 +1,10 @@
+import Handlers from "./SideEffects/eventHandlers.js"
+import Listener from "./SideEffects/eventListeners.js"
+import Elems from "./SideEffects/elements.js"
+import Attrs from "./SideEffects/elementAttributes.js"
 
-
-addListeners()
-handleSelection()
-hideAllPopups()
-show(div(".input"))
-textInput1.focus()
+Listener.addListeners()
+Handlers.selection()
+Handlers.hideAllPopups()
+Attrs.show(Elems.div(".input"))
+Elems.textInput1.focus()

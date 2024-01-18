@@ -1,5 +1,5 @@
 import Bases from "./bases.js"
-import Format from "./formatting.js"
+import Format from "./format.js"
 
 export default class Compress {
 
@@ -13,13 +13,12 @@ export default class Compress {
         const bigint = BigInt(noISicPadding)
         const converted = Bases.decToBase(bigint, Bases.CURRENTBASE)
         const padded = Format.padShortID(Bases.CURRENTBASE, converted)
-        const greekFormatted = Format.formatGreek(padded)
-
-        return greekFormatted
+        return Format.underlineGreek(padded)
     }
 
     /**
-     * Decompress a compressed ID
+     * Decompress a compressed ID.
+     * Assumes that any HTML formatting has been removed
      * @param {string} isicID 
      * @returns {string}
      */

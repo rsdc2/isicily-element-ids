@@ -1,6 +1,6 @@
 import Bases from "../Pure/bases.js"
 import Compress from "../Pure/compress.js"
-import Format from "../Pure/formatting.js"
+import Format from "../Pure/format.js"
 import Select from "./selection.js"
 import Validate from "../Pure/validate.js"
 import Constants from "../Pure/constants.js"
@@ -236,19 +236,19 @@ export default class Handlers {
      * @param {KeyboardEvent | MouseEvent | InputEvent | null} e
      */
     static handleGreekFormatting = (elem, e) => {
-        Elems.result.innerHTML = Format.formatGreek(Elems.result.textContent)
+        Elems.result.innerHTML = Format.underlineGreek(Elems.result.textContent)
 
         if (e != null && e.type === "keyup") {
             const keyE = /** @type {KeyboardEvent} */ (e)
             if (keyE.ctrlKey && (keyE.key === "v" || keyE.key === "ω")) {
-                elem.innerHTML = Format.formatGreek(elem.textContent) 
+                elem.innerHTML = Format.underlineGreek(elem.textContent) 
                 Select.setCaretEnd(elem)
                 return
             }
         }
 
         const position = Select.getCaretPosition(elem.id)
-        elem.innerHTML = Format.formatGreek(elem.textContent) 
+        elem.innerHTML = Format.underlineGreek(elem.textContent) 
         const [n, offset] = Select.getNodeAndOffsetFromPosition(elem, position)
         Select.setCaretFromNodeOffset(n, offset)    
         
@@ -369,7 +369,7 @@ export default class Handlers {
                 Bases.CURRENTBASE
             )
             Elems.result.innerHTML = 
-                `${REST}`.concat(Format.formatGreek(midpoint), `${REST}`
+                `${REST}`.concat(Format.underlineGreek(midpoint), `${REST}`
                 )
             
             resolvedMidpointID.textContent = Compress.decompressID(midpoint)

@@ -1,4 +1,4 @@
-import Format from "./formatting.js"
+import Format from "./format.js"
 import Constants from "./constants.js"
 
 export default class Validate {

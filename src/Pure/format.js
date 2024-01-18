@@ -1,8 +1,6 @@
 
 import Bases from "./bases.js"
 
-// const {BASE52, BASE100, CURRENTBASE} = Bases
-
 export default class Format {
 
     /**
@@ -54,4 +52,3 @@ export default class Format {
         return s.replace(/([α-ωΑ-Ω]+)/g, "<u>$1</u>")
     }
 }
-

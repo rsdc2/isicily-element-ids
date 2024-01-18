@@ -19,12 +19,6 @@ export default class Bases {
             .concat(LOWERCASEGREEK)
 
     static CURRENTBASE = Bases.BASE100
-
-    /**
-     * @param {Array.<string>} base
-     * @returns {string}
-     */                      
-    static zero = base => base[0]
     
     /**
      * Convert a decimal value to a value in the base passed

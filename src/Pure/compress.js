@@ -1,7 +1,7 @@
 import Bases from "./bases.js"
 import Format from "./format.js"
 
-export default class Compress {
+export default class Compress {    
 
     /**
      * Compresses a full ISicily token ID
@@ -18,7 +18,7 @@ export default class Compress {
             const noISicPadding = Format.removeISic(isicID)
             const bigint = BigInt(noISicPadding)
             const converted = Bases.decToBase(bigint, base)
-            const padded = Format.padShortID(base, converted)
+            const padded = Format.padShortID(Compress.zero(base), converted)
             return Format.underlineGreek(padded)    
         }
 
@@ -46,5 +46,11 @@ export default class Compress {
 
         return inner
     }
+
+    /**
+     * @param {Array.<string>} base
+     * @returns {string}
+     */                      
+    static zero = base => base[0]
 
 }

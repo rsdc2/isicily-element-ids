@@ -1,6 +1,4 @@
 
-import Bases from "./bases.js"
-
 export default class Format {
 
     /**
@@ -17,12 +15,12 @@ export default class Format {
 
     /**
      * Pads out a short ID with zero value for that base
-     * @param {Array.<string>} base
+     * @param {string} zero
      * @param {string} s 
      * @returns {string}
      */
 
-    static padShortID = (base, s) => s.padStart(5, Bases.zero(base))
+    static padShortID = (zero, s) => s.padStart(5, zero)
 
     /**
      * Removes string elements from a number corresponding to an

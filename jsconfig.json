@@ -4,5 +4,5 @@
     "target": "ES2020",
     "checkJs": true
   },
-  "include": ["public/src/**/*"]
+  "include": ["src/**/*"]
 } 

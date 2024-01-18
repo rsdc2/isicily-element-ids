@@ -4,7 +4,7 @@ import Format from "../Pure/format.js"
 import Select from "./selection.js"
 import Validate from "../Pure/validate.js"
 import Constants from "../Pure/constants.js"
-import Err from "../Pure/errors.js"
+import Err from "../Pure/err.js"
 import Elems from "./elements.js"
 import Attrs from "./elementAttributes.js"
 import Status from "./elementValues.js"
@@ -12,7 +12,6 @@ import Message from "./messageAlert.js"
 
 const {
     ABOUTTEXT,
-    
     BLANKCOMPRESSION,
     BLANKISIC,
     BLANKMIDPOINT,

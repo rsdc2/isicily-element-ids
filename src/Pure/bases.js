@@ -18,6 +18,8 @@ export default class Bases {
     static BASE100 = Bases.BASE52.concat(UPPERCASEGREEK)
             .concat(LOWERCASEGREEK)
 
+    static CURRENTBASE = Bases.BASE100
+
     /**
      * @param {Array.<string>} base
      * @returns {string}

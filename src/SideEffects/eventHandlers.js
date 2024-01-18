@@ -123,7 +123,8 @@ export default class Handlers {
     }
 
     /**
-     * 
+     * Handles both compression and decompression of IDs in 
+     * compression mode (i.e. not finding midpoint)
      */
     static handleCompression = () => {
         const {
@@ -133,18 +134,23 @@ export default class Handlers {
     
 
         if (Validate.validateShortID(Elems.textInput1.textContent)) {
+            // Handle decompression
             Message.hide()
-            Elems.resolvedID1.innerHTML = Format.insertISic(String(Bases.baseToDec(Elems.textInput1.textContent, Bases.BASE100)))
+            Elems.resolvedID1.innerHTML = Format.decompressID(Elems.textInput1.textContent)
+        
         } else if (Elems.textInput1.textContent.trim() === "") {
+            // Handle empty input box
             Elems.resolvedID1.innerHTML = BLANKCOMPRESSION
             Attrs.hide(Elems.result, Elems.textInput2)
             Handlers.reset(Elems.textInput2, Elems.result)
             Attrs.removeClasses(Elems.result, Elems.textInput2)("five", "one")  
+
         } else if (Validate.containsOnlyLetters(Elems.textInput1.textContent)) {
             Elems.resolvedID1.innerHTML = BLANKISIC
             Attrs.hide(Elems.result, Elems.textInput2)
             Handlers.reset(Elems.textInput2, Elems.result)
             Attrs.removeClasses(Elems.result, Elems.textInput2)("five", "one")   
+
         } else if (Validate.isDecimal(Elems.textInput1.textContent)) {
             Message.hide()
             Elems.textInput1.textContent = "ISic" + Elems.textInput1.textContent
@@ -160,7 +166,7 @@ export default class Handlers {
             Attrs.show(Elems.result, Elems.textInput2)
 
             if (Validate.validateLongID(inpt)) {
-                resolvedID1.innerHTML = Format.formatGreek(Format.padShortID(Bases.BASE100, Bases.decToBase(BigInt(Format.removeISic(inpt)), Bases.BASE100)))
+                resolvedID1.innerHTML = Format.compressID(inpt)
             } else {
                 resolvedID1.innerHTML = FIVEBLANKS
             }
@@ -181,8 +187,10 @@ export default class Handlers {
     static handleCheckFlip = () => {
         const { flipBtn, resolvedID1 } = Elems
 
-        if ((Validate.validate(Elems.textInput1) || 
-        Validate.validateLongID(Elems.textInput1.textContent + "-" + Elems.textInput2.textContent)) && Validate.validate(resolvedID1)) {
+        if (
+            (Validate.validate(Elems.textInput1) || 
+                Validate.validateLongID(Elems.textInput1.textContent + "-" + Elems.textInput2.textContent)) 
+                && Validate.validate(resolvedID1)) {
 
             Attrs.enable(flipBtn)
         } else {
@@ -273,18 +281,16 @@ export default class Handlers {
         const text1 = textInput1.textContent
         const text2 = textInput2.textContent
 
-        const text1Dec = Bases.baseToDec(text1, Bases.BASE100)
-        const text2Dec = Bases.baseToDec(text2, Bases.BASE100)
-        
         let midpointValid = true
-        
+
+        // Check that inputs are individually valid IDs
         let [textInput1Err, text1Status] = Err.getShortIDValidationIndividual(text1)
         let [textInput2Err, text2Status] = Err.getShortIDValidationIndividual(text2)
-        if (textInput1Err) resolvedID1.textContent = Format.insertISic(String(text1Dec))
-        if (textInput2Err) resolvedID1.textContent = Format.insertISic(String(text2Dec))
+        if (textInput1Err) resolvedID1.textContent = Format.decompressID(text1)
+        if (textInput2Err) resolvedID1.textContent = Format.decompressID(text2)
 
         if (textInput1Err === Err.ERR.ISVALID) {
-            resolvedID1.textContent = Format.insertISic(String(text1Dec))
+            resolvedID1.textContent = Format.decompressID(text1)
             Message.hide()
         } else {
             resolvedID1.textContent = BLANKISIC
@@ -297,7 +303,7 @@ export default class Handlers {
         }
 
         if (textInput2Err === Err.ERR.ISVALID) {
-            resolvedID2.textContent = Format.insertISic(String(text2Dec))
+            resolvedID2.textContent = Format.decompressID(text2)
             Message.hide()
         } else {
             resolvedID2.textContent = BLANKISIC
@@ -318,6 +324,10 @@ export default class Handlers {
         if (Err.isGenericErr(textInput1Err, textInput2Err)) {
             Message.hide()
         }
+
+        // Check that IDs are sequential etc.
+        const text1Dec = Bases.baseToDec(text1, Bases.CURRENTBASE)
+        const text2Dec = Bases.baseToDec(text2, Bases.CURRENTBASE)
 
         if (text1Dec > text2Dec) {
             text1Status = text1Status.concat("\nThis ID comes after the second ID")
@@ -355,13 +365,13 @@ export default class Handlers {
             const midpoint = Bases.midPointBetweenValues(
                 Elems.textInput1.textContent, 
                 Elems.textInput2.textContent, 
-                Bases.BASE100
+                Bases.CURRENTBASE
             )
             Elems.result.innerHTML = 
                 `${REST}`.concat(Format.formatGreek(midpoint), `${REST}`
                 )
             
-            resolvedMidpointID.textContent = Format.insertISic(String(Bases.baseToDec(midpoint, Bases.BASE100)))
+            resolvedMidpointID.textContent = Format.decompressID(midpoint)
 
         } else {
             Attrs.removeClasses(Elems.result)("valid")
@@ -564,11 +574,11 @@ export default class Handlers {
     }
 
     /**
-     * 
+     * Set the inner HTML of the elements (either divs or spans)
+     * to the empty string
      * @param {Array.<HTMLDivElement> | Array.<HTMLSpanElement>} divs 
      */
     static reset = (...divs) => {
-
         divs.forEach ( div => div.innerHTML = "" )
     }
 

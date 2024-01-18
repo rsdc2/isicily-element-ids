@@ -35,7 +35,12 @@ export default class Err {
     }
 
     /**
-     * 
+     * Returns the validation status of a 
+     * short (i.e. compressed) ID. 
+     * If valid, returns ERR.ISVALID,
+     * otherwise returns a tuple with 
+     * an error code and a string giving the
+     * description of the error.
      * @param {string} text 
      * @returns {[bigint, string]} 
      */

@@ -1,9 +1,9 @@
 import Str from "./str.js"
 
 export default class Constants {
-    static REST = " ... "
-
     static EQ = " = "
+
+    static REST = " ... "
     
     static FIVEBLANKS = "?????"
 

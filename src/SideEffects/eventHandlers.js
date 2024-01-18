@@ -1,14 +1,14 @@
 import Bases from "../Pure/bases.js"
 import Compress from "../Pure/compress.js"
 import Format from "../Pure/format.js"
-import Select from "./selection.js"
+import Select from "./select.js"
 import Validate from "../Pure/validate.js"
 import Constants from "../Pure/constants.js"
 import Err from "../Pure/err.js"
 import Elems from "./elements.js"
 import Attrs from "./elementAttributes.js"
 import Status from "./elementValues.js"
-import Message from "./messageAlert.js"
+import Message from "./message.js"
 
 const {
     ABOUTTEXT,

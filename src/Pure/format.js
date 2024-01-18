@@ -13,8 +13,8 @@ export default class Format {
      */
 
     static insertISic(s) {
-        const s_ = s.padStart(11, '0')
-        return "ISic" + s_.slice(0, 6) + "-" + s_.slice(6, 11)
+        const padded = s.padStart(11, '0')
+        return "ISic" + padded.slice(0, 6) + "-" + padded.slice(6, 11)
     }
 
     /**

@@ -12,10 +12,16 @@ export default class Message {
         Message.show()
     }
 
+    /**
+     * Hide the message bar
+     */
     static hide = () => {
         Attrs.addClasses(Elems.messageDiv)("hidden")
     }
 
+    /**
+     * Show the message bar
+     */
     static show = () => {
         Attrs.removeClasses(Elems.messageDiv)("hidden")
     }

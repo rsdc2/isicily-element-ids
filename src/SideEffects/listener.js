@@ -1,5 +1,5 @@
-import Handlers from "./eventHandlers.js"
-import Elems from "./elements.js"
+import Handlers from "./handlers.js"
+import Elems from "./elems.js"
 export default class Listener {
     static addListeners() {
         Elems.aboutBtn.addEventListener("click", Handlers.handleToggleShowAbout)

@@ -1,5 +1,5 @@
-import Attrs from "./elementAttributes.js"
-import Elems from "./elements.js"
+import Attrs from "./attrs.js"
+import Elems from "./elems.js"
 
 export default class Status {
     /**

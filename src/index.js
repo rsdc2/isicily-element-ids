@@ -1,6 +1,6 @@
-import Handlers from "./SideEffects/eventHandlers.js"
-import Listener from "./SideEffects/eventListeners.js"
-import Elems from "./SideEffects/elements.js"
+import Handlers from "./SideEffects/handlers.js"
+import Listener from "./SideEffects/listener.js"
+import Elems from "./SideEffects/elems.js"
 import Attrs from "./SideEffects/attrs.js"
 
 Listener.addListeners()

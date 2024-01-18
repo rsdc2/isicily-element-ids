@@ -62,7 +62,11 @@ npm install
 npx http-server
 ```
 
-- Open localhost according to the message provided by ```http-server```, e.g. http://127.0.0.1:8080 
+- Open localhost according to the message provided by ```http-server```:
+
+```
+http://localhost:8080/
+```
 
 
 ### Building

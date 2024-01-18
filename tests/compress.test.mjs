@@ -7,7 +7,7 @@ import Compress from "../src/Pure/compress.js"
 import Format from "../src/Pure/format.js"
 
 const parametrize = Parametrized.parametrize 
-const {compressID, decompressID} = Compress
+const { compressID, decompressID } = Compress
 
 /** @type{Array.<[string, string, string]>} */
 const compressions = [

@@ -1,6 +1,6 @@
 import Str from "./str.js"
 
-export default class Const {
+export default class Constants {
     static REST = " ... "
 
     static EQ = " = "
@@ -9,7 +9,7 @@ export default class Const {
 
     static BLANKCOMPRESSION = "?"
 
-    static BLANKMIDPOINT= `${Const.REST}${Const.FIVEBLANKS}${Const.REST}`
+    static BLANKMIDPOINT= `${Constants.REST}${Constants.FIVEBLANKS}${Constants.REST}`
 
     static BLANKISIC = "ISic??????-?????"
     
@@ -88,8 +88,8 @@ export default class Const {
     
     static STRICT = true
     
-    static UPPERCASELATIN = Const.LOWERCASELATIN.map(Str.toUpper)
-    static UPPERCASEGREEK = Const.LOWERCASEGREEK.map(Str.toUpper)
+    static UPPERCASELATIN = Constants.LOWERCASELATIN.map(Str.toUpper)
+    static UPPERCASEGREEK = Constants.LOWERCASEGREEK.map(Str.toUpper)
   
 }
 

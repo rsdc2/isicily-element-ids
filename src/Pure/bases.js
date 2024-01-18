@@ -1,7 +1,7 @@
 
 import { Arr } from "./arr.js"
 import Validate from "./validate.js"
-import Const from "./constants.js"
+import Constants from "./constants.js"
 
 const {
     UPPERCASELATIN, 
@@ -9,7 +9,7 @@ const {
     UPPERCASEGREEK, 
     LOWERCASEGREEK, 
     FIVEBLANKS
-} = Const
+} = Constants
 
 export default class Bases {
 

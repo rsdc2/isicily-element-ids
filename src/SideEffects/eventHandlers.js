@@ -2,7 +2,7 @@ import Bases from "../Pure/bases.js"
 import Format from "../Pure/formatting.js"
 import Select from "./selection.js"
 import Validate from "../Pure/validate.js"
-import Const from "../Pure/constants.js"
+import Constants from "../Pure/constants.js"
 import Err from "../Pure/errors.js"
 import Elems from "../SideEffects/elements.js"
 import Attrs from "./elementAttributes.js"
@@ -25,7 +25,7 @@ const {
     FIVEBLANKS,
     METAKEYS,
 
-} = Const
+} = Constants
 
 export default class Handlers {
     /**

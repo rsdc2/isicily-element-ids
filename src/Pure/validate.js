@@ -1,5 +1,5 @@
 import Format from "./formatting.js"
-import Const from "./constants.js"
+import Constants from "./constants.js"
 
 export default class Validate {
     /**
@@ -120,8 +120,8 @@ export default class Validate {
         return m != null
     }
 
-    static validateLongID = Const.STRICT ? Validate.validateLongIDStrict : Validate.validateLongIdNonStrict
-    static validateShortID = Const.STRICT ? Validate.validateShortIDStrict : Validate.validateShortIdNonStrict
+    static validateLongID = Constants.STRICT ? Validate.validateLongIDStrict : Validate.validateLongIdNonStrict
+    static validateShortID = Constants.STRICT ? Validate.validateShortIDStrict : Validate.validateShortIdNonStrict
 
     /**
      * @param {HTMLDivElement | HTMLSpanElement} elem

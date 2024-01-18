@@ -10,8 +10,7 @@ const parametrize = Parametrized.parametrize
 const compressions = [
     ["ISic000001-00001", "AAKAB", "First token id"],
     ["ISic000000-00000", "AAAAA", "Zero token id"],
-    ["ISic099999-99999", "ωωωωω", "Last token id"],
-    // ["ISic323257-21994", "ISic089097-4331"]
+    ["ISic099999-99999", "ωωωωω", "Last token id"]
 ]
 
 /** @type{Array.<[string, string, string]>} */

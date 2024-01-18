@@ -1,4 +1,4 @@
-import Attrs from "./elementAttributes.js"
+import Attrs from "./attrs.js"
 import Elems from "./elements.js"
 
 export default class Message {

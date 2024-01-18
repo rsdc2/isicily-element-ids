@@ -1,4 +1,4 @@
-import Attrs from "./elementAttributes.js"
+import Attrs from "./attrs.js"
 
 
 export default class Elems {

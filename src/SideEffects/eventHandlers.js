@@ -6,7 +6,7 @@ import Validate from "../Pure/validate.js"
 import Constants from "../Pure/constants.js"
 import Err from "../Pure/err.js"
 import Elems from "./elements.js"
-import Attrs from "./elementAttributes.js"
+import Attrs from "./attrs.js"
 import Status from "./elementValues.js"
 import Message from "./message.js"
 

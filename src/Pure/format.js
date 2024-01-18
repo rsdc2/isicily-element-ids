@@ -1,7 +1,7 @@
 
 import Bases from "./bases.js"
 
-const {BASE52, BASE100, CURRENTBASE} = Bases
+// const {BASE52, BASE100, CURRENTBASE} = Bases
 
 export default class Format {
 

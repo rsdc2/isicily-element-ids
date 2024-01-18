@@ -26,7 +26,7 @@ export default class Format {
 
     /**
      * Removes string elements from a number corresponding to an
-     * ISicily ID + 5 digit element id
+     * ISicily ID + 4 or 5 digit element id
      * @param {string} s 
      * @returns {string}
      */

@@ -127,46 +127,45 @@ export default class Handlers {
      * compression mode (i.e. not finding midpoint)
      */
     static handleCompression = () => {
-        const {
-            resolvedID1, 
-            resolvedID2
-        } = Elems
+        const { resolvedID1,result, textInput1, textInput2 } = Elems
     
-
         if (Validate.validateShortID(Elems.textInput1.textContent)) {
             // Handle decompression
             Message.hide()
-            Elems.resolvedID1.innerHTML = Compress.decompressID(Elems.textInput1.textContent)
+            resolvedID1.innerHTML = Compress.decompressID(
+                textInput1.textContent, 
+                Bases.CURRENTBASE
+            )
         
-        } else if (Elems.textInput1.textContent.trim() === "") {
+        } else if (textInput1.textContent.trim() === "") {
             // Handle empty input box
-            Elems.resolvedID1.innerHTML = BLANKCOMPRESSION
-            Attrs.hide(Elems.result, Elems.textInput2)
-            Handlers.reset(Elems.textInput2, Elems.result)
-            Attrs.removeClasses(Elems.result, Elems.textInput2)("five", "one")  
+            resolvedID1.innerHTML = BLANKCOMPRESSION
+            Attrs.hide(result, textInput2)
+            Handlers.reset(textInput2, result)
+            Attrs.removeClasses(result, textInput2)("five", "one")  
 
-        } else if (Validate.containsOnlyLetters(Elems.textInput1.textContent)) {
-            Elems.resolvedID1.innerHTML = BLANKISIC
-            Attrs.hide(Elems.result, Elems.textInput2)
-            Handlers.reset(Elems.textInput2, Elems.result)
-            Attrs.removeClasses(Elems.result, Elems.textInput2)("five", "one")   
+        } else if (Validate.containsOnlyLetters(textInput1.textContent)) {
+            resolvedID1.innerHTML = BLANKISIC
+            Attrs.hide(result, textInput2)
+            Handlers.reset(textInput2, result)
+            Attrs.removeClasses(result, textInput2)("five", "one")   
 
         } else if (Validate.isDecimal(Elems.textInput1.textContent)) {
             Message.hide()
-            Elems.textInput1.textContent = "ISic" + Elems.textInput1.textContent
-            Select.setCaretEnd(Elems.textInput1)
+            textInput1.textContent = "ISic" + textInput1.textContent
+            Select.setCaretEnd(textInput1)
             Handlers.handleCompression()
 
-        } else if (Validate.validatePartialLongID(Elems.textInput1.textContent)) {
+        } else if (Validate.validatePartialLongID(textInput1.textContent)) {
             Message.hide()
             Elems.result.textContent = "-"
-            const inpt = Elems.textInput1.textContent + "-" + Elems.textInput2.textContent
-            Attrs.addClasses(Elems.textInput2)("five")
-            Attrs.addClasses(Elems.result)("valid", "one")
-            Attrs.show(Elems.result, Elems.textInput2)
+            const inpt = textInput1.textContent + "-" + textInput2.textContent
+            Attrs.addClasses(textInput2)("five")
+            Attrs.addClasses(result)("valid", "one")
+            Attrs.show(result, textInput2)
 
             if (Validate.validateLongID(inpt)) {
-                resolvedID1.innerHTML = Compress.compressID(inpt)
+                resolvedID1.innerHTML = Compress.compressID(inpt, Bases.CURRENTBASE)
             } else {
                 resolvedID1.innerHTML = FIVEBLANKS
             }
@@ -174,9 +173,9 @@ export default class Handlers {
     
         } else {
             resolvedID1.innerHTML = BLANKCOMPRESSION
-            Attrs.hide(Elems.result, Elems.textInput2)
-            Handlers.reset(Elems.textInput2, Elems.result)
-            Attrs.removeClasses(Elems.result, Elems.textInput2)("five", "one")
+            Attrs.hide(result, textInput2)
+            Handlers.reset(textInput2, result)
+            Attrs.removeClasses(result, textInput2)("five", "one")
         }
     }
 
@@ -286,11 +285,11 @@ export default class Handlers {
         // Check that inputs are individually valid IDs
         let [textInput1Err, text1Status] = Err.getShortIDValidationIndividual(text1)
         let [textInput2Err, text2Status] = Err.getShortIDValidationIndividual(text2)
-        if (textInput1Err) resolvedID1.textContent = Compress.decompressID(text1)
-        if (textInput2Err) resolvedID1.textContent = Compress.decompressID(text2)
+        if (textInput1Err) resolvedID1.textContent = Compress.decompressID(text1, Bases.CURRENTBASE)
+        if (textInput2Err) resolvedID1.textContent = Compress.decompressID(text2, Bases.CURRENTBASE)
 
         if (textInput1Err === Err.ERR.ISVALID) {
-            resolvedID1.textContent = Compress.decompressID(text1)
+            resolvedID1.textContent = Compress.decompressID(text1, Bases.CURRENTBASE)
             Message.hide()
         } else {
             resolvedID1.textContent = BLANKISIC
@@ -303,7 +302,7 @@ export default class Handlers {
         }
 
         if (textInput2Err === Err.ERR.ISVALID) {
-            resolvedID2.textContent = Compress.decompressID(text2)
+            resolvedID2.textContent = Compress.decompressID(text2, Bases.CURRENTBASE)
             Message.hide()
         } else {
             resolvedID2.textContent = BLANKISIC
@@ -371,7 +370,7 @@ export default class Handlers {
                 `${REST}`.concat(Format.underlineGreek(midpoint), `${REST}`
                 )
             
-            resolvedMidpointID.textContent = Compress.decompressID(midpoint)
+            resolvedMidpointID.textContent = Compress.decompressID(midpoint, Bases.CURRENTBASE)
 
         } else {
             Attrs.removeClasses(Elems.result)("valid")

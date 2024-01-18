@@ -1,6 +1,8 @@
 
 import Parametrized from "./utils/parametrized.mjs"
 import { randomISicID, randomTuples } from "./utils/random.mjs"
+
+import Bases from "../src/Pure/bases.js"
 import Compress from "../src/Pure/compress.js"
 import Format from "../src/Pure/format.js"
 
@@ -36,8 +38,17 @@ const additionalRoundtrips = randomTuples(30, randomISicID)
  * @param {string} isicID 
  */
 function compress(isicID) {
-    const compressed = Compress.compressID(isicID)
+    const compressed = Compress.compressID(isicID, Bases.CURRENTBASE)
     return Format.removeUnderline(compressed)
+}
+
+/**
+ * 
+ * @param {string} isicID 
+ * @returns 
+ */
+function decompress(isicID) {
+    return Compress.decompressID(isicID, Bases.CURRENTBASE)
 }
 
 /**
@@ -46,11 +57,11 @@ function compress(isicID) {
  * @returns {string} 
  */
 function roundtrip(isicID) {
-    const compressed = Compress.compressID(isicID)
+    const compressed = Compress.compressID(isicID, Bases.CURRENTBASE)
     const formattingRemoved = Format.removeUnderline(compressed)
-    return Compress.decompressID(formattingRemoved)
+    return Compress.decompressID(formattingRemoved, Bases.CURRENTBASE)
 }
 
 parametrize(compressions, compress)
-parametrize(decompressions, Compress.decompressID)
+parametrize(decompressions, decompress)
 parametrize([...roundtrips, ...additionalRoundtrips], roundtrip)

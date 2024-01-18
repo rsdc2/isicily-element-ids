@@ -1,11 +1,13 @@
 
 import Bases from "./bases.js"
 
+const {BASE52, BASE100, CURRENTBASE} = Bases
+
 export default class Format {
 
     /**
      * Inserts string elements into a number corresponding to an
-     * ISicily ID + 5 digit element id
+     * ISicily ID + 4 or 5 digit element id
      * @param {string} s 
      * @returns {string}
      */

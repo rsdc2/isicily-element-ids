@@ -7,6 +7,7 @@ import Compress from "../src/Pure/compress.js"
 import Format from "../src/Pure/format.js"
 
 const parametrize = Parametrized.parametrize 
+const {compressID, decompressID} = Compress
 
 /** @type{Array.<[string, string, string]>} */
 const compressions = [
@@ -38,18 +39,10 @@ const additionalRoundtrips = randomTuples(30, randomISicID)
  * @param {string} isicID 
  */
 function compress(isicID) {
-    const compressed = Compress.compressID(isicID, Bases.CURRENTBASE)
+    const compressed = compressID(Bases.CURRENTBASE)(isicID)
     return Format.removeUnderline(compressed)
 }
 
-/**
- * 
- * @param {string} isicID 
- * @returns 
- */
-function decompress(isicID) {
-    return Compress.decompressID(isicID, Bases.CURRENTBASE)
-}
 
 /**
  * Compresses an ID and decompresses it again
@@ -57,11 +50,11 @@ function decompress(isicID) {
  * @returns {string} 
  */
 function roundtrip(isicID) {
-    const compressed = Compress.compressID(isicID, Bases.CURRENTBASE)
+    const compressed = compressID(Bases.CURRENTBASE)(isicID)
     const formattingRemoved = Format.removeUnderline(compressed)
-    return Compress.decompressID(formattingRemoved, Bases.CURRENTBASE)
+    return decompressID(Bases.CURRENTBASE)(formattingRemoved)
 }
 
 parametrize(compressions, compress)
-parametrize(decompressions, decompress)
+parametrize(decompressions, decompressID(Bases.CURRENTBASE))
 parametrize([...roundtrips, ...additionalRoundtrips], roundtrip)

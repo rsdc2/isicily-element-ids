@@ -18,14 +18,12 @@ const {
     EQ,
     NOTESTEXT,
     REST,
-    UPPERCASELATIN, 
-    LOWERCASELATIN, 
-    UPPERCASEGREEK, 
-    LOWERCASEGREEK, 
     FIVEBLANKS,
-    METAKEYS,
-
+    METAKEYS
 } = Constants
+
+const compress = Compress.compressID(Bases.CURRENTBASE)
+const decompress = Compress.decompressID(Bases.CURRENTBASE)
 
 export default class Handlers {
     /**
@@ -132,9 +130,9 @@ export default class Handlers {
         if (Validate.validateShortID(Elems.textInput1.textContent)) {
             // Handle decompression
             Message.hide()
-            resolvedID1.innerHTML = Compress.decompressID(
+            resolvedID1.innerHTML = decompress(
                 textInput1.textContent, 
-                Bases.CURRENTBASE
+
             )
         
         } else if (textInput1.textContent.trim() === "") {
@@ -165,7 +163,7 @@ export default class Handlers {
             Attrs.show(result, textInput2)
 
             if (Validate.validateLongID(inpt)) {
-                resolvedID1.innerHTML = Compress.compressID(inpt, Bases.CURRENTBASE)
+                resolvedID1.innerHTML = compress(inpt)
             } else {
                 resolvedID1.innerHTML = FIVEBLANKS
             }
@@ -285,11 +283,11 @@ export default class Handlers {
         // Check that inputs are individually valid IDs
         let [textInput1Err, text1Status] = Err.getShortIDValidationIndividual(text1)
         let [textInput2Err, text2Status] = Err.getShortIDValidationIndividual(text2)
-        if (textInput1Err) resolvedID1.textContent = Compress.decompressID(text1, Bases.CURRENTBASE)
-        if (textInput2Err) resolvedID1.textContent = Compress.decompressID(text2, Bases.CURRENTBASE)
+        if (textInput1Err) resolvedID1.textContent = decompress(text1)
+        if (textInput2Err) resolvedID1.textContent = decompress(text2)
 
         if (textInput1Err === Err.ERR.ISVALID) {
-            resolvedID1.textContent = Compress.decompressID(text1, Bases.CURRENTBASE)
+            resolvedID1.textContent = decompress(text1)
             Message.hide()
         } else {
             resolvedID1.textContent = BLANKISIC
@@ -302,7 +300,7 @@ export default class Handlers {
         }
 
         if (textInput2Err === Err.ERR.ISVALID) {
-            resolvedID2.textContent = Compress.decompressID(text2, Bases.CURRENTBASE)
+            resolvedID2.textContent = decompress(text2)
             Message.hide()
         } else {
             resolvedID2.textContent = BLANKISIC
@@ -370,7 +368,7 @@ export default class Handlers {
                 `${REST}`.concat(Format.underlineGreek(midpoint), `${REST}`
                 )
             
-            resolvedMidpointID.textContent = Compress.decompressID(midpoint, Bases.CURRENTBASE)
+            resolvedMidpointID.textContent = decompress(midpoint)
 
         } else {
             Attrs.removeClasses(Elems.result)("valid")

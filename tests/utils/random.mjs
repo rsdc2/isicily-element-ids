@@ -5,7 +5,6 @@ import Format from "../../src/Pure/format.js"
  * @returns {string} 
  */
 
-
 /**
  * Generate a random I.Sicily token ID
  * @returns {string}
@@ -19,7 +18,8 @@ export function randomISicID() {
 }
 
 /**
- * 
+ * Generate a triple consisting of two instances of a random
+ * number as a string, and a name
  * @param {number} max
  * @param {randomString} callback
  */

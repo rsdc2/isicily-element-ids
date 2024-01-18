@@ -77,7 +77,6 @@ From the repository root directory:
 node --test
 ```
 
-
 ## Dependencies
 
 The Element ID resolver / generator requires [```http-server```](https://www.npmjs.com/package/http-server) (MIT, see LICENSES folder) to run locally.

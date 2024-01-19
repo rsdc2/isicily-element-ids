@@ -136,9 +136,18 @@ export default class Validate {
     /**
      * @param {HTMLDivElement | HTMLSpanElement} elem
      */
-    static validate = elem => Validate.validateLongID(elem.textContent) || 
-                                Validate.validateShortID(elem.textContent) ||
-                                Validate.validateLongID(elem.textContent.replace(/[= ]/g, ""))
+    static validate = elem => {
+        const text = elem.textContent
+        if (text == null) {
+            return false
+        }
+
+        const {validateLongID, validateShortID} = Validate
+
+        return validateLongID(text) 
+                || validateShortID(text) 
+                || validateLongID(text.replace(/[= ]/g, ""))
+    }
 
 
 }

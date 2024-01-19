@@ -40,25 +40,25 @@ export default class Handlers {
                                             target.id === Elems.textInput2.id ? Elems.textInput2 :
                                                 null 
 
-        if (targetInput === null) return;
+        if (targetInput === null) return null;
 
         if (["keydown", "keypress", "keyup"].includes(e.type)) {
             const keyE = /** @type {KeyboardEvent} */ (e)
             
             if (METAKEYS.includes(keyE.key)) {
-                return 
+                return null
             }
             
             if (keyE.ctrlKey) {
                 if (keyE.key === "v" || keyE.key === "ω") {
                     return Handlers.getTargetInputFromSplittingLongID(
                         targetInput, 
-                        targetInput.textContent
+                        targetInput.textContent || ""
                     )
                 } else if (keyE.key === "Backspace") {
                     return targetInput
                 } else {
-                    return 
+                    return null
                 }
             }
         }
@@ -276,8 +276,8 @@ export default class Handlers {
             textInput2
         } = Elems
 
-        const text1 = textInput1.textContent
-        const text2 = textInput2.textContent
+        const text1 = textInput1.textContent || ""
+        const text2 = textInput2.textContent || ""
 
         let midpointValid = true
 

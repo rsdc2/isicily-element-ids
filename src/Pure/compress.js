@@ -26,7 +26,9 @@ export default class Compress {
     }
 
     /**
-     * 
+     * Convert a compressed ID in one base to a compressed ID
+     * in another.
+     * At present, only Base52 and Base100 are supported.
      * @param {Base} oldbase 
      * @param {Base} newbase 
      */
@@ -41,15 +43,21 @@ export default class Compress {
             const noUnderline = Format.removeUnderline(decompressed)
             const raw = Format.removeISic(noUnderline)
 
-            if (oldbase.index == 100) {
+            if (oldbase.index === 100 && newbase.index === 52) {
                 const newRaw = raw.slice(0, 6) + raw.slice(7, 11)
                 const newISic = Format.insertISic(newRaw, 52)
                 return Compress.compressID(newbase)(newISic)
             }
-            else if (oldbase.index == 52) {
+            else if (oldbase.index == 52 && newbase.index === 100) {
                 const newRaw = raw.slice(0, 6) + "0" + raw.slice(6, 10)
                 const newISic = Format.insertISic(newRaw, 100)
                 return Format.removeUnderline(Compress.compressID(newbase)(newISic))
+            }
+            else {
+                console.error(
+                    `Base ${oldbase.index} not valid: only Base 52 ` +  
+                    `and Base 100 are currently supported.`
+                )
             }
         }
 

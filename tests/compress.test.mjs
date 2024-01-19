@@ -9,12 +9,10 @@ import Constants from "../src/Pure/constants.js"
 
 const parametrize = Parametrized.parametrize 
 const { compressID, decompressID } = Compress
-
-const { BASE52, BASE100, CURRENTBASE } = Constants
+const { BASE52, BASE100 } = Constants
 
 const base52 = Base.from(BASE52)
 const base100 = Base.from(BASE100)
-const currentbase = Base.from(CURRENTBASE)
 
 /** @type{Array.<[string, string, string]>} */
 const compressions = [

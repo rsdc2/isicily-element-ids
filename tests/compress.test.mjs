@@ -34,7 +34,7 @@ const roundtrips = compressions.map (
 )
 
 /** @type {[string, string, string][]} */
-const additionalRoundtrips = randomTuples(30, randomISicID)
+const additionalRoundtrips = randomTuples(30, randomISicID(BASE.index))
 
 /**
  * 

@@ -40,7 +40,8 @@ export default class Compress {
         function inner(isicID) {
             const decompressed = base.baseToDec(isicID)
             const asString = String(decompressed)
-            const isicPadding = Format.insertISic(asString)
+            console.log(base.index)
+            const isicPadding = Format.insertISic(asString, base.index)
             return isicPadding
         }
 

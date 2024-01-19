@@ -5,12 +5,23 @@ export default class Format {
      * Inserts string elements into a number corresponding to an
      * ISicily ID + 4 or 5 digit element id
      * @param {string} s 
+     * @param {number} baseIdx
      * @returns {string}
      */
 
-    static insertISic(s) {
-        const padded = s.padStart(11, '0')
-        return "ISic" + padded.slice(0, 6) + "-" + padded.slice(6, 11)
+    static insertISic(s, baseIdx) {
+        if (baseIdx === 100) {
+            const padded = s.padStart(11, '0')
+            return "ISic" + padded.slice(0, 6) + "-" + padded.slice(6, 11)    
+        } 
+        else if (baseIdx === 52) {
+            const padded = s.padStart(10, '0')
+            return "ISic" + padded.slice(0, 6) + "-" + padded.slice(6, 10)    
+        }
+        else {
+            console.error("Invalid base")
+        }
+        
     }
 
     /**

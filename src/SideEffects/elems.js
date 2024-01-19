@@ -61,11 +61,11 @@ export default class Elems {
 
     static aboutDiv = Elems.div("#about")
 
+    static bodyDiv = Elems.div("#body")
+
     static compressBtn = 
         /** @type {HTMLButtonElement} */ 
         (document.getElementById("compress-btn"))
-
-    static bodyDiv = Elems.div("#body")
 
     static compressionRad = 
         /** @type {HTMLInputElement} */ 
@@ -75,13 +75,9 @@ export default class Elems {
         /** @type {HTMLButtonElement} */ 
         (document.getElementById("flip-btn"))
 
-    static textInput1 = 
-        /** @type {HTMLDivElement} */ 
-        (document.getElementById("text-input1"))
-
-    static textInput2 =
-        /** @type {HTMLDivElement} */ 
-        (document.getElementById("text-input2"))
+    static loadCSVBtn = 
+        /** @type {HTMLButtonElement} */ 
+        (document.getElementById("load-csv"))
 
     static messageDiv = Elems.div("#message")
 
@@ -118,6 +114,14 @@ export default class Elems {
     static result =  
         /** @type {HTMLInputElement} */
         document.getElementById("result")
+
+    static textInput1 = 
+    /** @type {HTMLDivElement} */ 
+    (document.getElementById("text-input1"))
+
+    static textInput2 =
+        /** @type {HTMLDivElement} */ 
+        (document.getElementById("text-input2"))
 
     static textInputDiv = 
         /** @type {HTMLDivElement} */

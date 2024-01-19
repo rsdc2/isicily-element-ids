@@ -26,6 +26,37 @@ export default class Compress {
     }
 
     /**
+     * 
+     * @param {Base} oldbase 
+     * @param {Base} newbase 
+     */
+    static convert(oldbase, newbase) {
+
+        /**
+         * Compressed value
+         * @param {string} value 
+         */
+        function inner(value) {
+            const decompressed = Compress.decompressID(oldbase)(value)
+            const noUnderline = Format.removeUnderline(decompressed)
+            const raw = Format.removeISic(noUnderline)
+
+            if (oldbase.index == 100) {
+                const newRaw = raw.slice(0, 6) + raw.slice(7, 11)
+                const newISic = Format.insertISic(newRaw, 52)
+                return Compress.compressID(newbase)(newISic)
+            }
+            else if (oldbase.index == 52) {
+                const newRaw = raw.slice(0, 6) + "0" + raw.slice(6, 10)
+                const newISic = Format.insertISic(newRaw, 100)
+                return Format.removeUnderline(Compress.compressID(newbase)(newISic))
+            }
+        }
+
+        return inner
+    }
+
+    /**
      * Decompress a compressed ID.
      * Assumes that any HTML formatting has been removed
      * @param {Base} base
@@ -40,7 +71,6 @@ export default class Compress {
         function inner(isicID) {
             const decompressed = base.baseToDec(isicID)
             const asString = String(decompressed)
-            console.log(base.index)
             const isicPadding = Format.insertISic(asString, base.index)
             return isicPadding
         }

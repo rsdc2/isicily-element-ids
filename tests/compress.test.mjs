@@ -19,11 +19,20 @@ const compressions = [
 ]
 
 /** @type{Array.<[string, string, string]>} */
+const conversions100to52 = [
+    ["AAKAB", "AADkR", "First token id"]
+]
+
+/** @type{Array.<[string, string, string]>} */
+const conversions52to100 = [
+    ["AADkR", "AAKAB", "First token id"]
+]
+
+/** @type{Array.<[string, string, string]>} */
 const decompressions = [
     ["AAKAB", "ISic000001-00001", "First token id"],
     ["AAAAA", "ISic000000-00000", "Zero token id"],
     ["ωωωωω", "ISic099999-99999", "Last token id"],
-
 ]
 
 const roundtrips = compressions.map (
@@ -60,3 +69,5 @@ function roundtrip(isicID) {
 parametrize(compressions, compress)
 parametrize(decompressions, decompressID(BASE))
 parametrize([...roundtrips, ...additionalRoundtrips], roundtrip)
+parametrize(conversions100to52, Compress.convert(Base.from(Constants.BASE100), Base.from(Constants.BASE52)))
+parametrize(conversions52to100, Compress.convert(Base.from(Constants.BASE52), Base.from(Constants.BASE100)))

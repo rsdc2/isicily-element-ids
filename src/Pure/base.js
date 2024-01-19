@@ -25,6 +25,62 @@ export default class Base {
     get baseChars() {
         return this.#baseChars
     }
+
+    /**
+     * Convert a value in the base of "baseVal" to a decimal
+     * @param {string} baseVal   
+     * @param {Array.<string>} base 
+     * @returns {bigint}
+     */
+
+    static baseToDec(baseVal, base) {
+        const chars = Arr.strToArr(baseVal)
+
+        /**
+         * 
+         * @param {bigint} acc 
+         * @param {string} baseVal 
+         * @param {number} idx 
+         * @param {Array.<string>} chars
+         * @returns {bigint}
+         */
+        const getDecValue = (acc, baseVal, idx, chars) => {
+            const reverseIdx = chars.length - 1 - idx // Start at the right end
+            return acc + BigInt(base.indexOf(baseVal)) * BigInt(base.length ** reverseIdx)
+        }
+
+        return chars.reduce(getDecValue, 0n)
+    }   
+
+
+    /**
+     * Convert a decimal value to a value in the base of the 
+     * current object
+     * @param {string} baseVal 
+     * @returns {bigint}
+     */
+    baseToDec(baseVal) {
+        return Base.baseToDec(baseVal, this.baseChars)
+    }
+
+    /**
+     * Convert a string value from one base into another
+     * @param {Base} oldbase 
+     * @param {Base} newbase 
+     */
+    static convert(oldbase, newbase) {
+        /**
+         * 
+         * @param {string} value 
+         * @returns {string}
+         */
+        function inner(value) {
+            const dec = oldbase.baseToDec(value)
+            return newbase.decToBase(dec)    
+        }
+
+        return inner
+    }
     
     /**
      * Convert a decimal value to a value in the base passed
@@ -68,40 +124,11 @@ export default class Base {
     }
 
     /**
-     * Convert a value in the base of "baseVal" to a decimal
-     * @param {string} baseVal   
-     * @param {Array.<string>} base 
-     * @returns {bigint}
+     * Return a new base object
+     * @param {string[]} baseChars 
      */
-
-    static baseToDec(baseVal, base) {
-        const chars = Arr.strToArr(baseVal)
-
-        /**
-         * 
-         * @param {bigint} acc 
-         * @param {string} baseVal 
-         * @param {number} idx 
-         * @param {Array.<string>} chars
-         * @returns {bigint}
-         */
-        const getDecValue = (acc, baseVal, idx, chars) => {
-            const reverseIdx = chars.length - 1 - idx // Start at the right end
-            return acc + BigInt(base.indexOf(baseVal)) * BigInt(base.length ** reverseIdx)
-        }
-
-        return chars.reduce(getDecValue, 0n)
-    }   
-
-
-    /**
-     * Convert a decimal value to a value in the base of the 
-     * current object
-     * @param {string} baseVal 
-     * @returns {bigint}
-     */
-    baseToDec(baseVal) {
-        return Base.baseToDec(baseVal, this.baseChars)
+    static from(baseChars) {
+        return new Base(baseChars)
     }
 
     /**

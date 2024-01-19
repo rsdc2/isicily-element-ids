@@ -3,22 +3,9 @@ import { Arr } from "./arr.js"
 import Validate from "./validate.js"
 import Constants from "./constants.js"
 
-const {
-    UPPERCASELATIN, 
-    LOWERCASELATIN, 
-    UPPERCASEGREEK, 
-    LOWERCASEGREEK, 
-    FIVEBLANKS
-} = Constants
+const { FIVEBLANKS } = Constants
 
-export default class Bases {
-
-    static BASE52 = UPPERCASELATIN.concat(LOWERCASELATIN)
-
-    static BASE100 = Bases.BASE52.concat(UPPERCASEGREEK)
-            .concat(LOWERCASEGREEK)
-
-    static CURRENTBASE = Bases.BASE100
+export default class Base {
     
     /**
      * Convert a decimal value to a value in the base passed
@@ -95,8 +82,8 @@ export default class Bases {
             return FIVEBLANKS
         }
 
-        const baseVal1Dec = Bases.baseToDec(val1, baseChars)
-        const baseVal2Dec = Bases.baseToDec(val2, baseChars)
+        const baseVal1Dec = Base.baseToDec(val1, baseChars)
+        const baseVal2Dec = Base.baseToDec(val2, baseChars)
 
         if (baseVal1Dec > baseVal2Dec) {
             return FIVEBLANKS
@@ -111,7 +98,7 @@ export default class Bases {
         }
 
         const mid = (baseVal1Dec + baseVal2Dec) / 2n
-        return Bases.decToBase(mid, baseChars)
+        return Base.decToBase(mid, baseChars)
     }
 
 }

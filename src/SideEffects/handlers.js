@@ -1,4 +1,4 @@
-import Bases from "../Pure/bases.js"
+import Base from "../Pure/bases.js"
 import Compress from "../Pure/compress.js"
 import Format from "../Pure/format.js"
 import Select from "./select.js"
@@ -22,8 +22,9 @@ const {
     METAKEYS
 } = Constants
 
-const compress = Compress.compressID(Bases.CURRENTBASE)
-const decompress = Compress.decompressID(Bases.CURRENTBASE)
+const BASE = Constants.CURRENTBASE
+const compress = Compress.compressID(BASE)
+const decompress = Compress.decompressID(BASE)
 
 export default class Handlers {
     /**
@@ -323,8 +324,8 @@ export default class Handlers {
         }
 
         // Check that IDs are sequential etc.
-        const text1Dec = Bases.baseToDec(text1, Bases.CURRENTBASE)
-        const text2Dec = Bases.baseToDec(text2, Bases.CURRENTBASE)
+        const text1Dec = Base.baseToDec(text1, BASE)
+        const text2Dec = Base.baseToDec(text2, BASE)
 
         if (text1Dec > text2Dec) {
             text1Status = text1Status.concat("\nThis ID comes after the second ID")
@@ -359,10 +360,10 @@ export default class Handlers {
         if (midpointValid) {
             Attrs.addClasses(Elems.result)("valid")
 
-            const midpoint = Bases.midPointBetweenValues(
+            const midpoint = Base.midPointBetweenValues(
                 Elems.textInput1.textContent, 
                 Elems.textInput2.textContent, 
-                Bases.CURRENTBASE
+                BASE
             )
             Elems.result.innerHTML = 
                 `${REST}`.concat(Format.underlineGreek(midpoint), `${REST}`

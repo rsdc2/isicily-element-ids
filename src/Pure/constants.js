@@ -2,7 +2,7 @@ import Str from "./str.js"
 
 export default class Constants {
     static EQ = " = "
-
+    
     static REST = " ... "
     
     static FIVEBLANKS = "?????"
@@ -92,6 +92,13 @@ export default class Constants {
     
     static UPPERCASELATIN = Constants.LOWERCASELATIN.map(Str.toUpper)
     static UPPERCASEGREEK = Constants.LOWERCASEGREEK.map(Str.toUpper)
+
+    static BASE52 = Constants.UPPERCASELATIN.concat(Constants.LOWERCASELATIN)
+
+    static BASE100 = Constants.BASE52.concat(Constants.UPPERCASEGREEK)
+            .concat(Constants.LOWERCASEGREEK)
+
+    static CURRENTBASE = Constants.BASE100
   
 }
 

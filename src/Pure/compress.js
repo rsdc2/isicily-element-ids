@@ -1,4 +1,4 @@
-import Bases from "./bases.js"
+import Base from "./bases.js"
 import Format from "./format.js"
 
 export default class Compress {    
@@ -17,7 +17,7 @@ export default class Compress {
         function inner(isicID) {
             const noISicPadding = Format.removeISic(isicID)
             const bigint = BigInt(noISicPadding)
-            const converted = Bases.decToBase(bigint, base)
+            const converted = Base.decToBase(bigint, base)
             const padded = Format.padShortID(Compress.zero(base), converted)
             return Format.underlineGreek(padded)    
         }
@@ -38,7 +38,7 @@ export default class Compress {
          * @returns {string}
          */
         function inner(isicID) {
-            const decompressed = Bases.baseToDec(isicID, base)
+            const decompressed = Base.baseToDec(isicID, base)
             const asString = String(decompressed)
             const isicPadding = Format.insertISic(asString)
             return isicPadding

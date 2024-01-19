@@ -6,6 +6,23 @@ import Constants from "./constants.js"
 const { FIVEBLANKS } = Constants
 
 export default class Base {
+
+    #baseChars
+
+    /**
+     * 
+     * @param {string[]} baseChars 
+     */
+    constructor(baseChars) {
+        this.#baseChars = baseChars
+    }
+
+    /**
+     * Return the underlying array of base characters
+     */
+    get baseChars() {
+        return this.#baseChars
+    }
     
     /**
      * Convert a decimal value to a value in the base passed
@@ -39,6 +56,16 @@ export default class Base {
     }
 
     /**
+     * Convert a decimal value to a value in the base of the 
+     * current object
+     * @param {bigint} dec 
+     * @returns {string}
+     */
+    decToBase(dec) {
+        return Base.decToBase(dec, this.baseChars)
+    }
+
+    /**
      * Convert a value in the base of "baseVal" to a decimal
      * @param {string} baseVal   
      * @param {Array.<string>} base 
@@ -64,6 +91,16 @@ export default class Base {
         return chars.reduce(getDecValue, 0n)
     }   
 
+
+    /**
+     * Convert a decimal value to a value in the base of the 
+     * current object
+     * @param {string} baseVal 
+     * @returns {bigint}
+     */
+    baseToDec(baseVal) {
+        return Base.baseToDec(baseVal, this.baseChars)
+    }
 
     /**
      * Finds the midpoint between two values in a given base
@@ -99,6 +136,22 @@ export default class Base {
 
         const mid = (baseVal1Dec + baseVal2Dec) / 2n
         return Base.decToBase(mid, baseChars)
+    }
+
+    /**
+     * 
+     * @param {string} val1 
+     * @param {string} val2 
+     */
+    midPointBetweenValues(val1, val2) {
+        return Base.midPointBetweenValues(val1, val2, this.#baseChars)
+    }
+
+    /**
+     * Get the zeroth element of the base
+     */
+    get zero() {
+        return this.#baseChars[0]
     }
 
 }

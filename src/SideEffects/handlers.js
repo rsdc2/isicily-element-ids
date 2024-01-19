@@ -22,7 +22,7 @@ const {
     METAKEYS
 } = Constants
 
-const BASE = Constants.CURRENTBASE
+const BASE = new Base(Constants.CURRENTBASE)
 const compress = Compress.compressID(BASE)
 const decompress = Compress.decompressID(BASE)
 
@@ -324,8 +324,8 @@ export default class Handlers {
         }
 
         // Check that IDs are sequential etc.
-        const text1Dec = Base.baseToDec(text1, BASE)
-        const text2Dec = Base.baseToDec(text2, BASE)
+        const text1Dec = BASE.baseToDec(text1)
+        const text2Dec = BASE.baseToDec(text2)
 
         if (text1Dec > text2Dec) {
             text1Status = text1Status.concat("\nThis ID comes after the second ID")
@@ -360,10 +360,9 @@ export default class Handlers {
         if (midpointValid) {
             Attrs.addClasses(Elems.result)("valid")
 
-            const midpoint = Base.midPointBetweenValues(
+            const midpoint = BASE.midPointBetweenValues(
                 Elems.textInput1.textContent, 
-                Elems.textInput2.textContent, 
-                BASE
+                Elems.textInput2.textContent
             )
             Elems.result.innerHTML = 
                 `${REST}`.concat(Format.underlineGreek(midpoint), `${REST}`

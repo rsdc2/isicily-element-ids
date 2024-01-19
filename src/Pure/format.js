@@ -2,14 +2,15 @@
 export default class Format {
 
     /**
-     * Inserts string elements into a number corresponding to an
+     * Pads a string of digits and 
+     * inserts string elements into a number corresponding to an
      * ISicily ID + 4 or 5 digit element id
      * @param {string} s 
      * @param {number} baseIdx
      * @returns {string}
      */
 
-    static insertISic(s, baseIdx) {
+    static padAndInsertISic(s, baseIdx) {
         if (baseIdx === 100) {
             const padded = s.padStart(11, '0')
             return "ISic" + padded.slice(0, 6) + "-" + padded.slice(6, 11)    

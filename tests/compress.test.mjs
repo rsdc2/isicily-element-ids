@@ -58,7 +58,6 @@ function compress(isicID) {
     return Format.removeUnderline(compressed)
 }
 
-
 /**
  * Compresses an ID and decompresses it again
  * @param {string} isicID

@@ -45,12 +45,12 @@ export default class Compress {
 
             if (oldbase.index === 100 && newbase.index === 52) {
                 const newRaw = raw.slice(0, 6) + raw.slice(7, 11)
-                const newISic = Format.insertISic(newRaw, 52)
+                const newISic = Format.padAndInsertISic(newRaw, 52)
                 return Compress.compressID(newbase)(newISic)
             }
             else if (oldbase.index == 52 && newbase.index === 100) {
                 const newRaw = raw.slice(0, 6) + "0" + raw.slice(6, 10)
-                const newISic = Format.insertISic(newRaw, 100)
+                const newISic = Format.padAndInsertISic(newRaw, 100)
                 return Format.removeUnderline(Compress.compressID(newbase)(newISic))
             }
             else {
@@ -73,14 +73,12 @@ export default class Compress {
 
         /**
          * 
-         * @param {string} isicID 
+         * @param {string} compressedID 
          * @returns {string}
          */
-        function inner(isicID) {
-            const decompressed = base.baseToDec(isicID)
-            const asString = String(decompressed)
-            const isicPadding = Format.insertISic(asString, base.index)
-            return isicPadding
+        function inner(compressedID) {
+            const decompressed = base.baseToDec(compressedID).toString()
+            return Format.padAndInsertISic(decompressed, base.index)
         }
 
         return inner

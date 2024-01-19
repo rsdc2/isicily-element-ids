@@ -1,4 +1,4 @@
-import Base from "./bases.js"
+import Base from "./base.js"
 import Format from "./format.js"
 
 export default class Compress {    

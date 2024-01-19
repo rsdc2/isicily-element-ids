@@ -1,4 +1,4 @@
-import Base from "../Pure/bases.js"
+import Base from "../Pure/base.js"
 import Compress from "../Pure/compress.js"
 import Format from "../Pure/format.js"
 import Select from "./select.js"

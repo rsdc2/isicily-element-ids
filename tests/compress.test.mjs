@@ -2,7 +2,7 @@
 import Parametrized from "./utils/parametrized.mjs"
 import { randomISicID, randomTuples } from "./utils/random.mjs"
 
-import Base from "../src/Pure/bases.js"
+import Base from "../src/Pure/base.js"
 import Compress from "../src/Pure/compress.js"
 import Format from "../src/Pure/format.js"
 import Constants from "../src/Pure/constants.js"

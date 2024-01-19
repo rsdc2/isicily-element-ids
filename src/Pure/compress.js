@@ -1,5 +1,7 @@
 import Base from "./base.js"
 import Format from "./format.js"
+import Validate from "./validate.js"
+import Constants  from "./constants.js"
 
 export default class Compress {    
 
@@ -32,13 +34,29 @@ export default class Compress {
      * @param {Base} oldbase 
      * @param {Base} newbase 
      */
-    static convert(oldbase, newbase) {
+    static convertID(oldbase, newbase) {
 
         /**
          * Compressed value
          * @param {string} value 
          */
         function inner(value) {
+
+
+            let valid = false;
+            // Validation
+            if (oldbase.index === 100) {
+                valid = Validate.containsOnlyLetters(value)
+            } 
+            else if (oldbase.index === 52) {
+                valid = Validate.containsOnlyLatinLetters(value)
+            }
+
+            if (!valid) {
+                console.error(`${value} not a valid compressed ID`)
+                return Constants.FIVEBLANKS
+            }
+
             const decompressed = Compress.decompressID(oldbase)(value)
             const noUnderline = Format.removeUnderline(decompressed)
             const raw = Format.removeISic(noUnderline)
@@ -58,7 +76,31 @@ export default class Compress {
                     `Base ${oldbase.index} not valid: only Base 52 ` +  
                     `and Base 100 are currently supported.`
                 )
+
+                return Constants.FIVEBLANKS
             }
+        }
+
+        return inner
+    }
+
+    /**
+     * Convert an array of compressed IDs in one base to a compressed ID
+     * in another.
+     * At present, only Base52 and Base100 are supported.
+     * @param {Base} oldbase 
+     * @param {Base} newbase 
+     */
+    static convertIDs(oldbase, newbase) {
+
+        const convert = Compress.convertID(oldbase, newbase)
+
+        /**
+         * 
+         * @param {string[]} ids 
+         */
+        function inner(ids) {
+            return ids.map( (id) => convert(id) )
         }
 
         return inner

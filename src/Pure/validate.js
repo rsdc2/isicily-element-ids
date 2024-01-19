@@ -3,20 +3,31 @@ import Constants from "./constants.js"
 
 export default class Validate {
     /**
-     * 
+     * Returns true if a string contains only digits
+     * 0-9
      * @param {string} s 
      */
-
     static containsNumerals = s => {
         const matches = s.match(/[0-9]/g) 
         return matches !== null
     }
 
+    
     /**
-     * 
+     * Returns true if a string contains only 
+     * Latin letters
      * @param {string} s 
      */
+    static containsOnlyLatinLetters = s => {
+        const matches = s.match(/^[a-zA-Z]+$/g) 
+        return matches !== null
+    }
 
+    /**
+     * Returns true if a string contains only Greek or 
+     * Latin letters
+     * @param {string} s 
+     */
     static containsOnlyLetters = s => {
         const matches = s.match(/^[a-zA-Zα-ωΑ-Ω]+$/g) 
         return matches !== null
@@ -24,10 +35,9 @@ export default class Validate {
 
 
     /**
-     * 
+     * Returns true if a string contains special characters
      * @param {string} s 
      */
-
     static containsSpecial = s => {
         const matches = s.match(/[./+-;:\[\]\{\}]/g) 
         return matches !== null

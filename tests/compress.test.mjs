@@ -72,5 +72,5 @@ function roundtrip(isicID) {
 parametrize(compressions, compress)
 parametrize(decompressions, decompressID(base100))
 parametrize([...roundtrips, ...additionalRoundtrips], roundtrip)
-parametrize(conversions100to52, Compress.convert(base100, base52))
-parametrize(conversions52to100, Compress.convert(base52, base100))
+parametrize(conversions100to52, Compress.convertID(base100, base52))
+parametrize(conversions52to100, Compress.convertID(base52, base100))

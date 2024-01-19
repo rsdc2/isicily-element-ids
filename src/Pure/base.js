@@ -8,6 +8,7 @@ const { FIVEBLANKS } = Constants
 export default class Base {
 
     #baseChars
+    #length
 
     /**
      * 
@@ -15,6 +16,7 @@ export default class Base {
      */
     constructor(baseChars) {
         this.#baseChars = baseChars
+        this.#length = baseChars.length
     }
 
     /**
@@ -103,7 +105,16 @@ export default class Base {
     }
 
     /**
-     * Finds the midpoint between two values in a given base
+     * Get the number of the base, e.g. 10 for decimal
+     */
+    get index() {
+        return this.#length
+    }
+    
+    /**
+     * Finds the midpoint between two values in a given base.
+     * Return ????? if midpoint cannot be found for some reason.
+     * 
      * @param {string} val1 
      * @param {string} val2 
      * @param {Array.<string>} baseChars

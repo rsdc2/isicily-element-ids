@@ -61,10 +61,10 @@ export default class Validate {
     }
 
     /**
-     * 
+     * Validates an I.Sicily document ID
      * @param {string} s 
      */
-    static validateISicilyNumber(s) {
+    static iSicilyDocID(s) {
         const m = s.match(/^ISic0[0-9]{5,5}$/)
         return m != null
     }
@@ -74,7 +74,7 @@ export default class Validate {
      * @param {string} s 
      * @returns 
      */
-    static validateISicilyTokenNumber(s) {
+    static iSicilyElemID(s) {
         const m = s.match(/^[0-9]{5,5}$/)
         return m != null
     }
@@ -86,7 +86,7 @@ export default class Validate {
      * @returns {boolean} 
      */
 
-    static validateLongIDStrict(s) {
+    static longIDStrict(s) {
         const m = s.match(/^ISic0[0-9]{5,5}-[0-9]{5,5}$/)
         return m != null
     }
@@ -96,7 +96,7 @@ export default class Validate {
      * with a long ID
      * @param {string} s 
      */
-    static validatePartialLongID(s) {
+    static partialLongID(s) {
         const m = s.match(/^ISic0/)
         return m != null
     }
@@ -107,7 +107,7 @@ export default class Validate {
      * @returns {boolean}
      */
 
-    static validateLongIdNonStrict = (x) => Validate.isDecimal(Format.removeISic(x))
+    static longIdNonStrict = (x) => Validate.isDecimal(Format.removeISic(x))
 
     /**
      * Returns true if @param s is a valid short ISicily element ID
@@ -115,7 +115,7 @@ export default class Validate {
      * @returns {boolean} 
      */
 
-    static validateShortIDStrict(s) {
+    static shortIDStrict(s) {
         const m = s.match(/^[A-Za-zΑ-Ωα-ω]{5,5}$/)
         return m != null
     }
@@ -125,24 +125,23 @@ export default class Validate {
      * @param {string} s
      * @returns {boolean} 
      */
-    static validateShortIdNonStrict(s) {
+    static shortIdNonStrict(s) {
         const m = s.match(/^[A-Za-zΑ-Ωα-ω]+$/)
         return m != null
     }
 
-    static validateLongID = Constants.STRICT ? Validate.validateLongIDStrict : Validate.validateLongIdNonStrict
-    static validateShortID = Constants.STRICT ? Validate.validateShortIDStrict : Validate.validateShortIdNonStrict
+    static longID = Constants.STRICT ? Validate.longIDStrict : Validate.longIdNonStrict
+    static shortID = Constants.STRICT ? Validate.shortIDStrict : Validate.shortIdNonStrict
 
     /**
      * @param {HTMLDivElement | HTMLSpanElement} elem
      */
     static validate = elem => {
         const text = elem.textContent
-        if (text == null) {
-            return false
-        }
 
-        const {validateLongID, validateShortID} = Validate
+        if (text == null) return false
+
+        const {longID: validateLongID, shortID: validateShortID} = Validate
 
         return validateLongID(text) 
                 || validateShortID(text) 

@@ -111,13 +111,13 @@ export default class Handlers {
 
         switch (target.id) {
             case Elems.textInput1.id:
-                if (Validate.validateISicilyNumber(Elems.textInput1.textContent) && Status.selectionMode() === "compression") changeFocus()
-                if (Validate.validateShortID(Elems.textInput1.textContent) && Status.selectionMode() === "midpoint") changeFocus()
+                if (Validate.iSicilyDocID(Elems.textInput1.textContent) && Status.selectionMode() === "compression") changeFocus()
+                if (Validate.shortID(Elems.textInput1.textContent) && Status.selectionMode() === "midpoint") changeFocus()
 
                 break;
             case Elems.textInput2.id:
-                if (Validate.validateISicilyTokenNumber(Elems.textInput2.textContent) && Status.selectionMode() === "compression") Elems.textInput2.blur()
-                if (Validate.validateShortID(Elems.textInput2.textContent) && Status.selectionMode() === "midpoint") Elems.textInput2.blur()
+                if (Validate.iSicilyElemID(Elems.textInput2.textContent) && Status.selectionMode() === "compression") Elems.textInput2.blur()
+                if (Validate.shortID(Elems.textInput2.textContent) && Status.selectionMode() === "midpoint") Elems.textInput2.blur()
         }
     }
 
@@ -128,7 +128,7 @@ export default class Handlers {
     static handleCompression = () => {
         const { resolvedID1,result, textInput1, textInput2 } = Elems
     
-        if (Validate.validateShortID(Elems.textInput1.textContent)) {
+        if (Validate.shortID(Elems.textInput1.textContent)) {
             // Handle decompression
             Message.hide()
             resolvedID1.innerHTML = decompress(
@@ -155,7 +155,7 @@ export default class Handlers {
             Select.setCaretEnd(textInput1)
             Handlers.handleCompression()
 
-        } else if (Validate.validatePartialLongID(textInput1.textContent)) {
+        } else if (Validate.partialLongID(textInput1.textContent)) {
             Message.hide()
             Elems.result.textContent = "-"
             const inpt = textInput1.textContent + "-" + textInput2.textContent
@@ -163,7 +163,7 @@ export default class Handlers {
             Attrs.addClasses(result)("valid", "one")
             Attrs.show(result, textInput2)
 
-            if (Validate.validateLongID(inpt)) {
+            if (Validate.longID(inpt)) {
                 resolvedID1.innerHTML = compress(inpt)
             } else {
                 resolvedID1.innerHTML = FIVEBLANKS
@@ -187,7 +187,7 @@ export default class Handlers {
 
         if (
             (Validate.validate(Elems.textInput1) || 
-                Validate.validateLongID(Elems.textInput1.textContent + "-" + Elems.textInput2.textContent)) 
+                Validate.longID(Elems.textInput1.textContent + "-" + Elems.textInput2.textContent)) 
                 && Validate.validate(resolvedID1)) {
 
             Attrs.enable(flipBtn)
@@ -209,13 +209,13 @@ export default class Handlers {
                 .replace(`${EQ}`, "")
                 .replace("?", "")
 
-            if (Validate.validateShortID(resolved)) {
+            if (Validate.shortID(resolved)) {
                 Elems.textInput1.textContent = resolved
                 Handlers.reset(Elems.textInput2, Elems.result)
                 Attrs.hide(Elems.textInput2, Elems.result)
             } else
 
-            if (Validate.validateLongID(resolved)) {
+            if (Validate.longID(resolved)) {
                 Handlers.getTargetInputFromSplittingLongID(Elems.textInput1, resolved)
             }
                                         
@@ -520,7 +520,7 @@ export default class Handlers {
                 break;
 
             case "midpoint":
-                if (Validate.validateShortID(targetInput.textContent)) {
+                if (Validate.shortID(targetInput.textContent)) {
                     Attrs.addClasses(targetInput)("valid")
                 }
                 else {
@@ -545,8 +545,8 @@ export default class Handlers {
             v1StatusComp = "This ID is not valid"
         }
 
-        if (Validate.validateISicilyNumber(Elems.textInput1.textContent) || 
-            Validate.validateShortID(Elems.textInput1.textContent)) {
+        if (Validate.iSicilyDocID(Elems.textInput1.textContent) || 
+            Validate.shortID(Elems.textInput1.textContent)) {
 
             Attrs.addClasses(Elems.textInput1)("valid")
 
@@ -554,7 +554,7 @@ export default class Handlers {
             Attrs.removeClasses(Elems.textInput1)("valid")
         }
 
-        if (Validate.validateISicilyTokenNumber(Elems.textInput2.textContent)) {
+        if (Validate.iSicilyElemID(Elems.textInput2.textContent)) {
             Attrs.addClasses(Elems.textInput2)("valid")             
         }  else {
             Attrs.removeClasses(Elems.textInput2)("valid")

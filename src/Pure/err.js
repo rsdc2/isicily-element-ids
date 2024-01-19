@@ -48,7 +48,7 @@ export default class Err {
     static getShortIDValidationIndividual = (text) => {
         let error = Err.ERR.ISVALID
         let status = ""
-        if (Validate.validateShortID(text)) {
+        if (Validate.shortID(text)) {
             status = "This ID is valid"
             error = Err.ERR.ISVALID
         } else {

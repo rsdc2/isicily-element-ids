@@ -149,11 +149,11 @@ export default class Base {
      */
 
     static midPointBetweenValues(val1, val2, baseChars) {
-        if (!Validate.validateLongID(val1) && !Validate.validateShortID(val1)) {
+        if (!Validate.longID(val1) && !Validate.shortID(val1)) {
             return FIVEBLANKS
         }
 
-        if (!Validate.validateLongID(val2) && !Validate.validateShortID(val2)) {
+        if (!Validate.longID(val2) && !Validate.shortID(val2)) {
             return FIVEBLANKS
         }
 

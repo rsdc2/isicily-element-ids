@@ -101,4 +101,3 @@ export default class Constants {
     static CURRENTBASE = Constants.BASE100
   
 }
-

@@ -5,7 +5,9 @@ import Convert from "../Pure/convert.js"
 import Base from "../Pure/base.js"
 import Message from "./message.js"
 import { 
-    BaseError, 
+    BaseIndexError, 
+    BaseLengthError, 
+    BaseValueError, 
     ConversionError, 
     CSVFormatError } from "../Pure/errors.js"
 
@@ -33,13 +35,15 @@ export default class CSVConverter {
                 } catch (error) {
                     if (error instanceof ConversionError) {
                         Message.alert(`${error.message}`)
-                    } else if (error instanceof BaseError) {
+                    } else if (error instanceof BaseIndexError) {
                         Message.alert(`${error.message}`)
                     } else if (error instanceof CSVFormatError) {
                         Message.alert(`${error.message}`)
                     } else {
                         console.error(error.message)
-                        Message.alert(`Unknown error: please refer to the developer console`)
+                        Message.alert(
+                            `Unknown error: please refer to the developer console`
+                        )
                     }
                 }  
             }
@@ -66,7 +70,7 @@ export default class CSVConverter {
      * @param {string} fileStr 
      */
     #convertFromStr(fileStr) {
-        const lines = fileStr.split("\n").reduce( 
+        const lines = fileStr.split(/\r?\n/).reduce( 
             (lines, line) => {
                 if (line === "") {
                     return lines
@@ -76,21 +80,22 @@ export default class CSVConverter {
             }, []
         )
 
-
-
         // Check at least 3 lines, two for bases, and one for data
         if (lines.length < 3) {
-            throw new ConversionError(`CSV file does not contain enough lines: the ` +
-                            `file has ${lines.length} lines of data, but ` +
-                            `at least 3 are needed`)
+            throw new CSVFormatError(
+                `CSV file does not contain enough lines: the ` +
+                `file has ${lines.length} lines of data, but ` +
+                `at least 3 are needed`)
         }
 
         // Check has one column
         lines.forEach( line => {
             const lineSplit = line.split(",")
             if (line.split(",").length > 1) {
-                throw new ConversionError(`File contains ${lineSplit.length} columns: ` +
-                                `there should be 1`)
+                throw new CSVFormatError(
+                    `File contains ${lineSplit.length} columns: ` +
+                    `there should be 1`
+                )
             }
         })
 
@@ -100,18 +105,32 @@ export default class CSVConverter {
         const newBaseIdx = /** @type{"52"|"100"} */ (lines[1])
 
         const ids = lines.slice(2)
+        const convert = Convert.ID(
+            Base.fromBaseIdx(oldBaseIdx), 
+            Base.fromBaseIdx(newBaseIdx)
+        )
 
         // Do the conversion
         const convertedLines = ids.map (
             (id) => {
-                return `${id},${
-                    Convert.ID(Base.fromBaseIdx(oldBaseIdx), 
-                    Base.fromBaseIdx(newBaseIdx))(id)
-                }`
+                try {
+                    const converted = convert(id)
+                    return `${id},${converted}`
+                } catch (error) {
+                    if (error instanceof BaseValueError) {
+                        return `${id},${error.message}`
+                    } 
+                    else if (error instanceof BaseLengthError) {
+                        return `${id},${error.message}`
+                    } 
+                    else {
+                        throw error
+                    }
+                } 
             }
         ) 
 
-        // Add the headings
+        // Add headings to the CSV file
         const headings = `${oldBaseIdx},${newBaseIdx}`
         convertedLines.unshift(headings)
 

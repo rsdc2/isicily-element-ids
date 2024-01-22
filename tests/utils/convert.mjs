@@ -10,5 +10,3 @@ const { BASE52, BASE100 } = Constants
 
 const base52 = Base.fromBaseChars(BASE52)
 const base100 = Base.fromBaseChars(BASE100)
-
-console.log(Compress.convertIDs(base100, base52)(['abcdα']))

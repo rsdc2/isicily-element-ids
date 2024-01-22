@@ -2,7 +2,7 @@
 import { Arr } from "./arr.js"
 import Validator from "./validator.js"
 import Constants from "./constants.js"
-import { BaseError } from "./errors.js"
+import { BaseIndexError } from "./errors.js"
 
 const { FIVEBLANKS } = Constants
 
@@ -145,8 +145,7 @@ export default class Base {
             return Base.fromBaseChars(Constants.BASE100)
         }
         else {
-            throw new BaseError (`Base ${idx} is not valid: only bases 52 and 100 ` + 
-                             `are currently supported`)
+            throw new BaseIndexError(idx)
         }
     }
 

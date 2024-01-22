@@ -2,7 +2,7 @@ import Base from "./base.js"
 import Format from "./format.js"
 import Validator from "./validator.js"
 import Compress from "./compress.js"
-import { BaseError } from "./errors.js"
+import { BaseIndexError, BaseLengthError, BaseValueError } from "./errors.js"
 
 export default class Convert {    
 
@@ -23,29 +23,50 @@ export default class Convert {
         function inner(value) {
 
             let valid = false;
-            
+
+            if (!Validator.length(value)) {
+                throw new BaseLengthError(value)
+            }
+
+            if (oldbase.index === 100 
+                && newbase.index === 52
+                && oldbase.baseToDec(value) > 380204031) {
+
+                throw new BaseValueError(
+                    `${value} is too large to be ` + 
+                    `converted to Base ${newbase.index}`
+                )
+            }
+
             if (oldbase.index === 100) {
                 valid = Validator.containsOnlyLetters(value)
-            } 
+            }
             else if (oldbase.index === 52) {
                 valid = Validator.containsOnlyLatinLetters(value)
             }
+            else {
+                throw new BaseIndexError(oldbase.index)
+            }
 
             if (!valid) {
-                return `${value} is an invalid ID in base ${oldbase}`
+                throw new BaseValueError(
+                    `${value} is invalid ` +
+                    `in base ${oldbase}`
+                )
             }
 
             const decompressed = Compress.decompressID(oldbase)(value)
-
             const noUnderline = Format.removeUnderline(decompressed)
             const raw = Format.removeISic(noUnderline)
 
             // Check that has an equivalent value in the new base
             if (raw[6] !== "0" && newbase.index === 52) {
-                console.log(raw[6])
-                return `Error: ${value} cannot be converted to an ID in ${newbase.index} ` +
-                       `because ${decompressed} has an element ID which is ` +
-                       `greater than 9999.`
+                throw new BaseValueError(
+                    `${value} cannot be converted ` +
+                    `to an ID in ${newbase.index} ` +
+                    `because ${decompressed} has an element ID which is ` +
+                    `greater than 9999.`
+                )
             } 
 
             if (oldbase.index === 100 && newbase.index === 52) {
@@ -59,12 +80,7 @@ export default class Convert {
                 const compressed = Compress.compressID(newbase)(newISic)
                 return Format.removeUnderline(compressed)
             }
-            else {
-                throw new BaseError(
-                    `Base ${oldbase.index} not valid: only Base 52 ` +  
-                    `and Base 100 are currently supported.`
-                )
-            }
+
         }
 
         return inner

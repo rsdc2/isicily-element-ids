@@ -9,6 +9,7 @@ import Elems from "./elems.js"
 import Attrs from "./attrs.js"
 import Status from "./status.js"
 import Message from "./message.js"
+import { BaseValueError } from "../Pure/errors.js"
 
 const {
     ABOUTTEXT,
@@ -284,7 +285,13 @@ export default class Handlers {
         // Check that inputs are individually valid IDs
         let [textInput1Err, text1Status] = Err.getShortIDValidationIndividual(text1)
         let [textInput2Err, text2Status] = Err.getShortIDValidationIndividual(text2)
+        // try {
         if (textInput1Err) resolvedID1.textContent = decompress(text1)
+        // } catch (error) {
+        //     if (error instanceof BaseValueError) {
+        //         resolvedID1.textContent = FIVEBLANKS
+        //     }
+        // }
         if (textInput2Err) resolvedID1.textContent = decompress(text2)
 
         if (textInput1Err === Err.ERR.ISVALID) {

@@ -2,6 +2,7 @@ import Base from "./base.js"
 import Format from "./format.js"
 import Validator from "./validator.js"
 import Constants  from "./constants.js"
+import { BaseValueError } from "./errors.js"
 
 export default class Compress {    
 
@@ -17,6 +18,7 @@ export default class Compress {
          * @returns {string}
          */
         function inner(isicID) {
+
             const noISicPadding = Format.removeISic(isicID)
             const dec = BigInt(noISicPadding)
             const converted = base.decToBase(dec)
@@ -40,6 +42,14 @@ export default class Compress {
          * @returns {string}
          */
         function inner(compressedID) {
+
+            // if (compressedID.length !== 5) {
+            //     throw new BaseValueError(
+            //         "Compressed ID has the wrong length: " +
+            //         "should be 5 characters"
+            //     )
+            // }
+
             const decompressed = base.baseToDec(compressedID).toString()
             return Format.padAndInsertISic(decompressed, base.index)
         }

@@ -72,11 +72,19 @@ export default class Validate {
     /**
      * 
      * @param {string} s 
-     * @returns 
+     * @returns {boolean}
      */
     static iSicilyElemID(s) {
         const m = s.match(/^[0-9]{5,5}$/)
         return m != null
+    }
+
+    /**
+     * 
+     * @param {string} s 
+     */
+    static length(s) {
+        return s.length === 5
     }
 
 

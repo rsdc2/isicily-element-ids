@@ -10,6 +10,7 @@ import {
     BaseValueError, 
     ConversionError, 
     CSVFormatError } from "../Pure/errors.js"
+import Constants from "../Pure/constants.js"
 
 
 export default class CSVConverter {
@@ -70,6 +71,7 @@ export default class CSVConverter {
      * @param {string} fileStr 
      */
     #convertFromStr(fileStr) {
+        // Split the string into lines
         const lines = fileStr.split(/\r?\n/).reduce( 
             (lines, line) => {
                 if (line === "") {
@@ -88,7 +90,7 @@ export default class CSVConverter {
                 `at least 3 are needed`)
         }
 
-        // Check has one column
+        // Check each line has only one column
         lines.forEach( line => {
             const lineSplit = line.split(",")
             if (line.split(",").length > 1) {
@@ -99,11 +101,24 @@ export default class CSVConverter {
             }
         })
 
-        // If these turn out not to be of the right base, 
-        // an error will be thrown further down the call stack
+        // Get the first two lines giving the conversion direction
+
+        lines.slice(0, 2).forEach( 
+            (line, idx) => {
+                if (!Constants.VALIDBASES.includes(line)) {
+                    throw new CSVFormatError(
+                        `Line ${idx + 1} does not contain a valid ` + 
+                        `base index (currently ${line}). ` +
+                        `Valid base indices are 52 and 100`
+                    )
+                }
+            }
+        )
+
         const oldBaseIdx = /** @type{"52"|"100"} */ (lines[0])
         const newBaseIdx = /** @type{"52"|"100"} */ (lines[1])
 
+        // Get the ids from the rest of the file
         const ids = lines.slice(2)
         const convert = Convert.ID(
             Base.fromBaseIdx(oldBaseIdx), 

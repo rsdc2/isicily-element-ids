@@ -96,7 +96,10 @@ export default class CSVConverter {
         // Do the conversion
         const convertedLines = ids.map (
             (id) => {
-                return `${id},${Convert.ID(Base.fromBaseIdx(oldBaseIdx), Base.fromBaseIdx(newBaseIdx))(id)}`
+                return `${id},${
+                    Convert.ID(Base.fromBaseIdx(oldBaseIdx), 
+                    Base.fromBaseIdx(newBaseIdx))(id)
+                }`
             }
         ) 
 

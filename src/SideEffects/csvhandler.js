@@ -7,18 +7,19 @@ export default class CSVHandler {
     #anchor
 
     constructor() {
-        // cf. https://developer.mozilla.org/en-US/docs/Web/API/File_API/Using_files_from_web_applications
-        // under 'Using hidden file input elements using the click() method'
 
         // Set up reader
+        // cf. https://developer.mozilla.org/en-US/docs/Web/API/FileReader
         this.#reader = new FileReader()
         this.#reader.onload = (e) => {
             this.#contents = e.target.result
             this.#download()
         }
 
+        // cf. https://developer.mozilla.org/en-US/docs/Web/API/File_API/Using_files_from_web_applications#using_hidden_file_input_elements_using_the_click_method
         // Set up picker
         this.#picker = document.createElement("input")
+
         this.#picker.setAttribute("type", "file")
         this.#picker.setAttribute("accept", ".txt")     
 
@@ -63,7 +64,6 @@ export default class CSVHandler {
         
         // https://developer.mozilla.org/en-US/docs/Web/API/URL/revokeObjectURL_static
         window.URL.revokeObjectURL(url)
-        this.#anchor.remove()
     }
 
      

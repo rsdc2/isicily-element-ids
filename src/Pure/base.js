@@ -127,8 +127,25 @@ export default class Base {
      * Return a new base object
      * @param {string[]} baseChars 
      */
-    static from(baseChars) {
+    static fromBaseChars(baseChars) {
         return new Base(baseChars)
+    }
+
+    /**
+     * Create a new Base object from a string representation
+     * of the base index
+     * @param {"52"|"100"} idx 
+     */
+    static fromBaseIdx(idx) {
+        if (idx === "52") {
+            return Base.fromBaseChars(Constants.BASE52)
+        }
+        else if (idx === "100") {
+            return Base.fromBaseChars(Constants.BASE100)
+        }
+        else {
+            console.error("Invalid base")
+        }
     }
 
     /**

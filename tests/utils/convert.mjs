@@ -8,7 +8,7 @@ import Compress from "../../src/Pure/compress.js"
 
 const { BASE52, BASE100 } = Constants
 
-const base52 = Base.from(BASE52)
-const base100 = Base.from(BASE100)
+const base52 = Base.fromBaseChars(BASE52)
+const base100 = Base.fromBaseChars(BASE100)
 
 console.log(Compress.convertIDs(base100, base52)(['abcdα']))

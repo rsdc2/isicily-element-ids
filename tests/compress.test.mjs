@@ -6,13 +6,14 @@ import Base from "../src/Pure/base.js"
 import Compress from "../src/Pure/compress.js"
 import Format from "../src/Pure/format.js"
 import Constants from "../src/Pure/constants.js"
+import Convert from "../src/Pure/convert.js"
 
 const parametrize = Parametrized.parametrize 
 const { compressID, decompressID } = Compress
 const { BASE52, BASE100 } = Constants
 
-const base52 = Base.from(BASE52)
-const base100 = Base.from(BASE100)
+const base52 = Base.fromBaseChars(BASE52)
+const base100 = Base.fromBaseChars(BASE100)
 
 /** @type{Array.<[string, string, string]>} */
 const compressions = [
@@ -72,5 +73,5 @@ function roundtrip(isicID) {
 parametrize(compressions, compress)
 parametrize(decompressions, decompressID(base100))
 parametrize([...roundtrips, ...additionalRoundtrips], roundtrip)
-parametrize(conversions100to52, Compress.convertID(base100, base52))
-parametrize(conversions52to100, Compress.convertID(base52, base100))
+parametrize(conversions100to52, Convert.ID(base100, base52))
+parametrize(conversions52to100, Convert.ID(base52, base100))

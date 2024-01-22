@@ -30,5 +30,5 @@ function checkCompressedIDsUnique(base) {
     return "unique"
 }
 
-const unique = checkCompressedIDsUnique(Base.from(BASE52))
+const unique = checkCompressedIDsUnique(Base.fromBaseChars(BASE52))
 console.log(unique)

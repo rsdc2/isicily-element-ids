@@ -99,5 +99,7 @@ export default class Constants {
             .concat(Constants.LOWERCASEGREEK)
 
     static CURRENTBASE = Constants.BASE100
+
+    static VALIDBASES = ["52", "100"]
   
 }

@@ -15,7 +15,7 @@ export default class Listener {
         Elems.textInput1.addEventListener("keyup", Handlers.handleUpdateInput)
         Elems.textInput2.addEventListener("keyup", Handlers.handleUpdateInput)
         Elems.textInput2.addEventListener("keyup", Handlers.handleUpdateInput)
-        Elems.loadCSVBtn.addEventListener("click", CSVHandler.create)
+        Elems.loadCSVBtn.addEventListener("click", CSVHandler.create("id_conversions.csv"))
     
         Elems.textInput1.addEventListener("keyup", Handlers.handleChangeFocus)
         window.addEventListener("click", Handlers.hideAllPopups)

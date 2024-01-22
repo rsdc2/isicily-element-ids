@@ -1,5 +1,6 @@
 import FilePicker from "./filepicker.js"
 import FileDownloader from "./filedownloader.js"
+import FileReader_ from "./filereader_.js"
 
 export default class CSVHandler {
     #picker 
@@ -13,12 +14,13 @@ export default class CSVHandler {
 
         // Set up reader
         // cf. https://developer.mozilla.org/en-US/docs/Web/API/FileReader
-        this.#reader = new FileReader()
-        this.#reader.onload = (e) => {
-            const contents = e.target.result
-            const downloader = new FileDownloader(contents)
-            downloader.download(filename)
-        }
+        this.#reader = new FileReader_(
+            (e) => {
+                const contents = e.target.result
+                const downloader = new FileDownloader(contents)
+                downloader.download(filename)    
+            }
+        )
 
         // Set up picker
         this.#picker = new FilePicker ( 

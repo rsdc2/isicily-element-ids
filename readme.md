@@ -26,11 +26,17 @@ The compression is simply the numerical part of the underlying ID, as a single s
 
 A consequence of limiting the Base 100 representation to 5 digits is that the maximum decimal number that can be represented is lower than the theoretical maximum decimal number from an ISicily token ID, i.e. ```ISic999999-9999 -> 9999999999```. 
 
-The maximum Base 1000 number is ```ωωωωω```, which corresponds to ```9999999999 -> ISic099999-99999```.
+The maximum Base 100 number is ```ωωωωω```, which corresponds to ```9999999999 -> ISic099999-99999```.
 
 ### Converting from Base 52 IDs
 
-Previously a particular implementation of Base 52 was used to render IDs (see (https://github.com/rsdc2/ISicID)). It is possible to  
+Previously a particular implementation of Base 52 was used to render IDs (see https://github.com/rsdc2/ISicID). It is possible to convert between these ID systems. To do this, click the button "Convert old IDs". This will load a dialog box where you can choose a CSV file containing the IDs you wish to convert.
+
+The CSV file must adhere to the following format:
+
+- The file must have only one column;
+- The first line of the CSV file must specify the Base of the source ID (currently either 52 or 100);
+- The second line of the CSV file must specify the Base of the destination ID (currently either 52 or 100)
 
 ## Running and building
 

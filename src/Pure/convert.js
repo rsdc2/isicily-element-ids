@@ -1,6 +1,6 @@
 import Base from "./base.js"
 import Format from "./format.js"
-import Validate from "./validate.js"
+import Validator from "./validator.js"
 import Compress from "./compress.js"
 import { BaseError } from "./errors.js"
 
@@ -22,23 +22,31 @@ export default class Convert {
          */
         function inner(value) {
 
-
             let valid = false;
-            // Validation
+            
             if (oldbase.index === 100) {
-                valid = Validate.containsOnlyLetters(value)
+                valid = Validator.containsOnlyLetters(value)
             } 
             else if (oldbase.index === 52) {
-                valid = Validate.containsOnlyLatinLetters(value)
+                valid = Validator.containsOnlyLatinLetters(value)
             }
 
             if (!valid) {
-                return `Invalid ID in base ${oldbase}`
+                return `${value} is an invalid ID in base ${oldbase}`
             }
 
             const decompressed = Compress.decompressID(oldbase)(value)
+
             const noUnderline = Format.removeUnderline(decompressed)
             const raw = Format.removeISic(noUnderline)
+
+            // Check that has an equivalent value in the new base
+            if (raw[6] !== "0" && newbase.index === 52) {
+                console.log(raw[6])
+                return `Error: ${value} cannot be converted to an ID in ${newbase.index} ` +
+                       `because ${decompressed} has an element ID which is ` +
+                       `greater than 9999.`
+            } 
 
             if (oldbase.index === 100 && newbase.index === 52) {
                 const newRaw = raw.slice(0, 6) + raw.slice(7, 11)
@@ -48,7 +56,8 @@ export default class Convert {
             else if (oldbase.index == 52 && newbase.index === 100) {
                 const newRaw = raw.slice(0, 6) + "0" + raw.slice(6, 10)
                 const newISic = Format.padAndInsertISic(newRaw, 100)
-                return Format.removeUnderline(Compress.compressID(newbase)(newISic))
+                const compressed = Compress.compressID(newbase)(newISic)
+                return Format.removeUnderline(compressed)
             }
             else {
                 throw new BaseError(

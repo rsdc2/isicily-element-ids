@@ -1,6 +1,6 @@
 import Base from "./base.js"
 import Format from "./format.js"
-import Validate from "./validate.js"
+import Validator from "./validator.js"
 import Constants  from "./constants.js"
 
 export default class Compress {    

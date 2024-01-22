@@ -2,7 +2,7 @@ import Base from "../Pure/base.js"
 import Compress from "../Pure/compress.js"
 import Format from "../Pure/format.js"
 import Select from "./select.js"
-import Validate from "../Pure/validate.js"
+import Validator from "../Pure/validator.js"
 import Constants from "../Pure/constants.js"
 import Err from "../Pure/err.js"
 import Elems from "./elems.js"
@@ -111,13 +111,13 @@ export default class Handlers {
 
         switch (target.id) {
             case Elems.textInput1.id:
-                if (Validate.iSicilyDocID(Elems.textInput1.textContent) && Status.selectionMode() === "compression") changeFocus()
-                if (Validate.shortID(Elems.textInput1.textContent) && Status.selectionMode() === "midpoint") changeFocus()
+                if (Validator.iSicilyDocID(Elems.textInput1.textContent) && Status.selectionMode() === "compression") changeFocus()
+                if (Validator.shortID(Elems.textInput1.textContent) && Status.selectionMode() === "midpoint") changeFocus()
 
                 break;
             case Elems.textInput2.id:
-                if (Validate.iSicilyElemID(Elems.textInput2.textContent) && Status.selectionMode() === "compression") Elems.textInput2.blur()
-                if (Validate.shortID(Elems.textInput2.textContent) && Status.selectionMode() === "midpoint") Elems.textInput2.blur()
+                if (Validator.iSicilyElemID(Elems.textInput2.textContent) && Status.selectionMode() === "compression") Elems.textInput2.blur()
+                if (Validator.shortID(Elems.textInput2.textContent) && Status.selectionMode() === "midpoint") Elems.textInput2.blur()
         }
     }
 
@@ -128,7 +128,7 @@ export default class Handlers {
     static handleCompression = () => {
         const { resolvedID1,result, textInput1, textInput2 } = Elems
     
-        if (Validate.shortID(Elems.textInput1.textContent)) {
+        if (Validator.shortID(Elems.textInput1.textContent)) {
             // Handle decompression
             Message.hide()
             resolvedID1.innerHTML = decompress(
@@ -143,19 +143,19 @@ export default class Handlers {
             Handlers.reset(textInput2, result)
             Attrs.removeClasses(result, textInput2)("five", "one")  
 
-        } else if (Validate.containsOnlyLetters(textInput1.textContent)) {
+        } else if (Validator.containsOnlyLetters(textInput1.textContent)) {
             resolvedID1.innerHTML = BLANKISIC
             Attrs.hide(result, textInput2)
             Handlers.reset(textInput2, result)
             Attrs.removeClasses(result, textInput2)("five", "one")   
 
-        } else if (Validate.isDecimal(Elems.textInput1.textContent)) {
+        } else if (Validator.isDecimal(Elems.textInput1.textContent)) {
             Message.hide()
             textInput1.textContent = "ISic" + textInput1.textContent
             Select.setCaretEnd(textInput1)
             Handlers.handleCompression()
 
-        } else if (Validate.partialLongID(textInput1.textContent)) {
+        } else if (Validator.partialLongID(textInput1.textContent)) {
             Message.hide()
             Elems.result.textContent = "-"
             const inpt = textInput1.textContent + "-" + textInput2.textContent
@@ -163,7 +163,7 @@ export default class Handlers {
             Attrs.addClasses(result)("valid", "one")
             Attrs.show(result, textInput2)
 
-            if (Validate.longID(inpt)) {
+            if (Validator.longID(inpt)) {
                 resolvedID1.innerHTML = compress(inpt)
             } else {
                 resolvedID1.innerHTML = FIVEBLANKS
@@ -186,9 +186,9 @@ export default class Handlers {
         const { flipBtn, resolvedID1 } = Elems
 
         if (
-            (Validate.validate(Elems.textInput1) || 
-                Validate.longID(Elems.textInput1.textContent + "-" + Elems.textInput2.textContent)) 
-                && Validate.validate(resolvedID1)) {
+            (Validator.validate(Elems.textInput1) || 
+                Validator.longID(Elems.textInput1.textContent + "-" + Elems.textInput2.textContent)) 
+                && Validator.validate(resolvedID1)) {
 
             Attrs.enable(flipBtn)
         } else {
@@ -209,18 +209,18 @@ export default class Handlers {
                 .replace(`${EQ}`, "")
                 .replace("?", "")
 
-            if (Validate.shortID(resolved)) {
+            if (Validator.shortID(resolved)) {
                 Elems.textInput1.textContent = resolved
                 Handlers.reset(Elems.textInput2, Elems.result)
                 Attrs.hide(Elems.textInput2, Elems.result)
             } else
 
-            if (Validate.longID(resolved)) {
+            if (Validator.longID(resolved)) {
                 Handlers.getTargetInputFromSplittingLongID(Elems.textInput1, resolved)
             }
                                         
             Handlers.handleCompression()    
-            Handlers.handleValidateCompression()
+            Handlers.handleValidatorCompression()
             Handlers.handleGreekFormatting(Elems.textInput1, null)
         }
     }
@@ -254,7 +254,7 @@ export default class Handlers {
     static  handleHover = () => {
         switch (Status.selectionMode()) {
             case "compression":
-                Handlers.handleValidateCompression()
+                Handlers.handleValidatorCompression()
                 break;
 
             case "midpoint":
@@ -330,7 +330,7 @@ export default class Handlers {
         if (text1Dec > text2Dec) {
             text1Status = text1Status.concat("\nThis ID comes after the second ID")
             text2Status = text2Status.concat("\nThis ID comes before the first ID")
-            if (Validate.validate(Elems.textInput1) && Validate.validate(Elems.textInput2)) {
+            if (Validator.validate(Elems.textInput1) && Validator.validate(Elems.textInput2)) {
                 Message.alert("First ID comes after second ID")
             }
             midpointValid = false
@@ -339,7 +339,7 @@ export default class Handlers {
         if (text1Dec === text2Dec) {
             text1Status = text1Status.concat("\nERROR: This ID is equal to the second ID")
             text2Status = text2Status.concat("\nERROR: This ID is equal to the first ID.")
-            if (Validate.validate(Elems.textInput1) && Validate.validate(Elems.textInput2)) {
+            if (Validator.validate(Elems.textInput1) && Validator.validate(Elems.textInput2)) {
                 Message.alert("IDs are equal")
             }
             midpointValid = false
@@ -348,7 +348,7 @@ export default class Handlers {
         if (text1Dec === text2Dec + 1n || text1Dec === text2Dec - 1n) {
             text1Status = text1Status.concat("\nERROR: There are no positions in between these IDs")
             text2Status = text2Status.concat("\nERROR: There are no positions in between these IDs")
-            if (Validate.validate(Elems.textInput1) && Validate.validate(Elems.textInput2)) {
+            if (Validator.validate(Elems.textInput1) && Validator.validate(Elems.textInput2)) {
                 Message.alert("No IDs between the two values")
             }
             midpointValid = false
@@ -429,7 +429,7 @@ export default class Handlers {
                     Select.setCaretEnd(Elems.textInput1)
                     Attrs.addClasses(Elems.textInput2)("five")
                     Attrs.addClasses(Elems.result)("one")
-                    Handlers.handleValidateCompression()
+                    Handlers.handleValidatorCompression()
                 }
                 else {
                     Handlers.resetInputs()
@@ -439,7 +439,7 @@ export default class Handlers {
             case Elems.midPointBtn.id:
 
                 if (Status.selectionMode() == "compression") {
-                    if (Validate.containsNumerals(Elems.textInput1.textContent)) {
+                    if (Validator.containsNumerals(Elems.textInput1.textContent)) {
                         Handlers.resetInputs()
                     }
                     Attrs.activate(Elems.midPointBtn)
@@ -515,12 +515,12 @@ export default class Handlers {
         switch (Status.selectionMode()) {
             case "compression":
                 Handlers.handleCompression()
-                Handlers.handleValidateCompression()
+                Handlers.handleValidatorCompression()
                 Handlers.handleCheckFlip()
                 break;
 
             case "midpoint":
-                if (Validate.shortID(targetInput.textContent)) {
+                if (Validator.shortID(targetInput.textContent)) {
                     Attrs.addClasses(targetInput)("valid")
                 }
                 else {
@@ -536,17 +536,17 @@ export default class Handlers {
 
     }
 
-    static handleValidateCompression = () => {
+    static handleValidatorCompression = () => {
         let v1StatusComp = ""
 
-        if (Validate.validate(Elems.textInput1)) {
+        if (Validator.validate(Elems.textInput1)) {
             v1StatusComp = "This ID is valid"
         } else {
             v1StatusComp = "This ID is not valid"
         }
 
-        if (Validate.iSicilyDocID(Elems.textInput1.textContent) || 
-            Validate.shortID(Elems.textInput1.textContent)) {
+        if (Validator.iSicilyDocID(Elems.textInput1.textContent) || 
+            Validator.shortID(Elems.textInput1.textContent)) {
 
             Attrs.addClasses(Elems.textInput1)("valid")
 
@@ -554,7 +554,7 @@ export default class Handlers {
             Attrs.removeClasses(Elems.textInput1)("valid")
         }
 
-        if (Validate.iSicilyElemID(Elems.textInput2.textContent)) {
+        if (Validator.iSicilyElemID(Elems.textInput2.textContent)) {
             Attrs.addClasses(Elems.textInput2)("valid")             
         }  else {
             Attrs.removeClasses(Elems.textInput2)("valid")

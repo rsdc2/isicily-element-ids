@@ -1,6 +1,6 @@
 
 import { Arr } from "./arr.js"
-import Validate from "./validate.js"
+import Validator from "./validator.js"
 import Constants from "./constants.js"
 import { BaseError } from "./errors.js"
 
@@ -168,11 +168,11 @@ export default class Base {
      */
 
     static midPointBetweenValues(val1, val2, baseChars) {
-        if (!Validate.longID(val1) && !Validate.shortID(val1)) {
+        if (!Validator.longID(val1) && !Validator.shortID(val1)) {
             return FIVEBLANKS
         }
 
-        if (!Validate.longID(val2) && !Validate.shortID(val2)) {
+        if (!Validator.longID(val2) && !Validator.shortID(val2)) {
             return FIVEBLANKS
         }
 

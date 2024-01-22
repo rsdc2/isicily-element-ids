@@ -1,4 +1,4 @@
-import Validate from "./validate.js"
+import Validator from "./validator.js"
 
 export default class Err {
     /**
@@ -48,15 +48,15 @@ export default class Err {
     static getShortIDValidationIndividual = (text) => {
         let error = Err.ERR.ISVALID
         let status = ""
-        if (Validate.shortID(text)) {
+        if (Validator.shortID(text)) {
             status = "This ID is valid"
             error = Err.ERR.ISVALID
         } else {
-            if (Validate.containsNumerals(text)) {
+            if (Validator.containsNumerals(text)) {
                 status = Err.containsNumeralErr("")
                 error = Err.ERR.CONTAINSNUMERAL
             }
-            else if (Validate.containsSpecial(text)) {
+            else if (Validator.containsSpecial(text)) {
                 status = Err.containsSpecialErr("")
                 error = Err.ERR.CONTAINSSPECIAL
             }

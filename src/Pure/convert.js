@@ -1,8 +1,8 @@
 import Base from "./base.js"
 import Format from "./format.js"
 import Validate from "./validate.js"
-import Constants  from "./constants.js"
 import Compress from "./compress.js"
+import { BaseError } from "./errors.js"
 
 export default class Convert {    
 
@@ -33,8 +33,7 @@ export default class Convert {
             }
 
             if (!valid) {
-                console.error(`${value} not a valid compressed ID`)
-                return Constants.FIVEBLANKS
+                return `Invalid ID in base ${oldbase}`
             }
 
             const decompressed = Compress.decompressID(oldbase)(value)
@@ -52,12 +51,10 @@ export default class Convert {
                 return Format.removeUnderline(Compress.compressID(newbase)(newISic))
             }
             else {
-                console.error(
+                throw new BaseError(
                     `Base ${oldbase.index} not valid: only Base 52 ` +  
                     `and Base 100 are currently supported.`
                 )
-
-                return Constants.FIVEBLANKS
             }
         }
 

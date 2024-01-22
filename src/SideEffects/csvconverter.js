@@ -4,7 +4,10 @@ import FileReader_ from "./filereader_.js"
 import Convert from "../Pure/convert.js"
 import Base from "../Pure/base.js"
 import Message from "./message.js"
-import Constants from "../Pure/constants.js"
+import { 
+    BaseError, 
+    ConversionError, 
+    CSVFormatError } from "../Pure/errors.js"
 
 
 export default class CSVConverter {
@@ -17,22 +20,32 @@ export default class CSVConverter {
      */
     constructor(filename) {
 
-        // Set up reader
+        // Initialize reader
         // cf. https://developer.mozilla.org/en-US/docs/Web/API/FileReader
         this.#reader = new FileReader_(
             (e) => {
-                const contents = /** @type {string} */ (e.target.result) // String because will use readAsText method to read
+                const contents = /** @type {string} */ (e.target.result) 
+                // String because will use readAsText method to read
                 try {
                     const conversion = this.#convertFromStr(contents)
                     const downloader = new FileDownloader(conversion)
                     downloader.download(filename)  
-                } catch (Error) {
-                    Message.alert(`${Error.message}`)
+                } catch (error) {
+                    if (error instanceof ConversionError) {
+                        Message.alert(`${error.message}`)
+                    } else if (error instanceof BaseError) {
+                        Message.alert(`${error.message}`)
+                    } else if (error instanceof CSVFormatError) {
+                        Message.alert(`${error.message}`)
+                    } else {
+                        console.error(error.message)
+                        Message.alert(`Unknown error: please refer to the developer console`)
+                    }
                 }  
             }
         )
 
-        // Set up picker
+        // Initialize file picker
         this.#picker = new FilePicker ( 
             (e) => {
                 const target = /** @type {HTMLInputElement} */ (e.target)
@@ -67,7 +80,7 @@ export default class CSVConverter {
 
         // Check at least 3 lines, two for bases, and one for data
         if (lines.length < 3) {
-            throw new Error(`CSV file does not contain enough lines: the ` +
+            throw new ConversionError(`CSV file does not contain enough lines: the ` +
                             `file has ${lines.length} lines of data, but ` +
                             `at least 3 are needed`)
         }
@@ -76,20 +89,15 @@ export default class CSVConverter {
         lines.forEach( line => {
             const lineSplit = line.split(",")
             if (line.split(",").length > 1) {
-                throw new Error(`File contains ${lineSplit.length} columns: ` +
+                throw new ConversionError(`File contains ${lineSplit.length} columns: ` +
                                 `there should be 1`)
             }
         })
 
+        // If these turn out not to be of the right base, 
+        // an error will be thrown further down the call stack
         const oldBaseIdx = /** @type{"52"|"100"} */ (lines[0])
         const newBaseIdx = /** @type{"52"|"100"} */ (lines[1])
-
-        if (!Constants.VALIDBASES.includes(oldBaseIdx)) {
-            throw new Error(`Old base invalid: ${oldBaseIdx}`)
-        }
-        if (!Constants.VALIDBASES.includes(newBaseIdx)) {
-            throw new Error(`New base invalid: ${newBaseIdx}`)
-        }
 
         const ids = lines.slice(2)
 

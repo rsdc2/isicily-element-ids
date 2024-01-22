@@ -2,7 +2,7 @@
 
 This is a resolver and generator for token IDs on token elements in the [I.Sicily](https://github.com/ISicily/ISicily) corpus of inscriptions from ancient Sicily.
 
-## I.Sicily token IDs
+## I.Sicily element IDs
 
 ### Background
 
@@ -27,6 +27,10 @@ The compression is simply the numerical part of the underlying ID, as a single s
 A consequence of limiting the Base 100 representation to 5 digits is that the maximum decimal number that can be represented is lower than the theoretical maximum decimal number from an ISicily token ID, i.e. ```ISic999999-9999 -> 9999999999```. 
 
 The maximum Base 1000 number is ```ωωωωω```, which corresponds to ```9999999999 -> ISic099999-99999```.
+
+### Converting from Base 52 IDs
+
+Previously a particular implementation of Base 52 was used to render IDs (see (https://github.com/rsdc2/ISicID)). It is possible to  
 
 ## Running and building
 

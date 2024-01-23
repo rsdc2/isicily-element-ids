@@ -132,20 +132,19 @@ export default class Handlers {
         if (Validator.shortID(Elems.textInput1.textContent)) {
             // Handle decompression
             Message.hide()
-            resolvedID1.innerHTML = decompress(
-                textInput1.textContent, 
-
+            resolvedID1.textContent = decompress(
+                textInput1.textContent
             )
         
         } else if (textInput1.textContent.trim() === "") {
             // Handle empty input box
-            resolvedID1.innerHTML = BLANKCOMPRESSION
+            resolvedID1.textContent = BLANKCOMPRESSION
             Attrs.hide(result, textInput2)
             Handlers.reset(textInput2, result)
             Attrs.removeClasses(result, textInput2)("five", "one")  
 
         } else if (Validator.containsOnlyLetters(textInput1.textContent)) {
-            resolvedID1.innerHTML = BLANKISIC
+            resolvedID1.textContent = BLANKISIC
             Attrs.hide(result, textInput2)
             Handlers.reset(textInput2, result)
             Attrs.removeClasses(result, textInput2)("five", "one")   
@@ -167,12 +166,12 @@ export default class Handlers {
             if (Validator.longID(inpt)) {
                 resolvedID1.innerHTML = compress(inpt)
             } else {
-                resolvedID1.innerHTML = FIVEBLANKS
+                resolvedID1.textContent = FIVEBLANKS
             }
     
     
         } else {
-            resolvedID1.innerHTML = BLANKCOMPRESSION
+            resolvedID1.textContent = BLANKCOMPRESSION
             Attrs.hide(result, textInput2)
             Handlers.reset(textInput2, result)
             Attrs.removeClasses(result, textInput2)("five", "one")
@@ -583,7 +582,7 @@ export default class Handlers {
      * @param {Array.<HTMLDivElement> | Array.<HTMLSpanElement>} divs 
      */
     static reset = (...divs) => {
-        divs.forEach ( div => div.innerHTML = "" )
+        divs.forEach ( div => div.textContent = "" )
     }
 
     /**

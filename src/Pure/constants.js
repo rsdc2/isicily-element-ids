@@ -61,8 +61,8 @@ export default class Constants {
         'π', 
         'ρ', 
         'σ', 
-        'υ',
         'τ', 
+        'υ',
         'φ', 
         'χ', 
         'ψ',
@@ -95,7 +95,8 @@ export default class Constants {
 
     static BASE52 = Constants.UPPERCASELATIN.concat(Constants.LOWERCASELATIN)
 
-    static BASE100 = Constants.BASE52.concat(Constants.UPPERCASEGREEK)
+    static BASE100 = Constants.BASE52
+            .concat(Constants.UPPERCASEGREEK)
             .concat(Constants.LOWERCASEGREEK)
 
     static CURRENTBASE = Constants.BASE100

@@ -9,8 +9,10 @@ import {
     BaseLengthError, 
     BaseValueError, 
     ConversionError, 
-    CSVFormatError } from "../Pure/errors.js"
+    CSVFormatError, 
+    FileError} from "../Pure/errors.js"
 import Constants from "../Pure/constants.js"
+
 
 
 export default class CSVConverter {
@@ -55,8 +57,21 @@ export default class CSVConverter {
             (e) => {
                 const target = /** @type {HTMLInputElement} */ (e.target)
                 const files = target.files
-                this.#reader.readAsText(files[0])
-                this.#picker.remove()
+                const file = files[0]
+
+                try {
+                    if (file.size > Constants.MAXFILESIZE) {
+                        throw new FileError("File size is too big. File must be below 100kb")
+                    } else {
+                        this.#reader.readAsText(file)
+                        this.#picker.remove()        
+                    }
+                } catch (error) {
+                    if (error instanceof FileError) {
+                        Message.alert(error.message)
+                    }
+                }
+
             }, [".csv"]
         )
         
@@ -161,7 +176,13 @@ export default class CSVConverter {
     static create(filename) {
 
         function inner() {
-            return new CSVConverter(filename) 
+            try {
+                return new CSVConverter(filename) 
+            } catch (error) {
+                if (error instanceof FileError) {
+                    Message.alert(error.message)
+                }
+            }
         }
         return inner
     }

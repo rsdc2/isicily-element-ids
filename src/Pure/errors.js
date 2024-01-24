@@ -58,3 +58,14 @@ export class CSVFormatError extends Error {
         this.message = "Format error: " + this.message
     }
 }
+
+export class FileError extends Error {
+    /**
+     * 
+     * @param {string} message 
+     */
+    constructor(message) {
+        super(message)
+        this.message = "File error: " + this.message
+    }
+}

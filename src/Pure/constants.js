@@ -80,6 +80,7 @@ export default class Constants {
         <a href="https://github.com/rsdc2/isicily-element-ids" target="_blank">the source code on Github</a>.
     </p> 
     `
+    static MAXFILESIZE = 100000
     
     static NOTESTEXT = `
     <ul>

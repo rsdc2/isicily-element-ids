@@ -71,7 +71,9 @@ export default class CSVConverter {
 
                     // Check the file is not too big
                     if (file.size > Constants.MAXFILESIZE) {
-                        throw new FileError("File size is too big. File must be below 100kb")
+                        throw new FileError(
+                            "File size is too big. File must be below 100kb"
+                        )
                     } else {
                         this.#reader.readAsText(file)
                         this.#picker.remove()        

@@ -1,8 +1,9 @@
 {
 "compilerOptions": {
     "module": "CommonJS",
-    "target": "ES2020",
-    "checkJs": true
+    "target": "ESNext",
+    "checkJs": true,
+    "strictNullChecks": false
   },
   "include": ["src/**/*", "tests/**/*"]
 } 

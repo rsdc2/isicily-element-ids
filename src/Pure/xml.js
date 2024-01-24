@@ -1,7 +1,7 @@
 
 export default class XML {
     /**
-     * 
+     * Returns as XPathResult as an Array of Node objects
      * @param {XPathResult} xpathresult 
      * @returns {Array.<Node>}
      */
@@ -18,6 +18,7 @@ export default class XML {
     }
 
     /**
+     * Run an xpath expression on a Node, and return an Array of Node objects
      * @param {string} expr
      * @param {Node} elem
      * @returns {Array.<Node>}

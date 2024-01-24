@@ -3,7 +3,7 @@ import Elems from "./elems.js"
 
 export default class Status {
     /**
-     * @returns {"compression"|"midpoint"} 
+     * @returns {"compression"|"midpoint"|"error"} 
      */
     static selectionMode = () => {
 
@@ -14,5 +14,6 @@ export default class Status {
         }
 
         console.error("Invalid selection mode")
+        return "error"
     }
 }

@@ -1,11 +1,14 @@
-import Base from "./bases.js"
+import Base from "./base.js"
 import Format from "./format.js"
+import Validator from "./validator.js"
+import Constants  from "./constants.js"
+import { BaseValueError } from "./errors.js"
 
 export default class Compress {    
 
     /**
      * Compresses a full ISicily token ID
-     * @param {string[]} base
+     * @param {Base} base
      */
     static compressID(base) {
 
@@ -15,10 +18,11 @@ export default class Compress {
          * @returns {string}
          */
         function inner(isicID) {
+
             const noISicPadding = Format.removeISic(isicID)
-            const bigint = BigInt(noISicPadding)
-            const converted = Base.decToBase(bigint, base)
-            const padded = Format.padShortID(Compress.zero(base), converted)
+            const dec = BigInt(noISicPadding)
+            const converted = base.decToBase(dec)
+            const padded = Format.padShortID(base.zero, converted)
             return Format.underlineGreek(padded)    
         }
 
@@ -28,29 +32,29 @@ export default class Compress {
     /**
      * Decompress a compressed ID.
      * Assumes that any HTML formatting has been removed
-     * @param {string[]} base
+     * @param {Base} base
      */
     static decompressID(base) {
 
         /**
          * 
-         * @param {string} isicID 
+         * @param {string} compressedID 
          * @returns {string}
          */
-        function inner(isicID) {
-            const decompressed = Base.baseToDec(isicID, base)
-            const asString = String(decompressed)
-            const isicPadding = Format.insertISic(asString)
-            return isicPadding
+        function inner(compressedID) {
+
+            // if (compressedID.length !== 5) {
+            //     throw new BaseValueError(
+            //         "Compressed ID has the wrong length: " +
+            //         "should be 5 characters"
+            //     )
+            // }
+
+            const decompressed = base.baseToDec(compressedID).toString()
+            return Format.padAndInsertISic(decompressed, base.index)
         }
 
         return inner
     }
-
-    /**
-     * @param {Array.<string>} base
-     * @returns {string}
-     */                      
-    static zero = base => base[0]
 
 }

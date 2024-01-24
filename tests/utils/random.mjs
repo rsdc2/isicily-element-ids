@@ -7,14 +7,19 @@ import Format from "../../src/Pure/format.js"
 
 /**
  * Generate a random I.Sicily token ID
- * @returns {string}
+ * @param {number} baseIdx The number of the base, e.g. 10 for decimal
  */
-export function randomISicID() {
-    const rand = Math.random()
-    const isicNum = rand * 1e10
-    const bigint = BigInt(Math.floor(isicNum))
-    const s = String(bigint)
-    return Format.insertISic(s)
+export function randomISicID(baseIdx) {
+
+    function inner() {
+        const rand = Math.random()
+        const isicNum = rand * 1e10
+        const bigint = BigInt(Math.floor(isicNum))
+        const s = String(bigint)
+        return Format.padAndInsertISic(s, baseIdx)
+    }
+
+    return inner
 }
 
 /**

@@ -2,7 +2,9 @@
 <html>
 
   <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8"/>
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; 
+      style-src 'self'" />
     <link rel="stylesheet" href="styles/styles.css">
   </head>
 
@@ -25,6 +27,9 @@
                 </td>
                 <td>
                   <button id="flip-btn" disabled title="Swap positions of the compressed / decompressed IDs">Flip</button>
+                </td>
+                <td>
+                  <button id="load-csv" title="Load a CSV file with IDs and return a CSV file with the conversions. The first two lines must specify the indices of the bases to be converted from and to respectively">Convert old IDs</button>
                 </td>
                 <td>
                   <button id="notes" title="Display notes">Notes</button>

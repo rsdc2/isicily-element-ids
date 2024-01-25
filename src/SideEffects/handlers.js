@@ -9,16 +9,13 @@ import Elems from "./elems.js"
 import Attrs from "./attrs.js"
 import Status from "./status.js"
 import Message from "./message.js"
-import { BaseValueError } from "../Pure/errors.js"
 import Elem from "./elem.js"
 
 const {
-    ABOUTTEXT,
     BLANKCOMPRESSION,
     BLANKISIC,
     BLANKMIDPOINT,
     EQ,
-    NOTESTEXT,
     REST,
     FIVEBLANKS,
     METAKEYS
@@ -165,7 +162,8 @@ export default class Handlers {
             Attrs.show(result, textInput2)
 
             if (Validator.longID(inpt)) {
-                resolvedID1.innerHTML = compress(inpt)
+                resolvedID1.textContent = compress(inpt)
+                Elem.highlightGreekInDiv(resolvedID1)
             } else {
                 resolvedID1.textContent = FIVEBLANKS
             }
@@ -481,7 +479,6 @@ export default class Handlers {
         }
 
         if (Attrs.hasClass("hidden")(Elems.aboutDiv)) {
-            Elems.aboutDiv.innerHTML = ABOUTTEXT
             Attrs.removeClasses(Elems.aboutDiv)("hidden")
             Attrs.activate(Elems.aboutBtn)
         } else {
@@ -497,7 +494,6 @@ export default class Handlers {
     static handleToggleShowNotes = (e) => {
         e.stopPropagation()
         if (Attrs.hasClass("hidden")(Elems.notesDiv)) {
-            Elems.notesDiv.innerHTML = NOTESTEXT
             Attrs.removeClasses(Elems.notesDiv)("hidden")
             Attrs.activate(Elems.notesBtn)
         } else {

@@ -45,6 +45,8 @@ export default class Compress {
             return formatted            
 
         }
+
+        return inner
     }
 
     /**

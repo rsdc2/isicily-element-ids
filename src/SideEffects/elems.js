@@ -112,7 +112,7 @@ export default class Elems {
     static resolvedMidpointID = Elems.span("#resolved-midpoint-id")
 
     static result =  
-        /** @type {HTMLInputElement} */
+        /** @type {HTMLSpanElement} */
         document.getElementById("result")
 
     static textInput1 = 

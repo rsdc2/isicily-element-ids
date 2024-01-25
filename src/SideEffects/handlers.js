@@ -10,6 +10,7 @@ import Attrs from "./attrs.js"
 import Status from "./status.js"
 import Message from "./message.js"
 import { BaseValueError } from "../Pure/errors.js"
+import Elem from "./elem.js"
 
 const {
     ABOUTTEXT,
@@ -233,19 +234,19 @@ export default class Handlers {
      * @param {KeyboardEvent | MouseEvent | InputEvent | null} e
      */
     static handleGreekFormatting = (elem, e) => {
-        Elems.result.innerHTML = Format.underlineGreek(Elems.result.textContent)
+        Elem.highlightGreekInDiv(Elems.result)
 
         if (e != null && e.type === "keyup") {
             const keyE = /** @type {KeyboardEvent} */ (e)
             if (keyE.ctrlKey && (keyE.key === "v" || keyE.key === "ω")) {
-                elem.innerHTML = Format.underlineGreek(elem.textContent) 
+                Elem.highlightGreekInDiv(elem)
                 Select.setCaretEnd(elem)
                 return
             }
         }
 
         const position = Select.getCaretPosition(elem.id)
-        elem.innerHTML = Format.underlineGreek(elem.textContent) 
+        Elem.highlightGreekInDiv(elem)
         const [n, offset] = Select.getNodeAndOffsetFromPosition(elem, position)
         Select.setCaretFromNodeOffset(n, offset)    
         
@@ -370,9 +371,10 @@ export default class Handlers {
                 Elems.textInput1.textContent, 
                 Elems.textInput2.textContent
             )
-            Elems.result.innerHTML = 
-                `${REST}`.concat(Format.underlineGreek(midpoint), `${REST}`
-                )
+
+            const span = Format.highlightGreekFromStr(midpoint)
+            Elem.clear(Elems.result)
+            Elems.result.append(REST, span, REST)
             
             resolvedMidpointID.textContent = decompress(midpoint)
 

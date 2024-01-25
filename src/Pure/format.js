@@ -1,3 +1,5 @@
+import Constants from "./constants.js"
+import Elem from "../SideEffects/elem.js"
 
 export default class Format {
 
@@ -56,9 +58,28 @@ export default class Format {
     /**
      * Underline Greek characters
      * @param {string} s 
-     * @returns {string} an HTML string with Greek characters surrounded by <u> tags
+     * @returns {HTMLSpanElement} an HTML string with Greek characters surrounded by <u> tags
      */
-    static underlineGreek = (s) => {
-        return s.replace(/([α-ωΑ-Ω]+)/g, "<u>$1</u>")
+    static highlightGreekFromStr = (s) => {
+        const span = document.createElement("span")
+        const {GREEKCHARSET} = Constants
+
+        const chars = Array.from(s)
+        chars.forEach(
+            (char) => {
+                if (GREEKCHARSET.includes(char)) {
+                    const strong = document.createElement("strong")
+                    strong.textContent = char
+                    span.append(strong)
+                } else {
+                    span.append(char)
+                }
+            }
+        )
+
+        return span
+        
     }
+
+
 }

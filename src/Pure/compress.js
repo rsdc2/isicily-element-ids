@@ -22,11 +22,29 @@ export default class Compress {
             const noISicPadding = Format.removeISic(isicID)
             const dec = BigInt(noISicPadding)
             const converted = base.decToBase(dec)
-            const padded = Format.padShortID(base.zero, converted)
-            return Format.underlineGreek(padded)    
+            const padded = Format.padShortID(base.zero, converted) 
+            return padded
         }
 
         return inner
+    }
+
+    /**
+     * 
+     * @param {Base} base 
+     */
+    static compressIDFormatted(base) {
+        /**
+         * 
+         * @param {string} isicID
+         * @returns {HTMLSpanElement} 
+         */
+        function inner(isicID) {
+            const compressed = Compress.compressID(base)(isicID)
+            const formatted = Format.highlightGreekFromStr(compressed)
+            return formatted            
+
+        }
     }
 
     /**

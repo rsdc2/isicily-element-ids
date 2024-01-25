@@ -93,6 +93,7 @@ export default class Constants {
     
     static UPPERCASELATIN = Constants.LOWERCASELATIN.map(Str.toUpper)
     static UPPERCASEGREEK = Constants.LOWERCASEGREEK.map(Str.toUpper)
+    static GREEKCHARSET = Constants.LOWERCASEGREEK.concat(Constants.UPPERCASEGREEK)
 
     static BASE52 = Constants.UPPERCASELATIN.concat(Constants.LOWERCASELATIN)
 

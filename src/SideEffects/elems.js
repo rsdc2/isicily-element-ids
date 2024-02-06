@@ -67,17 +67,17 @@ export default class Elems {
         /** @type {HTMLButtonElement} */ 
         (document.getElementById("compress-btn"))
 
-    static compressionRad = 
-        /** @type {HTMLInputElement} */ 
-        (document.getElementById("compressionRad"))
+    static convertOldIDsBtn = 
+        /** @type {HTMLButtonElement} */ 
+        (document.getElementById("convert-old-ids-btn"))
 
     static flipBtn = 
         /** @type {HTMLButtonElement} */ 
         (document.getElementById("flip-btn"))
 
-    static loadCSVBtn = 
+    static idXMLBtn = 
         /** @type {HTMLButtonElement} */ 
-        (document.getElementById("load-csv"))
+        (document.getElementById("id-xml-btn"))
 
     static messageDiv = Elems.div("#message")
 

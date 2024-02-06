@@ -8,11 +8,11 @@ export default class FilePicker {
     #picker 
     
     /**
-     * 
-     * @param {onchangeFunc} onchange
+     * Create a FilePicker instance 
+     * @param {onchangeFunc} onFileLoaded A function to be called when the file is loaded
      * @param {string[]} fileExts Array of acceptable file extensions
      */
-    constructor(onchange, fileExts) {
+    constructor(onFileLoaded, fileExts) {
 
         // cf. https://developer.mozilla.org/en-US/docs/Web/API/File_API/Using_files_from_web_applications#using_hidden_file_input_elements_using_the_click_method
         // Set up picker
@@ -21,7 +21,7 @@ export default class FilePicker {
         this.#picker.setAttribute("type", "file")
         this.#picker.setAttribute("accept", fileExts.join(","))     
 
-        this.#picker.onchange = onchange
+        this.#picker.onchange = onFileLoaded
     }
     
     /**
@@ -38,11 +38,17 @@ export default class FilePicker {
         return inner
     }
      
+    /**
+     * Show the file picker
+     */
     load() {
         // cf. https://developer.mozilla.org/en-US/docs/Web/API/File_API/Using_files_from_web_applications#using_hidden_file_input_elements_using_the_click_method
         this.#picker.click()
     }
 
+    /**
+     * Remove the file picker from the DOM
+     */
     remove() {
         this.#picker.remove()
     }

@@ -15,12 +15,13 @@ import Constants from "../Pure/constants.js"
 
 
 
-export default class CSVConverter {
+export default class XMLIDApplier {
     #picker 
     #reader
 
     /**
-     * 
+     * Create a new XMLIDApplier instance that applies IDs
+     * to tokens in a tokenized EpiDoc XML file.
      * @param {string} filename 
      */
     constructor(filename) {
@@ -32,7 +33,7 @@ export default class CSVConverter {
                 const contents = /** @type {string} */ (e.target.result) 
                 // String because will use readAsText method to read
                 try {
-                    const conversion = this.#convertFromStr(contents)
+                    const conversion = this.convertFromCSVStr(contents)
                     const downloader = new FileDownloader(conversion)
                     downloader.download(filename)  
                 } catch (error) {
@@ -88,17 +89,18 @@ export default class CSVConverter {
             }, [".csv"]
         )
         
+        // Show the file picker
         this.#picker.load()
     }
  
     /**
-     * Convert a string containing a sequence of 
+     * Convert a CSV string containing a sequence of 
      * IDs in a given base (52 or 100), to be converted.
      * The first line gives the original base.
      * The second line gives the new base.
      * @param {string} fileStr 
      */
-    #convertFromStr(fileStr) {
+    convertFromCSVStr(fileStr) {
         // Split the string into lines
         const lines = fileStr.split(/\r?\n/).reduce( 
             (lines, line) => {
@@ -190,7 +192,7 @@ export default class CSVConverter {
 
         function inner() {
             try {
-                return new CSVConverter(filename) 
+                return new XMLIDApplier(filename) 
             } catch (error) {
                 if (error instanceof FileError) {
                     Message.alert(error.message)

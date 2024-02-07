@@ -88,6 +88,7 @@ export default class Constants {
     static CURRENTBASE = Constants.BASE100
 
     static TEINS = "http://www.tei-c.org/ns/1.0"
+    static XMLNS = "http://www.w3.org/XML/1998/namespace"
     static VALIDBASES = ["52", "100"]
   
 }

@@ -12,7 +12,7 @@ import {
     CSVFormatError, 
     FileError} from "../Pure/errors.js"
 import Constants from "../Pure/constants.js"
-import EpiDoc from "../Pure/epidoc/epidoc.js"
+import EpiDoc from "./epidoc/epidoc.js"
 
 
 export default class XMLIDApplier {
@@ -39,12 +39,13 @@ export default class XMLIDApplier {
                     )
 
                     const epidoc = EpiDoc.fromDoc(xml)
-                    console.log(epidoc.editions[0].abs.map( ab => ab.elem )[0])
+                    epidoc.editions[0].setXMLIds()
+                    // console.log(epidoc.editions[0].abs.flatMap(ab => ab.descendants))
 
                     const xmlStr = new XMLSerializer().serializeToString(xml)
 
                     const downloader = new FileDownloader(xmlStr)
-                    // downloader.download(filename)  
+                    downloader.download(filename)  
                 } catch (error) {
                     Message.alert(
                         `Unknown error: please refer to the developer console`

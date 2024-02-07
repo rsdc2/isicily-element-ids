@@ -1,4 +1,5 @@
-
+import Base from "../../Pure/base.js";
+import Format from "../../Pure/format.js";
 import HasXMLElem from "../xml/hasxmlelem.js";
 import TextElem from "./textElem.js"
 
@@ -21,10 +22,13 @@ export default class TextContainer extends HasXMLElem {
 
     /**
      * Assign \@xml:id to each descendant text element
+     * @param {Base} base
      */
-    setXMLIds() {
+    setXMLIds(base) {
         this.descendantTextElems.forEach( (elem, index) => {
-            elem.setXMLId(index.toString()) 
+            const xmlid = base.decToBase(BigInt(index * 10))
+            const padded = Format.padShortID(base.zero, xmlid)
+            elem.setXMLId(padded) 
         })
     }
 

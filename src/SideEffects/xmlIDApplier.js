@@ -12,6 +12,8 @@ import {
     CSVFormatError, 
     FileError} from "../Pure/errors.js"
 import Constants from "../Pure/constants.js"
+
+const {BASE100, BASE52} = Constants
 import EpiDoc from "./epidoc/epidoc.js"
 
 
@@ -39,7 +41,7 @@ export default class XMLIDApplier {
                     )
 
                     const epidoc = EpiDoc.fromDoc(xml)
-                    epidoc.editions[0].setXMLIds()
+                    epidoc.editions[0].setXMLIds(Base.fromBaseChars(BASE100))
                     // console.log(epidoc.editions[0].abs.flatMap(ab => ab.descendants))
 
                     const xmlStr = new XMLSerializer().serializeToString(xml)

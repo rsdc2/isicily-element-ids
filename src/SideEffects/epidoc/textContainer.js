@@ -1,5 +1,5 @@
 
-import HasXMLElem from "../../Pure/xml/hasxmlelem.js";
+import HasXMLElem from "../xml/hasxmlelem.js";
 import TextElem from "./textElem.js"
 
 /**

@@ -1,6 +1,6 @@
 import TextElem from "../textElem.js";
 import Constants from "../../../Pure/constants.js";
-import HasXMLElem from "../../../Pure/xml/hasxmlelem.js";
+import HasXMLElem from "../../xml/hasxmlelem.js";
 import TextContainer from "../textContainer.js";
 
 export default class Ab extends TextContainer {

@@ -1,5 +1,5 @@
 
-import HasXMLElem from "../../Pure/xml/hasxmlelem.js";
+import HasXMLElem from "../xml/hasxmlelem.js";
 import Constants from "../../Pure/constants.js";
 
 const {TEINS, XMLNS} = Constants
@@ -22,7 +22,7 @@ export default class TextElem extends HasXMLElem {
      * @returns {string}
      */
     get xmlid() {
-        return this.attributeVal("xml:id")
+        return this.attributeValNS(XMLNS, "id")
     }
 
     /**

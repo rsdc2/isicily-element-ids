@@ -1,5 +1,5 @@
 import { Arr } from "../Pure/arr.js"
-import XML from "../Pure/xml/xml.js"
+import XML from "./xml/xml.js"
 
 export default class Select {
 

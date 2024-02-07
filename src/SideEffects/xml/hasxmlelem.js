@@ -1,5 +1,5 @@
 import { ElementAttributeError, LocalNameError, NamespaceError } from "./errors.js"
-import NamedNodeMap_ from "../namednodemap_.js"
+import NamedNodeMap_ from "../../Pure/namednodemap_.js"
 
 export default class HasXMLElem {
     #elem 
@@ -80,6 +80,16 @@ export default class HasXMLElem {
     }
 
     /**
+     * Return the element's Attr bearing the 
+     * specified name
+     * @param {string} namespace
+     * @param {string} localName
+     */
+    attributeNS(namespace, localName) {
+        return this.attributes.getNamedItemNS(namespace, localName)
+    }
+
+    /**
      * Return the value of the element's Attr bearing
      * the specified qualified name
      * @param {string} qualifiedName
@@ -95,7 +105,7 @@ export default class HasXMLElem {
      * @returns 
      */
     attributeValNS(namespace, localName) {
-        return this.attributes.getNamedItemNS(namespace, localName)
+        return this.attributes.getNamedItemNS(namespace, localName).value
     }
     
 

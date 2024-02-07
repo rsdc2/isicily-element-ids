@@ -1,29 +1,44 @@
-export class ElementTypeError extends Error {
+export class ElementAttributeError extends Error {
     /**
      * 
-     * @param {string} requiredType
-     * @param {string} actualType 
+     * @param {string} attributeName
+     * @param {string} requiredVal
+     * @param {string} actualVal
      */
-        constructor(requiredType, actualType) {
+        constructor(attributeName, requiredVal, actualVal) {
 
-            const msg = `Element type error: required ${requiredType}, 
-            actual ${actualType}`
+            const msg = `ElementAttributeError: ${attributeName} 
+                            required to be ${requiredVal}, 
+                            actual ${actualVal}`
             super(msg)
         }
 }
 
-export class ElementNameError extends Error {
+
+export class LocalNameError extends Error {
     /**
-     * @param {string} requiredNS
      * @param {string} requiredLocalName
-     * @param {string} actualNS
      * @param {string} actualLocalName
      */
-        constructor(requiredNS, requiredLocalName, actualNS, actualLocalName) {
+    constructor(requiredLocalName, actualLocalName) {
 
-            const msg = `Element type error: required 
-                    {${requiredNS}}${requiredLocalName}, 
-                    actual {${actualNS}}${actualLocalName}`
+        const msg = `LocalNameError: required 
+                ${requiredLocalName}, 
+                ${actualLocalName}`
+        super(msg)
+    }    
+}
+
+export class NamespaceError extends Error {
+    /**
+     * @param {string} requiredNS
+     * @param {string} actualNS
+     */
+        constructor(requiredNS, actualNS) {
+
+            const msg = `NamespaceError: required 
+                    ${requiredNS},
+                    actual ${actualNS}`
             super(msg)
         }
 }

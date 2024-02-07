@@ -1,6 +1,6 @@
 import FilePicker from "./filepicker.js"
 import FileDownloader from "./filedownloader.js"
-import FileReader_ from "./filereader_.js"
+import {newFileReader} from "./filereader_.js"
 import Convert from "../Pure/convert.js"
 import Base from "../Pure/base.js"
 import Message from "./message.js"
@@ -30,7 +30,7 @@ export default class CSVIDConverter {
 
         // Initialize reader
         // cf. https://developer.mozilla.org/en-US/docs/Web/API/FileReader
-        this.#reader = new FileReader_(
+        this.#reader = newFileReader(
             (e) => {
                 const contents = /** @type {string} */ (e.target.result) 
                 // String because will use readAsText method to read

@@ -1,6 +1,6 @@
 import FilePicker from "./filepicker.js"
 import FileDownloader from "./filedownloader.js"
-import FileReader_ from "./filereader_.js"
+import {newFileReader} from "./filereader_.js"
 import Convert from "../Pure/convert.js"
 import Base from "../Pure/base.js"
 import Message from "./message.js"
@@ -12,7 +12,7 @@ import {
     CSVFormatError, 
     FileError} from "../Pure/errors.js"
 import Constants from "../Pure/constants.js"
-
+import EpiDoc from "../Pure/epidoc/epidoc.js"
 
 
 export default class XMLIDApplier {
@@ -28,7 +28,7 @@ export default class XMLIDApplier {
 
         // Initialize reader
         // cf. https://developer.mozilla.org/en-US/docs/Web/API/FileReader
-        this.#reader = new FileReader_(
+        this.#reader = newFileReader(
             (e) => {
                 const contents = /** @type {string} */ (e.target.result) 
                 // String because will use readAsText method to read
@@ -38,10 +38,13 @@ export default class XMLIDApplier {
                         'application/xml'
                     )
 
+                    const epidoc = EpiDoc.fromDoc(xml)
+                    console.log(epidoc.editions[0].elem)
+
                     const xmlStr = new XMLSerializer().serializeToString(xml)
 
                     const downloader = new FileDownloader(xmlStr)
-                    downloader.download(filename)  
+                    // downloader.download(filename)  
                 } catch (error) {
                     Message.alert(
                         `Unknown error: please refer to the developer console`

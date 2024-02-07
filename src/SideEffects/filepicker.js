@@ -1,4 +1,4 @@
-import FileReader_ from "./filereader_.js"
+import {newFileReader} from "./filereader_.js"
 import {FileError} from "../Pure/errors.js"
 import Constants from "../Pure/constants.js"
 import Message from "./message.js"
@@ -14,7 +14,7 @@ export default class FilePicker {
     /**
      * Create a FilePicker instance 
      * @param {string[]} fileExts Array of acceptable file extensions
-     * @param {FileReader_} fileReader
+     * @param {FileReader} fileReader
      */
     constructor(fileExts, fileReader) {
 
@@ -31,7 +31,7 @@ export default class FilePicker {
     /**
      * Returns a function that creates a file picker with particular parameters
      * @param {string[]} fileExts Array of acceptable file extensions
-     * @param {FileReader_} fileReader
+     * @param {FileReader} fileReader
      */
     static create(fileExts, fileReader) {
 
@@ -51,7 +51,7 @@ export default class FilePicker {
     }
 
     /**
-     * @param {FileReader_} fileReader 
+     * @param {FileReader} fileReader 
      */
     onFileLoaded(fileReader) {
 

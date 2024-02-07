@@ -1,7 +1,7 @@
 
 import HasXMLDoc from "../xml/hasxmldoc.js";
 import HasXMLElem from "../xml/hasxmlelem.js"
-import { ElementTypeError } from "../xml/errors.js";
+import { ElementAttributeError } from "../xml/errors.js";
 import XML from "../xml/xml.js"
 import Edition from "./edition.js";
 

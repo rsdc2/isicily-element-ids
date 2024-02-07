@@ -1,6 +1,7 @@
 import HasXMLElem from "../xml/hasxmlelem.js"
-import { ElementTypeError } from "../xml/errors.js"
+import { ElementAttributeError } from "../xml/errors.js"
 import EditionElem from "./editionelem.js"
+import Ab from "./ab.js"
 import Constants from "../constants.js"
 
 export default class Edition extends HasXMLElem {
@@ -11,8 +12,13 @@ export default class Edition extends HasXMLElem {
     constructor(elem) {
         super(elem)
 
-        this.assertName("div", Constants.TEINS)
+        this.assertNameNS("div", Constants.TEINS)
         this.assertType("edition")
+    }
+
+    get abs() {
+        const elems = Array.from(this.elem.querySelectorAll('* ab'))
+        return elems.map(Ab.fromElem)
     }
 
     /**

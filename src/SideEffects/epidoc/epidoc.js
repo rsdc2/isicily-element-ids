@@ -7,6 +7,7 @@ import Edition from "./elements/edition.js";
 import TextContainer from "./textContainer.js";
 import Base from "../../Pure/base.js";
 import Format from "../../Pure/format.js";
+import Compress from "../../Pure/compress.js";
 
 
 export default class EpiDoc extends HasXMLDoc {
@@ -18,7 +19,29 @@ export default class EpiDoc extends HasXMLDoc {
     }
 
     /**
-     * 
+     * Set the IDs in the TextElements to their compressed
+     * form
+     * @param {Base} base The Base of the IDs in the document
+     */
+    compressXMLIDs(base) {
+        this.textElems.forEach ( (elem) => {
+            elem.compressID(base)
+        })
+    }
+
+    /**
+     * Set the IDs in the TextElements to their expanded
+     * (decompressed) form
+     * @param {Base} base The Base of the IDs in the document
+     */
+    expandXMLIDs(base) {
+        this.textElems.forEach ( (elem) => {
+            elem.expandID(base)
+        })
+    }
+
+    /**
+     * Create a new EpiDoc object from an XMLDocument
      * @param {XMLDocument} doc 
      */
     static fromDoc(doc) {
@@ -26,14 +49,26 @@ export default class EpiDoc extends HasXMLDoc {
     }
 
     /**
-     * Assign \@xml:id to each descendant text element
+     * The ISicily document ID
+     * @returns {string}
+     */
+    get id() {
+        return this.doc
+            .querySelector('publicationStmt > idno[type="filename"]')
+            .textContent
+    }   
+
+    /**
+     * Assign \@xml:id to each descendant text element in place
      * @param {Base} base
      */
     setXMLIDs(base) {
         this.textElems.forEach( (elem, index) => {
-            const xmlid = base.decToBase(BigInt(index * 10))
-            const padded = Format.padShortID(base.zero, xmlid)
-            elem.setXMLID(padded) 
+            const tokenDecimalID = BigInt((index + 1) * 10).toString()
+            const paddedTokenDecimalID = tokenDecimalID.padStart(5, "0")
+            const fullID = this.id.concat("-", paddedTokenDecimalID)
+            const compressed = Compress.compressID(base)(fullID)
+            elem.setXMLID(compressed) 
         })
     }
 

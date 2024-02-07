@@ -23,7 +23,9 @@ export default class TextContainer extends HasXMLElem {
      * Assign \@xml:id to each descendant text element
      */
     setXMLIds() {
-        this.descendantTextElems.forEach( elem => elem.setXMLId() )
+        this.descendantTextElems.forEach( (elem, index) => {
+            elem.setXMLId(index.toString()) 
+        })
     }
 
 }

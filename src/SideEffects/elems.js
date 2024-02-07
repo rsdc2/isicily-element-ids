@@ -71,13 +71,17 @@ export default class Elems {
         /** @type {HTMLButtonElement} */ 
         (document.getElementById("convert-old-ids-btn"))
 
+    static expandXMLIDBtn = 
+        /** @type {HTMLButtonElement} */ 
+        (document.getElementById("expand-xml-id-btn"))
+
     static flipBtn = 
         /** @type {HTMLButtonElement} */ 
         (document.getElementById("flip-btn"))
 
-    static idXMLBtn = 
+    static setXMLIDBtn = 
         /** @type {HTMLButtonElement} */ 
-        (document.getElementById("id-xml-btn"))
+        (document.getElementById("set-xml-id-btn"))
 
     static messageDiv = Elems.div("#message")
 

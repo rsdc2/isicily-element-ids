@@ -39,7 +39,7 @@ export default class XMLIDApplier {
                     )
 
                     const epidoc = EpiDoc.fromDoc(xml)
-                    console.log(epidoc.editions[0].elem)
+                    console.log(epidoc.editions[0].abs.map( ab => ab.elem )[0])
 
                     const xmlStr = new XMLSerializer().serializeToString(xml)
 
@@ -49,6 +49,7 @@ export default class XMLIDApplier {
                     Message.alert(
                         `Unknown error: please refer to the developer console`
                     )
+                    throw error
                 }  
             }
         )

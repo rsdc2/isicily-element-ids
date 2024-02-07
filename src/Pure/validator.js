@@ -118,12 +118,12 @@ export default class Validate {
     static longIdNonStrict = (x) => Validate.isDecimal(Format.removeISic(x))
 
     /**
-     * Returns true if @param s is a valid short ISicily element ID
+     * Returns true if input string is a valid short ISicily element ID
      * @param {string} s
      * @returns {boolean} 
      */
 
-    static shortIDStrict(s) {
+    static shortIDBase100Strict(s) {
         const m = s.match(/^[A-Za-zΑ-Ωα-ω]{5,5}$/)
         return m != null
     }
@@ -139,7 +139,7 @@ export default class Validate {
     }
 
     static longID = Constants.STRICT ? Validate.longIDStrict : Validate.longIdNonStrict
-    static shortID = Constants.STRICT ? Validate.shortIDStrict : Validate.shortIdNonStrict
+    static shortID = Constants.STRICT ? Validate.shortIDBase100Strict : Validate.shortIdNonStrict
 
     /**
      * @param {HTMLDivElement | HTMLSpanElement} elem

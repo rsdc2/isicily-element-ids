@@ -349,7 +349,9 @@ export default class Handlers {
         if (text1Dec === text2Dec + 1n || text1Dec === text2Dec - 1n) {
             text1Status = text1Status.concat("\nERROR: There are no positions in between these IDs")
             text2Status = text2Status.concat("\nERROR: There are no positions in between these IDs")
-            if (Validator.validate(Elems.textInput1) && Validator.validate(Elems.textInput2)) {
+            if (Validator.validate(Elems.textInput1) 
+                    && Validator.validate(Elems.textInput2)) {
+                
                 Message.alert("No IDs between the two values")
             }
             midpointValid = false

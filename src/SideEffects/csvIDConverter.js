@@ -56,40 +56,7 @@ export default class CSVIDConverter {
         )
 
         // Initialize file picker
-        this.#picker = new FilePicker ( 
-            (e) => {
-                const target = /** @type {HTMLInputElement} */ (e.target)
-                const files = target.files
-
-                try {
-
-                    let file;
-                    
-                    // Check that there is a file
-                    if (files.length === 0) {
-                        throw new FileError("No files selected")
-                    } else {
-                        file = files[0]
-                    }
-
-                    // Check the file is not too big
-                    if (file.size > Constants.MAXFILESIZE) {
-                        throw new FileError(
-                            "File size is too big. File must be below 100kb"
-                        )
-                    } else {
-                        this.#reader.readAsText(file)
-                        this.#picker.remove()        
-                    }
-
-                } catch (error) {
-                    if (error instanceof FileError) {
-                        Message.alert(error.message)
-                    }
-                }
-
-            }, [".csv"]
-        )
+        this.#picker = new FilePicker ([".csv"], this.#reader)
         
         // Show the file picker
         this.#picker.load()

@@ -1,3 +1,7 @@
+import FileReader_ from "./filereader_.js"
+import {FileError} from "../Pure/errors.js"
+import Constants from "../Pure/constants.js"
+import Message from "./message.js"
 
 /**
  * @callback onchangeFunc
@@ -9,10 +13,10 @@ export default class FilePicker {
     
     /**
      * Create a FilePicker instance 
-     * @param {onchangeFunc} onFileLoaded A function to be called when the file is loaded
      * @param {string[]} fileExts Array of acceptable file extensions
+     * @param {FileReader_} fileReader
      */
-    constructor(onFileLoaded, fileExts) {
+    constructor(fileExts, fileReader) {
 
         // cf. https://developer.mozilla.org/en-US/docs/Web/API/File_API/Using_files_from_web_applications#using_hidden_file_input_elements_using_the_click_method
         // Set up picker
@@ -21,18 +25,18 @@ export default class FilePicker {
         this.#picker.setAttribute("type", "file")
         this.#picker.setAttribute("accept", fileExts.join(","))     
 
-        this.#picker.onchange = onFileLoaded
+        this.#picker.onchange = this.onFileLoaded(fileReader)
     }
     
     /**
      * Returns a function that creates a file picker with particular parameters
-     * @param {onchangeFunc} onchange
      * @param {string[]} fileExts Array of acceptable file extensions
+     * @param {FileReader_} fileReader
      */
-    static create(onchange, fileExts) {
+    static create(fileExts, fileReader) {
 
         function inner() {
-            return new FilePicker(onchange, fileExts) 
+            return new FilePicker(fileExts, fileReader) 
         }
 
         return inner
@@ -44,6 +48,50 @@ export default class FilePicker {
     load() {
         // cf. https://developer.mozilla.org/en-US/docs/Web/API/File_API/Using_files_from_web_applications#using_hidden_file_input_elements_using_the_click_method
         this.#picker.click()
+    }
+
+    /**
+     * @param {FileReader_} fileReader 
+     */
+    onFileLoaded(fileReader) {
+
+        /**
+         * @param {Event} e
+         */
+        function inner(e) {
+            const target = /** @type {HTMLInputElement} */ (e.target)
+            const files = target.files
+            
+            try {
+
+                let file;
+                
+                // Check that there is a file
+                if (files.length === 0) {
+                    throw new FileError("No files selected")
+                } else {
+                    file = files[0]
+                }
+    
+                // Check the file is not too big
+                if (file.size > Constants.MAXFILESIZE) {
+                    throw new FileError(
+                        `File size is too big. File must be below ${Constants.MAXFILESIZE}`
+                    )
+                } else {
+                    fileReader.readAsText(file)
+                    this.remove()        
+                }
+    
+            } catch (error) {
+                if (error instanceof FileError) {
+                    Message.alert(error.message)
+                }
+            }
+    
+        }
+
+        return inner
     }
 
     /**

@@ -20,16 +20,6 @@ export default class TextContainer extends HasXMLElem {
         return new TextContainer(elem)
     }
 
-    /**
-     * Assign \@xml:id to each descendant text element
-     * @param {Base} base
-     */
-    setXMLIds(base) {
-        this.descendantTextElems.forEach( (elem, index) => {
-            const xmlid = base.decToBase(BigInt(index * 10))
-            const padded = Format.padShortID(base.zero, xmlid)
-            elem.setXMLId(padded) 
-        })
-    }
+
 
 }

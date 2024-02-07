@@ -29,7 +29,7 @@ export default class TextElem extends HasXMLElem {
      * 
      * @param {string} id 
      */
-    setXMLId(id) {
+    setXMLID(id) {
         this.elem.setAttributeNS(XMLNS, "id", id)
     }
 }

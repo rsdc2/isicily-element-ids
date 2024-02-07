@@ -33,6 +33,7 @@ export default class XMLIDApplier {
         this.#reader = newFileReader(
             (e) => {
                 const contents = /** @type {string} */ (e.target.result) 
+
                 // String because will use readAsText method to read
                 try {
                     const xml = new DOMParser().parseFromString(
@@ -41,7 +42,7 @@ export default class XMLIDApplier {
                     )
 
                     const epidoc = EpiDoc.fromDoc(xml)
-                    epidoc.editions[0].setXMLIds(Base.fromBaseChars(BASE100))
+                    epidoc.setXMLIDs(Base.fromBaseChars(BASE100))
                     // console.log(epidoc.editions[0].abs.flatMap(ab => ab.descendants))
 
                     const xmlStr = new XMLSerializer().serializeToString(xml)

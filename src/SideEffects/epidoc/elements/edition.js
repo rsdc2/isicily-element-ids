@@ -30,8 +30,8 @@ export default class Edition extends TextContainer {
         return new Edition(elem)
     }
 
-    get descendantEditionElems() {
-        return this.descendants.map(TextElem.fromElem)
+    get descendantTextElems() {
+        return this.abs.flatMap(ab => ab.descendantTextElems)
     }
 
 }

@@ -9,7 +9,6 @@ const {TEINS, XMLNS} = Constants
  */
 export default class TextElem extends HasXMLElem {
 
-
     /**
      * 
      * @param {Element} elem 
@@ -26,7 +25,11 @@ export default class TextElem extends HasXMLElem {
         return this.attributeVal("xml:id")
     }
 
-    setXMLId() {
-        this.elem.setAttributeNS(XMLNS, "id", "X")
+    /**
+     * 
+     * @param {string} id 
+     */
+    setXMLId(id) {
+        this.elem.setAttributeNS(XMLNS, "id", id)
     }
 }

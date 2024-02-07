@@ -87,6 +87,16 @@ export default class HasXMLElem {
     attributeVal(qualifiedName) {
         return this.attributes.getNamedItem(qualifiedName).value
     }
+
+    /**
+     * 
+     * @param {string} namespace 
+     * @param {string} localName 
+     * @returns 
+     */
+    attributeValNS(namespace, localName) {
+        return this.attributes.getNamedItemNS(namespace, localName)
+    }
     
 
     get attributes() {
@@ -95,6 +105,10 @@ export default class HasXMLElem {
 
     get attributesMap() {
         return NamedNodeMap_.toMap(this.#elem.attributes)
+    }
+
+    get descendants() {
+        return Array.from(this.elem.querySelectorAll('*'))
     }
 
     get elem() {

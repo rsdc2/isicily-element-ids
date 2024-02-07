@@ -1,8 +1,9 @@
-import HasXMLElem from "../xml/hasxmlelem.js";
-import Constants from "../constants.js";
+import TextElem from "../textElem.js";
+import Constants from "../../../Pure/constants.js";
+import HasXMLElem from "../../../Pure/xml/hasxmlelem.js";
+import TextContainer from "../textContainer.js";
 
-
-export default class Ab extends HasXMLElem {
+export default class Ab extends TextContainer {
     /**
      * 
      * @param {Element} elem 
@@ -13,6 +14,7 @@ export default class Ab extends HasXMLElem {
         this.assertNameNS("ab", Constants.TEINS)
     }
 
+
     /**
      * 
      * @param {Element} elem 
@@ -20,4 +22,6 @@ export default class Ab extends HasXMLElem {
     static fromElem(elem) { 
         return new Ab(elem)
     }
+
+
 }

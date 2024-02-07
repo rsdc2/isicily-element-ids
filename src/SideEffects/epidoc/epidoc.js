@@ -1,9 +1,10 @@
 
-import HasXMLDoc from "../xml/hasxmldoc.js";
-import HasXMLElem from "../xml/hasxmlelem.js"
-import { ElementAttributeError } from "../xml/errors.js";
-import XML from "../xml/xml.js"
-import Edition from "./edition.js";
+import HasXMLDoc from "../../Pure/xml/hasxmldoc.js";
+import HasXMLElem from "../../Pure/xml/hasxmlelem.js"
+import { ElementAttributeError } from "../../Pure/xml/errors.js";
+import XML from "../../Pure/xml/xml.js"
+import Edition from "./elements/edition.js";
+import TextContainer from "./textContainer.js";
 
 
 export default class EpiDoc extends HasXMLDoc {

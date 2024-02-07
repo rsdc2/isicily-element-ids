@@ -1,10 +1,11 @@
-import HasXMLElem from "../xml/hasxmlelem.js"
-import { ElementAttributeError } from "../xml/errors.js"
-import EditionElem from "./editionelem.js"
+import HasXMLElem from "../../../Pure/xml/hasxmlelem.js"
+import { ElementAttributeError } from "../../../Pure/xml/errors.js"
+import TextElem from "../textElem.js"
 import Ab from "./ab.js"
-import Constants from "../constants.js"
+import Constants from "../../../Pure/constants.js"
+import TextContainer from "../textContainer.js"
 
-export default class Edition extends HasXMLElem {
+export default class Edition extends TextContainer {
     /**
      * 
      * @param {Element} elem 
@@ -29,9 +30,8 @@ export default class Edition extends HasXMLElem {
         return new Edition(elem)
     }
 
-    get descendantElems() {
-        const elems = Array.from(this.elem.querySelectorAll('*'))
-        return elems.map(EditionElem.fromElem)
+    get descendantEditionElems() {
+        return this.descendants.map(TextElem.fromElem)
     }
 
     // get xmlIds() {

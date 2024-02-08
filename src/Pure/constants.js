@@ -71,7 +71,10 @@ export default class Constants {
     
     static METAKEYS = ["Alt", "Control", "Shift", "CapsLock", "ArrowDown", "ArrowUp", "ArrowLeft", "ArrowRight"]
     
-    static MAXFILESIZE = 100000
+    /**
+     * Maximum file size in KB
+     */
+    static MAXFILESIZEKB = 100
     
     static STRICT = true
     

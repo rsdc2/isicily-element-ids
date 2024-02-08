@@ -1,7 +1,7 @@
-import {newFileReader} from "./filereader_.js"
 import {FileError} from "../Pure/errors.js"
 import Constants from "../Pure/constants.js"
 import Message from "./message.js"
+import FileValidator from "./fileValidator.js"
 
 /**
  * @callback onchangeFunc
@@ -10,6 +10,7 @@ import Message from "./message.js"
 
 export default class FilePicker {
     #picker 
+    #exts
     
     /**
      * Create a FilePicker instance 
@@ -21,11 +22,11 @@ export default class FilePicker {
         // cf. https://developer.mozilla.org/en-US/docs/Web/API/File_API/Using_files_from_web_applications#using_hidden_file_input_elements_using_the_click_method
         // Set up picker
         this.#picker = document.createElement("input")
-
+        this.#exts = fileExts
         this.#picker.setAttribute("type", "file")
         this.#picker.setAttribute("accept", fileExts.join(","))     
 
-        this.#picker.onchange = this.onFileLoaded(fileReader)
+        this.#picker.onchange = this.onFileLoaded(fileReader, fileExts)
     }
     
     /**
@@ -51,9 +52,10 @@ export default class FilePicker {
     }
 
     /**
-     * @param {FileReader} fileReader 
+     * @param {FileReader} fileReader
+     * @param {Array.<string>} exts 
      */
-    onFileLoaded(fileReader) {
+    onFileLoaded(fileReader, exts) {
 
         /**
          * @param {Event} e
@@ -73,19 +75,19 @@ export default class FilePicker {
                     file = files[0]
                 }
     
-                // Check the file is not too big
-                if (file.size > Constants.MAXFILESIZE) {
-                    throw new FileError(
-                        `File size is too big. File must be below ${Constants.MAXFILESIZE}`
-                    )
-                } else {
-                    fileReader.readAsText(file)
-                    this.remove()        
-                }
+                // Validate the file's properties
+                FileValidator.assertFileExt(file, exts)
+                FileValidator.assertSize(file, Constants.MAXFILESIZEKB)
+                
+                fileReader.readAsText(file)
+                this.remove()        
+
     
             } catch (error) {
                 if (error instanceof FileError) {
                     Message.alert(error.message)
+                } else {
+                    throw error
                 }
             }
     

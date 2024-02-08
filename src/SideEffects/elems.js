@@ -67,6 +67,10 @@ export default class Elems {
         /** @type {HTMLButtonElement} */ 
         (document.getElementById("compress-btn"))
 
+    static compressXMLIDBtn = 
+        /** @type {HTMLButtonElement} */ 
+        (document.getElementById("compress-xml-id-btn"))
+    
     static convertOldIDsBtn = 
         /** @type {HTMLButtonElement} */ 
         (document.getElementById("convert-old-ids-btn"))

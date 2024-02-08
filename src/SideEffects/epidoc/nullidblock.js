@@ -1,6 +1,8 @@
 import Base from "../../Pure/base.js"
 import TextElem from "./textElem.js"
 import { TextElemLengthError } from "./errors.js"
+import Format from "../../Pure/format.js"
+
 /**
  * Class representing a sequence of consecutive
  * text elements that lack @xml:id
@@ -66,35 +68,36 @@ export default class NullIDBlock {
         return this.#endIdx
     }
 
+    get freeMidpointCount() {
+        const {base, xmlid1, xmlid2} = this
+        const freeMidpointCount = base.toDec(xmlid2) - base.toDec(xmlid1) - 1n;
+        return Number(freeMidpointCount);
+    }
+
+    get intervalSize() {
+        const rawIntervalSize = this.freeMidpointCount / (this.midpointsNeededCount + 1)
+        return Math.trunc(rawIntervalSize) + 1
+    }
+
+    get length() {
+        return this.#endIdx - this.#startIdx + 1
+    }
+
+    get midpointsNeededCount() {
+        return this.length
+    }
+
     get newIDs() {
         const newIDs = /** @type {Array.<string>}*/ ([])
         const {base, xmlid1, xmlid2, intervalSize} = this
         
         for (let i=1; i<=this.length; i++) {
             const newID = base.addDec(intervalSize * i, xmlid1)
-            newIDs.push(newID)
+            const padded = newID.padStart(5, base.zero)
+            newIDs.push(padded)
         }
 
         return newIDs
-    }
-
-    get freeMidpointCount() {
-        const {base, xmlid1, xmlid2} = this
-        const freeMidpointCount = base.toDec(xmlid2) - base.toDec(xmlid1);
-        return Number(freeMidpointCount)
-    }
-
-    get intervalSize() {
-        const rawIntervalSize = this.freeMidpointCount / this.midpointsNeededCount
-        return Math.trunc(rawIntervalSize)
-    }
-
-    get length() {
-        return this.#endIdx - this.#startIdx
-    }
-
-    get midpointsNeededCount() {
-        return this.length
     }
 
     get startIdx() {

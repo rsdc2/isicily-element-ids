@@ -30,7 +30,7 @@ export default class Convert {
 
             if (oldbase.index === 100 
                 && newbase.index === 52
-                && oldbase.baseToDec(value) > 380204031) {
+                && oldbase.toDec(value) > 380204031) {
 
                 throw new BaseValueError(
                     `${value} is too large to be ` + 

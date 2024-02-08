@@ -25,7 +25,7 @@ export default class XMLID {
      * Create a new XMLIDApplier instance that applies IDs
      * to tokens in a tokenized EpiDoc XML file.
      * @param {string} filename
-     * @param {"set"|"expand"|"compress"|"convert"} mode 
+     * @param {"set"|"expand"|"compress"|"convert"|"setMidpoint"} mode 
      */
     constructor(filename, mode) {
 
@@ -52,6 +52,9 @@ export default class XMLID {
                         epidoc.compressXMLIDs(Base.fromBaseChars(BASE100))
                     } else if (mode === "convert") {
                         epidoc.convertXMLIDs(Base.fromBaseChars(BASE52), Base.fromBaseChars(BASE100))
+                    } else if (mode === "setMidpoint") {
+                        epidoc.setMidpointXMLIDs(Base.fromBaseChars(BASE100))
+
                     }
 
                     const xmlStr = new XMLSerializer().serializeToString(xml)
@@ -79,7 +82,7 @@ export default class XMLID {
      * Create an XMLIDApplier that downloads a file with a specific filename
      * when called
      * @param {string} filename 
-     * @param {"set"|"expand"|"compress"|"convert"} mode 
+     * @param {"set"|"expand"|"compress"|"convert"|"setMidpoint"} mode 
      * @returns 
      */
     static create(filename, mode) {

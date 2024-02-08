@@ -21,7 +21,7 @@ export default class Compress {
 
             const noISicPadding = Format.removeISic(isicID)
             const dec = BigInt(noISicPadding)
-            const converted = base.decToBase(dec)
+            const converted = base.toBase(dec)
             const padded = Format.padShortID(base.zero, converted) 
             return padded
         }
@@ -70,7 +70,7 @@ export default class Compress {
             //     )
             // }
 
-            const decompressed = base.baseToDec(compressedID).toString()
+            const decompressed = base.toDec(compressedID).toString()
             return Format.padAndInsertISic(decompressed, base.index)
         }
 

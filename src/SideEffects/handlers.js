@@ -325,8 +325,8 @@ export default class Handlers {
         }
 
         // Check that IDs are sequential etc.
-        const text1Dec = BASE.baseToDec(text1)
-        const text2Dec = BASE.baseToDec(text2)
+        const text1Dec = BASE.toDec(text1)
+        const text2Dec = BASE.toDec(text2)
 
         if (text1Dec > text2Dec) {
             text1Status = text1Status.concat("\nThis ID comes after the second ID")

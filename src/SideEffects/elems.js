@@ -94,6 +94,10 @@ export default class Elems {
         /** @type {HTMLButtonElement} */ 
         (document.getElementById("set-xml-id-btn"))
 
+    static setMidpointXMLIDBtn = 
+        /** @type {HTMLButtonElement} */ 
+        (document.getElementById("set-midpoint-xml-id-btn"))
+
     static messageDiv = Elems.div("#message")
 
     static midPointBtn = 

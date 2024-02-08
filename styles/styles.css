@@ -5,6 +5,10 @@
   height: 0ch;
 }
 
+a#download-anchor {
+  display: none;
+}
+
 body {
   background-color: rgb(0, 171, 254);
   font-family: sans-serif;
@@ -138,6 +142,10 @@ div.text-input.hidden {
 
 div.text-input.valid {
   color: green
+}
+
+input[type="file"] {
+  display: none;
 }
 
 span.result.hidden {

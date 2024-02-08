@@ -12,12 +12,6 @@ import Compress from "../../Pure/compress.js";
 
 export default class EpiDoc extends HasXMLDoc {
 
-    get editions() {
-        const editionElems = this.doc.querySelectorAll('div[type="edition"]')
-        const editionElemArr = Array.from(editionElems)
-        return editionElemArr.map(Edition.fromElem)
-    }
-
     /**
      * Set the IDs in the TextElements to their compressed
      * form
@@ -40,6 +34,13 @@ export default class EpiDoc extends HasXMLDoc {
             elem.convertID(oldBase, newBase)
         })
     }
+
+    get editions() {
+        const editionElems = this.doc.querySelectorAll('div[type="edition"]')
+        const editionElemArr = Array.from(editionElems)
+        return editionElemArr.map(Edition.fromElem)
+    }
+
 
     /**
      * Set the IDs in the TextElements to their expanded

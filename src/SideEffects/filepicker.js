@@ -2,6 +2,7 @@ import {FileError} from "../Pure/errors.js"
 import Constants from "../Pure/constants.js"
 import Message from "./message.js"
 import FileValidator from "./fileValidator.js"
+import Elems from "./elems.js"
 
 /**
  * @callback onchangeFunc
@@ -10,7 +11,6 @@ import FileValidator from "./fileValidator.js"
 
 export default class FilePicker {
     #picker 
-    #exts
     
     /**
      * Create a FilePicker instance 
@@ -21,8 +21,7 @@ export default class FilePicker {
 
         // cf. https://developer.mozilla.org/en-US/docs/Web/API/File_API/Using_files_from_web_applications#using_hidden_file_input_elements_using_the_click_method
         // Set up picker
-        this.#picker = document.createElement("input")
-        this.#exts = fileExts
+        this.#picker = Elems.fileInput
         this.#picker.setAttribute("type", "file")
         this.#picker.setAttribute("accept", fileExts.join(","))     
 

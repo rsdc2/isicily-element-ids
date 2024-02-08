@@ -83,6 +83,9 @@ export default class Elems {
         /** @type {HTMLButtonElement} */ 
         (document.getElementById("expand-xml-id-btn"))
 
+    static fileInput = /** @type {HTMLInputElement} */
+        (document.getElementById("file-input"))
+
     static flipBtn = 
         /** @type {HTMLButtonElement} */ 
         (document.getElementById("flip-btn"))

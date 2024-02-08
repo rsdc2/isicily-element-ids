@@ -2,7 +2,6 @@
 export default class FileDownloader {
     #fileContents
     #blob
-    #anchor
 
     /**
      * 
@@ -15,9 +14,7 @@ export default class FileDownloader {
         
         // Set up download anchor
 
-        // cf. https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a
-        this.#anchor = document.createElement("a")
-        this.#anchor.remove()
+
     }
 
     get blob() {
@@ -44,13 +41,19 @@ export default class FileDownloader {
      */
     download(filename) {
         // https://developer.mozilla.org/en-US/docs/Web/API/URL/createObjectURL_static
+        // cf. https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a
+        const anchor = document.createElement("a")
+        anchor.id = "download-anchor"
         const url = window.URL.createObjectURL(this.#blob)
 
-        this.#anchor.setAttribute("href", url)
-        this.#anchor.setAttribute("download", filename)
-        this.#anchor.click()
+        // document.body.appendChild(this.#anchor)
+ 
+        anchor.setAttribute("href", url)
+        anchor.setAttribute("download", filename)
+        anchor.click()
         
         // https://developer.mozilla.org/en-US/docs/Web/API/URL/revokeObjectURL_static
         window.URL.revokeObjectURL(url)
+        // anchor.remove()
     }
 }

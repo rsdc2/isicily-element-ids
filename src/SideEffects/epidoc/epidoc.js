@@ -48,9 +48,18 @@ export default class EpiDoc extends HasXMLDoc {
      * @param {Base} base The Base of the IDs in the document
      */
     expandXMLIDs(base) {
+
         this.textElems.forEach ( (elem) => {
             elem.expandID(base)
         })
+    }
+
+    /**
+     * Fill in missing IDs with the midpoints
+     * @param {Base} base 
+     */
+    setMidpointIDs(base) {
+        
     }
 
     /**

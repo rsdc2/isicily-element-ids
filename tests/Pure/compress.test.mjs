@@ -1,12 +1,12 @@
 
-import Parametrized from "./utils/parametrized.mjs"
-import { randomISicID, randomTuples } from "./utils/random.mjs"
+import Parametrized from "../utils/parametrized.mjs"
+import { randomISicID, randomTuples } from "../utils/random.mjs"
 
-import Base from "../src/Pure/base.js"
-import Compress from "../src/Pure/compress.js"
-import Format from "../src/Pure/format.js"
-import Constants from "../src/Pure/constants.js"
-import Convert from "../src/Pure/convert.js"
+import Base from "../../src/Pure/base.js"
+import Compress from "../../src/Pure/compress.js"
+import Format from "../../src/Pure/format.js"
+import Constants from "../../src/Pure/constants.js"
+import Convert from "../../src/Pure/convert.js"
 
 const parametrize = Parametrized.parametrize 
 const { compressID, decompressID } = Compress

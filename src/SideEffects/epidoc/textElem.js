@@ -4,11 +4,14 @@ import Constants from "../../Pure/constants.js";
 import { ExistingIDError } from "./errors.js";
 import Base from "../../Pure/base.js";
 import Compress from "../../Pure/compress.js";
+import Convert from "../../Pure/convert.js";
 
 const {TEINS, XMLNS} = Constants
 
 /**
- * API for EpiDoc edition elements
+ * API for text elements that convey document content
+ * in an EpiDoc edition; excludes container elements such
+ * as <div/> and <ab/> elements.
  */
 export default class TextElem extends HasXMLElem {
 
@@ -17,10 +20,24 @@ export default class TextElem extends HasXMLElem {
      * @param {Base} base 
      */
     compressID (base) {
-
-        
         const expanded = Compress.compressID(base)(this.xmlid)
         this.setXMLID(expanded, true, false)
+    }
+
+    /**
+     * Converts the \@xml:id from the form in one base
+     * to the form in another base
+     * @param {Base} oldBase 
+     * @param {Base} newBase 
+     */
+    convertID (oldBase, newBase) {
+        const oldID = this.xmlid
+
+        // Only convert the ID if one is already present
+        if (oldID != null) {
+            const newID = Convert.ID(oldBase, newBase)(oldID)
+            this.setXMLID(newID, true, false)    
+        }
     }
 
     /**
@@ -68,7 +85,7 @@ export default class TextElem extends HasXMLElem {
 
     /**
      * Get the \@xml:id attribute value
-     * @returns {string}
+     * @returns {string | null}
      */
     get xmlid() {
         return this.elem.getAttributeNS(XMLNS, "id")

@@ -1,7 +1,7 @@
 import Format from "./format.js"
 import Constants from "./constants.js"
 
-export default class Validate {
+export default class Validator {
     /**
      * Returns true if a string contains only digits
      * 0-9
@@ -115,7 +115,7 @@ export default class Validate {
      * @returns {boolean}
      */
 
-    static longIdNonStrict = (x) => Validate.isDecimal(Format.removeISic(x))
+    static longIdNonStrict = (x) => Validator.isDecimal(Format.removeISic(x))
 
     /**
      * Returns true if input string is a valid short ISicily element ID
@@ -138,8 +138,8 @@ export default class Validate {
         return m != null
     }
 
-    static longID = Constants.STRICT ? Validate.longIDStrict : Validate.longIdNonStrict
-    static shortID = Constants.STRICT ? Validate.shortIDBase100Strict : Validate.shortIdNonStrict
+    static longID = Constants.STRICT ? Validator.longIDStrict : Validator.longIdNonStrict
+    static shortID = Constants.STRICT ? Validator.shortIDBase100Strict : Validator.shortIdNonStrict
 
     /**
      * @param {HTMLDivElement | HTMLSpanElement} elem
@@ -149,7 +149,7 @@ export default class Validate {
 
         if (text == null) return false
 
-        const {longID: validateLongID, shortID: validateShortID} = Validate
+        const {longID: validateLongID, shortID: validateShortID} = Validator
 
         return validateLongID(text) 
                 || validateShortID(text) 

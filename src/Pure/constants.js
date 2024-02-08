@@ -74,7 +74,7 @@ export default class Constants {
     /**
      * Maximum file size in KB
      */
-    static MAXFILESIZEKB = 100
+    static MAXFILESIZEKB = 200
     
     static STRICT = true
     

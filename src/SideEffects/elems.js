@@ -75,6 +75,10 @@ export default class Elems {
         /** @type {HTMLButtonElement} */ 
         (document.getElementById("convert-old-ids-btn"))
 
+    static convertOldXMLIDsBtn = 
+        /** @type {HTMLButtonElement} */ 
+        (document.getElementById("convert-old-xml-ids-btn"))
+
     static expandXMLIDBtn = 
         /** @type {HTMLButtonElement} */ 
         (document.getElementById("expand-xml-id-btn"))

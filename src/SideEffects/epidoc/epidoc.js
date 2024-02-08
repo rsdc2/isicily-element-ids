@@ -30,6 +30,18 @@ export default class EpiDoc extends HasXMLDoc {
     }
 
     /**
+     * Convert the IDs in the TextElements from their Base52 form 
+     * to their Base100 form
+     * @param {Base} oldBase The Base of the IDs in the document
+     * @param {Base} newBase
+     */
+    convertXMLIDs(oldBase, newBase) {
+        this.textElems.forEach ( (elem) => {
+            elem.convertID(oldBase, newBase)
+        })
+    }
+
+    /**
      * Set the IDs in the TextElements to their expanded
      * (decompressed) form
      * @param {Base} base The Base of the IDs in the document

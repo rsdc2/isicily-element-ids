@@ -20,7 +20,7 @@ export default class FilePicker {
     constructor(fileExts, fileReader) {
 
         // cf. https://developer.mozilla.org/en-US/docs/Web/API/File_API/Using_files_from_web_applications#using_hidden_file_input_elements_using_the_click_method
-        // Set up picker
+        // Set up file picker
         this.#picker = document.createElement("input")
         this.#picker.setAttribute("type", "file")
         this.#picker.setAttribute("accept", fileExts.join(","))     

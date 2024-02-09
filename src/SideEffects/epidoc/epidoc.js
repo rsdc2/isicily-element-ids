@@ -20,6 +20,7 @@ export default class EpiDoc extends HasXMLDoc {
         this.textElems.forEach ( (elem) => {
             elem.compressID(base)
         })
+        return this.textElems
     }
 
     /**
@@ -32,6 +33,7 @@ export default class EpiDoc extends HasXMLDoc {
         this.textElems.forEach ( (elem) => {
             elem.convertID(oldBase, newBase)
         })
+        return this.textElems
     }
 
     get editions() {
@@ -40,82 +42,28 @@ export default class EpiDoc extends HasXMLDoc {
         return editionElemArr.map(Edition.fromElem)
     }
 
-
     /**
      * Set the IDs in the TextElements to their expanded
      * (decompressed) form
      * @param {Base} base The Base of the IDs in the document
      */
     expandXMLIDs(base) {
-
         this.textElems.forEach ( (elem) => {
             elem.expandID(base)
         })
+        return this.textElems
     }
 
     /**
-     * Fill in missing IDs with the midpoints
+     * Finds any text elements that lack an
+     * \@xml:id and assigns an \@xml:id between those that 
+     * have already been assigned
      * @param {Base} base 
      */
     setMidpointXMLIDs(base) {
-
-        /**
-         * Return the index of the next \@xml:id which is not null
-         * If no ID, returns null
-         * @param {Array.<TextElem>} textelems 
-         * @param {number} startIdx
-         * @returns {number} 
-         */
-        function indexOfNextID(textelems, startIdx) {
-
-            for (let i=startIdx; i<textelems.length; i++) {
-                const xmlid = textelems[i].xmlid
-                if (xmlid != null) {
-                    return i
-                }
-            }
-
-            throw new MidpointIDError(
-                `No @xml:id after TextElem index position ${startIdx}`
-            )
-        }
-
-
-        const elems = this.textElems;
-        const blocks = new NullIDBlocks([])
-        let lastXMLID = null;
-
-        for (let i=0; i<this.textElems.length; i++) {
-            const elem = elems[i];
- 
-            if (elem.xmlid == null) {
-                if (!blocks.containIndex(i)) {
-                    const nextIDIndex = indexOfNextID(elems, i)
-                    const nullidblock = new NullIDBlock(
-                        i, 
-                        nextIDIndex - 1, 
-                        lastXMLID, 
-                        elems[nextIDIndex].xmlid, 
-                        base
-                    )
-                    blocks.push(nullidblock)
-                }
-                
-            } else {
-                lastXMLID = elem.xmlid
-            }
-
-
-        }
-
-        blocks.assignIDs(elems)
+        const blocks = NullIDBlocks.fromTextElems(this.textElems, base)
+        return blocks.assignIDs()
     }
-
-    // const [xmlid2, midpoints] = findNextIDAndMidpoints(elems, i)
-    // const freeMidpoints = calcFreeMidpoints(xmlid1, xmlid2)
-    // if (midpoints > freeMidpoints) {
-    //     throw new MidpointIDError("Too many midpoints to assign")
-    // } 
 
     /**
      * Create a new EpiDoc object from an XMLDocument

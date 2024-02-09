@@ -1,30 +1,57 @@
 import NullIDBlock from "./nullidblock.js";
 import TextElem from "./textElem.js";
+import { MidpointIDError } from "./errors.js";
+import Base from "../../Pure/base.js";
 
+/**
+ * Represents contiguous sequences of text elements
+ * that lack \@xml:id
+ */
 export default class NullIDBlocks {
     #blocks
-
-    /**
-     * 
-     * @param {NullIDBlock[]} blocks 
-     */
-    constructor(blocks) {
-        this.#blocks = blocks
-    }
+    #textelems
 
     /**
      * 
      * @param {TextElem[]} textelems 
+     * @param {NullIDBlock[]} blocks
      */
-    assignIDs(textelems) {
-        for (let i=0; i<this.#blocks.length; i++) {
-            textelems = this.#blocks[i].assignIDs(textelems)
-        }
-        return textelems
+    constructor(textelems, blocks) {
+        this.#blocks = blocks
+        this.#textelems = textelems
+    }
+
+    /**
+     * Assign \@xml:id to elements that do not have one
+     */
+    assignIDs() {
+        const elems = this.#textelems
+
+        this.blocks.forEach(
+            (block) => block.assignIDs(elems)
+        )
+
+        return elems
     }
 
     get blocks() {
         return this.#blocks
+    }
+
+    /**
+     * 
+     * @param {NullIDBlock[]} blocks 
+     * @param {number} index 
+     */
+    static containIndex(blocks, index) {
+        for (let i=0; i<blocks.length; i++) {
+            const block = blocks[i]
+            if (block.containsIndex(index)) {
+                return true
+            }
+        }
+
+        return false   
     }
 
     /**
@@ -34,14 +61,66 @@ export default class NullIDBlocks {
      */
     containIndex(index) {
         const blocks = this.#blocks
-        for (let i=0; i<blocks.length; i++) {
-            const block = blocks[i]
-            if (block.containsIndex(index)) {
-                return true
+        return NullIDBlocks.containIndex(blocks, index)
+    }
+
+    /**
+     * Gathers all contiguous sequences of text elements
+     * that lack IDs in a NullIDBlocks object
+     * @param {TextElem[]} textelems 
+     * @param {Base} base 
+     * @returns {NullIDBlocks}
+     */
+    static fromTextElems(textelems, base) {
+
+        /**
+         * Return the index of the next \@xml:id in 
+         * TextElems which is not null
+         * @param {Array.<TextElem>} textelems 
+         * @param {number} startIdx
+         * @returns {number} 
+         */
+        function indexOfNextID(textelems, startIdx) {
+
+            for (let i=startIdx; i<textelems.length; i++) {
+                const xmlid = textelems[i].xmlid
+                if (xmlid != null) {
+                    return i
+                }
             }
+
+            throw new MidpointIDError(
+                `No @xml:id after TextElem index position ${startIdx}`
+            )
         }
 
-        return false
+        const blocks = /** @type {NullIDBlock[]} */ ([])
+        let lastXMLID = null;
+
+        // Loop through all the text elements to establish
+        // where the sequences of null IDs are
+        textelems.forEach(
+            (elem, i, elems) => {
+                if (elem.xmlid == null) {
+                    if (!NullIDBlocks.containIndex(blocks, i)) {
+                        const nextIDIndex = indexOfNextID(elems, i);
+                        const nullidblock = new NullIDBlock(
+                            i, 
+                            nextIDIndex - 1, 
+                            lastXMLID, 
+                            elems[nextIDIndex].xmlid, 
+                            base
+                        )
+                        blocks.push(nullidblock);
+                    }
+                    
+                } else {
+                    lastXMLID = elem.xmlid;
+                }
+            }
+        )
+        return new NullIDBlocks(textelems, blocks)
+
     }
 
     /**

@@ -56,7 +56,7 @@ export default class NullIDBlocks {
     }
 
     /**
-     * 
+     * Return true if any of the NullIDBlocks contains the index
      * @param {number} index 
      * @returns {boolean}
      */
@@ -120,12 +120,12 @@ export default class NullIDBlocks {
                 }
             }
         )
-        return new NullIDBlocks(textelems, blocks)
 
+        return new NullIDBlocks(textelems, blocks)
     }
 
     /**
-     * 
+     * Append a NullIDBlock
      * @param {NullIDBlock} block 
      */
     push(block) {

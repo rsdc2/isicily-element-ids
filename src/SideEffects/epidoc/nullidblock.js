@@ -1,8 +1,10 @@
 import Base from "../../Pure/base.js"
 import TextElem from "./textElem.js"
+import TextElems from "./textElems.js"
 import { MidpointIDError, TextElemLengthError } from "./errors.js"
 import Format from "../../Pure/format.js"
 import BaseValue from "../../Pure/baseValue.js"
+
 
 /**
  * Class representing a sequence of consecutive
@@ -36,15 +38,15 @@ export default class NullIDBlock {
 
     /**
      * 
-     * @param {Array.<TextElem>} textelems 
-     * @returns {Array.<TextElem>}
+     * @param {TextElems} textelems 
+     * @returns {TextElems}
      */
     assignIDs(textelems) {
-        this.#assertCompatibleArrayLength(textelems)
+        this.#assertCompatibleArrayLength(textelems.elems)
 
         const newids = this.newIDs
         for (let i=0; i<newids.length; i++) {
-            const elem = textelems[i + this.#startIdx]
+            const elem = textelems.elems[i + this.#startIdx]
             const newid = newids[i]
             
             elem.setXMLID(newid, false, true)

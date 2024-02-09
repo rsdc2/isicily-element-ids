@@ -7,13 +7,13 @@ export class ElementAttributeError extends ISicElementIDError {
      * @param {string} requiredVal
      * @param {string} actualVal
      */
-        constructor(attributeName, requiredVal, actualVal) {
+    constructor(attributeName, requiredVal, actualVal) {
 
-            const msg = `ElementAttributeError: ${attributeName} ` +
-                            `required to be ${requiredVal}, whereas the ` +
-                            `actual attribute value is ${actualVal}`
-            super(msg)
-        }
+        const msg = `ElementAttributeError: ${attributeName} ` +
+                        `required to be ${requiredVal}, whereas the ` +
+                        `actual attribute value is ${actualVal}`
+        super(msg)
+    }
 }
 
 

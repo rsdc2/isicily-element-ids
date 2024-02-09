@@ -16,6 +16,7 @@ export default class NullIDBlock {
     #xmlid1
     #xmlid2
     #base
+
     /**
      * 
      * @param {number} startIdx Position of the first element in the TextElem Array
@@ -34,6 +35,8 @@ export default class NullIDBlock {
         this.#xmlid1 = xmlid1
         this.#xmlid2 = xmlid2
         this.#base = base
+
+        this.#assertEnoughFreeXMLIDs()
     }
 
     /**
@@ -55,7 +58,9 @@ export default class NullIDBlock {
     }
 
     /**
-     * 
+     * Checks that the number of TextElems is at
+     * least as many as the number of index positions
+     * between startIdx and endIdx
      * @param {Array.<TextElem>} textelems
      * @returns {boolean} 
      */
@@ -67,6 +72,22 @@ export default class NullIDBlock {
         }
         return true
     } 
+
+    /**
+     * Checks that there are suficient free IDs
+     * between xmlid1 and xmlid2 for all the 
+     * elements without ids that need them
+     */
+    #assertEnoughFreeXMLIDs() {
+        const enough = this.midpointsNeededCount <= this.freeMidpointCount
+        if (!enough) {
+            throw new MidpointIDError(
+                `Not enough free IDs between @xml:id ` + 
+                `"${this.xmlid1.baseStr}" ` +
+                `"${this.xmlid2.baseStr}"`
+            )
+        }
+    }
 
     get base() {
         return this.#base

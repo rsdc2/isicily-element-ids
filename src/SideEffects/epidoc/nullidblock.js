@@ -79,8 +79,7 @@ export default class NullIDBlock {
      * @returns {boolean}
      */
     containsIndex(index) {
-        const result = index >= this.#startIdx && index <= this.#endIdx
-        return result
+        return index >= this.#startIdx && index <= this.#endIdx
     }
 
     get endIdx() {

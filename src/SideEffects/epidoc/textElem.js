@@ -62,6 +62,7 @@ export default class TextElem extends EpiDocElem {
      * @param {string} id The ID to assign
      * @param {boolean} override Override existing IDs
      * @param {boolean} error Raise an error if an ID already 
+     * @returns {TextElem}
      * exists on the element
      */
     setXMLID(id, override = false, error = true) {
@@ -83,7 +84,7 @@ export default class TextElem extends EpiDocElem {
 
         } else {
             // Do nothing
-            return
+            return this
         }
     }
 

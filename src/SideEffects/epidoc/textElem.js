@@ -1,7 +1,7 @@
 
 import EpiDocElem from "./epidocElem.js";
 import Constants from "../../Pure/constants.js";
-import { ExistingIDError } from "./errors.js";
+import { ExistingIDError, NullIDError } from "./errors.js";
 import Base from "../../Pure/base.js";
 import Compress from "../../Pure/compress.js";
 import Convert from "../../Pure/convert.js";
@@ -65,6 +65,10 @@ export default class TextElem extends EpiDocElem {
      * exists on the element
      */
     setXMLID(id, override = false, error = true) {
+
+        if (id == null) {
+            throw new NullIDError("Tried to add an empty ID")
+        }
 
         if (this.xmlid === null || override === true) {
             // Assign ID for the first time, or override

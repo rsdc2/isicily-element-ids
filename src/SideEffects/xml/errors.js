@@ -1,4 +1,6 @@
-export class ElementAttributeError extends Error {
+import { ISicElementIDError } from "../../Pure/errors.js"
+
+export class ElementAttributeError extends ISicElementIDError {
     /**
      * 
      * @param {string} attributeName
@@ -15,7 +17,7 @@ export class ElementAttributeError extends Error {
 }
 
 
-export class LocalNameError extends Error {
+export class LocalNameError extends ISicElementIDError {
     /**
      * @param {string} requiredLocalName
      * @param {string} actualLocalName
@@ -29,7 +31,7 @@ export class LocalNameError extends Error {
     }    
 }
 
-export class NamespaceError extends Error {
+export class NamespaceError extends ISicElementIDError {
     /**
      * @param {string} requiredNS
      * @param {string} actualNS

@@ -1,8 +1,8 @@
 import FilePicker from "./filepicker.js"
 import FileDownloader from "./filedownloader.js"
 import {newFileReader} from "./filereader_.js"
-import Convert from "../Pure/convert.js"
 import Base from "../Pure/base.js"
+import EpiDoc from "./epidoc/epidoc.js"
 import Message from "./message.js"
 import { 
     BaseIndexError, 
@@ -10,11 +10,17 @@ import {
     BaseValueError, 
     ConversionError, 
     CSVFormatError, 
-    FileError} from "../Pure/errors.js"
+    FileError
+} from "../Pure/errors.js"
+
+import { 
+    MidpointIDError, 
+
+} from "./epidoc/errors.js"
+
 import Constants from "../Pure/constants.js"
 
 const {BASE100, BASE52} = Constants
-import EpiDoc from "./epidoc/epidoc.js"
 
 
 export default class XMLID {
@@ -42,18 +48,20 @@ export default class XMLID {
                         'application/xml'
                     )
 
+                    const base100 = Base.fromBaseChars(BASE100)
+                    const base52 = Base.fromBaseChars(BASE52)
                     const epidoc = EpiDoc.fromDoc(xml)
 
                     if (mode === "set") {
-                        epidoc.setXMLIDs(Base.fromBaseChars(BASE100))
+                        epidoc.textElems.setXMLIDs(base100, epidoc.id)
                     } else if (mode === "expand") {
-                        epidoc.expandXMLIDs(Base.fromBaseChars(BASE100))
+                        epidoc.textElems.expandXMLIDs(base100)
                     } else if (mode === "compress") {
-                        epidoc.compressXMLIDs(Base.fromBaseChars(BASE100))
+                        epidoc.textElems.compressXMLIDs(base100)
                     } else if (mode === "convert") {
-                        epidoc.convertXMLIDs(Base.fromBaseChars(BASE52), Base.fromBaseChars(BASE100))
+                        epidoc.textElems.convertXMLIDs(base52, base100)
                     } else if (mode === "setMidpoint") {
-                        epidoc.setMidpointXMLIDs(Base.fromBaseChars(BASE100))
+                        epidoc.textElems.setMidpointXMLIDs(base100)
                     }
 
                     const xmlStr = new XMLSerializer().serializeToString(xml)

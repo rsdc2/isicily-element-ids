@@ -2,7 +2,6 @@
 import HasXMLDoc from "../xml/hasxmldoc.js";
 import Edition from "./elements/edition.js";
 import Base from "../../Pure/base.js";
-import Compress from "../../Pure/compress.js";
 import TextElems from "./textElems.js";
 import Constants from "../../Pure/constants.js";
 
@@ -101,14 +100,7 @@ export default class EpiDoc extends HasXMLDoc {
      * @returns {TextElems}
      */
     setXMLIDs(base) {
-        this.textElems.elems.forEach( (elem, index) => {
-            const tokenDecimalID = BigInt((index + 1) * 10).toString()
-            const paddedTokenDecimalID = tokenDecimalID.padStart(5, "0")
-            const fullID = this.id.concat("-", paddedTokenDecimalID)
-            const compressed = Compress.compressID(base)(fullID)
-            elem.setXMLID(compressed) 
-        })
-        return this.textElems
+        return this.textElems.setXMLIDs(base, this.id)
     }
 
     get textElems() {

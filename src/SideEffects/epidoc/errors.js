@@ -1,6 +1,6 @@
+import { ISicElementIDError } from "../../Pure/errors.js"
 
-
-export class ExistingIDError extends Error {
+export class ExistingIDError extends ISicElementIDError {
     /**
      * @param {string} existingID
      * @param {Element} element
@@ -14,7 +14,7 @@ export class ExistingIDError extends Error {
     }    
 }
 
-export class MidpointIDError extends Error {
+export class MidpointIDError extends ISicElementIDError {
     /**
      * @param {string} msg
      */
@@ -25,10 +25,10 @@ export class MidpointIDError extends Error {
     }    
 }
 
-export class TextElemLengthError extends Error {
+export class TextElemLengthError extends ISicElementIDError {
     
 }
 
-export class TextElemsIndexError extends Error {
+export class TextElemsIndexError extends ISicElementIDError {
     
 }

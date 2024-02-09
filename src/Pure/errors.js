@@ -1,5 +1,9 @@
+export class ISicElementIDError extends Error {
 
-export class ConversionError extends Error {
+}
+
+
+export class ConversionError extends ISicElementIDError {
     /**
      * 
      * @param {string} message 
@@ -11,7 +15,7 @@ export class ConversionError extends Error {
     
 }
 
-export class BaseIndexError extends Error {
+export class BaseIndexError extends ISicElementIDError {
 
     /**
      * 
@@ -25,7 +29,7 @@ export class BaseIndexError extends Error {
     }
 }
 
-export class BaseLengthError extends Error {
+export class BaseLengthError extends ISicElementIDError {
     /**
      * 
      * @param {string} baseValue
@@ -37,7 +41,7 @@ export class BaseLengthError extends Error {
     }    
 }
 
-export class BaseValueError extends Error {
+export class BaseValueError extends ISicElementIDError {
     /**
      * 
      * @param {string} message 
@@ -48,7 +52,7 @@ export class BaseValueError extends Error {
     }
 }
 
-export class CSVFormatError extends Error {
+export class CSVFormatError extends ISicElementIDError {
     /**
      * 
      * @param {string} message 
@@ -59,7 +63,7 @@ export class CSVFormatError extends Error {
     }
 }
 
-export class FileError extends Error {
+export class FileError extends ISicElementIDError {
     /**
      * 
      * @param {string} message 

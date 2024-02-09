@@ -1,6 +1,7 @@
 import Base from "../../Pure/base.js"
 import TextElem from "./textElem.js"
 import NullIDBlocks from "./nullidblocks.js"
+import Compress from "../../Pure/compress.js"
 import { MidpointIDError, TextElemsIndexError } from "./errors.js"
 
 /**
@@ -108,6 +109,23 @@ export default class TextElems {
         this.assertLastElemHasID()
         const blocks = NullIDBlocks.fromTextElems(this, base)
         return blocks.assignIDs()
+    }
+
+    /**
+     * Assign \@xml:id to each descendant text element in place
+     * @param {Base} base
+     * @param {string} docid
+     * @returns {TextElems}
+     */
+    setXMLIDs(base, docid) {
+        this.elems.forEach( (elem, index) => {
+            const tokenDecimalID = BigInt((index + 1) * 10).toString()
+            const paddedTokenDecimalID = tokenDecimalID.padStart(5, "0")
+            const fullID = docid.concat("-", paddedTokenDecimalID)
+            const compressed = Compress.compressID(base)(fullID)
+            elem.setXMLID(compressed) 
+        })
+        return this
     }
 
     get elems() {

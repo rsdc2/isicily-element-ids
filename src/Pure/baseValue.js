@@ -27,15 +27,44 @@ export default class BaseValue {
         return new BaseValue(newVal, this.#base)
     }
 
+    /**
+     * 
+     * @param {BaseValue} valueToAdd 
+     * @returns 
+     */
+    addBase(valueToAdd) {
+        const newVal = this.dec + valueToAdd.dec
+        return BaseValue.fromDec(Number(newVal), this.#base)
+    }
+
     get base() {
         return this.#base
     }
 
-    get baseValue() {
+    get baseStr() {
         return this.#baseValue
     }
 
-    get decValue() {
+    get dec() {
         return this.#base.toDec(this.#baseValue)
+    }
+
+    /**
+     * Return a new BaseValue from a number input
+     * @param {number} dec 
+     * @param {Base} base
+     * @returns {BaseValue}
+     */
+    static fromDec(dec, base) {
+        return new BaseValue(base.toBase(BigInt(dec)), base)
+    }
+
+    /**
+     * 
+     * @param {BaseValue} valueToSubtract 
+     */
+    subtract(valueToSubtract) {
+        const newVal = this.dec - valueToSubtract.dec
+        return BaseValue.fromDec(Number(newVal), this.#base)
     }
 }

@@ -2,6 +2,7 @@ import Base from "../../Pure/base.js"
 import TextElem from "./textElem.js"
 import { TextElemLengthError } from "./errors.js"
 import Format from "../../Pure/format.js"
+import BaseValue from "../../Pure/baseValue.js"
 
 /**
  * Class representing a sequence of consecutive
@@ -69,14 +70,15 @@ export default class NullIDBlock {
     }
 
     get freeMidpointCount() {
-        const {base, xmlid1, xmlid2} = this
-        const freeMidpointCount = base.toDec(xmlid2) - base.toDec(xmlid1) - 1n;
+        const {xmlid1, xmlid2} = this
+        const freeMidpointCount = xmlid2.subtract(xmlid1).dec - 1n;
         return Number(freeMidpointCount);
     }
 
     get intervalSize() {
-        const rawIntervalSize = this.freeMidpointCount / (this.midpointsNeededCount + 1)
-        return Math.trunc(rawIntervalSize) + 1
+        const diff = this.xmlid2.dec - this.xmlid1.dec
+        const firstInterval = Number(diff) / (this.midpointsNeededCount + 1)
+        return Math.trunc(firstInterval)
     }
 
     get length() {
@@ -92,7 +94,7 @@ export default class NullIDBlock {
         const {base, xmlid1, xmlid2, intervalSize} = this
         
         for (let i=1; i<=this.length; i++) {
-            const newID = base.addDec(intervalSize * i, xmlid1)
+            const newID = base.addDec(intervalSize * i, xmlid1.baseStr)
             const padded = newID.padStart(5, base.zero)
             newIDs.push(padded)
         }
@@ -105,11 +107,11 @@ export default class NullIDBlock {
     }
 
     get xmlid1() {
-        return this.#xmlid1
+        return new BaseValue(this.#xmlid1, this.#base)
     }
 
     get xmlid2() {
-        return this.#xmlid2
+        return new BaseValue(this.#xmlid2, this.#base)
     }
 
 }

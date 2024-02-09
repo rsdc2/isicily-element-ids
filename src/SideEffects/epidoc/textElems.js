@@ -98,6 +98,14 @@ export default class TextElems {
         return last
     }
 
+    get lastIndex() {
+        return this.length - 1
+    }
+
+    get length() {
+        return this.#elems.length
+    }
+
     /**
      * Finds any text elements that lack an
      * \@xml:id and assigns an \@xml:id between those that 

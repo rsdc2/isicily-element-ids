@@ -7,9 +7,9 @@ export class ElementAttributeError extends Error {
      */
         constructor(attributeName, requiredVal, actualVal) {
 
-            const msg = `ElementAttributeError: ${attributeName} 
-                            required to be ${requiredVal}, 
-                            actual ${actualVal}`
+            const msg = `ElementAttributeError: ${attributeName} ` +
+                            `required to be ${requiredVal}, whereas the` +
+                            `actual attribute value is ${actualVal}`
             super(msg)
         }
 }
@@ -36,9 +36,9 @@ export class NamespaceError extends Error {
      */
         constructor(requiredNS, actualNS) {
 
-            const msg = `NamespaceError: required 
-                    ${requiredNS},
-                    actual ${actualNS}`
+            const msg = `NamespaceError: the required namespace is ` +
+                    `${requiredNS}, whereas the actual namespace is ` +
+                    `actual ${actualNS}`
             super(msg)
         }
 }

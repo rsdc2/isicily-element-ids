@@ -91,7 +91,7 @@ export default class TextElems {
     }
 
     get last() {
-        const last = this.#elems.reverse()[0]
+        const last = [...this.#elems].reverse()[0]
         if (last == null) {
             throw new TextElemsIndexError("No TextElems")
         }        

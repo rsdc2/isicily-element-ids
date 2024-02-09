@@ -2,9 +2,7 @@ import Base from "../../Pure/base.js"
 import TextElem from "./textElem.js"
 import TextElems from "./textElems.js"
 import { MidpointIDError, TextElemLengthError } from "./errors.js"
-import Format from "../../Pure/format.js"
 import BaseValue from "../../Pure/baseValue.js"
-
 
 /**
  * Class representing a sequence of consecutive
@@ -83,7 +81,7 @@ export default class NullIDBlock {
         if (!enough) {
             throw new MidpointIDError(
                 `Not enough free IDs between @xml:id ` + 
-                `"${this.xmlid1.baseStr}" ` +
+                `"${this.xmlid1.baseStr}" and ` +
                 `"${this.xmlid2.baseStr}"`
             )
         }
@@ -106,7 +104,7 @@ export default class NullIDBlock {
     get endIdx() {
         return this.#endIdx
     }
-
+    
     get freeMidpointCount() {
         const {xmlid1, xmlid2} = this
         const freeMidpointCount = xmlid2.subtract(xmlid1).dec - 1n;

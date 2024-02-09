@@ -9,7 +9,7 @@ export const Arr = {
         if (arr.length === 0) {
             return null
         } else {
-            return arr.reverse()[0]
+            return [...arr].reverse()[0]
         }
     },
 

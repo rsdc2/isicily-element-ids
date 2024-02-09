@@ -114,7 +114,6 @@ export default class NullIDBlocks {
                         )
                         blocks.push(nullidblock);
                     }
-                    
                 } else {
                     lastXMLID = elem.xmlid;
                 }

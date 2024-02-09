@@ -25,6 +25,17 @@ export class MidpointIDError extends ISicElementIDError {
     }    
 }
 
+export class NullIDError extends ISicElementIDError {
+    /**
+     * @param {string} msg
+     */
+    constructor(msg) {
+
+        const msg_ = `NullIDError: ` + msg
+        super(msg_)
+    }    
+}
+
 export class TextElemLengthError extends ISicElementIDError {
     
 }

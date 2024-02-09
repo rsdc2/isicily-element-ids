@@ -5,11 +5,7 @@ import Base from "../Pure/base.js"
 import EpiDoc from "./epidoc/epidoc.js"
 import Message from "./message.js"
 import { 
-    BaseIndexError, 
-    BaseLengthError, 
-    BaseValueError, 
-    ConversionError, 
-    CSVFormatError, 
+    ISicElementIDError,
     FileError
 } from "../Pure/errors.js"
 
@@ -69,10 +65,14 @@ export default class XMLID {
                     const downloader = new FileDownloader(xmlStr)
                     downloader.download(filename)  
                 } catch (error) {
-                    Message.alert(
-                        `Unknown error: please refer to the developer console`
-                    )
-                    throw error
+                    if (error instanceof ISicElementIDError) {
+                        Message.alert(error.message)
+                    } else {
+                        Message.alert(
+                            `Unknown error: please refer to the developer console`
+                        )
+                        throw error    
+                    }
                 }  
             }
         )

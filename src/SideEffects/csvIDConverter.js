@@ -5,10 +5,9 @@ import Convert from "../Pure/convert.js"
 import Base from "../Pure/base.js"
 import Message from "./message.js"
 import { 
-    BaseIndexError, 
+    ISicElementIDError,
     BaseLengthError, 
     BaseValueError, 
-    ConversionError, 
     CSVFormatError, 
     FileError} from "../Pure/errors.js"
 import Constants from "../Pure/constants.js"
@@ -39,11 +38,7 @@ export default class CSVIDConverter {
                     const downloader = new FileDownloader(conversion)
                     downloader.download(filename)  
                 } catch (error) {
-                    if (error instanceof ConversionError) {
-                        Message.alert(`${error.message}`)
-                    } else if (error instanceof BaseIndexError) {
-                        Message.alert(`${error.message}`)
-                    } else if (error instanceof CSVFormatError) {
+                    if (error instanceof ISicElementIDError) {
                         Message.alert(`${error.message}`)
                     } else {
                         console.error(error.message)

@@ -53,7 +53,7 @@ export default class NullIDBlock {
         for (let i=0; i<newids.length; i++) {
             const elem = textelems.elems[i + this.#startIdx]
             const newid = newids[i]
-            
+
             elem.setXMLID(newid, false, true)
         }       
         return textelems 

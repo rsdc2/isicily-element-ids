@@ -1,6 +1,4 @@
-export class TextElemLengthError extends Error {
-    
-}
+
 
 export class ExistingIDError extends Error {
     /**
@@ -25,4 +23,12 @@ export class MidpointIDError extends Error {
         const msg_ = `MidpointIDError: ` + msg
         super(msg_)
     }    
+}
+
+export class TextElemLengthError extends Error {
+    
+}
+
+export class TextElemsIndexError extends Error {
+    
 }

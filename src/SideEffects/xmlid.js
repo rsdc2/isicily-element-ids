@@ -54,7 +54,6 @@ export default class XMLID {
                         epidoc.convertXMLIDs(Base.fromBaseChars(BASE52), Base.fromBaseChars(BASE100))
                     } else if (mode === "setMidpoint") {
                         epidoc.setMidpointXMLIDs(Base.fromBaseChars(BASE100))
-
                     }
 
                     const xmlStr = new XMLSerializer().serializeToString(xml)

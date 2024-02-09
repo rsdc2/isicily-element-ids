@@ -1,6 +1,6 @@
 import Base from "../../Pure/base.js"
 import TextElem from "./textElem.js"
-import { TextElemLengthError } from "./errors.js"
+import { MidpointIDError, TextElemLengthError } from "./errors.js"
 import Format from "../../Pure/format.js"
 import BaseValue from "../../Pure/baseValue.js"
 
@@ -18,11 +18,15 @@ export default class NullIDBlock {
      * 
      * @param {number} startIdx Position of the first element in the TextElem Array
      * @param {number} endIdx Position of the final element in the TextElem Array
-     * @param {string} xmlid1 Already defined ID before the beginning of the block
+     * @param {string | null} xmlid1 Already defined ID before the beginning of the block
      * @param {string} xmlid2 Already defined ID after the end of the block
      * @param {Base} base
      */
     constructor(startIdx, endIdx, xmlid1, xmlid2, base) {
+        if (xmlid1 == null) {
+            throw new MidpointIDError("First ID in block is null")
+        }
+
         this.#startIdx = startIdx
         this.#endIdx = endIdx
         this.#xmlid1 = xmlid1
@@ -35,13 +39,14 @@ export default class NullIDBlock {
      * @param {Array.<TextElem>} textelems 
      * @returns {Array.<TextElem>}
      */
-    assignNewIDs(textelems) {
+    assignIDs(textelems) {
         this.#assertCompatibleArrayLength(textelems)
 
         const newids = this.newIDs
-        for (let i=this.#startIdx; i<=this.#endIdx; i++) {
-            const elem = textelems[i]
+        for (let i=0; i<newids.length; i++) {
+            const elem = textelems[i + this.#startIdx]
             const newid = newids[i]
+            
             elem.setXMLID(newid, false, true)
         }       
         return textelems 
@@ -63,6 +68,17 @@ export default class NullIDBlock {
 
     get base() {
         return this.#base
+    }
+
+    /**
+     * Return true if the index occurs within the range
+     * covered by the null ID block
+     * @param {number} index 
+     * @returns {boolean}
+     */
+    containsIndex(index) {
+        const result = index >= this.#startIdx && index <= this.#endIdx
+        return result
     }
 
     get endIdx() {

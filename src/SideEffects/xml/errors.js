@@ -8,7 +8,7 @@ export class ElementAttributeError extends Error {
         constructor(attributeName, requiredVal, actualVal) {
 
             const msg = `ElementAttributeError: ${attributeName} ` +
-                            `required to be ${requiredVal}, whereas the` +
+                            `required to be ${requiredVal}, whereas the ` +
                             `actual attribute value is ${actualVal}`
             super(msg)
         }

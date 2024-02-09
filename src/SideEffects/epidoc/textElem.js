@@ -1,5 +1,5 @@
 
-import HasXMLElem from "../xml/hasxmlelem.js";
+import EpiDocElem from "./epidocElem.js";
 import Constants from "../../Pure/constants.js";
 import { ExistingIDError } from "./errors.js";
 import Base from "../../Pure/base.js";
@@ -13,7 +13,7 @@ const {TEINS, XMLNS} = Constants
  * in an EpiDoc edition; excludes container elements such
  * as <div/> and <ab/> elements.
  */
-export default class TextElem extends HasXMLElem {
+export default class TextElem extends EpiDocElem {
 
     /**
      * Compress the \@xml:id of the element

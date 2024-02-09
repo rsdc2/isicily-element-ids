@@ -22,9 +22,9 @@ export class LocalNameError extends Error {
      */
     constructor(requiredLocalName, actualLocalName) {
 
-        const msg = `LocalNameError: required 
-                ${requiredLocalName}, 
-                ${actualLocalName}`
+        const msg = `LocalNameError: required localName is ` +
+                `"${requiredLocalName}", whereas the actual name is ` + 
+                `"${actualLocalName}"`
         super(msg)
     }    
 }

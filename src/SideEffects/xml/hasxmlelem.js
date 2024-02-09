@@ -29,7 +29,8 @@ export default class HasXMLElem {
     }
 
     /**
-     * 
+     * Assert that the localName is localName 
+     * and that the namespace is namespace
      * @param {string} localName
      * @param {string} namespace 
      */
@@ -42,7 +43,8 @@ export default class HasXMLElem {
     }
 
     /**
-     * 
+     * Assert that the element's namespace matches
+     * the input value
      * @param {string} namespace 
      */
     assertNS(namespace) {

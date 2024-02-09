@@ -4,10 +4,29 @@ import Edition from "./elements/edition.js";
 import Base from "../../Pure/base.js";
 import Compress from "../../Pure/compress.js";
 import TextElems from "./textElems.js";
-import NullIDBlocks from "./nullidblocks.js";
+import Constants from "../../Pure/constants.js";
+
+const {TEINS} = Constants
 
 
 export default class EpiDoc extends HasXMLDoc {
+
+    /**
+     * 
+     * @param {XMLDocument} doc 
+     */
+    constructor(doc) {
+        super(doc)
+        this.assertTEINameAndNS()
+    }
+
+    /**
+     * Assert that the root element has localName TEI 
+     * and uses TEI namespace
+     */
+    assertTEINameAndNS() {
+        this.root.assertNameNS("TEI", TEINS)
+    }
 
     /**
      * Set the IDs in the TextElements to their compressed

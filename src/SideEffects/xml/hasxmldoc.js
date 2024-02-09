@@ -19,10 +19,10 @@ export default class HasXMLDoc {
     }
 
     /**
-     * @returns {Element}
+     * @returns {HasXMLElem}
      */
     get root() {
-        return this.#doc.documentElement
+        return new HasXMLElem(this.#doc.documentElement)
     } 
 
 

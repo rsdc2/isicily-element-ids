@@ -27,52 +27,11 @@ export default class EpiDoc extends HasXMLDoc {
         this.root.assertNameNS("TEI", TEINS)
     }
 
-    /**
-     * Set the IDs in the TextElements to their compressed
-     * form
-     * @param {Base} base The Base of the IDs in the document
-     * @returns {TextElems}
-     */
-    compressXMLIDs(base) {
-        return this.textElems.compressXMLIDs(base)
-    }
-
-    /**
-     * Convert the IDs in the TextElements from their Base52 form 
-     * to their Base100 form
-     * @param {Base} oldBase The Base of the IDs in the document
-     * @param {Base} newBase
-     * @returns {TextElems}
-     */
-    convertXMLIDs(oldBase, newBase) {
-        return this.textElems.convertXMLIDs(oldBase, newBase)
-    }
 
     get editions() {
         const editionElems = this.doc.querySelectorAll('div[type="edition"]')
         const editionElemArr = Array.from(editionElems)
         return editionElemArr.map(Edition.fromElem)
-    }
-
-    /**
-     * Set the IDs in the TextElements to their expanded
-     * (decompressed) form
-     * @param {Base} base The Base of the IDs in the document
-     * @returns {TextElems}
-     */
-    expandXMLIDs(base) {
-        return this.textElems.expandXMLIDs(base)
-    }
-
-    /**
-     * Finds any text elements that lack an
-     * \@xml:id and assigns an \@xml:id between those that 
-     * have already been assigned
-     * @param {Base} base 
-     * @returns {TextElems}
-     */
-    setMidpointXMLIDs(base) {
-        return this.textElems.setMidpointXMLIDs(base)
     }
 
     /**
@@ -93,15 +52,6 @@ export default class EpiDoc extends HasXMLDoc {
             .querySelector('publicationStmt > idno[type="filename"]')
             .textContent
     }   
-
-    /**
-     * Assign \@xml:id to each descendant text element in place
-     * @param {Base} base
-     * @returns {TextElems}
-     */
-    setXMLIDs(base) {
-        return this.textElems.setXMLIDs(base, this.id)
-    }
 
     get textElems() {
         const elems = this.editions.flatMap(

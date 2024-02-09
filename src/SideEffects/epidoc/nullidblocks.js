@@ -1,5 +1,6 @@
 import NullIDBlock from "./nullidblock.js";
 import TextElem from "./textElem.js";
+import TextElems from "./textElems.js";
 import { MidpointIDError } from "./errors.js";
 import Base from "../../Pure/base.js";
 
@@ -13,7 +14,7 @@ export default class NullIDBlocks {
 
     /**
      * 
-     * @param {TextElem[]} textelems 
+     * @param {TextElems} textelems 
      * @param {NullIDBlock[]} blocks
      */
     constructor(textelems, blocks) {
@@ -67,7 +68,7 @@ export default class NullIDBlocks {
     /**
      * Gathers all contiguous sequences of text elements
      * that lack IDs in a NullIDBlocks object
-     * @param {TextElem[]} textelems 
+     * @param {TextElems} textelems 
      * @param {Base} base 
      * @returns {NullIDBlocks}
      */
@@ -99,7 +100,7 @@ export default class NullIDBlocks {
 
         // Loop through all the text elements to establish
         // where the sequences of null IDs are
-        textelems.forEach(
+        textelems.elems.forEach(
             (elem, i, elems) => {
                 if (elem.xmlid == null) {
                     if (!NullIDBlocks.containIndex(blocks, i)) {

@@ -16,12 +16,13 @@ export default class NullIDBlock {
     #base
 
     /**
-     * 
-     * @param {number} startIdx Position of the first element in the TextElem Array
-     * @param {number} endIdx Position of the final element in the TextElem Array
-     * @param {string | null} xmlid1 Already defined ID before the beginning of the block
-     * @param {string} xmlid2 Already defined ID after the end of the block
-     * @param {Base} base
+     * Create a new NullIDBlock, i.e. sequence of elements that lack \@xml:id. Throws MidpointIDError if there are not 
+     * enough free ID positions between xmlid1 and xmlid2
+     * @param {number} startIdx Index of the first element without \@xml:id in the array of text elements (TextElems) 
+     * @param {number} endIdx Index of the final element without \@xml:id in the array in the array of text elements (TextElems)
+     * @param {string | null} xmlid1 The already defined \@xml:id immediately before the beginning of the block
+     * @param {string} xmlid2 The already defined \@xml:id immediately after the end of the block
+     * @param {Base} base The base of the \@xml:id to be used
      */
     constructor(startIdx, endIdx, xmlid1, xmlid2, base) {
         if (xmlid1 == null) {
@@ -38,12 +39,15 @@ export default class NullIDBlock {
     }
 
     /**
-     * 
+     * Assigns IDs to those elements in textElems which match 
+     * the indices of the NullIDBlock. 
+     * Throws ExistingIDError if tries to overwrite an 
+     * existing \@xml:id.
      * @param {TextElems} textelems 
      * @returns {TextElems}
      */
     assignIDs(textelems) {
-        this.#assertCompatibleArrayLength(textelems.elems)
+        this.#assertCompatibleArrayLength(textelems)
 
         const newids = this.newIDs
         for (let i=0; i<newids.length; i++) {
@@ -59,13 +63,24 @@ export default class NullIDBlock {
      * Checks that the number of TextElems is at
      * least as many as the number of index positions
      * between startIdx and endIdx
-     * @param {Array.<TextElem>} textelems
+     * @param {TextElems} textelems
      * @returns {boolean} 
      */
     #assertCompatibleArrayLength(textelems) {
+        
         if (textelems.length < this.length) {
             throw new TextElemLengthError(
-                "TextElem Array does not have enough members"
+                `TextElem Array does not have enough members: ` +
+                `required = ${this.length + 2}; ` +
+                `actual = ${textelems.length}`
+            )
+        }
+
+        if (this.endIdx >= textelems.lastIndex) {
+            throw new TextElemLengthError(
+                `The last index of the NullIDBlock (${this.endIdx}) ` +
+                `is greater than the last index of the text element ` +
+                `array (${textelems.lastIndex})`
             )
         }
         return true
@@ -75,6 +90,7 @@ export default class NullIDBlock {
      * Checks that there are suficient free IDs
      * between xmlid1 and xmlid2 for all the 
      * elements without ids that need them
+     * @returns {boolean}
      */
     #assertEnoughFreeXMLIDs() {
         const enough = this.midpointsNeededCount <= this.freeMidpointCount
@@ -85,6 +101,7 @@ export default class NullIDBlock {
                 `"${this.xmlid2.baseStr}"`
             )
         }
+        return true
     }
 
     get base() {
@@ -105,22 +122,36 @@ export default class NullIDBlock {
         return this.#endIdx
     }
     
+    /**
+     * The number of free \@xml:id's between the bounding
+     * \@xml:id's
+     */
     get freeMidpointCount() {
         const {xmlid1, xmlid2} = this
         const freeMidpointCount = xmlid2.subtract(xmlid1).dec - 1n;
         return Number(freeMidpointCount);
     }
 
+    /**
+     * The size of the interval between midpoints
+     */
     get intervalSize() {
         const diff = this.xmlid2.dec - this.xmlid1.dec
         const firstInterval = Number(diff) / (this.midpointsNeededCount + 1)
         return Math.trunc(firstInterval)
     }
 
+    /**
+     * The absolute length of the NullIDBlock
+     */
     get length() {
         return this.#endIdx - this.#startIdx + 1
     }
 
+    /**
+     * The length of the NullIDBlock, i.e. 
+     * the number of elements needing an \@xml:id
+     */
     get midpointsNeededCount() {
         return this.length
     }

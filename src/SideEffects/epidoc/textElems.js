@@ -145,23 +145,59 @@ export default class TextElems {
     }
 
     /**
-     * Assign \@xml:id to each descendant text element in place
-     * @param {Base} base
-     * @param {string} docid
-     * @returns {TextElems}
+     * 
+     * @param {TextElem[]} elems 
+     * @param {Base} base 
+     * @param {string} docid 
      */
-    setXMLIDsToAll(base, docid) {
-        this.elems.forEach( (elem, index) => {
+    #setXMLIDs(elems, base, docid) {
+        elems.forEach( (elem, index) => {
             const tokenDecimalID = BigInt((index + 1) * 10).toString()
             const paddedTokenDecimalID = tokenDecimalID.padStart(5, "0")
             const fullID = docid.concat("-", paddedTokenDecimalID)
             const compressed = Compress.compressID(base)(fullID)
             elem.setXMLID(compressed) 
         })
+    }
+
+    /**
+     * Assign \@xml:id to each descendant text element in place
+     * @param {Base} base
+     * @param {string} docid
+     * @returns {TextElems}
+     */
+    setXMLIDsToAll(base, docid) {
+        this.#setXMLIDs(this.elems, base, docid)
+        return this
+    }
+
+    /**
+     * Assign \@xml:id to a subset of descendant text elements in place
+     * @param {Base} base 
+     * @param {string} docid
+     * @param {string[]} localNames localNames of elements that should receive
+     *  an \@xml:id
+     * @returns {TextElems} 
+     */
+    setXMLIDsToSubset(base, docid, localNames) {
+        const elemSubset = this.elemSubset(localNames)
+        this.#setXMLIDs(elemSubset, base, docid)
         return this
     }
 
     get elems() {
         return this.#elems
+    }
+
+    /**
+     * Return those text elements whose localName 
+     * is included in localNames
+     * @param {string[]} localNames localNames of elements required 
+     * @returns {TextElem[]}
+     */
+    elemSubset(localNames) {
+        return this.elems.filter(
+            elem => localNames.includes(elem.localName)
+        )
     }
 }

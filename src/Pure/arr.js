@@ -1,3 +1,5 @@
+import { ArrayLengthError } from "./errors.js"
+
 export const Arr = {
     /**
      * Return the last element of an array, or null if the array is empty
@@ -39,5 +41,23 @@ export const Arr = {
         }
 
         return arr
+    },
+
+    /**
+     * Zip together two arrays. Throw ArrayLengthError if arrays
+     * are of different lengths
+     * @template T
+     * @param {Array.<T>} arr1 
+     * @param {Array.<T>} arr2 
+     * @returns {Array.<[T, T]>}
+     */
+    zip: (arr1, arr2) => {
+        if (arr1.length !== arr2.length) {
+            throw new ArrayLengthError("Arrays are of different lengths")
+        }
+
+        return arr1.map( (item, idx) => {
+            return [item, arr2[idx]]
+        })
     }
 }

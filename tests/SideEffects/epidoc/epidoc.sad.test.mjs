@@ -11,7 +11,7 @@ const epidocFp = "./tests/SideEffects/epidoc/files/ISic000001_invalid.xml"
 test("Load and read invalid EpiDoc file with error", (t) => {
     assert.throws(() => {
         const xmlStr = readFileSync(epidocFp, {encoding: "utf8"})
-        const xml = new JSDOM(xmlStr, {contentType: "application/xml"}).window.document
+        const xml = new JSDOM(xmlStr, { contentType: "application/xml" }).window.document
         const epidoc = new EpiDoc(xml)
         epidoc.assertTEINameAndNS()    
     }, ISicElementIDError)

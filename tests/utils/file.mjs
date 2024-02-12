@@ -1,7 +1,7 @@
-import { JSDOM } from "jsdom"
+// import { JSDOM } from "jsdom"
 import { readFileSync, writeFileSync } from "node:fs"
 import EpiDoc from "../../src/SideEffects/epidoc/epidoc.js"
-
+import { DOMParser } from "./xml.mjs"
 /**
  * Load an XML file at the path
  * @param {string} path
@@ -9,8 +9,10 @@ import EpiDoc from "../../src/SideEffects/epidoc/epidoc.js"
  */
 export function loadXML(path) {
     const xmlStr = readFileSync(path, { encoding: "utf8" })
-    const xml = new JSDOM(xmlStr, { contentType: "application/xml" }).window.document
-    return xml
+    // const xml = new JSDOM(xmlStr, { contentType: "application/xml" }).window.document
+    // const jsdom = new JSDOM()
+    // const DOMParser = jsdom.window.DOMParser
+    return new DOMParser().parseFromString(xmlStr, "application/xml")
 }
 
 /**

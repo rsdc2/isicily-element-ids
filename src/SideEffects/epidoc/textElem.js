@@ -1,4 +1,3 @@
-
 import EpiDocElem from "./epidocElem.js";
 import Constants from "../../Pure/constants/constants.js";
 import { ExistingIDError, NullIDError } from "./errors.js";

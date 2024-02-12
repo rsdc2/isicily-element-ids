@@ -1,6 +1,6 @@
 import FilePicker from "./filepicker.js"
 import FileDownloader from "./filedownloader.js"
-import {newFileReader} from "./filereader_.js"
+import {newFileReader} from "./fileReader_.js"
 import Base from "../Pure/base.js"
 import EpiDoc from "./epidoc/epidoc.js"
 import Message from "./message.js"

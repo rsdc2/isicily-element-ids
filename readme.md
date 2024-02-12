@@ -93,8 +93,11 @@ node --test
 
 ## Dependencies
 
-The Element ID resolver / generator requires [```http-server```](https://www.npmjs.com/package/http-server) (MIT, see LICENSES folder) to run locally.
+The Element ID resolver / generator requires:
+
+1. [`http-server`](https://www.npmjs.com/package/http-server) (MIT, see LICENSES folder) to run locally;
+2. [`jsdom`](https://www.npmjs.com/package/jsdom) (MIT, see LICENSES folder) to run tests.
 
 ## Acknowledgements
 
-The software for the Token ID resolver / generator was written by Robert Crellin as part of the Crossreads project at the Faculty of Classics, University of Oxford, and is licensed under the BSD 3-clause license. This project has received funding from the European Research Council (ERC) under the European Union’s Horizon 2020 research and innovation programme (grant agreement No 885040, “Crossreads”).
+The software for the ISicily Element ID resolver / generator was written by Robert Crellin as part of the Crossreads project at the Faculty of Classics, University of Oxford, and is licensed under the MIT license. This project has received funding from the European Research Council (ERC) under the European Union’s Horizon 2020 research and innovation programme (grant agreement No 885040, “Crossreads”).

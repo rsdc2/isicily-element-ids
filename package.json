@@ -7,8 +7,8 @@
     "author": "Robert Crellin",
     "license": "MIT",
     "type": "module",
-    "dependencies": {
+    "devDependencies": {
         "http-server": "^14.1.1",
-        "jsdom": "^24.0.0"
+        "jsdom": "^24.0.0"        
     }
 }

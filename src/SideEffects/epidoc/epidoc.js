@@ -1,7 +1,6 @@
 
 import HasXMLDoc from "../xml/hasxmldoc.js";
 import Edition from "./elements/edition.js";
-import Base from "../../Pure/base.js";
 import TextElems from "./textElems.js";
 import Constants from "../../Pure/constants.js";
 

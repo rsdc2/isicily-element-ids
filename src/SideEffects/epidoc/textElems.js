@@ -150,7 +150,7 @@ export default class TextElems {
      * @param {string} docid
      * @returns {TextElems}
      */
-    setXMLIDs(base, docid) {
+    setXMLIDsToAll(base, docid) {
         this.elems.forEach( (elem, index) => {
             const tokenDecimalID = BigInt((index + 1) * 10).toString()
             const paddedTokenDecimalID = tokenDecimalID.padStart(5, "0")

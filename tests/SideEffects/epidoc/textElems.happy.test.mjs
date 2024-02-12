@@ -14,16 +14,17 @@ const base100 = Base.fromBaseChars(BASE100)
 
 const epidocFp = "./tests/SideEffects/epidoc/files/ISic000001_valid.xml"
 
+
 test("Put an @xml:id on all text elements", (t) => {
-    const xmlStr = readFileSync(epidocFp, {encoding: "utf8"})
-    const xml = new JSDOM(xmlStr, {contentType: "application/xml"}).window.document
+    const xmlStr = readFileSync(epidocFp, { encoding: "utf8" })
+    const xml = new JSDOM(xmlStr, { contentType: "application/xml" }).window.document
     const epidoc = new EpiDoc(xml)
     
     assert.doesNotThrow(() => {
         epidoc.textElems.assertNoIDs()
     }, NullIDError)
 
-    epidoc.textElems.setXMLIDs(base100, epidoc.id)
+    epidoc.textElems.setXMLIDsToAll(base100, epidoc.id)
 
     assert.doesNotThrow(() => {
         epidoc.textElems.assertAllElementsHaveID()

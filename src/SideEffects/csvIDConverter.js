@@ -1,6 +1,6 @@
 import FilePicker from "./filepicker.js"
 import FileDownloader from "./filedownloader.js"
-import {newFileReader} from "./filereader_.js"
+import {newFileReader} from "./fileReader_.js"
 import Convert from "../Pure/convert.js"
 import Base from "../Pure/base.js"
 import Message from "./message.js"

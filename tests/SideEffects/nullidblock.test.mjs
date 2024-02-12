@@ -9,6 +9,7 @@ import { MidpointIDError } from "../../src/SideEffects/epidoc/errors.js"
 const {BASE52, BASE100} = Constants
 const base = Base.fromBaseChars(BASE100)
 
+
 test("Null ID block 1", (t) => {
     const block = new NullIDBlock(0, 0, "AAKAK", "AAKAU", base)
     const newids = block.newIDs

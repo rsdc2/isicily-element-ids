@@ -1,4 +1,4 @@
-export const CONFIG = {
+export const Config = {
     elementsWithXMLID: [
         'w',
         'name'

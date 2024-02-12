@@ -24,9 +24,28 @@ test("Put an @xml:id on all text elements", (t) => {
         epidoc.textElems.assertNoIDs()
     }, NullIDError)
 
-    epidoc.textElems.setXMLIDsToAll(base100, epidoc.id)
+    epidoc.textElems.setXMLIDs(base100, epidoc.id)
 
     assert.doesNotThrow(() => {
         epidoc.textElems.assertAllElementsHaveID()
     }, NullIDError)
+})
+
+
+test("Put an @xml:id on element subset", (t) => {
+    const xmlStr = readFileSync(epidocFp, { encoding: "utf8" })
+    const xml = new JSDOM(xmlStr, { contentType: "application/xml" }).window.document
+    const epidoc = new EpiDoc(xml)
+    const elems = epidoc.textElems
+    
+    assert.doesNotThrow(() => {
+        elems.assertNoIDs()
+    }, NullIDError)
+
+    elems.setXMLIDs(base100, epidoc.id, ["w"])
+
+    const lbs = elems.subset(["lb"])
+    const ws = elems.subset(["w"])
+    assert.strictEqual(lbs[0].xmlid, null)
+    assert.notStrictEqual(ws[0].xmlid, null)
 })

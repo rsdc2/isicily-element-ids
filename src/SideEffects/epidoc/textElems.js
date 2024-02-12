@@ -150,7 +150,7 @@ export default class TextElems {
      * @param {Base} base 
      * @param {string} docid 
      */
-    #setXMLIDs(elems, base, docid) {
+    #setXMLIDsToElems(elems, base, docid) {
         elems.forEach( (elem, index) => {
             const tokenDecimalID = BigInt((index + 1) * 10).toString()
             const paddedTokenDecimalID = tokenDecimalID.padStart(5, "0")
@@ -161,27 +161,21 @@ export default class TextElems {
     }
 
     /**
-     * Assign \@xml:id to each descendant text element in place
-     * @param {Base} base
-     * @param {string} docid
-     * @returns {TextElems}
-     */
-    setXMLIDsToAll(base, docid) {
-        this.#setXMLIDs(this.elems, base, docid)
-        return this
-    }
-
-    /**
-     * Assign \@xml:id to a subset of descendant text elements in place
+     * Assign \@xml:id to descendant text elements in place. 
+     * If localNames is empty assigns ID to all descendant 
+     * text elements
      * @param {Base} base 
-     * @param {string} docid
-     * @param {string[]} localNames localNames of elements that should receive
-     *  an \@xml:id
-     * @returns {TextElems} 
+     * @param {string} docid 
+     * @param {string[]} [localNames=[]] the localNames of the elements to receive an \@xml:id 
      */
-    setXMLIDsToSubset(base, docid, localNames) {
-        const elemSubset = this.elemSubset(localNames)
-        this.#setXMLIDs(elemSubset, base, docid)
+    setXMLIDs(base, docid, localNames = []) {
+        if (localNames.length == 0) {
+            this.#setXMLIDsToElems(this.elems, base, docid)
+        } else {
+            const elemSubset = this.subset(localNames)
+            this.#setXMLIDsToElems(elemSubset, base, docid)            
+        }
+
         return this
     }
 
@@ -195,7 +189,7 @@ export default class TextElems {
      * @param {string[]} localNames localNames of elements required 
      * @returns {TextElem[]}
      */
-    elemSubset(localNames) {
+    subset(localNames) {
         return this.elems.filter(
             elem => localNames.includes(elem.localName)
         )

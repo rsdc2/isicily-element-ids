@@ -10,6 +10,7 @@ import {
 } from "../Pure/errors.js"
 
 import Constants from "../Pure/constants.js"
+import { Config } from "../config.js"
 
 const {BASE100, BASE52} = Constants
 
@@ -44,7 +45,7 @@ export default class XMLID {
                     const epidoc = EpiDoc.fromDoc(xml)
 
                     if (mode === "set") {
-                        epidoc.textElems.setXMLIDsToAll(base100, epidoc.id)
+                        epidoc.textElems.setXMLIDs(base100, epidoc.id, Config.elementsWithXMLID)
                     } else if (mode === "expand") {
                         epidoc.textElems.expandXMLIDs(base100)
                     } else if (mode === "compress") {

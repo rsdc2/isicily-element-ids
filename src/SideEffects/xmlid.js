@@ -45,7 +45,7 @@ export default class XMLID {
                     const epidoc = EpiDoc.fromDoc(xml)
 
                     if (mode === "set") {
-                        epidoc.textElems.setXMLIDs(base100, epidoc.id, Config.elementsWithXMLID)
+                        epidoc.textElems.setXMLIDs(base100, epidoc.id, Config.elementsForXMLID)
                     } else if (mode === "expand") {
                         epidoc.textElems.expandXMLIDs(base100)
                     } else if (mode === "compress") {

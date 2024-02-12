@@ -2,6 +2,9 @@ export class ISicElementIDError extends Error {
 
 }
 
+export class ArrayLengthError extends ISicElementIDError {
+    
+}
 
 export class ConversionError extends ISicElementIDError {
     /**

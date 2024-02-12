@@ -9,7 +9,7 @@ import {
     FileError
 } from "../Pure/errors.js"
 
-import Constants from "../Pure/constants.js"
+import Constants from "../Pure/constants/constants.js"
 import { Config } from "../config.js"
 
 const {BASE100, BASE52} = Constants

@@ -1,7 +1,7 @@
 import Base from "./base.js"
 import Format from "./format.js"
 import Validator from "./validator.js"
-import Constants  from "./constants.js"
+import Constants  from "./constants/constants.js"
 import { BaseValueError } from "./errors.js"
 
 export default class Compress {    

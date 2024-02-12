@@ -2,7 +2,7 @@ import Parametrized from "../utils/parametrized.mjs"
 import { randomISicID, randomTuples } from "../utils/random.mjs"
 
 import Base from "../../src/Pure/base.js"
-import Constants from "../../src/Pure/constants.js"
+import Constants from "../../src/Pure/constants/constants.js"
 
 const parametrize = Parametrized.parametrize 
 

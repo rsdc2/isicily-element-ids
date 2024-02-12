@@ -1,6 +1,6 @@
 
 import EpiDocElem from "./epidocElem.js";
-import Constants from "../../Pure/constants.js";
+import Constants from "../../Pure/constants/constants.js";
 import { ExistingIDError, NullIDError } from "./errors.js";
 import Base from "../../Pure/base.js";
 import Compress from "../../Pure/compress.js";

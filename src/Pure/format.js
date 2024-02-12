@@ -1,4 +1,4 @@
-import Constants from "./constants.js"
+import Constants from "./constants/constants.js"
 import Elem from "../SideEffects/elem.js"
 
 export default class Format {

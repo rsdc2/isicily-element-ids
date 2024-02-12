@@ -2,7 +2,7 @@ import HasXMLElem from "../../xml/hasxmlelem.js"
 import { ElementAttributeError } from "../../xml/errors.js"
 import TextElem from "../textElem.js"
 import Ab from "./ab.js"
-import Constants from "../../../Pure/constants.js"
+import Constants from "../../../Pure/constants/constants.js"
 import TextContainer from "../textContainer.js"
 
 export default class Edition extends TextContainer {

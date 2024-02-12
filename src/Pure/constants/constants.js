@@ -1,4 +1,4 @@
-import Str from "./str.js"
+import Str from "../str.js"
 
 export default class Constants {
     static EQ = " = "

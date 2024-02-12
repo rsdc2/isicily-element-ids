@@ -2,7 +2,7 @@
 import HasXMLDoc from "../xml/hasxmldoc.js";
 import Edition from "./elements/edition.js";
 import TextElems from "./textElems.js";
-import Constants from "../../Pure/constants.js";
+import Constants from "../../Pure/constants/constants.js";
 
 const {TEINS} = Constants
 

@@ -3,7 +3,7 @@
  */
 
 import Base from "../../src/Pure/base.js"
-import Constants from "../../src/Pure/constants.js"
+import Constants from "../../src/Pure/constants/constants.js"
 import Compress from "../../src/Pure/compress.js"
 
 const { BASE52, BASE100 } = Constants

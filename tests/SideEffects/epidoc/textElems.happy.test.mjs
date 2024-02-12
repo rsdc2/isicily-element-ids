@@ -7,7 +7,7 @@ import EpiDoc from "../../../src/SideEffects/epidoc/epidoc.js"
 import { ISicElementIDError } from "../../../src/Pure/errors.js"
 import { NullIDError } from "../../../src/SideEffects/epidoc/errors.js"
 import Base from "../../../src/Pure/base.js"
-import Constants from "../../../src/Pure/constants.js"
+import Constants from "../../../src/Pure/constants/constants.js"
 
 const {BASE100, BASE52} = Constants
 const base100 = Base.fromBaseChars(BASE100)

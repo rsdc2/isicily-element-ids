@@ -10,7 +10,7 @@ import {
     BaseValueError, 
     CSVFormatError, 
     FileError} from "../Pure/errors.js"
-import Constants from "../Pure/constants.js"
+import Constants from "../Pure/constants/constants.js"
 
 
 

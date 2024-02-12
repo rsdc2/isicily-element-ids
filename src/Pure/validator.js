@@ -1,5 +1,5 @@
 import Format from "./format.js"
-import Constants from "./constants.js"
+import Constants from "./constants/constants.js"
 
 export default class Validator {
     /**

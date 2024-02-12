@@ -1,7 +1,7 @@
 // import { JSDOM } from "jsdom"
 import { readFileSync, writeFileSync } from "node:fs"
 import EpiDoc from "../../src/SideEffects/epidoc/epidoc.js"
-import { DOMParser } from "./xml.mjs"
+import { DOMParser, XMLSerializer } from "./xml.mjs"
 /**
  * Load an XML file at the path
  * @param {string} path
@@ -21,7 +21,7 @@ export function loadXML(path) {
  * @param {string} path
  */
 export function writeXML(xmldoc, path) {
-    const docstr = xmldoc.documentElement.outerHTML
+    const docstr = new XMLSerializer().serializeToString(xmldoc)
     writeFileSync(path, docstr)
 }
 

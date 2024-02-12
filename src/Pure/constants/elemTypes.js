@@ -1,4 +1,5 @@
 export const Subatomic = {    
+    Ex: "ex",
     Expan: "expan",
     Unclear: "unclear",
     Abbr: "abbr",

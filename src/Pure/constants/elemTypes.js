@@ -1,5 +1,4 @@
-export const Subatomic = {
-    
+export const Subatomic = {    
     Expan: "expan",
     Unclear: "unclear",
     Abbr: "abbr",
@@ -49,6 +48,11 @@ export const Compound = {
     Cb: "cb" // Column beginning
 }
 
-export const IDCarrier = {...Subatomic, ...Atomic, ...AtomicNonToken, ...Compound}
+export const IDCarrier = {
+    ...Subatomic, 
+    ...Atomic, 
+    ...AtomicNonToken, 
+    ...Compound
+}
 
 export const IDCarrierMap = new Map(Object.entries(IDCarrier))

@@ -52,6 +52,9 @@ export default class EpiDoc extends HasXMLDoc {
             .textContent
     }   
 
+    /**
+     * @returns {TextElems}
+     */
     get textElems() {
         const elems = this.editions.flatMap(
             edition => edition.descendantTextElems

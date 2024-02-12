@@ -2,7 +2,7 @@ import Base from "../../Pure/base.js"
 import TextElem from "./textElem.js"
 import NullIDBlocks from "./nullidblocks.js"
 import Compress from "../../Pure/compress.js"
-import { MidpointIDError, TextElemsIndexError } from "./errors.js"
+import { MidpointIDError, NullIDError, TextElemsIndexError } from "./errors.js"
 
 /**
  * Represents a collection of text elements
@@ -18,6 +18,16 @@ export default class TextElems {
         this.#elems = textelems
     }
 
+    assertAllElementsHaveID() {
+        this.elems.forEach( (elem) => {
+            if (elem.xmlid == null) {
+                throw new NullIDError(
+                    "At least one text element does not have an @xml:id"
+                )
+            }
+        })
+    }
+
     /**
      * @returns {boolean}
      */
@@ -26,6 +36,21 @@ export default class TextElems {
             throw new MidpointIDError("First element has no @xml:id")
         }
         return true
+    }
+
+    /**
+     * Assert that no elements have an \@xml:id attribute
+     */
+    assertNoIDs() {
+        this.elems.forEach(
+            (elem) => {
+                if (elem.xmlid != null) {
+                    throw new NullIDError(
+                        "At least one text element has an @xml:id attribute"
+                    )
+                }
+            }
+        )
     }
 
     assertLastElemHasID() {

@@ -1,0 +1,811 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<?xml-model href="https://epidoc.stoa.org/schema/latest/tei-epidoc.rng" type="application/xml" schematypens="http://relaxng.org/ns/structure/1.0"?>
+<?xml-model href="../schematron/ircyr-checking.sch" schematypens="http://purl.oclc.org/dsdl/schematron"?>
+<TEI xmlns="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" xml:lang="en">
+    <teiHeader>
+        <fileDesc>
+            <titleStmt>
+                <title>Cadastral inscription for the territory of Halaesa</title>
+                <editor ref="#JP">Jonathan Prag</editor>
+                <principal ref="#JP">Jonathan Prag</principal>
+                <funder>John Fell OUP Research Fund</funder>
+	   <funder><ref target="https://cordis.europa.eu/project/id/885040">ERC Advanced Grant no.885040</ref></funder>
+                <respStmt>
+                    <name xml:id="JP" ref="http://orcid.org/0000-0003-3819-8537">Jonathan Prag</name>
+                    <resp>original data collection and editing</resp>
+                </respStmt>
+                <respStmt>
+                    <name xml:id="JCu" ref="http://orcid.org/0000-0002-6686-3728">James Cummings</name>
+                    <resp>conversion to EpiDoc</resp>
+                </respStmt>
+                <respStmt>
+                    <name xml:id="JCh" ref="http://orcid.org/0000-0001-6823-0265">James Chartrand</name>
+                    <resp>site construction and encoding</resp>
+                </respStmt>
+                <respStmt>
+                    <name xml:id="VV" ref="http://orcid.org/0000-0002-9695-0240">Valeria Vitale</name>
+                    <resp>editing of geo data</resp>
+                </respStmt>
+                <respStmt>
+                    <name xml:id="MM">Michael Metcalfe</name>
+                    <resp>museum data collection</resp>
+                </respStmt>
+                <respStmt>
+     	       <name xml:id="SS" ref="https://orcid.org/0000-0003-3914-9569">Simona Stoyanova</name>
+     	       <resp>standardisation of template and tidying up encoding</resp>
+ 	   </respStmt>
+	    <respStmt>
+                    <name xml:id="system">system</name>
+                    <resp>automated or batch processes</resp>
+                </respStmt>
+            </titleStmt>
+            <publicationStmt>
+                <authority>I.Sicily</authority>
+                <idno type="filename">ISic001174</idno>
+                <idno type="TM">492780</idno>
+                <idno type="EDR"/>
+                <idno type="EDH"/>
+                <idno type="EDCS">39102328</idno>
+                <idno type="PHI">140657</idno>
+                <idno type="PHI">329609</idno>
+                <idno type="PHI">333187</idno>
+                <idno type="URI">http://sicily.classics.ox.ac.uk/inscription/ISic001174</idno>
+                <idno type="DOI" when="2020-12-18">10.5281/zenodo.4351707</idno>
+                <availability>
+                    <licence target="http://creativecommons.org/licenses/by/4.0/">Licensed under a Creative Commons-Attribution 4.0 licence.</licence>
+                </availability>
+            </publicationStmt>
+            <sourceDesc>
+                <msDesc>
+                    <msIdentifier>
+                        <country>Italy</country>
+                        <region>Sicily</region>
+                        <settlement>Messina</settlement>
+                        <repository role="museum" ref="http://sicily.classics.ox.ac.uk/museum/197">Soprintendenza Beni Culturali e Ambientali di Messina</repository>
+                        <idno type="inventory">Me 30903</idno><!-- fragment c -->
+                        <idno type="inventory">Me 30905</idno><!-- fragment d -->
+                        <altIdentifier>
+                            <settlement/>
+                            <repository/>
+                            <idno type="old"/>
+                        </altIdentifier>
+                    </msIdentifier>
+                    <msContents>
+                        <textLang mainLang="grc">Ancient Greek</textLang>
+                    </msContents>
+                    <physDesc>
+                        <objectDesc>
+                            <supportDesc>
+                                <support><p>A monumental inscription on at least two large 'tabulae', presumably free-standing stelae; fragments both lost and preserved are recorded of at least two.</p>
+                                    <material ana="#material.stone.limestone" ref="http://www.eagle-network.eu/voc/material/lod/66.html">limestone</material>
+                                    <objectType ana="#object.stele" ref="https://www.eagle-network.eu/voc/objtyp/lod/250">stele</objectType>
+                                    <dimensions><!--based upon the measurements of Gualtherus--><!-- fragment C is H 11cm, W 10 cm, D 8.3 cm [Arena]; frag. D is H 9 cm, W 8 cm, D 1-2.5 cm [Arena] -->
+                                        <height unit="cm">95</height>
+                                        <width unit="cm">7</width>
+                                        <depth unit="cm">61</depth>
+                                    </dimensions>
+                                </support>
+                                <condition ana="#condition.fragments.non-contiguous"/>
+		    </supportDesc>
+                            <layoutDesc>
+                                <layout>
+                                    <rs ana="#execution.chiselled" ref="http://www.eagle-network.eu/voc/writing/lod/1">chiselled</rs>
+                                	<damage/>
+			</layout>
+                            </layoutDesc>
+                        </objectDesc>
+                        <handDesc>
+                            <handNote><!--Default value and requires editing-->
+                                <locus from="line1" to="line1">Line 1</locus>
+                                <dimensions type="letterHeight">
+                                    <height unit="mm"/>
+                                </dimensions>
+                                <locus from="line1" to="line2">Interlineation line 1 to 2</locus>
+                                <dimensions type="interlinear">
+                                    <height unit="mm"/>
+                                </dimensions>
+                            </handNote>
+                        </handDesc>
+                    </physDesc>
+                    <history>
+                        <origin>
+                            <origPlace>
+                                <placeName type="ancient" ref="http://pleiades.stoa.org/places/462225">Halaesa</placeName>		
+                                <offset>near
+                                    <placeName type="modern" ref="http://sws.geonames.org/2525099">Castel di Tusa</placeName>
+                                </offset>
+                            	<geo>37.99907, 14.26197</geo>
+		</origPlace>
+                            <origDate datingMethod="#julian" notBefore-custom="-0200" notAfter-custom="-0001" precision="low">2nd — 1st century BCE (Kaibel simply 'post-Roman conquest'; Calderone argues 2nd — 1st on letter forms etc. of his frag.; but, 1998, for c. 300 BCE, which Nenci too believes; Manganaro 2nd century BCE).</origDate> <!-- needs tidying before we add more origDates with alternative values -->
+                        </origin>
+                        <provenance type="found" subtype="discovered" when="1558">The principal fragment A was found in the area of the church of Santa Maria dei Palazzi, on the site of Halaesa, in 1558.<geo cert="medium">37.996420, 14.261944</geo>; fragment C was found 2007-03-07 in a dry stone wall (USM 1065) in land to the south-east of the Church of S. Maria dei Palazzi, between insulae III and IV, west of the 'cardo maximus'; fragment D was a casual find, precise data and location not recorded, within the archaeological site of Halaesa.</provenance>
+                        <provenance type="observed" subtype="autopsied">None</provenance>
+                        <provenance type="not-observed" subtype="lost">Lost.</provenance>
+                    </history>
+                </msDesc>
+            </sourceDesc>
+        </fileDesc>
+        <encodingDesc>
+             <p>Encoded following the latest EpiDoc guidelines</p>
+             <xi:include href="../alists/ISicily-taxonomies.xml">
+                 <xi:fallback>
+                     <p>Taxonomies for ISicily controlled values</p>
+                 </xi:fallback>
+             </xi:include>
+	  <xi:include href="../alists/charDecl.xml">
+	     <xi:fallback>
+	       <p>ISicily glyphs authority list</p>
+	     </xi:fallback>
+	   </xi:include>
+         </encodingDesc>
+        <profileDesc>
+            <calendarDesc>
+                <calendar xml:id="julian">
+                    <p>Julian Calendar</p>
+                </calendar>
+            </calendarDesc>
+            <langUsage>
+                <language ident="en">English</language>
+                <language ident="it">Italian</language>
+                <language ident="grc">Ancient Greek</language>
+                <language ident="la">Latin</language>
+                <language ident="he">Hebrew</language>
+                <language ident="phn">Phoenician</language>
+                <language ident="xpu">Punic</language>
+                <language ident="osc">Oscan</language>
+                <language ident="xly">Elymian</language>
+                <language ident="scx">Sikel</language>
+                <language ident="sxc">Sikan</language>
+            </langUsage>
+            <textClass>
+                <keywords scheme="http://www.eagle-network.eu/voc/typeins.html">
+                    <term ana="#function.cadastral" ref="http://www.eagle-network.eu/voc/typeins/lod/48.html">cadastral</term>
+                </keywords>
+            </textClass>
+        </profileDesc>
+        <revisionDesc status="draft">
+            <listChange>
+                <change when="2016-12-03" who="#JCu">James Cummings autogenerated EpiDoc output from database</change>
+                <change when="2017-06-16" who="#JP">Jonathan Prag checked the EpiDoc and added a translation</change>
+                <change when="2018-01-19" who="#JP">Jonathan Prag added fragment and column divisions to text</change>
+                <change when="2020-10-05" who="#SS">Simona Stoyanova normalised Unicode</change>
+                <change when="2020-10-08" who="#SS">Simona Stoyanova updated list of languages</change>
+                <change when="2020-11-20" who="#SS">Simona Stoyanova added EDCS numbers</change>
+                <change when="2020-11-26" who="#SS">Simona Stoyanova restructured bibliography</change>
+                <change when="2020-12-18" who="#system">Updated Zenodo DOI</change>
+                <change when="2021-01-19" who="#SS">renumbered files, uris and references</change>
+                <change when="2021-08-18" who="#JP">Jonathan Prag made initial cleaning of text epidoc and amended bibliography</change>
+                <change when="2021-11-23" who="#JP">Jonathan Prag added fragments c and d from Arena 2020, and amended commentary and metadata</change>
+            </listChange>
+        </revisionDesc>
+    </teiHeader>
+    <facsimile>
+        <surface type="front">
+            <graphic n="screen" url="ISic001174_tiled.tif" height="3680px" width="5520px">
+                <desc>I.Sicily with the permission of the Assessorato Regionale dei Beni Culturali e dell’Identità Siciliana - Dipartimento dei Beni Culturali e dell’Identità Siciliana</desc>
+            </graphic>
+            <graphic n="print" url="ISic001174.jpg" height="3680px" width="5520px">
+                <desc>I.Sicily with the permission of the Assessorato Regionale dei Beni Culturali e dell’Identità Siciliana - Dipartimento dei Beni Culturali e dell’Identità Siciliana</desc>
+            </graphic>
+         </surface>
+    </facsimile>
+    <text>
+        <body>
+            <div type="edition" xml:space="preserve" xml:lang="grc" resp="#JP">
+                <div type="textpart" subtype="fragment-physical" n="a">
+                    <ab>
+                        <cb n="1"/>
+                         <lb n="1"/><gap reason="lost" extent="unknown" unit="character"/>τὸν ὑπὸ κα
+                         <lb n="2" break="no"/><gap reason="lost" extent="unknown" unit="character"/> <supplied reason="lost">κα</supplied>τὰ τοῦ ὁρίου ἐς τὸν πο
+                         <lb n="3" break="no"/><supplied reason="lost">ταμὸν</supplied> <gap reason="lost" extent="unknown" unit="character"/> <supplied reason="lost">καὶ κατ</supplied>ὰ τοῦ ποταμοῦ ἕστε ποτὶ
+                         <lb n="4"/><supplied reason="lost">τὸν ῥοίσκον τὸν ὁρίζοντ</supplied>α τὸν ∙ βʹ ∙ κλᾶρον καὶ ἂν τοῦ ῥο
+                         <lb n="5" break="no"/><supplied reason="lost">ίσκου ἐς τὰν ὁδὸν τ</supplied>ὰν ἐπὶ τὰν Ἰπύρραν, αἱ ἐλαῖαι αἱ ἐ
+                         <lb n="6" break="no"/><supplied reason="lost">πιγεγραμμέναι</supplied> αὗται ἀκολουθέοντι τῷ κλάρῳ τούτῳ.
+                         <lb n="7"/><supplied reason="lost">τὸ</supplied> <gap reason="lost" extent="unknown" unit="character"/> τὸ ὑπὸ τὸν ὀχετὸν ἄχρι ποτὶ τὰν κράναν
+                         <lb n="8"/><supplied reason="lost">τὰν Ἰπύ</supplied><unclear>ρ</unclear>ραν οὐκ ἐργαξεῖται καὶ περίστασιν ἀφησεῖτα<supplied reason="lost">ι</supplied>
+                         <lb n="9"/><expan><abbr>πό</abbr><ex>δας</ex></expan> οʹ παντᾷ, τὰ δὲ δένδρεα καρπεύσε<supplied reason="omitted">τ</supplied><supplied reason="lost">αι</supplied>.
+                         <lb n="10"/><supplied reason="lost">εʹ</supplied> ἀπὸ τοῦ <expan><abbr>τέ</abbr><ex>ρμονος</ex></expan> τοῦ ποτὶ τᾷ κράνᾳ τᾷ Ἰπύρρᾳ κατὰ τᾶς ὁδοῦ ἐς
+                         <lb n="11"/>τὰν ἐλαίαν τὰν κολοβάν, ἐν ᾇ <expan><abbr>τέ</abbr><ex>ρμων</ex></expan> καὶ ἐς τὰν ἐλαίαν, ἐν ᾇ
+                         <lb n="12"/><expan><abbr>τέ</abbr><ex>ρμων</ex></expan> καὶ τᾷ ὁδῷ ἐς τὸν ποταμὸν καὶ κατὰ τοῦ ποταμοῦ ἐς
+                         <lb n="13"/>τὸ ὅριον τοῦ <g ref="#interpunct">·</g> δʹ <g ref="#interpunct">·</g> κλάρου καὶ ὡς τὰ ὅρια τοῦ <g ref="#interpunct">·</g> δʹ <g ref="#interpunct">·</g> κλάρου, αἱ ἐλαῖ
+                         <lb n="14" break="no"/>αι αὗται αἱ ἐπιγεγραμμέναι ἕπονται τῷ κλάρῳ τούτῳ.
+                         <lb n="15"/>ϛʹ ἀπὸ τᾶς ὁδοῦ τᾶς Ξενίδος κατὰ τᾶς ὁδοῦ τᾶς παρὰ τὸ
+                         <lb n="16"/>Μειλιχιεῖον ἐς τὸν ῥοίσκον καὶ κατὰ τοῦ ῥοίσκου ἐς
+                         <lb n="17"/>τὰν συμβολὰν τοῦ ῥοίσκου καὶ ἂν τοῦ ῥοίσκου ἐς τὰν
+                         <lb n="18"/>ὁδὸν τὰν Ξενίδα, ἀκολουθεῖ τῷ κλάρῳ τούτῳ τὸ ὕ
+                         <lb n="19" break="no"/>δωρ τὸ ἐκ τᾶς κράννας καὶ τοῦ βαλανείου τὸ ἀπορρέον
+                         <lb n="20"/><supplied reason="omitted">ζʹ</supplied> ἀπὸ τοῦ ὁρίου τοῦ ∙ <supplied reason="omitted">ϛʹ</supplied> ∙ κλάρου κατὰ τᾶς ὁδοῦ τᾶς ἀγούσας
+                         <lb n="21"/>ἐπὶ τὸ Τάπανον ἐς τὰν σκαφιὰν τὰν παρὰ τὰν Θεματεῖ
+                         <lb n="22" break="no"/>τιν καὶ ὡς αἱ σκαφιαὶ παρὰ τὰν ἅλον ἐς τὰν ἐλαίαν, ἐν ᾇ
+                         <lb n="23"/><expan><abbr>τέ</abbr><ex>ρμων</ex></expan> καὶ ἐς τὰν ἐλαίαν, ἐν ᾇ <expan><abbr>τέ</abbr><ex>ρμων</ex></expan> καὶ ἐς τὸν ῥοίσκον καὶ ἂν τοῦ
+                         <lb n="24"/>ῥοίσκου ἐς τὰν ὁδὸν τὰν ἐπὶ τὸ Τάπανον, αἱ ἐλαῖαι αἱ
+                         <lb n="25"/>ἐπιγεγραμμέναι αὗται ἕπονται τῷ κλάρῳ τούτῳ.
+                         <lb n="26"/>ηʹ ἀπὸ τᾶς σκαφιᾶς τᾶς παρὰ τὰν Θεματεῖτιν ἐς τὸ ῥο
+                         <lb n="27" break="no"/>είδιον καὶ κατὰ τοῦ ῥοειδίου ἐς τὸν ἀγριέλαιον, ἐν ᾧ <expan><abbr>τέ</abbr><ex>ρμων</ex></expan>
+                         <lb n="28"/>καὶ ἐπίστρεμμα ἐς τὰν ἐλαίαν, ἐν ᾇ <expan><abbr>τέ</abbr><ex>ρμων</ex></expan> καὶ ἐς τὰν ἐλαί
+                         <lb n="29" break="no"/>αν, ἐν ᾇ <expan><abbr>τέ</abbr><ex>ρμων</ex></expan> καὶ ἐς τὰν ἐλαίαν, ἐν ᾇ <expan><abbr>τέ</abbr><ex>ρμων</ex></expan> καὶ ἐς τὰν ἐλαίαν
+                         <lb n="30"/>ἐν ᾇ <expan><abbr>τέ</abbr><ex>ρμων</ex></expan> καὶ ἐς τὸν πέτρον, ἐν ᾧ <expan><abbr>τέ</abbr><ex>ρμων</ex></expan> καὶ ἐς τὰν ἐλαίαν, ἐν ᾇ
+                         <lb n="31"/><expan><abbr>τέ</abbr><ex>ρμων</ex></expan> καὶ ἐς τὰν σκαφιὰν καὶ ἐς τὸν <expan><abbr>τέ</abbr><ex>ρμωνα</ex></expan> τὸν ποτὶ τᾷ Ἰπύρρᾳ καὶ
+                         <lb n="32"/>κατὰ τᾶς ὁδοῦ ἕστε ποτὶ τὸν ῥοίσκον καὶ ἂν τοῦ ῥοίσκου
+                         <lb n="33"/>ἕστε ποτὶ τὰν ἐλαίαν τὰν ἐπιγεγραμμέναν, καὶ ὡς τὰ ὅρια
+                         <lb n="34"/>τοῦ <g ref="#interpunct">·</g> ζʹ <g ref="#interpunct">·</g> κλάρου, αἱ ἐλαῖαι αἱ ἐπιγεγραμμέναι αὗται ἕπον
+                         <lb n="35" break="no"/>ται τῷ κλάρῳ τούτῳ.
+                         <lb n="36"/>θʹ ἀπὸ τοῦ ἀγριελαίου, ἐν ᾧ <expan><abbr>τέ</abbr><ex>ρμων</ex></expan> καὶ κατὰ τοῦ ῥοειδίου ἐς τὰν ἐλαίαν
+                         <lb n="37"/>ἐν ᾇ <expan><abbr>τέ</abbr><ex>ρμων</ex></expan> καὶ ἐς τὰν ἐλαίαν, ἐν ᾇ <expan><abbr>τέ</abbr><ex>ρμων</ex></expan> καὶ ἐς τὰν ἐλαίαν <supplied reason="omitted">τὰν</supplied> ἐπι
+                         <lb n="38" break="no"/>γεγραμμέναν <expan><abbr>πό</abbr><ex>λις</ex></expan> <expan><abbr>Ἀ</abbr><ex>λαισίνων</ex></expan> καὶ ὡς αἱ σκαφιαὶ <supplied reason="omitted">αἱ</supplied> παρὰ τοὺς πασσάλους
+                         <lb n="39"/>καὶ κάτω ὡς αἱ σκαφιαὶ καὶ οἱ πάσσαλοι ἄχρι ἐς τὰν σκανάν
+                         <lb n="40"/>καὶ ἐκ τᾶς σκανᾶς ἂν τοῦ τοίχου καὶ ὡς <supplied reason="omitted">ὁ</supplied> τοῖχος ἐς
+                         <lb n="41"/>τὰν σκαφιὰν καὶ ὡς αἱ σκαφιαὶ ἐς τὸν <expan><abbr>τέ</abbr><ex>ρμονα</ex></expan> τὸν ὑπὲρ τᾶς ὁ
+                         <lb n="42" break="no"/>δοῦ καὶ ἂν τᾶς ὁδοῦ ἐς τὸν <expan><abbr>τέ</abbr><ex>ρμονα</ex></expan> τὸν ποτὶ τᾷ Ἰπύρρᾳ καὶ ὡς
+                         <lb n="43"/>τὰ ὅρια τοῦ <g ref="#interpunct">·</g> ηʹ <g ref="#interpunct">·</g> κλάρου· ἁ σκανὰ κοινὰ ποτὶ τὸν μισθωσά
+                         <lb n="44" break="no"/>μενον τὸν <g ref="#interpunct">·</g> ιʹ <g ref="#interpunct">·</g> κλᾶρον· αἱ ἐλαῖαι αἱ ἐπιγεγραμμέναι
+                         <lb n="45"/>αὗται ἕπονται τῷ κλάρῳ τούτῳ.
+                         <lb n="46"/>ιʹ ἀπὸ τᾶς σκανᾶς κάτω ὡς αἱ σκαφιαὶ καὶ οἱ πάσσαλοι
+                         <lb n="47"/>ἐς τὸν τοῖχον καὶ ὡς ὁ τοῖχος ἐς τὰν σκαφιὰν καὶ ὡς
+                         <lb n="48"/>αἱ σκαφιαὶ ἐς τὸν ποταμὸν καὶ κατὰ τοῦ ποταμοῦ ἕσ
+                         <lb n="49" break="no"/>τε ποτὶ τὰν ὁδὸν τὰν ὁρίζουσαν τὸν <g ref="#interpunct">·</g> ζʹ <g ref="#interpunct">·</g> κλᾶρον καὶ
+                         <lb n="50"/>ὡς τὰ ὅρια τοῦ <g ref="#interpunct">·</g> ζʹ <g ref="#interpunct">·</g> καὶ <g ref="#interpunct">·</g> θʹ <g ref="#interpunct">·</g> κλάρου.
+                         <lb n="51"/>αιʹ ἀπὸ τοῦ ὁρίου τοῦ <g ref="#interpunct">·</g> θʹ <g ref="#interpunct">·</g> κλάρου κατὰ τᾶς ὁδοῦ τᾶς ἐπὶ τὸ Τά
+                         <lb n="52" break="no"/>πανον ἐς τὰν γωνίαν τὰν ἀνωτάταν τοῦ περιτειχίσματος
+                         <lb n="53"/>τοῦ Ταπάνου καὶ ἐκ τοῦ Ταπάνου κατὰ τᾶς ποθόδου τᾶς ἐς τὸ
+                         <lb n="54"/>Ἀδρανιεῖον ἐς τὰν ἐλαίαν, ἐν ᾇ <expan><abbr>τέ</abbr><ex>ρμων</ex></expan> καὶ ἐς τὰς σιδέας καὶ
+                         <lb n="55"/>ἐς τὰν ἐλαίαν, ἐν ᾇ <expan><abbr>τέ</abbr><ex>ρμων</ex></expan> καὶ ὡς αἱ σκαφιαὶ <supplied reason="omitted">αἱ</supplied> ὑπὸ τὸν τέρμονα
+                         <lb n="56"/>ἐς τὸ ῥοείδιον καὶ ἂν τοῦ ῥοειδίου ἐς τὰν σκαφιὰν τὰν παρὰ
+                         <lb n="57"/>τὰν Θεματεῖτιν καὶ ἐς τὰν ὁδὸν τὰν ἄγουσαν ἐπὶ τὸ Τάπανον
+                         <lb n="58"/>αἱ ἐλαῖαι αἱ ἐπιγεγραμμέναι αὗται ἕπονται τῷ κλάρῳ τούτῳ.
+                         <lb n="59"/>βιʹ ἀπὸ τοῦ Ταπάνου κατὰ τᾶς ὁδοῦ ἕστε ποτὶ τὸ ῥοείδιον καὶ κατὰ
+                         <lb n="60"/>τοῦ ῥοειδίου ἕστε ποτὶ τὸν πάσσαλον τὸν παρὰ τὸ ῥοείδιον καὶ
+                         <lb n="61"/>ὡς οἱ πάσσαλοι ἕστε ποτὶ τὸ ὅριον τοῦ <g ref="#interpunct">·</g> αιʹ <g ref="#interpunct">·</g> κλάρου καὶ ὡς τὰ ὅρια
+                         <lb n="62"/>τοῦ <g ref="#interpunct">·</g> αιʹ <g ref="#interpunct">·</g> κλάρου· παρεξεῖ πόθοδον ἑξάπεδον ποτὶ τὸ Ἀδρανιεῖ
+                         <lb n="63" break="no"/>ον καὶ <g ref="#interpunct">·</g> κʹ <g ref="#interpunct">·</g> <expan><abbr>πό</abbr><ex>δας</ex></expan> ἀποστασεῖ ἀπὸ τοῦ ναοῦ παντᾷ.
+                         <lb n="64"/>γιʹ ἀπὸ τᾶς σκαφιᾶς τὰς παρὰ τὸν Ὀπικανὸν κατὰ τοῦ Ὀπικανοῦ
+                         <lb n="65"/> ἐς τὸν ποταμὸν καὶ κατὰ τοῦ ποταμοῦ ἕστε κατὰ τὸν <expan><abbr>τέ</abbr><ex>ρμονα</ex></expan> τὸν
+                         <lb n="66"/>ἐν τῷ κλάρῳ καὶ ἂν τῶν <expan><abbr>τε</abbr><ex>ρμόνων</ex></expan> ἐς τὸν <expan><abbr>τέ</abbr><ex>ρμονα</ex></expan> τὸν ποτὶ τᾷ συκέᾳ τὸν ὑπὸ
+                         <lb n="67"/>τὰν ὁδὸν καὶ ὡς ἁ ὁδὸς ἕστε ποτὶ τὸ ὅριον τοῦ <g ref="#interpunct">·</g> γιʹ <g ref="#interpunct">·</g> κλάρου τοῦ με
+                         <lb n="68" break="no"/>γάλου δρυμοῦ καὶ ὡς τὸ ὅριον τοῦ <g ref="#interpunct">·</g> γιʹ <g ref="#interpunct">·</g> κλάρου τοῦ μεγάλου δρυμοῦ.
+                         <lb n="69"/>ἐλαιοκόμιον δίκλαρον
+                         <lb n="70"/>περίστασις τῷ ἐλαιοκομίῳ εἴ τίς ἐστι ἱερά, ἕπεται· οὐ ποιησοῦν
+                         <lb n="71" break="no"/>τι δὲ βυρσοδέψιον οὐδὲ μαγειρικὸν οἱ μισθωσάμενοι τὸ ἐλαιοκόμιον
+                        <cb n="2"/>
+                        <lb n="1"/><gap reason="lost" extent="unknown" unit="character"/>ου κα<supplied reason="lost">ὶ</supplied>
+                            <lb n="2"/><gap reason="lost" extent="unknown" unit="character"/>ν τὰν ὑπὸ τὸ
+                            <lb n="3"/><gap reason="lost" extent="unknown" unit="character"/> ἐς τὸν τέρμονα
+                            <lb n="4"/><gap reason="lost" extent="unknown" unit="character"/> <supplied reason="lost">τὸ ὅρ</supplied>ιον τοῦ <g ref="#interpunct">·</g> θʹ <g ref="#interpunct">·</g> κλάρου καὶ
+                            <lb n="5"/><gap reason="lost" extent="unknown" unit="character"/> <supplied reason="lost">ου τ</supplied>οῦ κατὰ τοῦ ῥόου τοῦ Ὀπικανοῦ
+                            <lb n="6"/><gap reason="lost" extent="unknown" unit="character"/> <supplied reason="lost">κ</supplied>αὶ ἐς τὸν <expan><abbr>τέ</abbr><ex>ρμονα</ex></expan> καὶ ἐς τὰν σκαφιὰν τὰν
+                            <lb n="7"/><supplied reason="lost">παρὰ</supplied> <gap reason="lost" extent="unknown" unit="character"/> <supplied reason="lost">κ</supplied>αὶ ὡς ὁ τέρμων καὶ αἱ σκαφιαὶ ἐς τὰν ἐλαί
+                            <lb n="8" break="no"/><supplied reason="lost">αν ἐν ᾇ <expan><abbr>τέ</abbr><ex>ρμων</ex></expan> καὶ</supplied> ἐς τὸ ὅριον τοῦ <g ref="#interpunct">·</g> ιʹ <g ref="#interpunct">·</g> κλάρου καὶ ἄν τοῦ ὁρίου τοῦ <g ref="#interpunct">·</g> ιʹ <g ref="#interpunct">·</g> <supplied reason="lost">κλά</supplied>
+                            <lb n="9" break="no"/><supplied reason="omitted">ρ</supplied>ου ἕστε ποτὶ τὸ ὅριον τοῦ Πικάττου καὶ ὡς τὰ ὅρια τοῦ
+                            <lb n="10"/>Πικάττου, τούτῳ τῷ κλάρῳ ἕπονται αἱ ἐλαῖαι αἱ ἐπι
+                            <lb n="11" break="no"/>γεγραμμέναι αὗται.
+                            <lb n="12"/>βιʹ ἀπὸ τοῦ τέρμονος τοῦ ὑπὸ τὰν Ἀσπίδα ἐς τὸν πλάτα
+                            <lb n="13" break="no"/>μον, εἷ <expan><abbr>τέ</abbr><ex>ρμων</ex></expan> καὶ ἐς τὰν ἐλαίαν, ἐν ᾇ <expan><abbr>τέ</abbr><ex>ρμων</ex></expan> καὶ ἐς τὰν σκαφιὰν
+                            <lb n="14"/>καὶ ὡς αἱ σκαφιαὶ ἐς τὰν ἐλαίαν, ἐν ᾇ <expan><abbr>τέ</abbr><ex>ρμων</ex></expan> καὶ ἐς τὰν ὁδὸν
+                            <lb n="15"/>τὰν ἀπὸ <supplied reason="omitted">τοῦ</supplied> Ταπάνου καὶ ἂν τᾶς ὁδοῦ ἕστε ποτὶ τὸ ὅριον
+                            <lb n="16"/>τοῦ <g ref="#interpunct">·</g> ζʹ <g ref="#interpunct">·</g> κλάρου καὶ ὡς τὰ ὅρια τοῦ <g ref="#interpunct">·</g> ζʹ <g ref="#interpunct">·</g> κλάρου ἐς τὸν τέρμο
+                            <lb n="17" break="no"/>να καὶ ὡς ὁ τέρμων ἄχρι κατὰ τὸν πλάταμον, τούτῳ
+                            <lb n="18"/>τῷ κλάρῳ ἕπονται αἱ ἐλαῖαι αὗται αἱ ἐπιγεγραμμέναι.
+                            <lb n="19"/>γιʹ ἀπὸ τοῦ ὁρίου τοῦ <g ref="#interpunct">·</g> αιʹ <g ref="#interpunct">·</g> κλάρου κατὰ τοῦ Ὀπικανοῦ ἐς τὰν σκαφιὰν
+                            <lb n="20"/>τὰν παρὰ τὸν Ὀπικανὸν καὶ ὡς αἱ σκαφιαὶ αἱ ὑπὸ τὸν τέρμονα
+                            <lb n="21"/>ἐς τὰν ὁδὸν τὰν ἄγουσαν ἐπὶ τὸ Τάπανον καὶ ἂν τᾶς ὁδοῦ
+                            <lb n="22"/>ἕστε ποτὶ τὸ ὅριον τοῦ <g ref="#interpunct">·</g> βιʹ <g ref="#interpunct">·</g> κλάρου καὶ ὡς τὰ ὅρια τοῦ <g ref="#interpunct">·</g> βιʹ <g ref="#interpunct">·</g> κλάρου.
+                            <lb n="23"/>τοῖς παρὰ τὸν ῥοῦν τὸν Ἄλαισον δαιθμοὺς <supplied reason="omitted">ζ</supplied>.
+                            <lb n="24"/>αʹ ἀπὸ τοῦ ῥόου τοῦ Ἀλαίσου ἐς τὸν <expan><abbr>τέ</abbr><ex>ρμονα</ex></expan> τὸν ἐν τῷ πέτρῳ τὸν παρὰ τὰς
+                            <lb n="25"/>πυάλους καὶ ἂν τοῦ ῥάχα ἐς τὸν πέτρον, ἐν ᾧ <expan><abbr>τέ</abbr><ex>ρμων</ex></expan> καὶ ἐς τὰν ὁδὸν καὶ
+                            <lb n="26"/>ἂν τᾶς ὁδοῦ ἐς τὸν ῥοίσκον καὶ ἂν τοῦ ῥοίσκου ἐς τὰν σκαφιὰν
+                            <lb n="27"/>τὰν ὑπὸ τῷ τέρμονι καὶ ὡς ὁ τέρμων ὁ ὑπὲρ τᾶς σκαφιᾶς ἕσ
+                            <lb n="28" break="no"/>τε ποτὶ τὰν ἅλον καὶ ὑπὲρ τᾶς ἅλου ὡς ὁ τέρμων ὑπὲρ τὰν
+                            <lb n="29"/>σκαφιὰν καὶ ἐς τὰν σκαφιὰν τὰν παρὰ τὰν ἐλαίαν καὶ ὑ
+                            <lb n="30" break="no"/>πὲρ τᾶς ἐλαίας ὡς ὁ τρίβος καὶ αἱ σκαφιαὶ ἐς τὰν ἐλαίαν
+                            <lb n="31"/>τὰν ἐπιγεγραμμέναν <expan><abbr>πό</abbr><ex>λις</ex></expan> <expan><abbr>Ἀ</abbr><ex>λαισίνων</ex></expan> καὶ ἐκ τᾶς ἐλαίας ὡς ὁ τέρμων
+                            <lb n="32"/>ὑπὲρ τὰν ἐλαίαν ἐς τὰν σκαφιὰν καὶ ἄνω ἐς τὰς ῥάμνους
+                            <lb n="33"/>καὶ ὡς αἱ ῥάμνοι περὶ τὸν τέρμονα καὶ ἐς τὰν σκαφιὰν
+                            <lb n="34"/>καὶ ἄνω ἐς τὸν <expan><abbr>τέ</abbr><ex>ρμονα</ex></expan> τὸν ἐν τῷ λίθῳ καὶ ὡς ὁ τέρμων ὑπὸ
+                            <lb n="35"/>τὰν ἅλον καὶ ἐς τὸν <expan><abbr>τέ</abbr><ex>ρμονα</ex></expan> τὸν ἐν τῷ πύργῳ καὶ ὑπὸ τὸν πύρ
+                            <lb n="36" break="no"/>γον ἐς τὸν ῥοίσκον τὸν ὑπὸ τὰν ῥῖνα τὰν ἐν τῷ πύργῳ, εἷ
+                            <lb n="37"/><expan><abbr>τέ</abbr><ex>ρμων</ex></expan> καὶ κατὰ τοῦ ῥοίσκου ἐς τὸν ῥοῦν τὸν Ἄλαισον καὶ ἂν τοῦ
+                            <lb n="38"/>Ἀλαίσου ἐς τὰν ἀρχὰν τᾶς περιωρεσίας· ἐν τούτῳ Ἀγρίου.
+                            <lb n="39"/>βʹ ἀπὸ τᾶς ῥινὸς τᾶς ἐν τῷ πύργω, εἷ <expan><abbr>τέ</abbr><ex>ρμων</ex></expan> ὑπὸ τὸν πύργον ἕστε
+                            <lb n="40"/>ποτὶ τὸν <expan><abbr>τέ</abbr><ex>ρμονα</ex></expan> τὸν ἐν τῷ πύργῳ καὶ ἀπὸ τοῦ <expan><abbr>τέ</abbr><ex>ρμονος</ex></expan> κάτω ὡς αἱ σκαφι
+                            <lb n="41" break="no"/>αὶ ἐς τὰν ἀχράδα τὰν ἐπιγεγραμμέναν <expan><abbr>πό</abbr><ex>λις</ex></expan> <expan><abbr>Ἀ</abbr><ex>λαισίνων</ex></expan> καὶ ὡς αἱ σκα
+                            <lb n="42" break="no"/>φιαὶ ἐς τὰν ἐλαίαν τὰν ἐπιγεγραμμέναν <expan><abbr>πό</abbr><ex>λις</ex></expan> <expan><abbr>Ἀ</abbr><ex>λαισίνων</ex></expan> καὶ ἐς τὰν
+                            <lb n="43"/>συκέαν τὰν ἐπιγεγραμμέναν <expan><abbr>πό</abbr><ex>λις</ex></expan> <expan><abbr>Ἀ</abbr><ex>λαισίνων</ex></expan> καὶ ὡς <surplus>τ</surplus> αἱ σκαφιαὶ ἕστε πο
+                            <lb n="44" break="no"/>τὶ τὸν τέρμονα καὶ ὡς ὁ τέρμων ἐς τὸν ῥοίσκον καὶ κατὰ τοῦ
+                            <lb n="45"/>ῥοίσκου ἐς τὸν ῥοῦν τὸν Ἄλαισον καὶ ἂν τοῦ Ἀλαίσου ποτὶ τὸ
+                            <lb n="46"/>ὅριον τοῦ <g ref="#interpunct">·</g> αʹ <g ref="#interpunct">·</g> κλάρου· ἐν τούτῳ Ἐλαφέος.
+                            <lb n="47"/>γʹ ἀπὸ τοῦ <expan><abbr>τέ</abbr><ex>ρμονος</ex></expan> τοῦ ἐν τῷ πύργῳ τοῦ ὁρίζοντος τὸν <g ref="#interpunct">·</g> βʹ <g ref="#interpunct">·</g> κλᾶρον ἕστε
+                            <lb n="48"/>ποτὶ τὸν ῥοίσκον τὸν ἐκ τοῦ διαπαύματος ῥέοντα καὶ κα
+                            <lb n="49" break="no"/>τὰ τοῦ ῥοίσκου ἐς τὰν συμβολὰν τοῦ ῥοειδίου καὶ ἂν τοῦ ῥο
+                            <lb n="50" break="no"/>ειδίου ἐς τὸν τέρμονα καὶ ὡς τὰ ὅρια τοῦ <g ref="#interpunct">·</g> βʹ <g ref="#interpunct">·</g> κλάρου·
+                            <lb n="51"/>ἐν τούτῳ Ἐλαφέος.
+                            <lb n="52"/>δʹ ἀπὸ τοῦ ῥοίσκου τοῦ ἐκ τοῦ διαπαύματος ὑπὸ τὸν πύργον
+                            <lb n="53"/>ἕστε ποτὶ τὸν ῥοίσκον τὸν ῥέοντα ἐκ τᾶς ῥινὸς τᾶς κα
+                            <lb n="54" break="no"/>τὰ τὸ ἱερόν, εἷ τὰ χάλκια, κατὰ τὸ μαγειρικὸν καὶ κατὰ
+                            <lb n="55"/>τοῦ ῥοίσκου ἕστε ποτὶ τὸν τέρμονα εἷ σκαφιά καὶ ὡς ὁ
+                            <lb n="56"/>τέρμων ἄχρι ποτὶ τὸν ῥοίσκον τὸν ῥέοντα ἐκ τοῦ διαπαύ
+                            <lb n="57" break="no"/>ματος τὸν ὁρίζοντα τὸν <g ref="#interpunct">·</g> γʹ <g ref="#interpunct">·</g> κλᾶρον.
+                            <lb n="58"/>εʹ ἀπὸ τοῦ τέρμονος, εἷ ἁ σκαφιά, κατὰ τοῦ ῥοίσκου ἐς τὰν
+                            <lb n="59"/>σκαφιὰν καὶ ὡς αἱ σκαφιαὶ ἐς τὸν ῥοῦν τὸν Ἄλαισον καὶ ἂν
+                            <lb n="60"/>τοῦ Ἀλαίσου ἕστε ἐς τὸν ῥοίσκον τὸν ὁρίζοντα τὸν <g ref="#interpunct">·</g> βʹ <g ref="#interpunct">·</g> κλᾶ
+                            <lb n="61" break="no"/>ρον καὶ ἂν τοῦ ῥοίσκου ἕστε ἐς τὸν τέρμονα τὸν ὁρίζον
+                            <lb n="62" break="no"/>τα τὸν <g ref="#interpunct">·</g> δʹ <g ref="#interpunct">·</g> κλᾶρον.
+                            <lb n="63"/>ϛʹ ἀπὸ τᾶς ῥινὸς τᾶς κατὰ τὸ ἱερὸν τοῦ Ἀπόλλωνος τᾶς κα
+                            <lb n="64" break="no"/>τὰ τὰ χάλκια τὰ ποτὶ τῷ μαγειρικῷ ὑπὸ τὸν πύργον ἕσ
+                            <lb n="65" break="no"/>τε ποτὶ τὰν ῥεῖνα τὰν πελαστάταν ποτὶ τὸ τυρρίδι
+                            <lb n="66" break="no"/>ον καὶ κατὰ τοῦ ῥάχα ὡς αἱ σκαφιαὶ ἐς τὰν ἅλον καὶ ἐς
+                            <lb n="67"/>τὸν <expan><abbr>τέ</abbr><ex>ρμονα</ex></expan> καὶ κάτω ὡς αἱ σκαφιαὶ ἐς τὸν τέρμονα καὶ ὡς ὁ
+                            <lb n="68"/>τέρμων καὶ αἱ σκαφιαὶ ἐς τὸν <g ref="#interpunct">·</g> βʹ <g ref="#interpunct">·</g> ῥοίσκον καὶ κατὰ τοῦ ῥοί
+                            <lb n="69" break="no"/>σκου ἐς τὸν ῥοῦν τὸν Ἄλαισον καὶ ἂν τοῦ Ἀλαίσου ἐς τὸ
+                            <lb n="70"/>ὅριον τοῦ <g ref="#interpunct">·</g> εʹ <g ref="#interpunct">·</g> κλάρου.
+                            <lb n="71"/>ζʹ ἀπὸ τοῦ πύργου κατὰ τοῦ βαθέος ῥόου ἐς τὸν ῥοῦν τὸν Ἄλαι
+                            <lb n="72" break="no"/>σον καὶ ἂν τοῦ Ἀλαίσου ἄχρι ποτὶ τὸν <g ref="#interpunct">·</g> αʹ <g ref="#interpunct">·</g> ῥοίσκον καὶ ἂν τοῦ
+                            <lb n="73"/>ῥοίσκου ἄχρι ποτὶ τὸν πύργον· ἐν τούτῳ Ἡρακλείδα Ἀπολ
+                            <lb n="74" break="no"/>λωνίου καὶ Φιλοξένου Μενίσκου.
+                            <lb n="75"/>Σκυρεώνοις δαιθμοὺς <g ref="#interpunct">·</g> <unclear>ΙΙ</unclear>
+                            <lb n="76"/>αʹ ἀπὸ τᾶς ῥεινὸς καθὼς ὁ πύργος ἄχρι ποτὶ τὰν ῥεῖνα τὰν ἐ
+                            <lb n="77" break="no"/>χομέν<supplied reason="omitted">α</supplied>ν τοῦ <g ref="#interpunct">·</g> βʹ <g ref="#interpunct">·</g> τυρριδίου καὶ ἀπὸ τᾶς ῥεινὸς κατὰ τοῦ ῥοει
+                            <lb n="78" break="no"/>δίου ἄχρι ποτὶ τὸν τέρμονα καὶ ὡς ὁ τέρμων <supplied reason="omitted">ὁ</supplied> ὑπὲρ τᾶς ἅ
+                            <lb n="79" break="no"/>λου καὶ ἂν τοῦ ῥάχα ὡς αἱ σκαφιαὶ ἐς τὰν ῥεῖνα· ἐν τούτῳ
+                            <lb n="80"/>Ἱστιείου Θέστωνος καὶ Πελαγίου.
+                            <lb n="81"/>βʹ ἀπὸ τοῦ τέρμονος κατὰ τοῦ ῥοίσκου ἕστε ποτὶ τὸν τέρμονα
+                            <lb n="82"/>εἷ σκαφιά, καὶ τῷ τέρμονι ἕστε ποτὶ τὸ ῥοείδιον τὸ ῥέον ἀ
+                            <lb n="83" break="no"/>νὰ μέσον τῶν γαεώνων καὶ ἂν τοῦ ῥοειδίου ἕστε ποτὶ
+                            <lb n="84"/>τὸν τέρμονα καὶ ὡς ὁ τέρμ<supplied reason="omitted">ω</supplied>ν ἐς τὸ ῥοείδιον.
+                            <lb n="85"/>γʹ ἀπὸ τοῦ τέρμονος κατὰ τοῦ ῥοειδίου τοῦ ἀνὰ μέσον τῶν γα
+                            <lb n="86" break="no"/>εώνων ἕστε ποτὶ τὸν τέρμονα εἷ σκαφιά καὶ ὡς ὁ τέρμων
+                            <lb n="87"/>καὶ αἱ σκαφιαὶ ἂν τοῦ ῥάχα ἐς τὸν <expan><abbr>τέ</abbr><ex>ρμονα</ex></expan> καὶ ὑπὲρ τᾶς ἅλου καὶ ἐς
+                            <lb n="88"/>τὸν τέρμονα καὶ ὡς ὁ τέρμων ἄχρι ποτὶ τὸν ῥοίσκον.
+                </ab>
+                </div>
+               <div type="textpart" subtype="fragment-physical" n="b">
+                <ab>
+                    <cb n="1"/>
+                       <lb n="1"/><gap reason="lost" extent="unknown" unit="character"/><supplied reason="lost">ὁ</supplied>δὸς
+                       <lb n="2"/><gap reason="lost" extent="unknown" unit="character"/><supplied reason="lost">π</supplied>όλει
+                       <lb n="3"/><gap reason="lost" extent="unknown" unit="character"/>ου
+                       <lb n="4"/><space extent="unknown" unit="character"/>
+                       <lb n="5"/><gap reason="lost" extent="unknown" unit="character"/><supplied reason="lost">κατ</supplied>ὰ τοῦ τρί
+                       <lb n="6" break="no"/><supplied reason="lost">του</supplied><gap reason="lost" extent="unknown" unit="character"/><supplied reason="lost">καὶ ἐς τ</supplied>ὸν <expan><abbr>τέ</abbr><ex>ρμονα</ex></expan> τὸν
+                       <lb n="7"/><gap reason="lost" extent="unknown" unit="character"/><supplied reason="lost">τοῦτ</supplied>ο καὶ ὡς ἁ
+                       <lb n="8"/><gap reason="lost" extent="unknown" unit="character"/><supplied reason="lost">ὁδὸς</supplied> ἁ ἄγουσα
+                       <lb n="9"/><gap reason="lost" extent="unknown" unit="character"/>ἐπὶ τὸ ξε
+                       <lb n="10" break="no"/><gap reason="lost" extent="unknown" unit="character"/><supplied reason="lost">κ</supplied>ατὰ τὸν ὀ
+                       <lb n="11" break="no"/><supplied reason="lost">χετὸν</supplied> <gap reason="lost" extent="unknown" unit="character"/> <supplied reason="lost">ἔστε</supplied> ποτὶ τὸν
+                       <lb n="12"/><supplied reason="lost" cert="low">ῥοΐσκον</supplied> <gap reason="lost" extent="unknown" unit="character"/> τὸ ἱερὸν <supplied reason="lost">τ</supplied>ᾶ<unclear>ς</unclear>
+                       <lb n="13"/><gap reason="lost" extent="unknown" unit="character"/><orig>ΕΣΑΝΚΛΕΤΟΣ</orig>
+                       <lb n="14"/><gap reason="lost" extent="unknown" unit="character"/>ε τὸν Κάνησ
+                       <lb n="15" break="no"/><supplied reason="lost">σον</supplied><gap reason="lost" extent="unknown" unit="character"/><supplied reason="lost">ἀπὸ τοῦ Κα</supplied>νήσσου ἔσ
+                       <lb n="16" break="no"/><supplied reason="lost">τε ποτὶ</supplied> <gap reason="lost" extent="unknown" unit="character"/> <unclear>τ</unclear>οῖς Νυμφοδώ
+                       <lb n="17" break="no"/><supplied reason="lost">ρου</supplied> <gap reason="lost" extent="unknown" unit="character"/>ακαν <orig>ΜΟΡ</orig>
+                       <lb n="18"/><gap reason="lost" extent="unknown" unit="character"/> <supplied reason="lost">καὶ ὡς</supplied> τὰ ὅρια τοῦ
+                       <lb n="19"/><supplied reason="lost">κλάρου</supplied><gap reason="lost" extent="unknown" unit="character"/> <supplied reason="lost">ἔ</supplied>στε ποτὶ τὸ
+                       <lb n="20"/><supplied reason="lost">ὅριον</supplied> <gap reason="lost" extent="unknown" unit="character"/> καὶ ἀπὸ τοῦ
+                       <lb n="21"/><supplied reason="lost">ὁρίου</supplied> <gap reason="lost" extent="unknown" unit="character"/> <supplied reason="lost">ἐ</supplied>πὶ τὸ πλάγι
+                       <lb n="22" break="no"/><supplied reason="lost">ον</supplied> <gap reason="lost" extent="unknown" unit="character"/> πρῶτον <expan><abbr>τέ</abbr><ex>ρμονα</ex></expan> καὶ
+                       <lb n="23"/><gap reason="lost" extent="unknown" unit="character"/> <supplied reason="lost">ῥ</supplied>άχαν τὸν ὑπ<supplied reason="lost">ὸ</supplied>
+                       <lb n="24"/><gap reason="lost" extent="unknown" unit="character"/> <unclear>γ</unclear>ι ἀπὸ <gap reason="lost" extent="unknown" unit="character"/>
+                <cb n="2"/>
+                           <lb n="1"/> <orig>Χ</orig><gap reason="lost" extent="unknown" unit="character"/>
+                           <lb n="2"/><orig>Ν</orig><gap reason="illegible" unit="character" quantity="1"/><orig>Σ</orig> <gap reason="lost" extent="unknown" unit="character"/> <supplied reason="lost">ἐς πέ</supplied>
+                           <lb n="3" break="no"/>τρον ε<gap reason="lost" extent="unknown" unit="character"/>
+                           <lb n="4"/>ἐς πέτρ<supplied reason="lost">ον</supplied> <gap reason="lost" extent="unknown" unit="character"/> <supplied reason="lost">ἐς</supplied>
+                           <lb n="5"/>τὰς ὀφρύα<supplied reason="lost">ς</supplied> <gap reason="lost" extent="unknown" unit="character"/> <supplied reason="lost">καὶ ἀπὸ</supplied>
+                           <lb n="6"/>τούτου κατ<supplied reason="lost">ὰ</supplied> <gap reason="lost" extent="unknown" unit="character"/> <supplied reason="lost">καὶ ἀπὸ</supplied>
+                           <lb n="7"/>τούτου κατὰ <gap reason="lost" extent="unknown" unit="character"/> <supplied reason="lost">καὶ ἀπὸ</supplied>
+                           <lb n="8"/>τούτου κατὰ τ<unclear>ᾶς</unclear> <gap reason="lost" extent="unknown" unit="character"/>
+                           <lb n="9"/>εἷ <expan><abbr>τέ</abbr><ex>ρμων</ex></expan> καὶ ἀπὸ τούτου ἔ<supplied reason="lost">στε ποτὶ</supplied> <gap reason="lost" extent="unknown" unit="character"/>
+                           <lb n="10"/>εἷ <expan><abbr>τέ</abbr><ex>ρμων</ex></expan> καὶ ἀπὸ τούτου ἔσ<unclear>τ</unclear><supplied reason="lost">ε ποτὶ</supplied> <gap reason="lost" extent="unknown" unit="character"/> <supplied reason="lost">τοὺς</supplied>
+                           <lb n="11"/>λαιούς, εἷ <expan><abbr>τέ</abbr><ex>ρμων</ex></expan> ἐν <gap reason="illegible" unit="character" quantity="1"/> ὁ ἅγι<supplied reason="lost" cert="low">ος</supplied> <gap reason="lost" extent="unknown" unit="character"/> <supplied reason="lost">πα</supplied>
+                           <lb n="12" break="no"/>ρὰ τὰν ὁδὸν καὶ ὡς αἱ <supplied reason="lost">σκαφιαὶ</supplied> <gap reason="lost" extent="unknown" unit="character"/>
+                           <lb n="13"/><orig>ΔΕΝΑΝΟΝ</orig><space unit="character" extent="unknown"/>
+                           <lb n="14"/>Ἡράκλειος Διογέ<unclear>ν</unclear><supplied reason="lost">ους</supplied> <gap reason="lost" extent="unknown" unit="character"/>
+                           <lb n="15"/>Ἀρτεμίδω<unclear>ρ</unclear><supplied reason="lost">ος</supplied> <gap reason="lost" extent="unknown" unit="character"/>
+                           <lb n="16"/>τοῦ ϛʹ πρ<gap reason="lost" extent="unknown" unit="character"/>
+                           <lb n="17"/>τὸ μι<supplied reason="lost">κρὸν</supplied> <gap reason="lost" extent="unknown" unit="character"/>
+                           <lb n="18"/>το<unclear>υ</unclear><gap reason="lost" extent="unknown" unit="character"/>
+                       </ab>
+                 </div>
+                 <div type="textpart" subtype="fragment-physical" n="c">
+                     <ab>
+                         <lb n="1"/><gap reason="lost" extent="unknown" unit="character"/><gap reason="illegible" unit="character" quantity="1"/><gap reason="lost" unit="character" quantity="1" cert="low"/><gap reason="illegible" unit="character" quantity="1"/><orig>ΗΚ</orig><gap reason="lost" extent="unknown" unit="character"/>
+                         <lb n="2"/><gap reason="lost" extent="unknown" unit="character"/><supplied reason="lost">τ</supplied>ᾶς ῥαχίας<gap reason="lost" extent="unknown" unit="character"/>
+                         <lb n="3"/><gap reason="lost" extent="unknown" unit="character"/><orig>Σ</orig> ὑπὸ τὸν <unclear>Κ</unclear><supplied reason="lost" cert="low">άνησσον</supplied><gap reason="lost" extent="unknown" unit="character"/>
+                         <lb n="4"/><gap reason="lost" extent="unknown" unit="character"/><orig>ΝΑ</orig> ἐν ᾧ <expan><abbr><hi rend="ligature">Τέ</hi></abbr><ex>ρμων</ex></expan> <gap reason="lost" extent="unknown" unit="character"/>
+                         <lb n="5"/><gap reason="lost" extent="unknown" unit="character"/><supplied reason="lost">τᾶ</supplied><unclear>ς</unclear> ὁδοῦ τᾶ<unclear>ς</unclear><gap reason="lost" extent="unknown" unit="character"/>
+                         <lb n="6"/><gap reason="lost" extent="unknown" unit="character"/><unclear>ΥΝΙΟ</unclear><gap reason="lost" extent="unknown" unit="character"/>
+                     </ab>
+                 </div>
+                <div type="textpart" subtype="fragment-physical" n="d">
+                     <ab>
+                         <lb n="1"/><gap reason="lost" extent="unknown" unit="character"/><supplied reason="lost">ἐς</supplied> <supplied reason="lost">τὸ</supplied>ν πέτρ<unclear>ο</unclear><supplied reason="lost">ν</supplied> <supplied reason="lost">ἐν</supplied> <supplied reason="lost">ᾧ</supplied> <supplied reason="lost"><expan><abbr>τέ</abbr><ex>ρμων</ex></expan></supplied><gap reason="lost" extent="unknown" unit="character"/>
+                         <lb n="2"/><gap reason="lost" extent="unknown" unit="character"/><supplied reason="lost">α</supplied>̓́νω δ’ ἐς Κά<supplied reason="lost" cert="low">νησσον</supplied><gap reason="lost" extent="unknown" unit="character"/>
+                         <lb n="3"/><gap reason="lost" extent="unknown" unit="character"/>ἕστε κ<supplied reason="lost">ατὰ</supplied> <supplied reason="lost">τὸν</supplied> <supplied reason="lost" cert="low"><expan><abbr>τέ</abbr><ex>ρμονα</ex></expan></supplied><gap reason="lost" extent="unknown" unit="character"/>
+                         <lb n="4"/><gap reason="lost" extent="unknown" unit="character"/><orig><unclear>Ε</unclear>ΙΚΟ</orig><gap reason="lost" extent="unknown" unit="character"/>
+                         <lb n="5"/><gap reason="lost" extent="unknown" unit="character"/><supplied reason="lost">τ</supplied><unclear>ὰ</unclear>ν ὁ<unclear>δ</unclear><supplied reason="lost">ὸν</supplied><gap reason="lost" extent="unknown" unit="character"/>
+                        </ab>
+                 </div>
+            </div>
+            <div type="apparatus" resp="#JP">
+                <listApp>
+                    <app loc="frA"><note>Text of IG XIV.352</note></app>
+                    <app loc="frB"><note>Text of SEG 4.45</note></app>
+                    <app loc="frC"><note>Text of Arena 2020: 5 no. 1 (cf. Arena 2018)</note></app>
+                    <app loc="frC-4"><note>Arena: ὁδοῦ τᾶ[ς---], but traces of final Σ clear in photo and drawing.</note></app>
+                    <app loc="frD"><note>Text of Arena 2020: 15 no. 2 (cf. Arena 2018)</note></app>
+                </listApp>
+            </div>
+            <div type="translation" xml:lang="en" resp="#JP">
+                <p>
+                    Fragment A
+                    Column I:
+                    (lines 1-2 too frag. for transl.)
+                    ...] descending along the boundary to the river[...] and descending along the river until [the rivulet
+                    which borders] allotment 2, and upstream along the rivulet ||5 [to the road] which leads to the
+                    (spring) Ipyrra; the olives [which have been marked] at this point belong to this allotment. [The
+                    land(?)] below the acqueduct as far as the Ipyrra spring shall not be worked, and the surrounding
+                    space for 70 feet in every direction will be left free, but the trees will be harvested. ||10
+                    (Section 5) From the boundary marker at the Ipyrra spring, down along the road to the stunted olive,
+                    on which is a boundary mark, and to the olive on which is a boundary marker, and by the road to the
+                    river and down along the river to the boundary of allotment 4, and along the boundaries of allotment
+                    4; the olives which are marked here belong to this allotment. ||15 From the road which leads outside
+                    the city land, down along the road which passes the Meilichios sanctuary to the rivulet and down
+                    along the rivulet to the confluence of the rivulet and up along the rivulet to the road which leads
+                    outside the city land; to this plot belongs the water from the spring and the run-off from the bath.
+                    ||20 (Section 7) From the boundary of allotment 7 down along the road which leads towards the
+                    Tapanon (a fortress?) to the ditch which borders the Themateitis (a sanctuary? a spring? a road?)
+                    and where the ditches border the area (or garden) to the olive tree on which is a boundary marker,
+                    and to the olive tree on which is a boundary marker, and to the rivulet, and up along the rivulet to
+                    the road which leads towards the Tapanon; the olives which ||25 have been marked at this point
+                    belong to this allotment. (Section 8) From the ditch which borders the Themateitis to the rill, and
+                    down along the rill to the wild olive on which is a boundary mark, and turning about to the olive on
+                    which is a boundary mark, and to the olive on which is a boundary mark, and to the olive on which is
+                    a boundary mark, and to the olive ||30 on which is a boundary mark and to the stone on which is a
+                    boundary mark, and to the olive on which is a boundary mark, and to the ditch, and to the boundary
+                    marker at the Ipyrra (spring), and up along the road as far as the rivulet, and up along the rivulet
+                    as far as the olive which has been marked, and along the boundaries of allotment 7; the olives which
+                    have been marked at this point belong ||35 to this allotment.
+                    (Section 9) From the wild olive on which is a boundary mark, and down along the rill to the olive on
+                    which is a boundary mark, and to the olive on which is a boundary mark, and to the olive on which is
+                    written (monogram Πό(λις) Ἁ(λαισίνων) ?), and where the ditches border the pales, and down along
+                    where there are the ditches and the pales as far as the barn (taverna? cattleshed? masonry
+                    building?) ||40 and from the barn up along the wall, and along the wall to the ditch, and along the
+                    ditches to the boundary marker which is over the road, and up along the road to the boundary marker
+                    which is at the Ipyrra (spring) and along the boundaries of allotment 8; the barn is shared in
+                    proportion to that for which allotment 10 has been leased; the olives which are marked ||45 at this
+                    point belong to this allotment.
+                    (Section 10) From the barn downwards where the ditches and the pales are to the wall, and where the
+                    wall is to the ditch and where the ditches are to the river and along the river as far as the road
+                    which borders allotment 5 and ||50 along the boundaries of allotments 5 and 9. (Section 11) From the
+                    boundary of allotment 7 down along the road which goes toward the Tapanon to the highest corner of
+                    the circuit wall of the Tapanon, and from the Tapanon down along the approach road which leads to
+                    the Adranieion, to the olive on which is a marker, and to the pomegranate trees, and ||55 to the
+                    olive on which is a marker, and along the ditches which are below the boundary marker as far as the
+                    rivulet and up along the rivulet to the ditch besides the Themateitis and to the road which leads
+                    towards the Tapanon; the olives which have been inscribed belong to this allotment. (Section 12)
+                    From the Tapanon down along the road as far as the rivulet, and down along ||60 the rivulet as far
+                    as the pale which border the rivulet and where the pales are as far as the boundary of allotment 11,
+                    and along the boundaries of allotment 11. (The lessee) will provide a six-foot approach road to the
+                    Adranieion and will keep a distance of 20 feet away from the temple on all sides.
+                    (Section 13) From the ditch which borders the (river) Opikanos down along the Opikanos ||65 to the
+                    river and down along the river as far down as the boundary marker which is in the allotment and up
+                    along the boundary markers to the marker which is by the fig-tree below the road and where the road
+                    is as far as the boundary of allotment 13, that of the large coppice, and such is the boundary of
+                    allotment 13, that of the large coppice.
+                    Double-allotment of the olive-yard
+                    ||70 Contents (lit: ‘circumference’): any sacred (olive) belongs to the olive-yard; those who have
+                    leased the olive-yard shall not make a tannery or a cookhouse.
+
+                    Column II:
+                    (Section 11) [first six lines are fragmentary, only surviving at right margin] ... and ... which is
+                    below the ... to the boundary marker ... the boundary of allotment 9 and ||5 ... down along the river
+                    Opikanos ... and to the boundary marker, and to the ditch which borders [...?...] and where the boundary
+                    marker is and the ditches to the olive [on which is a boundary mark, and] to the boundary of
+                    allotment 10 and up along the boundary of allotment 10 as far as the boundary of the Pikattos and
+                    along the boundaries of the ||10 Pikattos; to this allotment belong the olives here which have been
+                    marked.
+                    (Section 12) From the boundary marker below the Aspis to the Platamos (?flat rock?) where there is a
+                    boundary marker, and to the olive on which is a boundary mark, and to the ditch, and where the
+                    ditches are to the olive on which is a boundary mark, and to the road ||15 which leads from the
+                    Tapanon and up along the road as far as the boundary of allotment 7 and along the boundaries of
+                    allotment 7 to the boundary marker, and where the boundary marker is as far down as the Platamos;
+                    the olives marked here belong to this allotment.
+                    (Section 13) From the boundary of allotment 11 down along the Opikanos to the ditch ||20 which
+                    borders the Opikanos and where the ditches are below the boundary marker to the road which leads to
+                    the Tapanon and up along the road as far as the boundary of allotment 12 and along the boundaries of
+                    allotment 12.
+                    To those (living) along the river Halaisos (we have assigned) [7] allotments/divisions (as follows):
+                    (Section 1) From the river Halaisos to the boundary marker on the rock which is beside the ||25
+                    tubs, and up along the ridge to the rock on which is a boundary mark, and to the road, up along the
+                    road to the rill and up along the rill to the ditch which is below the boundary marker, and where
+                    the boundary marker is beyond the ditch as far as the area (?garden), and above the garden where the
+                    boundary marker is beyond the ditch and to the ditch which is beside the olive and beyond ||30 the
+                    olive where the beaten track is and the ditches to the olive on which is marked (monogram Πό(λις)
+                    Ἁ(λαισίνων)) and from the olive where the boundary marker is above the olive to the ditch and
+                    upwards to the thorn bushes and where the thorn bushes are round the boundary marker and to the
+                    ditch and upwards to the boundary mark on the stone and where the boundary mark is below ||35 the
+                    area (?garden) and to the boundary mark on the circuit wall and along under the wall to the rill
+                    which is below the culvert in the wall where there is a boundary mark, and down along the rill to
+                    the river Halaisos and up along the Halaisos to the beginning of the circuit (or delimitation). In
+                    this (allotment is the land) of Agrios.
+                    (Section 2) From the culvert in the wall where there is a boundary mark along beneath the wall as
+                    far ||40 as the boundary mark on the wall and from the boundary mark downwards where the ditches are
+                    to the wild pear tree marked with (monogram Πό(λις) Ἁ(λαισίνων)), and where the ditches are to the
+                    olive marked with (monogram Πό(λις) Ἁ(λαισίνων)), and to the fig tree marked with (monogram Πό(λις)
+                    Ἁ(λαισίνων)), and where the ditches are as far as the boundary marker and where the boundary marker
+                    is to the rivulet and down along the ||45 rivulet to the river Halaisos and up along the Halaisos to
+                    the boundary of allotment 1; in this (allotment is land) of Elapheus.
+                    (Section 3) From the boundary mark on the wall limiting allotment 2 as far as the rill flowing from
+                    the sluice-gate (? - διαπαυμα) and down along the rill to the confluence of the rivulet and up along
+                    the ||50 rivulet to the boundary marker and along the boundaries of allotment 2; in this (allotment
+                    is land) of Elapheus.
+                    (Section 4) From the rill (which flows) out of the sluice gate, along below the wall as far as the
+                    rill which flows out of the culvert below the temple, where there is the forge (?) below the
+                    cookshop (??), and down along ||55 the rill as far as the boundary marker where there is a ditch,
+                    and where the boundary marker is as far as the rill which flows from the sluice-gate bordering
+                    allotment 3.
+                    (Section 5) From the boundary marker where the ditch is, down along the rill to the ditch and where
+                    the ditches are to the river Halaisos and up along ||60 the Halaisos as far as the rill which
+                    borders allotment 2 and up along the rill as far as the boundary marker which delimits allotment 4.
+                    (Section 6) From the culvert below the temple of Apollo, below the forge(?) next to the cookshop(?)
+                    along beneath the wall as far ||65 as the culvert nearest to the little turret and down along the
+                    ridge where the ditches are to the area (or garden) and to the boundary marker and downwards where
+                    the ditches are to the boundary marker and where the boundary marker is and the ditches to the
+                    second rill and down along the rill to the river Halaisos and up along the Halaisos to the ||70
+                    boundary of allotment 5.
+                    (Section 7) From the wall down along the stream to the river Halaisos and up along the Halaisos as
+                    far as the first rill and up along the rill as far as the wall; in this (allotment is land) of
+                    Herakleides son of Apollonios and (land) of Philoxenos son of Meniskos.
+                    ||75 To the Skureonoi (we have assigned) 10 allotments (as follows):
+                    (Allotment 1) From the culvert along the wall(?) as far as the culvert next to the second little
+                    turret and from the culvert down along the rivulet as far as the boundary marker and where the
+                    boundary marker is beyond the area (?garden) and up along the ridge where the dtiches are to the
+                    culvert; in this (allotment is land) of ||80 Histieios son of Theston and (land) of Pelagios.
+                    (Allotment 2) From the boundary marker down along the rill as far as the boundary marker, where
+                    there is a ditch, and by the boundary as far as the rivulet which flows along the space between the
+                    soils(??) and up along the rivulet as far as the boundary marker and where the boundary marker is to
+                    the rivulet.
+                    ||85 (Allotment 3) From the boundary marker down along the rivulet which runs in the space between
+                    the soils(??) as far as the boundary marker where there is a ditch, and where the boundary marker is
+                    and the ditches up along the ridge to the boundary marker and beyond the area (?garden), and to the
+                    boundary marker, and where the boundary is as far as the rill.</p>
+            </div>
+            <div type="commentary">
+                <p>(Note that the translation of Fragment A is based upon the text of Dubois, IGDS no.196.)</p>
+                <p>The main fragment A, is long-since lost, in the course of the 17th century; the second fragment, B, found in 1885 and published the same year by Di Giovanni is also now lost. Two further fragments, sporadic finds on the site of Halaesa (fragment c in 2007, fragment d undated), were published in 2020 by Arena. The original reports of discovery of the principal fragment reference the existence of a second very mutilated and damaged stele that was therefore not recovered or recorded further. It is most commonly reckoned that Fragment B probably derives from this second stele. Arena argues cogently that fragments C and D belong to this text, and explores the possible hypotheses regarding whether they should be associated with the first stele / fragment A, or with the second and fragment B, concluding with a speculative integration of fragment C into the right hand side of column 2 of fragment B. Fragment D is too small to warrant such speculation.</p>
+                <p>A further substantial fragment (<ref target="http://sicily.classics.ox.ac.uk/inscription/ISic003651">ISic003651</ref>) of similar type, but slightly divergent content was published by Calderone in 1961, and is generally considered to belong to a separate but probably associated text. Arena 2020 offers the most detailed consideration of the relationship, concluding that the stone and text are distinct, but belong within the same socio-economic and political context and is most likely associated to, if separate from, the cadastral text itself.</p>
+            </div>
+            <div type="bibliography">
+                <listBibl type="edition">
+                    <bibl type="corpus" n="IG">
+                        <citedRange>
+                            <ref target="https://clio.columbia.edu/catalog/6873760">14.0352</ref>
+                        </citedRange>
+                        <ptr target="https://www.zotero.org/groups/382445/items/Q2SBPG9F"/>
+                    <ref target="https://biblio.inscriptiones.org/epig10001072">https://biblio.inscriptiones.org/epig10001072</ref></bibl>
+                    <bibl type="bulletin" n="SEG">
+                        <citedRange>59.1098</citedRange>
+                        <ptr target="http://zotero.org/groups/382445/items/F2GG87EQ"/>
+                    <ref target="https://biblio.inscriptiones.org/epig10000796">https://biblio.inscriptiones.org/epig10000796</ref></bibl>
+                    <bibl type="bulletin" n="SEG">
+                        <citedRange>58.1039</citedRange>
+                        <ptr target="http://zotero.org/groups/382445/items/F2GG87EQ"/>
+                    <ref target="https://biblio.inscriptiones.org/epig10000796">https://biblio.inscriptiones.org/epig10000796</ref></bibl>
+                    <bibl type="bulletin" n="SEG">
+                        <citedRange>56.1084</citedRange>
+                        <ptr target="http://zotero.org/groups/382445/items/F2GG87EQ"/>
+                    <ref target="https://biblio.inscriptiones.org/epig10000796">https://biblio.inscriptiones.org/epig10000796</ref></bibl>
+                    <bibl type="bulletin" n="SEG">
+                        <citedRange>53.0997</citedRange>
+                        <ptr target="http://zotero.org/groups/382445/items/F2GG87EQ"/>
+                    <ref target="https://biblio.inscriptiones.org/epig10000796">https://biblio.inscriptiones.org/epig10000796</ref></bibl>
+                    <bibl type="bulletin" n="SEG">
+                        <citedRange>52.0917</citedRange>
+                        <ptr target="http://zotero.org/groups/382445/items/F2GG87EQ"/>
+                    <ref target="https://biblio.inscriptiones.org/epig10000796">https://biblio.inscriptiones.org/epig10000796</ref></bibl>
+                    <bibl type="bulletin" n="SEG">
+                        <citedRange>51.1191</citedRange>
+                        <ptr target="http://zotero.org/groups/382445/items/F2GG87EQ"/>
+                    <ref target="https://biblio.inscriptiones.org/epig10000796">https://biblio.inscriptiones.org/epig10000796</ref></bibl>
+                    <bibl type="bulletin" n="SEG">
+                        <citedRange>48.1240</citedRange>
+                        <ptr target="http://zotero.org/groups/382445/items/F2GG87EQ"/>
+                    <ref target="https://biblio.inscriptiones.org/epig10000796">https://biblio.inscriptiones.org/epig10000796</ref></bibl>
+                    <bibl type="bulletin" n="SEG">
+                        <citedRange>45.1363</citedRange>
+                        <ptr target="http://zotero.org/groups/382445/items/F2GG87EQ"/>
+                    <ref target="https://biblio.inscriptiones.org/epig10000796">https://biblio.inscriptiones.org/epig10000796</ref></bibl>
+                    <bibl type="bulletin" n="SEG">
+                        <citedRange>45.1342</citedRange>
+                        <ptr target="http://zotero.org/groups/382445/items/F2GG87EQ"/>
+                    <ref target="https://biblio.inscriptiones.org/epig10000796">https://biblio.inscriptiones.org/epig10000796</ref></bibl>
+                    <bibl type="bulletin" n="SEG">
+                        <citedRange>42.0844</citedRange>
+                        <ptr target="http://zotero.org/groups/382445/items/F2GG87EQ"/>
+                    <ref target="https://biblio.inscriptiones.org/epig10000796">https://biblio.inscriptiones.org/epig10000796</ref></bibl>
+                    <bibl type="bulletin" n="SEG">
+                        <citedRange>40.0796</citedRange>
+                        <ptr target="http://zotero.org/groups/382445/items/F2GG87EQ"/>
+                    <ref target="https://biblio.inscriptiones.org/epig10000796">https://biblio.inscriptiones.org/epig10000796</ref></bibl>
+                    <bibl type="bulletin" n="SEG">
+                        <citedRange>39.0991</citedRange>
+                        <ptr target="http://zotero.org/groups/382445/items/F2GG87EQ"/>
+                    <ref target="https://biblio.inscriptiones.org/epig10000796">https://biblio.inscriptiones.org/epig10000796</ref></bibl>
+                    <bibl type="bulletin" n="SEG">
+                        <citedRange>38.0929</citedRange>
+                        <ptr target="http://zotero.org/groups/382445/items/F2GG87EQ"/>
+                    <ref target="https://biblio.inscriptiones.org/epig10000796">https://biblio.inscriptiones.org/epig10000796</ref></bibl>
+                    <bibl type="bulletin" n="SEG">
+                        <citedRange>37.0758</citedRange>
+                        <ptr target="http://zotero.org/groups/382445/items/F2GG87EQ"/>
+                    <ref target="https://biblio.inscriptiones.org/epig10000796">https://biblio.inscriptiones.org/epig10000796</ref></bibl>
+                    <bibl type="bulletin" n="SEG">
+                        <citedRange>34.0935</citedRange>
+                        <ptr target="http://zotero.org/groups/382445/items/F2GG87EQ"/>
+                    <ref target="https://biblio.inscriptiones.org/epig10000796">https://biblio.inscriptiones.org/epig10000796</ref></bibl>
+                    <bibl type="bulletin" n="SEG">
+                        <citedRange>28.0763</citedRange>
+                        <ptr target="http://zotero.org/groups/382445/items/F2GG87EQ"/>
+                    <ref target="https://biblio.inscriptiones.org/epig10000796">https://biblio.inscriptiones.org/epig10000796</ref></bibl>
+                    <bibl type="bulletin" n="SEG">
+                        <citedRange>04.0045</citedRange>
+                        <ptr target="http://zotero.org/groups/382445/items/F2GG87EQ"/>
+                    <ref target="https://biblio.inscriptiones.org/epig10000796">https://biblio.inscriptiones.org/epig10000796</ref></bibl>
+                    <bibl type="bulletin" n="BE">
+                        <citedRange>1980.0592</citedRange>
+                        <ptr target="http://zotero.org/groups/382445/items/77P5MNIR"/>
+                    <ref target="https://biblio.inscriptiones.org/epig10001282">https://biblio.inscriptiones.org/epig10001282</ref></bibl>
+                    <bibl type="corpus" n="IGDS1">
+                        <citedRange>
+                            <ref target="http://www.persee.fr/doc/efr_0000-0000_1989_cat_119_1">196</ref>
+                        </citedRange>
+                        <ptr target="https://www.zotero.org/groups/382445/items/RWXNUFEX"/>
+                    <ref target="https://biblio.inscriptiones.org/epig10000187">https://biblio.inscriptiones.org/epig10000187</ref></bibl>
+                    <bibl>
+                        <author>Gualtherus</author>
+                        <date>1624 [1625]</date>
+                        <citedRange>
+                            <ref target="http://arachne.uni-koeln.de/item/buchseite/310953">no.182</ref>
+                        </citedRange>
+                        <ptr target="https://www.zotero.org/groups/382445/items/ZP8DE8KS"/>
+                    <ref target="https://biblio.inscriptiones.org/epig10001931">https://biblio.inscriptiones.org/epig10001931</ref></bibl>
+                    <bibl>
+                        <author>Castelli</author>
+                        <date>1753</date>
+                        <citedRange>153</citedRange>
+                        <ptr target="https://www.zotero.org/groups/382445/items/U7S4ZAG3"/>
+                    <ref target="https://biblio.inscriptiones.org/epig10002086">https://biblio.inscriptiones.org/epig10002086</ref></bibl>
+                    <bibl>
+                        <author>Castelli</author>
+                        <date>1769</date>
+                        <citedRange><ref target="http://arachne.uni-koeln.de/item/buchseite/501394">cl.8 no.9</ref></citedRange>
+                        <ptr target="https://www.zotero.org/groups/382445/items/SPTB56H3"/>
+                    <ref target="https://biblio.inscriptiones.org/epig10002084">https://biblio.inscriptiones.org/epig10002084</ref></bibl>
+                    <bibl>
+                        <author>Castelli</author>
+                        <date>1784</date>
+                        <citedRange><ref target="http://arachne.uni-koeln.de/item/buchseite/501812">109 cl. 8 no. 11</ref></citedRange>
+                        <ptr target="https://www.zotero.org/groups/382445/items/7PSFHSUH"/>
+                    <ref target="https://biblio.inscriptiones.org/epig10002083">https://biblio.inscriptiones.org/epig10002083</ref></bibl>
+                    <bibl type="corpus" n="CIG">
+                        <citedRange>3.5594</citedRange>
+                        <ptr target="https://www.zotero.org/groups/382445/items/HTUDQBXS"/>
+                    <ref target="https://biblio.inscriptiones.org/epig10001252">https://biblio.inscriptiones.org/epig10001252</ref></bibl>
+                    <bibl type="corpus" n="SGDI">
+                        <citedRange>5200</citedRange>
+                        <ptr target="https://www.zotero.org/groups/382445/items/JB4GMPBH"/>
+                    <ref target="https://biblio.inscriptiones.org/epig10000817">https://biblio.inscriptiones.org/epig10000817</ref></bibl>
+                    <bibl>
+                        <author>Di Giovanni</author>
+                        <date>1885</date>
+                        <ptr target="https://www.zotero.org/groups/382445/items/3EUW62UF"/>
+                    <ref target="https://biblio.inscriptiones.org/epig10001426">https://biblio.inscriptiones.org/epig10001426</ref></bibl>
+                    <bibl>
+                        <author>Sicca</author>
+                        <date>1924</date>
+                        <citedRange>211-231</citedRange>
+                        <ptr target="https://www.zotero.org/groups/382445/items/WGXVTUBP"/>
+                    <ref target="https://biblio.inscriptiones.org/epig10001393">https://biblio.inscriptiones.org/epig10001393</ref></bibl>
+                    <bibl>
+                        <author>Arangio-Ruiz and Olivieri</author>
+                        <date>1925</date>
+                        <citedRange>47-61 no. 2</citedRange>
+                        <ptr target="https://www.zotero.org/groups/382445/items/5Q2B5T7T"/>
+                    <ref target="https://biblio.inscriptiones.org/epig10001378">https://biblio.inscriptiones.org/epig10001378</ref></bibl>
+                    <bibl>
+                        <author>Manganaro</author>
+                        <date>1980</date>
+                        <citedRange>430-435</citedRange>
+                        <ptr target="https://www.zotero.org/groups/382445/items/VQBJ735Q"/>
+                    <ref target="https://biblio.inscriptiones.org/epig10001836">https://biblio.inscriptiones.org/epig10001836</ref></bibl>
+                    <bibl>
+                        <author>Ghinatti</author>
+                        <date>1993</date>
+                        <citedRange>54</citedRange>
+                        <ptr target="https://www.zotero.org/groups/382445/items/DHSC78CQ"/>
+                    <ref target="https://biblio.inscriptiones.org/epig10001952">https://biblio.inscriptiones.org/epig10001952</ref></bibl>
+                   <bibl>
+                        <author>Prestianni Giallombardo</author>
+                        <date>1999</date>
+                        <ptr target="https://www.zotero.org/groups/382445/items/I2TZQG3X"/>
+                    <ref target="https://biblio.inscriptiones.org/epig10001658">https://biblio.inscriptiones.org/epig10001658</ref></bibl>
+                  <bibl>
+                        <author>Scibona</author>
+                        <date>2002</date>
+                        <ptr target="https://www.zotero.org/groups/382445/items/8IVR89M4"/>
+                    <ref target="https://biblio.inscriptiones.org/epig10001598">https://biblio.inscriptiones.org/epig10001598</ref></bibl>
+                    <bibl>
+                        <author>Corsaro</author>
+                        <date>2003</date>
+                        <citedRange>156-159</citedRange>
+                        <ptr target="https://www.zotero.org/groups/382445/items/NHR6X35V"/>
+                    <ref target="https://biblio.inscriptiones.org/epig10002063">https://biblio.inscriptiones.org/epig10002063</ref></bibl>
+                    <bibl>
+                        <author>Prestianni Giallombardo</author>
+                        <date>2003</date>
+                        <ptr target="https://www.zotero.org/groups/382445/items/QGRM45AD"/>
+                    <ref target="https://biblio.inscriptiones.org/epig10001656">https://biblio.inscriptiones.org/epig10001656</ref></bibl>
+                    <bibl>
+                        <author>Scibona</author>
+                        <date>2003</date>
+                        <ptr target="https://www.zotero.org/groups/382445/items/I9WTFKV3"/>
+                    <ref target="https://biblio.inscriptiones.org/epig10001597">https://biblio.inscriptiones.org/epig10001597</ref></bibl>
+                    <bibl>
+                        <author>Facella</author>
+                        <date>2006</date>
+                        <citedRange>115 n.153</citedRange>
+                        <ptr target="https://www.zotero.org/groups/382445/items/J4XWZPV6"/>
+                    <ref target="https://biblio.inscriptiones.org/epig10002013">https://biblio.inscriptiones.org/epig10002013</ref></bibl>
+                    <bibl>
+                        <author>Cusumano</author>
+                        <date>2008</date>
+                        <citedRange>456-460</citedRange>
+                        <ptr target="https://www.zotero.org/groups/382445/items/J5XXEQRW"/>
+                    <ref target="https://biblio.inscriptiones.org/epig10002058">https://biblio.inscriptiones.org/epig10002058</ref></bibl>
+                    <bibl>
+                        <author>Manganaro</author>
+                        <date>2009</date>
+                        <ptr target="https://www.zotero.org/groups/382445/items/ZDVZC4BR"/>
+                    <ref target="https://biblio.inscriptiones.org/epig10001795">https://biblio.inscriptiones.org/epig10001795</ref></bibl>
+                    <bibl>
+                        <author>Prestianni Giallombardo and Facella</author>
+                        <date>2012</date>
+                        <citedRange>265-267</citedRange>
+                        <ptr target="https://www.zotero.org/groups/382445/items/M5NPN3MF"/>
+                    <ref target="https://biblio.inscriptiones.org/epig10001655">https://biblio.inscriptiones.org/epig10001655</ref></bibl>
+                    <bibl>
+                        <author>Arena</author>
+                        <date>2020</date>
+                        <citedRange>5-15 no. 1 (fr. C); 15-17 no. 2 (fr. D); 89-94 tav. V (fr. B)</citedRange>
+                        <ptr target="http://zotero.org/groups/382445/items/KAIR5ZLR"/>
+                    <ref target="https://biblio.inscriptiones.org/epig10002404">https://biblio.inscriptiones.org/epig10002404</ref></bibl>
+                    <bibl>
+                        <author>Arena</author>
+                        <date>2018</date>
+                        <citedRange>83-102 (fr. C); 102-104 (fr. D)</citedRange>
+                        <ptr target="http://zotero.org/groups/382445/items/PIJWA8DY"/>
+                    <ref target="https://biblio.inscriptiones.org/epig10002351">https://biblio.inscriptiones.org/epig10002351</ref></bibl>
+                    <bibl>
+                        <author>Arena</author>
+                        <date>2023</date>
+                        <citedRange>42-44 figs. 1-2 (frr. C and D)</citedRange>
+                        <ptr target="http://zotero.org/groups/382445/items/Z3VU3KSX"/>
+                    </bibl>
+                 </listBibl>
+                <listBibl type="discussion">
+	       <bibl>
+	           <author>Manganaro</author>
+	           <date>1977</date>
+	           <citedRange>150</citedRange>
+	           <ptr target="http://zotero.org/groups/382445/items/JQHZXXJN"/>
+	       <ref target="https://biblio.inscriptiones.org/epig10001440">https://biblio.inscriptiones.org/epig10001440</ref></bibl>
+	       <bibl>
+	           <author>Manganaro</author>
+	           <date>2001</date>
+	           <citedRange>66-68</citedRange>
+	           <ptr target="http://zotero.org/groups/382445/items/EF6BSAQP"/>
+	       <ref target="https://biblio.inscriptiones.org/epig10001804">https://biblio.inscriptiones.org/epig10001804</ref></bibl>
+	   </listBibl>
+            </div>
+        </body>
+    </text>
+</TEI>

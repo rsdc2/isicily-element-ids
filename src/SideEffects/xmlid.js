@@ -9,11 +9,6 @@ import {
     FileError
 } from "../Pure/errors.js"
 
-import { 
-    MidpointIDError, 
-
-} from "./epidoc/errors.js"
-
 import Constants from "../Pure/constants.js"
 
 const {BASE100, BASE52} = Constants

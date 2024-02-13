@@ -56,7 +56,7 @@ export default class XMLID {
                         epidoc.textElems.setMidpointXMLIDs(base100)
                     }
 
-                    const xmlStr = epidoc.serializeToString(new XMLSerializer())
+                    const xmlStr = epidoc.serializeToString(new XMLSerializer(), false)
 
                     const downloader = new FileDownloader(xmlStr)
                     downloader.download(filename)  

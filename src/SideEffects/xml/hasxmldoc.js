@@ -35,33 +35,39 @@ export default class HasXMLDoc {
 
         // cf. https://www.w3resource.com/xml/declarations.php
 
-        if (this.XMLDeclaration != null) {
+        if (this.XMLDeclaration == null) {
+            console.log("no xml declaration")
+
+            let dataStr = `version="${version}"`;
+
+            if (encoding != null) {
+                dataStr = dataStr.concat(` encoding="${encoding}"`)
+            }
+    
+            if (standalone != null) {
+                dataStr = dataStr.concat(` standalone="${standalone}"`)
+            }
+    
+            const declaration = this.#doc.createProcessingInstruction(
+                "xml", 
+                dataStr
+            )
+    
+            this.#doc.insertBefore(declaration, this.#doc.firstChild)
+    
+            return this
+    
+        } else {
+            console.log("already has xml declaration")
             if (throwOnFail) {
+
                 throw new XMLDeclarationError(
-                    "XML declaration already exists. Did not create XML declaration."
+                    "XML declaration already exists. " +
+                    "Did not create XML declaration."
                 )
             }
-            return
         }
         
-        let dataStr = `version="${version}"`;
-
-        if (encoding != null) {
-            dataStr = dataStr.concat(` encoding="${encoding}"`)
-        }
-
-        if (standalone != null) {
-            dataStr = dataStr.concat(` standalone="${standalone}"`)
-        }
-
-        const declaration = this.#doc.createProcessingInstruction(
-            "xml", 
-            dataStr
-        )
-
-        this.#doc.insertBefore(declaration, this.#doc.firstChild)
-
-        return this
     }
 
     get doc() {
@@ -91,10 +97,13 @@ export default class HasXMLDoc {
     /**
      * 
      * @param {XMLSerializer} serializer 
-     * @param {boolean} declaration 
+     * @param {boolean} addDeclaration Option to add an XML declaration.
+     * This is unnecessary in the browser as XMLSerializer adds one itself.
+     * In JSDom under Node, however, XMLSerializer does not automatically add a declaration.
+     * @returns {string}
      */
-    serializeToString(serializer, declaration = true) {
-        if (declaration) {
+    serializeToString(serializer, addDeclaration = true) {
+        if (addDeclaration) {
             this.createXMLDeclaration({throwOnFail: false})
         }
         return serializer.serializeToString(this.#doc)

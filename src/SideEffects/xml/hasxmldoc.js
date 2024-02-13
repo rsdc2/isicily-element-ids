@@ -93,8 +93,12 @@ export default class HasXMLDoc {
     } 
 
     /**
-     * 
-     * @param {XMLSerializer} serializer 
+     * Serializes the XML document to a string.
+     * Note that the format of the ProcessingInstructions
+     * is dependent on the serializer: Firefox separates 
+     * with newline, whereas Chromium does not.
+     * @param {XMLSerializer} serializer An XMLSerializer that 
+     * serializes an XMLDocument with a serializeToString method
      * @param {boolean} addDeclaration Option to add an XML declaration.
      * This is unnecessary in the browser as XMLSerializer adds one itself.
      * In JSDom under Node, however, XMLSerializer does not automatically add a declaration.

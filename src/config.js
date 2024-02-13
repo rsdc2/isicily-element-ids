@@ -7,4 +7,5 @@ export const Config = {
      * an \@xml:id
      */
     elementsForXMLID: Object.values(IDCarrier)
+    // elementsForXMLID: ["w"]
 }

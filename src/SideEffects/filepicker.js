@@ -83,7 +83,7 @@ export default class FilePicker {
     
             } catch (error) {
                 if (error instanceof FileError) {
-                    Message.alert(error.message)
+                    Message.error(error.message)
                 } else {
                     throw error
                 }

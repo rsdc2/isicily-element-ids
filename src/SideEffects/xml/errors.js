@@ -36,17 +36,21 @@ export class NamespaceError extends ISicElementIDError {
      * @param {string} requiredNS
      * @param {string} actualNS
      */
-        constructor(requiredNS, actualNS) {
-            let actualNS_;
-            if (actualNS == null) {
-                actualNS_ = "empty"
-            } else {
-                actualNS_ = `"${actualNS}"`
-            }
-
-            const msg = `NamespaceError: the required namespace is ` +
-                    `"${requiredNS}", whereas the actual namespace is ` +
-                    `${actualNS_}`
-            super(msg)
+    constructor(requiredNS, actualNS) {
+        let actualNS_;
+        if (actualNS == null) {
+            actualNS_ = "empty"
+        } else {
+            actualNS_ = `"${actualNS}"`
         }
+
+        const msg = `NamespaceError: the required namespace is ` +
+                `"${requiredNS}", whereas the actual namespace is ` +
+                `${actualNS_}`
+        super(msg)
+    }
+}
+
+export class XMLDeclarationError extends ISicElementIDError {
+
 }

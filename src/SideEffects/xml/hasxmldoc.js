@@ -1,5 +1,5 @@
 import HasXMLElem from "./hasxmlelem.js"
-
+import { XMLDeclarationError } from "./errors.js"
 /**
  * Services for EpiDoc XML documents
  */
@@ -15,18 +15,32 @@ export default class HasXMLDoc {
     }
 
     /**
-     * 
-     * @param {string} version 
-     * @param {string | null} encoding 
-     * @param {string | null} standalone 
-     * @returns 
+     * Creates an XML declaration for the document.
+     * If one already exists, throws an error if
+     * throwOnFail is set to true.
+     * @param {Object} options
+     * @param {string} [options.version = "1.0"] 
+     * @param {string | null} [options.encoding = "UTF-8"] 
+     * @param {string | null} [options.standalone = null] 
+     * @param {boolean} [options.throwOnFail = false]
+     * @returns {HasXMLDoc}
      */
-    createXMLDeclaration(
-        version = "1.0", 
-        encoding = "UTF-8", 
-        standalone = null
+    createXMLDeclaration({
+            version = "1.0", 
+            encoding = "UTF-8", 
+            standalone = null,
+            throwOnFail = false
+        }
     ) {
+
+        // cf. https://www.w3resource.com/xml/declarations.php
+
         if (this.XMLDeclaration != null) {
+            if (throwOnFail) {
+                throw new XMLDeclarationError(
+                    "XML declaration already exists. Did not create XML declaration."
+                )
+            }
             return
         }
         
@@ -44,7 +58,10 @@ export default class HasXMLDoc {
             "xml", 
             dataStr
         )
+
         this.#doc.insertBefore(declaration, this.#doc.firstChild)
+
+        return this
     }
 
     get doc() {
@@ -78,22 +95,33 @@ export default class HasXMLDoc {
      */
     serializeToString(serializer, declaration = true) {
         if (declaration) {
-            this.createXMLDeclaration()
+            this.createXMLDeclaration({throwOnFail: false})
         }
         return serializer.serializeToString(this.#doc)
     }
 
     /**
+     * Get the XML declaration of the current document, 
+     * if it exists, null if not
      * @returns {ProcessingInstruction | null}
      */
     get XMLDeclaration() {
-        this.processingInstructions.forEach( item => {
-                if (item.target === "xml" && item.data.includes("version")) {
+
+        const decl = this.processingInstructions.reduce( 
+            (acc, item) => {
+                const fieldMap = /** @type {Map<string, string>} */ (new Map())
+                item.data.split(" ").forEach(item => {
+                    const [key, value] = item.split("=")
+                    fieldMap.set(key, value)
+                })
+                
+                if (item.target === "xml" && fieldMap.has("version")) {
                     return item
                 }
-            }
+                return acc
+            }, null
         )
-        return null
+        return decl
     }
 
 }

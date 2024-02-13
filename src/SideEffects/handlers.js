@@ -297,7 +297,7 @@ export default class Handlers {
             midpointValid = false
 
             if (textInput1Err === Err.ERR.CONTAINSNUMERAL) {
-                Message.alert(Err.containsNumeralErr("1"))
+                Message.error(Err.containsNumeralErr("1"))
             }
         }
 
@@ -311,12 +311,12 @@ export default class Handlers {
         }
 
         if (textInput1Err === Err.ERR.CONTAINSNUMERAL || textInput2Err === Err.ERR.CONTAINSNUMERAL) {
-            Message.alert(Err.containsNumeralErr(""))
+            Message.error(Err.containsNumeralErr(""))
             midpointValid = false
         }
 
         if (textInput1Err === Err.ERR.CONTAINSSPECIAL || textInput2Err === Err.ERR.CONTAINSSPECIAL) {
-            Message.alert(Err.containsSpecialErr(""))
+            Message.error(Err.containsSpecialErr(""))
             midpointValid = false
         }
 
@@ -332,7 +332,7 @@ export default class Handlers {
             text1Status = text1Status.concat("\nThis ID comes after the second ID")
             text2Status = text2Status.concat("\nThis ID comes before the first ID")
             if (Validator.validate(Elems.textInput1) && Validator.validate(Elems.textInput2)) {
-                Message.alert("First ID comes after second ID")
+                Message.error("First ID comes after second ID")
             }
             midpointValid = false
         }
@@ -341,7 +341,7 @@ export default class Handlers {
             text1Status = text1Status.concat("\nERROR: This ID is equal to the second ID")
             text2Status = text2Status.concat("\nERROR: This ID is equal to the first ID.")
             if (Validator.validate(Elems.textInput1) && Validator.validate(Elems.textInput2)) {
-                Message.alert("IDs are equal")
+                Message.error("IDs are equal")
             }
             midpointValid = false
         }
@@ -352,7 +352,7 @@ export default class Handlers {
             if (Validator.validate(Elems.textInput1) 
                     && Validator.validate(Elems.textInput2)) {
                 
-                Message.alert("No IDs between the two values")
+                Message.error("No IDs between the two values")
             }
             midpointValid = false
         }

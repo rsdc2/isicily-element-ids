@@ -66,6 +66,17 @@ export default class NullIDBlocks {
     }
 
     /**
+     * 
+     * @param {TextElem[]} textelemArray
+     * @param {Base} base
+     * @returns {NullIDBlocks} 
+     */
+    static fromTextElemArray(textelemArray, base) {
+        const textelems = new TextElems(textelemArray)
+        return NullIDBlocks.fromTextElems(textelems, base)
+    }
+
+    /**
      * Gathers all contiguous sequences of text elements
      * that lack IDs in a NullIDBlocks object
      * @param {TextElems} textelems 

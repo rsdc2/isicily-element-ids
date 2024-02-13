@@ -13,9 +13,12 @@ function loadFile() {
     const epidoc = loadEpiDoc(
         "../SideEffects/epidoc/files/input/ISic000001_valid.xml"
     )
-    epidoc.createXMLDeclaration()
+    console.log(epidoc.XMLDeclaration)
+    epidoc.createXMLDeclaration({throwOnFail: true})
+
     // epidoc.doc.insertBefore(new Text("\n"), epidoc.doc.firstChild)
-    console.log(epidoc.processingInstructions.length)
+    // console.log(epidoc.processingInstructions.map(item => item.data))
+    console.log(epidoc.XMLDeclaration.data)
     // console.log(cwd())
 }
 

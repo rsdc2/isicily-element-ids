@@ -39,10 +39,10 @@ export default class CSVIDConverter {
                     downloader.download(filename)  
                 } catch (error) {
                     if (error instanceof ISicElementIDError) {
-                        Message.alert(`${error.message}`)
+                        Message.error(`${error.message}`)
                     } else {
                         console.error(error.message)
-                        Message.alert(
+                        Message.error(
                             `Unknown error: please refer to the developer console`
                         )
                     }
@@ -159,7 +159,7 @@ export default class CSVIDConverter {
                 return new CSVIDConverter(filename) 
             } catch (error) {
                 if (error instanceof FileError) {
-                    Message.alert(error.message)
+                    Message.error(error.message)
                 }
             }
         }

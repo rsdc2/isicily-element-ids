@@ -196,9 +196,9 @@
         <body>
             <div type="edition" xml:space="preserve" xml:lang="la" resp="#JP">
                 <ab>
-                    <lb n="1" xml:id="AAKAK"/><w>D<hi rend="tall">i</hi>s</w> <g ref="#interpunct" xml:id="AAKAo">·</g> <w xml:id="AAKAy"><expan xml:id="AAKAΙ"><abbr xml:id="AAKAΤ">man</abbr><ex xml:id="AAKAε">ibus</ex></expan></w> 
-                    <lb n="2" xml:id="AAKAο"/><g ref="#interpunct" xml:id="AAKBA">·</g> <persName type="attested" xml:id="AAKBK"><name xml:id="AAKBU">Zet<hi rend="ligature" xml:id="AAKBe">hi</hi></name></persName> 
-                    <lb n="3"/><w><expan xml:id="AAKBΙ"><abbr xml:id="AAKBΤ">vix</abbr><ex xml:id="AAKBε">it</ex></expan></w> <g ref="#interpunct" xml:id="AAKBο">·</g> <w xml:id="AAKCA"><expan xml:id="AAKCK"><abbr xml:id="AAKCU">a</abbr><ex xml:id="AAKCe">nnis</ex></expan></w> <g ref="#interpunct" xml:id="AAKCo">·</g> <num value="6" xml:id="AAKCy">VI</num>
+                    <lb n="1" xml:id="AAKAK"/><w>D<hi rend="tall">i</hi>s</w> <g ref="#interpunct">·</g> <w><expan><abbr>man</abbr><ex>ibus</ex></expan></w> 
+                    <lb n="2" xml:id="AAKAο"/><g ref="#interpunct">·</g> <persName type="attested"><name>Zet<hi rend="ligature">hi</hi></name></persName> 
+                    <lb n="3"/><w><expan><abbr>vix</abbr><ex>it</ex></expan></w> <g ref="#interpunct">·</g> <w><expan><abbr>a</abbr><ex>nnis</ex></expan></w> <g ref="#interpunct">·</g> <num value="6" xml:id="AAKCy">VI</num>
                 </ab>
             </div>
             <div type="apparatus" resp="#JP">

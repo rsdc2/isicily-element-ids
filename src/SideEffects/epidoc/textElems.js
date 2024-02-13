@@ -100,6 +100,18 @@ export default class TextElems {
     }
 
     /**
+     * Return those text elements whose localName 
+     * is not included in localNames
+     * @param {string[]} localNames localNames of elements required 
+     * @returns {TextElem[]}
+     */
+    disjoint(localNames) {
+        return this.elems.filter(
+            elem => !localNames.includes(elem.localName)
+        )
+    }
+
+    /**
      * Set the IDs in the TextElements to their expanded
      * (decompressed) form
      * @param {Base} base The Base of the IDs in the document

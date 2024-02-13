@@ -72,3 +72,36 @@ test("Puts midpoints in correctly", (t) => {
 
     assertIDsEqual(missingMidpoints.textElems.elems, benchmark.textElems.elems)
 })
+
+
+test("Put midpoints on only subset of elements", (t) => {
+    const epidoc = loadEpiDoc(
+        getInputPath(
+            "ISic000001_tokenized_with_ids_pyepidoc_missing_midpoints.xml"
+            )
+        )
+
+    const tokensForIDs = ["w", "name", "num", "lb"]
+
+    epidoc.textElems.setMidpointXMLIDs(base100, tokensForIDs)
+
+    const elemSubset = epidoc.textElems.subset(tokensForIDs)
+
+    elemSubset.forEach( elem => {
+        assert.notStrictEqual(
+            elem.xmlid, 
+            null, 
+            "Element that should have been given an @xml:id has null @xml:id"
+        )
+    })
+
+    const elemDisjoint = epidoc.textElems.disjoint(tokensForIDs)
+
+    elemDisjoint.forEach( elem => {
+        assert.strictEqual(
+            elem.xmlid, 
+            null, 
+            "Element that should not have been given an @xml:id has been given an @xml:id"
+        )
+    })
+}) 

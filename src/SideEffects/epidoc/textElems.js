@@ -7,7 +7,8 @@ import {
     MidpointIDError, 
     NullIDError, 
     TextElemsIndexError,
-    UnexpectedIDError
+    UnexpectedIDError,
+    UniqueIDError
 } from "./errors.js"
 
 /**
@@ -42,6 +43,27 @@ export default class TextElems {
             throw new MidpointIDError("First element has no @xml:id")
         }
         return true
+    }
+
+    assertNonNullIDsUnique() {
+        const ids = this.elems.reduce( (acc, elem) => {
+            if (elem === null) {
+                return acc
+            } else {
+                acc.push(elem)
+                return acc
+            }
+        }, [])
+
+        const set = new Set(ids)
+
+        if (ids.length !== set.size) {
+            console.log(ids)
+            console.log(set.entries())
+            throw new UniqueIDError(
+                `IDs are not unique`
+            )
+        }
     }
 
     assertMissingIDs() {
@@ -98,7 +120,6 @@ export default class TextElems {
         return true
     }
 
-
     /**
      * Set the IDs in the TextElements to their compressed
      * form
@@ -111,8 +132,6 @@ export default class TextElems {
         })
         return this
     }
-
-
 
     /**
      * Convert the IDs in the TextElements from their Base52 form 
@@ -207,7 +226,9 @@ export default class TextElems {
         }
 
         const blocks = NullIDBlocks.fromTextElemArray(elems, base)
-        return blocks.assignIDs()
+        const elemsWithIDs = blocks.assignIDs()
+        this.assertNonNullIDsUnique()
+        return elemsWithIDs
     }
 
     /**
@@ -243,6 +264,8 @@ export default class TextElems {
             const elemSubset = this.subset(localNames)
             this.#setXMLIDsToElems({elems: elemSubset, base: base, docId: docid})            
         }
+
+        this.assertNonNullIDsUnique()
 
         return this
     }

@@ -47,3 +47,7 @@ export class TextElemLengthError extends ISicElementIDError {
 export class TextElemsIndexError extends ISicElementIDError {
     
 }
+
+export class UniqueIDError extends ISicElementIDError {
+    
+}

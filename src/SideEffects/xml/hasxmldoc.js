@@ -36,7 +36,6 @@ export default class HasXMLDoc {
         // cf. https://www.w3resource.com/xml/declarations.php
 
         if (this.XMLDeclaration == null) {
-            console.log("no xml declaration")
 
             let dataStr = `version="${version}"`;
 
@@ -58,7 +57,6 @@ export default class HasXMLDoc {
             return this
     
         } else {
-            console.log("already has xml declaration")
             if (throwOnFail) {
 
                 throw new XMLDeclarationError(

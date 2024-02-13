@@ -14,6 +14,10 @@ export class ExistingIDError extends ISicElementIDError {
     }    
 }
 
+export class UnexpectedIDError extends ISicElementIDError {
+  
+}
+
 export class MidpointIDError extends ISicElementIDError {
     /**
      * @param {string} msg

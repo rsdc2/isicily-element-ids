@@ -2,7 +2,12 @@ import Base from "../../Pure/base.js"
 import TextElem from "./textElem.js"
 import NullIDBlocks from "./nullidblocks.js"
 import Compress from "../../Pure/compress.js"
-import { MidpointIDError, NullIDError, TextElemsIndexError } from "./errors.js"
+import { ExistingIDError, 
+    MidpointIDError, 
+    NullIDError, 
+    TextElemsIndexError,
+    UnexpectedIDError
+} from "./errors.js"
 
 /**
  * Represents a collection of text elements
@@ -46,6 +51,28 @@ export default class TextElems {
         }
 
         throw new MidpointIDError("All elements have an @xml:id attribute")
+    }
+
+    /**
+     * 
+     * @param {string[]} localNames 
+     */
+    assertNoElemsOutsideLocalNameSubsetHaveIDs(localNames) {
+        if (localNames.length === 0) {
+            return
+        } 
+        const elems = this.disjoint(localNames)
+        elems.forEach ( elem => {
+            if (elem.xmlid != null) {
+                throw new UnexpectedIDError(
+                    `Element with ID ${elem.xmlid} ` +
+                    `has an @xml:id attribute. This is not expected ` + 
+                    `because its localName ("${elem.localName}") is not ` +
+                    `in the set of localNames that are supposed to receive ` +
+                    `IDs.`
+                )
+            }
+        })
     }
 
     /**
@@ -165,6 +192,7 @@ export default class TextElems {
     setMidpointXMLIDs(base, localNames = []) {
         this.assertFirstElemHasID()
         this.assertLastElemHasID()
+        this.assertNoElemsOutsideLocalNameSubsetHaveIDs(localNames)
 
         let elems = this.#elems
         if (localNames.length !== 0) {
@@ -200,6 +228,8 @@ export default class TextElems {
      * @param {string[]} [localNames=[]] the localNames of the elements to receive an \@xml:id 
      */
     setXMLIDs(base, docid, localNames = []) {
+        this.assertNoElemsOutsideLocalNameSubsetHaveIDs(localNames)
+
         if (localNames.length == 0) {
             this.#setXMLIDsToElems({elems: this.elems, base: base, docId: docid})
         } else {

@@ -10,27 +10,8 @@ import { Config } from "../../../src/config.js"
 
 const {BASE100, BASE52} = Constants
 const base100 = Base.fromBaseChars(BASE100)
-const inputpath = "./tests/SideEffects/epidoc/files/input/"
-const outputpath = "./tests/SideEffects/epidoc/files/output/"
 
-
-/**
- * 
- * @param {string} filename 
- * @returns {string}
- */
-function getInputPath(filename) {
-    return inputpath + filename
-}
-
-/**
- * 
- * @param {string} filename 
- * @returns {string}
- */
-function getOutputPath(filename) {
-    return outputpath + filename
-}
+import { getInputPath, getOutputPath } from "../../utils/file.mjs"
 
 
 test("Throw error when not enough free midpoints", (t) => {

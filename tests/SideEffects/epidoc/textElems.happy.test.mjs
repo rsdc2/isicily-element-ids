@@ -16,7 +16,7 @@ const base100 = Base.fromBaseChars(BASE100)
 
 
 test("Put an @xml:id on all text elements", (t) => {
-    const epidoc = loadEpiDoc(getInputPath("ISic000001_valid.xml"))
+    const epidoc = loadEpiDoc(getInputPath("ISic000001_valid_no_ids.xml"))
     
     assert.doesNotThrow(() => {
         epidoc.textElems.assertNoIDs()
@@ -31,7 +31,7 @@ test("Put an @xml:id on all text elements", (t) => {
 
 
 test("Put an @xml:id on element subset", (t) => {
-    const epidoc = loadEpiDoc(getInputPath("ISic000001_valid.xml"))
+    const epidoc = loadEpiDoc(getInputPath("ISic000001_valid_no_ids.xml"))
     const elems = epidoc.textElems
     
     assert.doesNotThrow(() => {

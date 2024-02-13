@@ -6,6 +6,7 @@ import { ISicElementIDError } from "../../../src/Pure/errors.js"
 
 const epidocFp = "./tests/SideEffects/epidoc/files/input/ISic000001_invalid.xml"
 
+
 test("Load and read invalid EpiDoc file with error", (t) => {
     assert.throws(() => {
         const epidoc = loadEpiDoc(epidocFp)

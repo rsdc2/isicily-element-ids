@@ -39,7 +39,6 @@ export function loadXML(path) {
  */
 export function writeXML(xmldoc, path) {
     const hasxmldoc = new HasXMLDoc(xmldoc)
-    // hasxmldoc.doc.insertBefore(new Text("\n"), hasxmldoc.processingInstructions[1])
     const docstr = hasxmldoc.serializeToString(new XMLSerializer())
     writeFileSync(path, docstr)
 }

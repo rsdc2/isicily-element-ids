@@ -186,6 +186,10 @@ table {
   margin: auto
 }
 
+table.browser {
+  margin-top: 20px;
+}
+
 td {
   text-align: center;
 }

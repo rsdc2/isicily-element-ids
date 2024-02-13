@@ -13,6 +13,9 @@ export function assertIDsEqual(ids1, ids2) {
     assert.strictEqual(ids1.length, ids2.length)
 
     Arr.zip(ids1, ids2).forEach(([pyepidocID, jsID]) => {
-        assert.strictEqual(pyepidocID.xmlid, jsID.xmlid)
+        assert.strictEqual(
+            pyepidocID.xmlid, 
+            jsID.xmlid, 
+            `${pyepidocID} is not equal to ${jsID}`)
     });
 }

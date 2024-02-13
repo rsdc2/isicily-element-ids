@@ -127,11 +127,23 @@ export default class HasXMLElem {
         return this.#elem
     }
 
+    /**
+     * 
+     * @param {number} nodeType 
+     */
+    isNodeType(nodeType) {
+        return this.#elem.nodeType == nodeType
+    }
+
     get localName() {
         return this.#elem.localName
     }
 
     get namespace() {
         return this.#elem.namespaceURI
+    }
+
+    get nodeType() {
+        return this.#elem.nodeType
     }
 }

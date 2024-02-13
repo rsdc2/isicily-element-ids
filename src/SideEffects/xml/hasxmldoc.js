@@ -14,10 +14,35 @@ export default class HasXMLDoc {
         this.#doc = doc
     }
 
-    createXMLDeclaration() {
+    /**
+     * 
+     * @param {string} version 
+     * @param {string | null} encoding 
+     * @param {string | null} standalone 
+     * @returns 
+     */
+    createXMLDeclaration(
+        version = "1.0", 
+        encoding = "UTF-8", 
+        standalone = null
+    ) {
+        if (this.XMLDeclaration != null) {
+            return
+        }
+        
+        let dataStr = `version="${version}"`;
+
+        if (encoding != null) {
+            dataStr = dataStr.concat(` encoding="${encoding}"`)
+        }
+
+        if (standalone != null) {
+            dataStr = dataStr.concat(` standalone="${standalone}"`)
+        }
+
         const declaration = this.#doc.createProcessingInstruction(
             "xml", 
-            `version="1.0" encoding="UTF-8"`
+            dataStr
         )
         this.#doc.insertBefore(declaration, this.#doc.firstChild)
     }
@@ -56,6 +81,19 @@ export default class HasXMLDoc {
             this.createXMLDeclaration()
         }
         return serializer.serializeToString(this.#doc)
+    }
+
+    /**
+     * @returns {ProcessingInstruction | null}
+     */
+    get XMLDeclaration() {
+        this.processingInstructions.forEach( item => {
+                if (item.target === "xml" && item.data.includes("version")) {
+                    return item
+                }
+            }
+        )
+        return null
     }
 
 }

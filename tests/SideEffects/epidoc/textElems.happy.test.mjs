@@ -3,8 +3,7 @@ import assert from "node:assert/strict"
 import { loadEpiDoc, writeXML } from "../../utils/file.mjs"
 import { assertIDsEqual } from "../../utils/ids.mjs"
 
-import { Arr } from "../../../src/Pure/arr.js"
-import { NullIDError } from "../../../src/SideEffects/epidoc/errors.js"
+import { MidpointIDError, NullIDError } from "../../../src/SideEffects/epidoc/errors.js"
 import Base from "../../../src/Pure/base.js"
 import Constants from "../../../src/Pure/constants/constants.js"
 import { Config } from "../../../src/config.js"
@@ -66,25 +65,27 @@ test("Put an @xml:id on element subset", (t) => {
 })
 
 
-test("Check IDs are the same as those assigned by PyEpiDoc", (t) => {
+test("IDs are the same as those assigned by PyEpiDoc", (t) => {
     const withIDs = loadEpiDoc(getInputPath("ISic001174_tokenized_with_ids_pyepidoc.xml"))
     const noIDs = loadEpiDoc(getInputPath("ISic001174_tokenized_without_ids.xml"))
     
     noIDs.textElems.setXMLIDs(base100, noIDs.id, Config.elementsForXMLID)
-    writeXML(noIDs.doc, outputpath + "ISic001174_tokenized_with_ids_js.xml")
+    writeXML(noIDs.doc, getOutputPath("ISic001174_tokenized_with_ids_js.xml"))
 
     assertIDsEqual(withIDs.textElems.elems, noIDs.textElems.elems)
 })
 
 
-test("Check puts midpoints in correctly", (t) => {
+test("Puts midpoints in correctly", (t) => {
     const missingMidpoints = loadEpiDoc(
-        getInputPath("ISic000001_tokenized_with_ids_pyepidoc_midpoint.xml")
+        getInputPath("ISic000001_tokenized_with_ids_pyepidoc_missing_midpoints.xml")
     )
 
-    missingMidpoints.textElems.assertMissingIDs()
+    assert.throws(() => 
+        missingMidpoints.textElems.assertAllElementsHaveID(), NullIDError
+    )
+    
     missingMidpoints.textElems.setMidpointXMLIDs(base100)
-
     const benchmark = loadEpiDoc(getInputPath("ISic000001_all_ids.xml"))
 
     assertIDsEqual(missingMidpoints.textElems.elems, benchmark.textElems.elems)

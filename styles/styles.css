@@ -102,12 +102,16 @@ div.message {
   padding-right: 15px;
   padding-top: 5px;
   padding-bottom: 5px;
+  color: black;
   z-index: 1;
   background-color: whitesmoke;
-  color: red;
   text-align: center;
   transition: 0s;
   width: fit-content;
+}
+
+div.message.error {
+  color: red
 }
 
 div.message.hidden {

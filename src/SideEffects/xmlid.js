@@ -45,7 +45,11 @@ export default class XMLID {
                     const epidoc = EpiDoc.fromDoc(xml)
 
                     if (mode === "set") {
-                        epidoc.textElems.setXMLIDs(base100, epidoc.id, Config.elementsForXMLID)
+                        epidoc.textElems.setXMLIDs(
+                            base100, 
+                            epidoc.id, 
+                            Config.elementsForXMLID
+                        )
                     } else if (mode === "expand") {
                         epidoc.textElems.expandXMLIDs(base100)
                     } else if (mode === "compress") {
@@ -53,18 +57,23 @@ export default class XMLID {
                     } else if (mode === "convert") {
                         epidoc.textElems.convertXMLIDs(base52, base100)
                     } else if (mode === "setMidpoint") {
-                        epidoc.textElems.setMidpointXMLIDs(base100)
+                        epidoc.textElems.setMidpointXMLIDs(
+                            base100,
+                            Config.elementsForXMLID
+                        )
                     }
 
                     const xmlStr = epidoc.serializeToString(new XMLSerializer(), false)
 
                     const downloader = new FileDownloader(xmlStr)
                     downloader.download(filename)  
+                    Message.alert("Successfully processed XML document")
+
                 } catch (error) {
                     if (error instanceof ISicElementIDError) {
-                        Message.alert(error.message)
+                        Message.error(error.message)
                     } else {
-                        Message.alert(
+                        Message.error(
                             `Unknown error: please refer to the developer console`
                         )
                         throw error    
@@ -95,7 +104,7 @@ export default class XMLID {
                 return new XMLID(filename, mode) 
             } catch (error) {
                 if (error instanceof FileError) {
-                    Message.alert(error.message)
+                    Message.error(error.message)
                 }
             }
         }

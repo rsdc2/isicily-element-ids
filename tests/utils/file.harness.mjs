@@ -1,4 +1,4 @@
-import { loadXML, loadEpiDoc } from "./file.mjs";
+import { loadXML, loadEpiDoc } from "./xml.mjs";
 import { cwd } from "node:process"
 
 // https://developer.mozilla.org/en-US/docs/Web/API/ProcessingInstruction

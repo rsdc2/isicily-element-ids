@@ -1,6 +1,6 @@
 import { test } from "node:test"
 import assert from "node:assert/strict"
-import { loadEpiDoc, writeXML } from "../../utils/file.mjs"
+import { loadEpiDoc, writeXML } from "../../utils/xml.mjs"
 import { assertIDsEqual } from "../../utils/ids.mjs"
 
 import { MidpointIDError, NullIDError } from "../../../src/SideEffects/epidoc/errors.js"

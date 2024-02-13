@@ -1,6 +1,6 @@
 import { test } from "node:test"
 import assert from "node:assert/strict"
-import { loadEpiDoc, writeXML } from "../../utils/file.mjs"
+import { loadEpiDoc, writeXML } from "../../utils/xml.mjs"
 import { assertIDsEqual } from "../../utils/ids.mjs"
 
 import { MidpointIDError, NullIDError } from "../../../src/SideEffects/epidoc/errors.js"
@@ -84,7 +84,7 @@ test("Puts midpoints in correctly", (t) => {
     assert.throws(() => 
         missingMidpoints.textElems.assertAllElementsHaveID(), NullIDError
     )
-    
+
     missingMidpoints.textElems.setMidpointXMLIDs(base100)
     const benchmark = loadEpiDoc(getInputPath("ISic000001_all_ids.xml"))
 

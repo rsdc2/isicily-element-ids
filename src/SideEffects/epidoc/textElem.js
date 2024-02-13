@@ -20,7 +20,12 @@ export default class TextElem extends EpiDocElem {
      */
     compressID (base) {
         const expanded = Compress.compressID(base)(this.xmlid)
-        this.setXMLID(expanded, true, false)
+        this.setXMLID({
+            id: expanded, 
+            override: true,
+            existingIDError: false,
+            nullIDError: true
+        })
     }
 
     /**
@@ -35,7 +40,12 @@ export default class TextElem extends EpiDocElem {
         // Only convert the ID if one is already present
         if (oldID != null) {
             const newID = Convert.ID(oldBase, newBase)(oldID)
-            this.setXMLID(newID, true, false)    
+            this.setXMLID({
+                id: newID, 
+                override: true, 
+                nullIDError: true, 
+                existingIDError: false
+            })    
         }
     }
 
@@ -45,7 +55,12 @@ export default class TextElem extends EpiDocElem {
      */
     expandID (base) {
         const expanded = Compress.decompressID(base)(this.xmlid)
-        this.setXMLID(expanded, true, false)
+        this.setXMLID({
+            id: expanded, 
+            override: true, 
+            nullIDError: true,
+            existingIDError: false
+        })
     }
 
     /**
@@ -56,17 +71,28 @@ export default class TextElem extends EpiDocElem {
         return new TextElem(elem)
     }
 
+    removeXMLID() {
+        this.elem.removeAttributeNS(XMLNS, "id")
+    }
+
     /**
      * Assign an \@xml:id to the element
-     * @param {string} id The ID to assign
-     * @param {boolean} override Override existing IDs
-     * @param {boolean} error Raise an error if an ID already 
+     * @param {Object} options
+     * @param {string | null} options.id The ID to assign
+     * @param {boolean} [options.override = false] Override existing IDs
+     * @param {boolean} [options.nullIDError = true] Raise an error if tries to set an ID to null
+     * @param {boolean} [options.existingIDError = true] Raise an error if an ID already 
      * @returns {TextElem}
      * exists on the element
      */
-    setXMLID(id, override = false, error = true) {
+    setXMLID({
+        id, 
+        override = false, 
+        nullIDError = true, 
+        existingIDError = true
+    }) {
 
-        if (id == null) {
+        if (id == null && nullIDError) {
             throw new NullIDError("Tried to add an empty ID")
         }
 
@@ -74,7 +100,7 @@ export default class TextElem extends EpiDocElem {
             // Assign ID for the first time, or override
             this.elem.setAttributeNS(XMLNS, "id", id)
 
-        } else if (error) {
+        } else if (existingIDError) {
             // Throw an error if element already has an ID
             throw new ExistingIDError(
                 this.xmlid,
@@ -94,6 +120,8 @@ export default class TextElem extends EpiDocElem {
     get xmlid() {
         return this.elem.getAttributeNS(XMLNS, "id")
     }
+    
+
 
 
 }

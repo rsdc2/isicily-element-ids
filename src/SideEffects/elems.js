@@ -90,6 +90,10 @@ export default class Elems {
         /** @type {HTMLButtonElement} */ 
         (document.getElementById("flip-btn"))
 
+    static removeAllXMLIDBtn = 
+        /** @type {HTMLButtonElement} */ 
+        (document.getElementById("remove-all-xml-id-btn"))
+
     static setXMLIDBtn = 
         /** @type {HTMLButtonElement} */ 
         (document.getElementById("set-xml-id-btn"))

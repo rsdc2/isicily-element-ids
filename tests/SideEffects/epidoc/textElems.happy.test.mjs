@@ -105,3 +105,13 @@ test("Put midpoints on only subset of elements", (t) => {
         )
     })
 }) 
+
+
+test("Remove IDs correctly", (t) => {
+    const doc = loadEpiDoc(getInputPath("ISic000001_all_ids.xml"))
+    doc.textElems.assertAllElementsHaveID()
+
+    doc.textElems.removeXMLIDs()
+    writeXML(doc.doc, getOutputPath("ISic000001_no_ids.xml"))
+    doc.textElems.assertNoIDs()
+})

@@ -17,6 +17,7 @@ export default class Listener {
         Elems.midPointBtn.addEventListener("click", Handlers.handleToggleMode)
         Elems.notesBtn.addEventListener("click", Handlers.handleToggleShowNotes)
         Elems.notesDiv.addEventListener("click", Handlers.handleToggleShowNotes)
+        Elems.removeAllXMLIDBtn.addEventListener("click", XMLID.create("epidoc_with_no_ids.xml", "remove"))
         Elems.setXMLIDBtn.addEventListener("click", XMLID.create("epidoc_with_ids.xml", "set"))
         Elems.setMidpointXMLIDBtn.addEventListener("click", XMLID.create("epidoc_with_midpoint_ids.xml", "setMidpoint"))
         Elems.textInput1.addEventListener("keyup", Handlers.handleUpdateInput)

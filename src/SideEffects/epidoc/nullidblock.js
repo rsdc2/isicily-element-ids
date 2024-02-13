@@ -1,5 +1,4 @@
 import Base from "../../Pure/base.js"
-import TextElem from "./textElem.js"
 import TextElems from "./textElems.js"
 import { MidpointIDError, TextElemLengthError } from "./errors.js"
 import BaseValue from "../../Pure/baseValue.js"
@@ -16,12 +15,17 @@ export default class NullIDBlock {
     #base
 
     /**
-     * Create a new NullIDBlock, i.e. sequence of elements that lack \@xml:id. Throws MidpointIDError if there are not 
+     * Create a new NullIDBlock, i.e. sequence of elements that lack \@xml:id. 
+     * Throws MidpointIDError if there are not 
      * enough free ID positions between xmlid1 and xmlid2
-     * @param {number} startIdx Index of the first element without \@xml:id in the array of text elements (TextElems) 
-     * @param {number} endIdx Index of the final element without \@xml:id in the array in the array of text elements (TextElems)
-     * @param {string | null} xmlid1 The already defined \@xml:id immediately before the beginning of the block
-     * @param {string} xmlid2 The already defined \@xml:id immediately after the end of the block
+     * @param {number} startIdx Index of the first element without \@xml:id in 
+     * the array of text elements (TextElems) 
+     * @param {number} endIdx Index of the final element without \@xml:id in 
+     * the array in the array of text elements (TextElems)
+     * @param {string | null} xmlid1 The already defined \@xml:id immediately 
+     * before the beginning of the block
+     * @param {string} xmlid2 The already defined \@xml:id immediately after 
+     * the end of the block
      * @param {Base} base The base of the \@xml:id to be used
      */
     constructor(startIdx, endIdx, xmlid1, xmlid2, base) {
@@ -54,7 +58,12 @@ export default class NullIDBlock {
             const elem = textelems.elems[i + this.#startIdx]
             const newid = newids[i]
 
-            elem.setXMLID(newid, false, true)
+            elem.setXMLID({
+                id: newid, 
+                override: false, 
+                existingIDError: true,
+                nullIDError: true
+            })
         }       
         return textelems 
     }

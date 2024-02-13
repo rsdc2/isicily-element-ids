@@ -23,7 +23,7 @@ export default class XMLID {
      * Create a new XMLIDApplier instance that applies IDs
      * to tokens in a tokenized EpiDoc XML file.
      * @param {string} filename
-     * @param {"set"|"expand"|"compress"|"convert"|"setMidpoint"} mode 
+     * @param {"set"|"expand"|"compress"|"convert"|"setMidpoint"|"remove"} mode 
      */
     constructor(filename, mode) {
 
@@ -43,21 +43,24 @@ export default class XMLID {
                     const base100 = Base.fromBaseChars(BASE100)
                     const base52 = Base.fromBaseChars(BASE52)
                     const epidoc = EpiDoc.fromDoc(xml)
+                    const textElems = epidoc.textElems
 
                     if (mode === "set") {
-                        epidoc.textElems.setXMLIDs(
+                        textElems.setXMLIDs(
                             base100, 
                             epidoc.id, 
                             Config.elementsForXMLID
                         )
                     } else if (mode === "expand") {
-                        epidoc.textElems.expandXMLIDs(base100)
+                        textElems.expandXMLIDs(base100)
                     } else if (mode === "compress") {
-                        epidoc.textElems.compressXMLIDs(base100)
+                        textElems.compressXMLIDs(base100)
+                    } else if (mode === "remove") {
+                        textElems.removeXMLIDs()
                     } else if (mode === "convert") {
-                        epidoc.textElems.convertXMLIDs(base52, base100)
+                        textElems.convertXMLIDs(base52, base100)
                     } else if (mode === "setMidpoint") {
-                        epidoc.textElems.setMidpointXMLIDs(
+                        textElems.setMidpointXMLIDs(
                             base100,
                             Config.elementsForXMLID
                         )
@@ -94,7 +97,7 @@ export default class XMLID {
      * Create an XMLIDApplier that downloads a file with a specific filename
      * when called
      * @param {string} filename 
-     * @param {"set"|"expand"|"compress"|"convert"|"setMidpoint"} mode 
+     * @param {"set"|"expand"|"compress"|"convert"|"setMidpoint"|"remove"} mode 
      * @returns 
      */
     static create(filename, mode) {

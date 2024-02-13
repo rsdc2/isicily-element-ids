@@ -180,6 +180,12 @@ export default class TextElems {
         return this.#elems.length
     }
 
+    removeXMLIDs() {
+        this.elems.forEach (elem => {
+            elem.removeXMLID()
+        })
+    }
+
     /**
      * Finds any text elements that lack an
      * \@xml:id and assigns an \@xml:id to those that 
@@ -215,7 +221,7 @@ export default class TextElems {
             const paddedTokenDecimalID = tokenDecimalID.padStart(5, "0")
             const fullID = docId.concat("-", paddedTokenDecimalID)
             const compressed = Compress.compressID(base)(fullID)
-            elem.setXMLID(compressed) 
+            elem.setXMLID({id: compressed}) 
         })
     }
 

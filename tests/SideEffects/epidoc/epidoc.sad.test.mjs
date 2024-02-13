@@ -1,19 +1,14 @@
-import { JSDOM } from "jsdom"
 import { test } from "node:test"
 import assert from "node:assert/strict"
-import { readFileSync } from "node:fs"
+import { loadEpiDoc } from "../../utils/file.mjs"
 
-
-import EpiDoc from "../../../src/SideEffects/epidoc/epidoc.js"
 import { ISicElementIDError } from "../../../src/Pure/errors.js"
 
 const epidocFp = "./tests/SideEffects/epidoc/files/input/ISic000001_invalid.xml"
 
 test("Load and read invalid EpiDoc file with error", (t) => {
     assert.throws(() => {
-        const xmlStr = readFileSync(epidocFp, {encoding: "utf8"})
-        const xml = new JSDOM(xmlStr, { contentType: "application/xml" }).window.document
-        const epidoc = new EpiDoc(xml)
+        const epidoc = loadEpiDoc(epidocFp)
         epidoc.assertTEINameAndNS()    
     }, ISicElementIDError)
 })

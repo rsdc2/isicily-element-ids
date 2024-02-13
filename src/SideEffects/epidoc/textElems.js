@@ -38,6 +38,16 @@ export default class TextElems {
         return true
     }
 
+    assertMissingIDs() {
+        try {
+            this.assertAllElementsHaveID()
+        } catch (error) {
+            return
+        }
+
+        throw new MidpointIDError("All elements have an @xml:id attribute")
+    }
+
     /**
      * Assert that no elements have an \@xml:id attribute
      */

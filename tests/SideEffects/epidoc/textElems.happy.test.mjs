@@ -1,6 +1,7 @@
 import { test } from "node:test"
 import assert from "node:assert/strict"
 import { loadEpiDoc, writeXML } from "../../utils/file.mjs"
+import { assertIDsEqual } from "../../utils/ids.mjs"
 
 import { Arr } from "../../../src/Pure/arr.js"
 import { NullIDError } from "../../../src/SideEffects/epidoc/errors.js"
@@ -13,15 +14,28 @@ const base100 = Base.fromBaseChars(BASE100)
 const inputpath = "./tests/SideEffects/epidoc/files/input/"
 const outputpath = "./tests/SideEffects/epidoc/files/output/"
 
-const files = new Map([
-    ["ISic000001Valid", inputpath + "ISic000001_valid.xml"],
-    ["ISic001174NoIDs", inputpath + "ISic001174_tokenized_without_ids.xml"],
-    ["ISic001174WithIDs", inputpath + "ISic001174_tokenized_with_ids_pyepidoc.xml"]
-])
+
+/**
+ * 
+ * @param {string} filename 
+ * @returns {string}
+ */
+function getInputPath(filename) {
+    return inputpath + filename
+}
+
+/**
+ * 
+ * @param {string} filename 
+ * @returns {string}
+ */
+function getOutputPath(filename) {
+    return outputpath + filename
+}
 
 
 test("Put an @xml:id on all text elements", (t) => {
-    const epidoc = loadEpiDoc(files.get("ISic000001Valid"))
+    const epidoc = loadEpiDoc(getInputPath("ISic000001_valid.xml"))
     
     assert.doesNotThrow(() => {
         epidoc.textElems.assertNoIDs()
@@ -36,7 +50,7 @@ test("Put an @xml:id on all text elements", (t) => {
 
 
 test("Put an @xml:id on element subset", (t) => {
-    const epidoc = loadEpiDoc(files.get("ISic000001Valid"))
+    const epidoc = loadEpiDoc(getInputPath("ISic000001_valid.xml"))
     const elems = epidoc.textElems
     
     assert.doesNotThrow(() => {
@@ -53,19 +67,25 @@ test("Put an @xml:id on element subset", (t) => {
 
 
 test("Check IDs are the same as those assigned by PyEpiDoc", (t) => {
-    const withIDs = loadEpiDoc(files.get("ISic001174WithIDs"))
-    const noIDs = loadEpiDoc(files.get("ISic001174NoIDs"))
+    const withIDs = loadEpiDoc(getInputPath("ISic001174_tokenized_with_ids_pyepidoc.xml"))
+    const noIDs = loadEpiDoc(getInputPath("ISic001174_tokenized_without_ids.xml"))
     
     noIDs.textElems.setXMLIDs(base100, noIDs.id, Config.elementsForXMLID)
     writeXML(noIDs.doc, outputpath + "ISic001174_tokenized_with_ids_js.xml")
 
-    const idElems = withIDs.textElems.elems
-    const noIDElems = noIDs.textElems.elems
+    assertIDsEqual(withIDs.textElems.elems, noIDs.textElems.elems)
+})
 
-    assert.strictEqual(idElems.length, noIDElems.length)
 
-    Arr.zip(idElems, noIDElems).forEach(([pyepidocID, jsID]) => {
-        assert.strictEqual(pyepidocID.xmlid, jsID.xmlid)
-    });
+test("Check puts midpoints in correctly", (t) => {
+    const missingMidpoints = loadEpiDoc(
+        getInputPath("ISic000001_tokenized_with_ids_pyepidoc_midpoint.xml")
+    )
 
+    missingMidpoints.textElems.assertMissingIDs()
+    missingMidpoints.textElems.setMidpointXMLIDs(base100)
+
+    const benchmark = loadEpiDoc(getInputPath("ISic000001_all_ids.xml"))
+
+    assertIDsEqual(missingMidpoints.textElems.elems, benchmark.textElems.elems)
 })

@@ -143,14 +143,23 @@ export default class TextElems {
 
     /**
      * Finds any text elements that lack an
-     * \@xml:id and assigns an \@xml:id between those that 
-     * have already been assigned
+     * \@xml:id and assigns an \@xml:id to those that 
+     * have not already had an \@xml:id assigned
      * @param {Base} base 
+     * @param {string[]} [localNames=[]] 
+     * the localNames of the elements to receive an \@xml:id.
+     * If empty, applies to all text elements
      */
-    setMidpointXMLIDs(base) {
+    setMidpointXMLIDs(base, localNames = []) {
         this.assertFirstElemHasID()
         this.assertLastElemHasID()
-        const blocks = NullIDBlocks.fromTextElems(this, base)
+
+        let elems = this.#elems
+        if (localNames.length !== 0) {
+            elems = this.subset(localNames)
+        }
+
+        const blocks = NullIDBlocks.fromTextElemArray(elems, base)
         return blocks.assignIDs()
     }
 

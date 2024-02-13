@@ -535,35 +535,46 @@ export default class Handlers {
         }
 
         Handlers.handleGreekFormatting(targetInput, e)
-
-
     }
 
     static handleValidatorCompression = () => {
-        let v1StatusComp = ""
 
-        if (Validator.validate(Elems.textInput1)) {
-            v1StatusComp = "This ID is valid"
-        } else {
-            v1StatusComp = "This ID is not valid"
+        const { textInput1, textInput2 } = Elems
+        /**
+         * 
+         * @param {HTMLDivElement} elem 
+         */
+        const getValidationText = (elem) => {
+            if (elem.classList.contains("valid")) {
+                return "This ID is valid"
+            } else {
+                return "This ID is not valid"
+            }
         }
 
-        if (Validator.iSicilyDocID(Elems.textInput1.textContent) || 
-            Validator.shortID(Elems.textInput1.textContent)) {
-
-            Attrs.addClasses(Elems.textInput1)("valid")
-
+        if (Validator.iSicilyDocID(textInput1.textContent) &&
+                Validator.shortID(textInput1.textContent)) {
+            Attrs.addClasses(textInput1)("valid")
         } else {
-            Attrs.removeClasses(Elems.textInput1)("valid")
+            Attrs.removeClasses(textInput2)("valid")
         }
 
-        if (Validator.iSicilyElemID(Elems.textInput2.textContent)) {
-            Attrs.addClasses(Elems.textInput2)("valid")             
+        if (Validator.iSicilyDocID(textInput1.textContent) || 
+            Validator.shortID(textInput1.textContent)) {
+                Attrs.addClasses(textInput1)("valid")
+
+        } else {
+            Attrs.removeClasses(textInput1)("valid")
+        }
+
+        if (Validator.iSicilyElemID(textInput2.textContent)) {
+            Attrs.addClasses(textInput2)("valid")             
         }  else {
-            Attrs.removeClasses(Elems.textInput2)("valid")
+            Attrs.removeClasses(textInput2)("valid")
         }
 
-        Elems.textInput1.setAttribute("title", v1StatusComp)
+        textInput1.setAttribute("title", getValidationText(textInput1))
+        textInput2.setAttribute("title", getValidationText(textInput2))
     }
 
     static hideAllPopups = () => {

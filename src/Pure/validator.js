@@ -140,20 +140,19 @@ export default class Validator {
 
     static longID = Constants.STRICT ? Validator.longIDStrict : Validator.longIdNonStrict
     static shortID = Constants.STRICT ? Validator.shortIDBase100Strict : Validator.shortIdNonStrict
-
     /**
      * @param {HTMLDivElement | HTMLSpanElement} elem
      */
-    static validate = elem => {
+    static validate = (elem) => {
         const text = elem.textContent
 
         if (text == null) return false
 
-        const {longID: validateLongID, shortID: validateShortID} = Validator
+        const {longID, shortID} = Validator
 
-        return validateLongID(text) 
-                || validateShortID(text) 
-                || validateLongID(text.replace(/[= ]/g, ""))
+        return longID(text) 
+                || shortID(text) 
+                || longID(text.replace(/[= ]/g, ""))
     }
 
 

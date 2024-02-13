@@ -10,12 +10,13 @@ import { Config } from "../../../src/config.js"
 
 const {BASE100, BASE52} = Constants
 const base100 = Base.fromBaseChars(BASE100)
-const relpath = "./tests/SideEffects/epidoc/files/"
+const inputpath = "./tests/SideEffects/epidoc/files/input/"
+const outputpath = "./tests/SideEffects/epidoc/files/output/"
 
 const files = new Map([
-    ["ISic000001Valid", relpath + "ISic000001_valid.xml"],
-    ["ISic001174NoIDs", relpath + "ISic001174_tokenized_without_ids.xml"],
-    ["ISic001174WithIDs", relpath + "ISic001174_tokenized_with_ids_pyepidoc.xml"]
+    ["ISic000001Valid", inputpath + "ISic000001_valid.xml"],
+    ["ISic001174NoIDs", inputpath + "ISic001174_tokenized_without_ids.xml"],
+    ["ISic001174WithIDs", inputpath + "ISic001174_tokenized_with_ids_pyepidoc.xml"]
 ])
 
 
@@ -56,7 +57,7 @@ test("Check IDs are the same as those assigned by PyEpiDoc", (t) => {
     const noIDs = loadEpiDoc(files.get("ISic001174NoIDs"))
     
     noIDs.textElems.setXMLIDs(base100, noIDs.id, Config.elementsForXMLID)
-    writeXML(noIDs.doc, relpath + "ISic001174_tokenized_with_ids_js.xml")
+    writeXML(noIDs.doc, outputpath + "ISic001174_tokenized_with_ids_js.xml")
 
     const idElems = withIDs.textElems.elems
     const noIDElems = noIDs.textElems.elems

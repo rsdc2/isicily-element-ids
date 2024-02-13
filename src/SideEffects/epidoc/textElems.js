@@ -145,16 +145,16 @@ export default class TextElems {
     }
 
     /**
-     * 
-     * @param {TextElem[]} elems 
-     * @param {Base} base 
-     * @param {string} docid 
+     * @param {Object} args
+     * @param {TextElem[]} args.elems 
+     * @param {Base} args.base
+     * @param {string} args.docId
      */
-    #setXMLIDsToElems(elems, base, docid) {
+    #setXMLIDsToElems({elems, base, docId}) {
         elems.forEach( (elem, index) => {
             const tokenDecimalID = BigInt((index + 1) * 10).toString()
             const paddedTokenDecimalID = tokenDecimalID.padStart(5, "0")
-            const fullID = docid.concat("-", paddedTokenDecimalID)
+            const fullID = docId.concat("-", paddedTokenDecimalID)
             const compressed = Compress.compressID(base)(fullID)
             elem.setXMLID(compressed) 
         })
@@ -170,10 +170,10 @@ export default class TextElems {
      */
     setXMLIDs(base, docid, localNames = []) {
         if (localNames.length == 0) {
-            this.#setXMLIDsToElems(this.elems, base, docid)
+            this.#setXMLIDsToElems({elems: this.elems, base: base, docId: docid})
         } else {
             const elemSubset = this.subset(localNames)
-            this.#setXMLIDsToElems(elemSubset, base, docid)            
+            this.#setXMLIDsToElems({elems: elemSubset, base: base, docId: docid})            
         }
 
         return this

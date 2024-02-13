@@ -26,7 +26,6 @@ export default class EpiDoc extends HasXMLDoc {
         this.root.assertNameNS("TEI", TEINS)
     }
 
-
     get editions() {
         const editionElems = this.doc.querySelectorAll('div[type="edition"]')
         const editionElemArr = Array.from(editionElems)

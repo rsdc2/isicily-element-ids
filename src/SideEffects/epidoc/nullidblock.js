@@ -137,7 +137,7 @@ export default class NullIDBlock {
      */
     get freeMidpointCount() {
         const {xmlid1, xmlid2} = this
-        const freeMidpointCount = xmlid2.subtract(xmlid1).dec - 1n;
+        const freeMidpointCount = xmlid2.subtract(xmlid1).dec - 1;
         return Number(freeMidpointCount);
     }
 

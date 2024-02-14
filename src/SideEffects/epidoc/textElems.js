@@ -239,7 +239,7 @@ export default class TextElems {
      */
     #setXMLIDsToElems({elems, base, docId}) {
         elems.forEach( (elem, index) => {
-            const tokenDecimalID = BigInt((index + 1) * 10).toString()
+            const tokenDecimalID = ((index + 1) * 10).toString()
             const paddedTokenDecimalID = tokenDecimalID.padStart(5, "0")
             const fullID = docId.concat("-", paddedTokenDecimalID)
             const compressed = Compress.compressID(base)(fullID)

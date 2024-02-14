@@ -27,11 +27,11 @@ export default class Err {
     static idNotValidErr = (s) => `ID ${s} is not valid`
 
     static ERR = {
-        ISVALID: 0n,
-        ISINVALID: 1n,
-        ISEMPTY: 2n,
-        CONTAINSNUMERAL: 3n,
-        CONTAINSSPECIAL: 4n
+        ISVALID: 0,
+        ISINVALID: 1,
+        ISEMPTY: 2,
+        CONTAINSNUMERAL: 3,
+        CONTAINSSPECIAL: 4
     }
 
     /**
@@ -42,7 +42,7 @@ export default class Err {
      * an error code and a string giving the
      * description of the error.
      * @param {string} text 
-     * @returns {[bigint, string]} 
+     * @returns {[number, string]} 
      */
 
     static getShortIDValidationIndividual = (text) => {
@@ -75,7 +75,7 @@ export default class Err {
     }
     /**
      * 
-     * @param {Array.<bigint>} errNo 
+     * @param {Array.<number>} errNo 
      */
     static isGenericErr = (...errNo) => {
         return errNo.every( x => x <= 2n )

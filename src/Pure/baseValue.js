@@ -56,7 +56,7 @@ export default class BaseValue {
      * @returns {BaseValue}
      */
     static fromDec(dec, base) {
-        return new BaseValue(base.toBase(BigInt(dec)), base)
+        return new BaseValue(base.toBase(dec), base)
     }
 
     /**

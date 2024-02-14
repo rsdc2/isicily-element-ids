@@ -22,7 +22,7 @@ export class BaseIndexError extends ISicElementIDError {
 
     /**
      * 
-     * @param {string | number | bigint} baseIndex 
+     * @param {string | number} baseIndex 
      */
     constructor(baseIndex) {
         super()

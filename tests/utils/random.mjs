@@ -14,8 +14,8 @@ export function randomISicID(baseIdx) {
     function inner() {
         const rand = Math.random()
         const isicNum = rand * 1e10
-        const bigint = BigInt(Math.floor(isicNum))
-        const s = String(bigint)
+        const num = Math.floor(isicNum)
+        const s = String(num)
         return Format.padAndInsertISic(s, baseIdx)
     }
 

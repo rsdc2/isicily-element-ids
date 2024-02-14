@@ -28,7 +28,7 @@ export default class Base {
      */
     addDec(valueToAdd, baseVal) {
         const decval = this.toDec(baseVal)
-        const added = decval + BigInt(valueToAdd)
+        const added = decval + valueToAdd
         return this.toBase(added)
     }   
 
@@ -122,11 +122,11 @@ export default class Base {
             return FIVEBLANKS
         }
 
-        if (baseVal1Dec === baseVal2Dec + 1n || baseVal1Dec === baseVal2Dec - 1n) {
+        if (baseVal1Dec === baseVal2Dec + 1 || baseVal1Dec === baseVal2Dec - 1) {
             return FIVEBLANKS
         }
 
-        const mid = (baseVal1Dec + baseVal2Dec) / 2n
+        const mid = (baseVal1Dec + baseVal2Dec) / 2
         return Base.toBase(mid, baseChars)
     }
 
@@ -142,30 +142,30 @@ export default class Base {
     /**
      * Convert a decimal value to a value in the base passed
      * as the baseChars parameter
-     * @param {bigint} dec
+     * @param {number} dec
      * @param {Array.<string>} baseChars
      * @returns {string}
      */
     static toBase(dec, baseChars) {
         
-        const base = BigInt(baseChars.length)
+        const base = baseChars.length
 
         /**
-         * @param {bigint} i
-         * @returns {Array.<bigint>}
+         * @param {number} i
+         * @returns {Array.<number>}
          */
         function f(i) {
 
-            const q = i / base
+            const q = Math.floor(i / base)
             const r = i % base
 
-            if (q == 0n) {
+            if (q == 0) {
                 return [r]
             }
             return q < base ? [q, r] : [...f(q), r]
         }
 
-        const l = f(dec).map( value => baseChars[Number(value)] )
+        const l = f(dec).map( value => baseChars[value] )
         return l.join("")
 
     }
@@ -173,7 +173,7 @@ export default class Base {
     /**
      * Convert a decimal value to a value in the base of the 
      * current object
-     * @param {bigint} dec 
+     * @param {number} dec 
      * @returns {string}
      */
     toBase(dec) {
@@ -184,7 +184,7 @@ export default class Base {
      * Convert a value in the base of "baseVal" to a decimal
      * @param {string} baseVal   
      * @param {Array.<string>} base 
-     * @returns {bigint}
+     * @returns {number}
      */
 
     static toDec(baseVal, base) {
@@ -192,18 +192,18 @@ export default class Base {
 
         /**
          * 
-         * @param {bigint} acc 
+         * @param {number} acc 
          * @param {string} baseVal 
          * @param {number} idx 
          * @param {Array.<string>} chars
-         * @returns {bigint}
+         * @returns {number}
          */
         const getDecValue = (acc, baseVal, idx, chars) => {
             const reverseIdx = chars.length - 1 - idx // Start at the right end
-            return acc + BigInt(base.indexOf(baseVal)) * BigInt(base.length ** reverseIdx)
+            return acc + base.indexOf(baseVal) * base.length ** reverseIdx
         }
 
-        return chars.reduce(getDecValue, 0n)
+        return chars.reduce(getDecValue, 0)
     }   
 
 
@@ -211,7 +211,7 @@ export default class Base {
      * Convert a decimal value to a value in the base of the 
      * current object
      * @param {string} baseVal 
-     * @returns {bigint}
+     * @returns {number}
      */
     toDec(baseVal) {
         return Base.toDec(baseVal, this.baseChars)

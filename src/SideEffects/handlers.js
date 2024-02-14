@@ -346,7 +346,7 @@ export default class Handlers {
             midpointValid = false
         }
 
-        if (text1Dec === text2Dec + 1n || text1Dec === text2Dec - 1n) {
+        if (text1Dec === text2Dec + 1 || text1Dec === text2Dec - 1) {
             text1Status = text1Status.concat("\nERROR: There are no positions in between these IDs")
             text2Status = text2Status.concat("\nERROR: There are no positions in between these IDs")
             if (Validator.validate(Elems.textInput1) 

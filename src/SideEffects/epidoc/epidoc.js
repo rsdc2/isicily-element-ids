@@ -33,6 +33,18 @@ export default class EpiDoc extends HasXMLDoc {
     }
 
     /**
+     * Generate a filename based on the document ID
+     * of the EpiDoc, with an optional suffix to 
+     * be inserted before the file extension
+     * @param {string} [suffix = ""] Optional suffix to be 
+     *      inserted before the extension
+     * @returns {string}
+     */
+    filename(suffix = "") {
+        return this.id + suffix + ".xml"        
+    }
+
+    /**
      * Create a new EpiDoc object from an XMLDocument
      * @param {XMLDocument} doc 
      * @returns {EpiDoc}

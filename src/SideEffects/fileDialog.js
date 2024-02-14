@@ -8,7 +8,7 @@ import FileValidator from "./fileValidator.js"
  * @param {Event} e
  */
 
-export default class FilePicker {
+export default class FileDialog {
     #picker 
     
     /**
@@ -35,7 +35,7 @@ export default class FilePicker {
     static create(fileExts, fileReader) {
 
         function inner() {
-            return new FilePicker(fileExts, fileReader) 
+            return new FileDialog(fileExts, fileReader) 
         }
 
         return inner

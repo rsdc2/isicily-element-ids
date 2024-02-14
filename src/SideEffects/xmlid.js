@@ -1,5 +1,5 @@
-import FilePicker from "./filepicker.js"
-import FileDownloader from "./filedownloader.js"
+import FileDialog from "./fileDialog.js"
+import FileDownloader from "./fileDownloader.js"
 import {newFileReader} from "./fileReader_.js"
 import Base from "../Pure/base.js"
 import EpiDoc from "./epidoc/epidoc.js"
@@ -16,16 +16,15 @@ const {BASE100, BASE52} = Constants
 
 
 export default class XMLID {
-    #picker 
+    #dialog 
     #reader
 
     /**
      * Create a new XMLIDApplier instance that applies IDs
      * to tokens in a tokenized EpiDoc XML file.
-     * @param {string} filename
      * @param {"set"|"expand"|"compress"|"convert"|"setMidpoint"|"remove"} mode 
      */
-    constructor(filename, mode) {
+    constructor(mode) {
 
         // Initialize reader
         // cf. https://developer.mozilla.org/en-US/docs/Web/API/FileReader
@@ -45,31 +44,53 @@ export default class XMLID {
                     const epidoc = EpiDoc.fromDoc(xml)
                     const textElems = epidoc.textElems
 
-                    if (mode === "set") {
-                        textElems.setXMLIDs(
-                            base100, 
-                            epidoc.id, 
-                            Config.elementsForXMLID
-                        )
-                    } else if (mode === "expand") {
-                        textElems.expandXMLIDs(base100)
-                    } else if (mode === "compress") {
-                        textElems.compressXMLIDs(base100)
-                    } else if (mode === "remove") {
-                        textElems.removeXMLIDs()
-                    } else if (mode === "convert") {
-                        textElems.convertXMLIDs(base52, base100)
-                    } else if (mode === "setMidpoint") {
-                        textElems.setMidpointXMLIDs(
-                            base100,
-                            Config.elementsForXMLID
-                        )
+                    // Stores the filename suffixes and functions
+                    // associated with the different modes
+                    const funcsAndLabels = {
+                        "set": {
+                            suffix: "_ids_set",
+                            func: () => textElems.setXMLIDs(
+                                base100, 
+                                epidoc.id,
+                                Config.elementsForXMLID
+                            )
+                        },
+                        "expand": {
+                            suffix: "_expanded_ids",
+                            func: () => textElems.expandXMLIDs(base100)
+                        },
+                        "compress": {
+                            suffix: "_compressed_ids",
+                            func: () => textElems.compressXMLIDs(base100)
+                        },
+                        "remove": {
+                            suffix: "_ids_removed",
+                            func: () => textElems.removeXMLIDs()
+                        },
+                        "convert": {
+                            suffix: "_ids_converted",
+                            func: () => textElems.convertXMLIDs(base52, base100)
+                        },
+                        "setMidpoint": {
+                            suffix: "_midpoints_set",
+                            func: () => textElems.setMidpointXMLIDs(
+                                base100,
+                                Config.elementsForXMLID
+                            )
+                        }
                     }
 
+                    // Call the appropriate function based on the mode
+                    funcsAndLabels[mode].func()
+                    
+                    // Serialize to string
                     const xmlStr = epidoc.serializeToString(new XMLSerializer(), false)
 
+                    // Download the file
                     const downloader = new FileDownloader(xmlStr)
-                    downloader.download(filename)  
+                    downloader.download(epidoc.filename(funcsAndLabels[mode].suffix))  
+
+                    // Print message that operation successful
                     Message.alert("Successfully processed XML document")
 
                 } catch (error) {
@@ -85,18 +106,17 @@ export default class XMLID {
             }
         )
 
-        // Initialize file picker
-        this.#picker = new FilePicker ([".xml"], this.#reader)
+        // Initialize the file dialog
+        this.#dialog = new FileDialog ([".xml"], this.#reader)
         
-        // Show the file picker
-        this.#picker.load()
+        // Show the file dialog
+        this.#dialog.load()
     }
  
 
     /**
      * Create an XMLIDApplier that downloads a file with a specific filename
      * when called
-     * @param {string} filename 
      * @param {"set"|"expand"|"compress"|"convert"|"setMidpoint"|"remove"} mode 
      * @returns 
      */
@@ -104,7 +124,7 @@ export default class XMLID {
 
         function inner() {
             try {
-                return new XMLID(filename, mode) 
+                return new XMLID(mode) 
             } catch (error) {
                 if (error instanceof FileError) {
                     Message.error(error.message)

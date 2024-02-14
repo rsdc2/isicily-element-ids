@@ -1,5 +1,5 @@
-import FilePicker from "./filepicker.js"
-import FileDownloader from "./filedownloader.js"
+import FileDialog from "./fileDialog.js"
+import FileDownloader from "./fileDownloader.js"
 import {newFileReader} from "./fileReader_.js"
 import Convert from "../Pure/convert.js"
 import Base from "../Pure/base.js"
@@ -51,7 +51,7 @@ export default class CSVIDConverter {
         )
 
         // Initialize file picker
-        this.#picker = new FilePicker ([".csv"], this.#reader)
+        this.#picker = new FileDialog ([".csv"], this.#reader)
         
         // Show the file picker
         this.#picker.load()

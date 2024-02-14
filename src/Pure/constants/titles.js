@@ -27,7 +27,7 @@ const titles = new Map(
 
     ["midpoint-btn", "Find the ID at the midpoint between two IDs"],
     
-    ["remove-all-xml-id-btn", "Load a ttokenized EpiDoc XML file with IDs and " +
+    ["remove-all-xml-id-btn", "Load a tokenized EpiDoc XML file with IDs and " +
                             "remove @xml,id from all text elements"],
     
     ["set-xml-id-btn", "Load a tokenized EpiDoc XML file and download " +

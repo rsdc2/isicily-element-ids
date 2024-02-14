@@ -9,6 +9,8 @@ import {
     UnexpectedIDError,
     UniqueIDError
 } from "./errors.js"
+import Validator from "../../Pure/validator.js"
+import { ValidationError } from "../../Pure/errors.js"
 
 /**
  * Represents a collection of text elements
@@ -32,6 +34,28 @@ export default class TextElems {
                 )
             }
         })
+    }
+
+    /**
+     * 
+     * @param {Base} base 
+     */
+    assertAllIDsAreValidForBase(base) {
+        this.elems.forEach( (elem) => {
+            Validator.assertFullCompressedID(elem.xmlid, base)
+        })
+    }
+
+    /**
+     * 
+     * @param {Base} base 
+     */
+    assertAllIDsAreCompressedOrNull(base) {
+        this.elems.forEach( (elem) => {
+            if (elem.xmlid !== null) {
+                Validator.assertFullCompressedID(elem.xmlid, base)
+            }  
+        })        
     }
 
     /**
@@ -139,7 +163,16 @@ export default class TextElems {
      * @param {Base} newBase
      */
     convertXMLIDs(oldBase, newBase) {
-        this.elems.forEach ( (elem) => {
+        this.elems.forEach ( (elem) => { 
+            try {
+                Validator.assertFullCompressedID(elem.xmlid, oldBase)
+            } catch (error) {
+                if (error instanceof ValidationError) {
+                    throw error
+                } else {
+                    throw error
+                }
+            }
             elem.convertID(oldBase, newBase)
         })
         return this
@@ -217,6 +250,7 @@ export default class TextElems {
     setMidpointXMLIDs(base, localNames = []) {
         this.assertFirstElemHasID()
         this.assertLastElemHasID()
+        this.assertAllIDsAreCompressedOrNull(base)
         this.assertNoElemsOutsideLocalNameSubsetHaveIDs(localNames)
 
         let elems = this.#elems

@@ -21,16 +21,9 @@ export default class TextElem extends EpiDocElem {
      * @param {Base} base 
      */
     compressID (base) {
-        if (Validator.containsOnlyLetters(this.xmlid)) {
-            throw new ConversionError(
-                "Contains at least one @xml:id that is not a " +
-                "valid expanded I.Sicily element ID."
-            )
-        }
-        
-        const expanded = Compress.compressID(base)(this.xmlid)
+        const compressed = Compress.compressID(base)(this.xmlid)
         this.setXMLID({
-            id: expanded, 
+            id: compressed, 
             override: true,
             existingIDError: false,
             nullIDError: true

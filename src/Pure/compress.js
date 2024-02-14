@@ -1,5 +1,7 @@
 import Base from "./base.js"
+import { ConversionError } from "./errors.js"
 import Format from "./format.js"
+import Validator from "./validator.js"
 
 export default class Compress {    
 
@@ -15,6 +17,9 @@ export default class Compress {
          * @returns {string}
          */
         function inner(isicID) {
+
+            Validator.assertNotCompressedID(isicID, base)
+            Validator.assertLongID(isicID, base)
 
             const noISicPadding = Format.removeISic(isicID)
             const dec = Number(noISicPadding)

@@ -4,6 +4,7 @@ import Validator from "./validator.js"
 import Constants from "./constants/constants.js"
 import { BaseIndexError } from "./errors.js"
 
+
 const { FIVEBLANKS } = Constants
 
 export default class Base {
@@ -103,11 +104,12 @@ export default class Base {
      */
 
     static midPoint(val1, val2, baseChars) {
-        if (!Validator.longID(val1) && !Validator.shortID(val1)) {
+        const base = Base.fromBaseChars(baseChars)
+        if (!Validator.longID(val1, base) && !Validator.shortID(val1, base)) {
             return FIVEBLANKS
         }
 
-        if (!Validator.longID(val2) && !Validator.shortID(val2)) {
+        if (!Validator.longID(val2, base) && !Validator.shortID(val2, base)) {
             return FIVEBLANKS
         }
 

@@ -1,7 +1,48 @@
-import Format from "./format.js"
-import Constants from "./constants/constants.js"
+
+import { ConversionError } from "./errors.js"
+import Base from "./base.js"
 
 export default class Validator {
+
+    /**
+     * 
+     * @param {string} s 
+     * @param {Base} base
+     */
+    static assertLongID(s, base) {
+        if (!Validator.longID(s, base)) {
+            throw new ConversionError(
+                `ID ${s} is not a valid expanded I.Sicily element ID.`
+            )
+        }
+    }
+
+    /**
+     * 
+     * @param {string} s 
+     * @param {Base} base
+     */
+    static assertNotCompressedID(s, base) {
+        if (Validator.shortID(s, base)) {
+            throw new ConversionError(
+                `ID ${s} is already compressed.`
+            )
+        }
+    }
+
+    /**
+     * 
+     * @param {string} s 
+     * @param {Base} base
+     */
+    static assertShortID(s, base) {
+        if (!Validator.shortID(s, base)) {
+            throw new ConversionError(
+                `ID ${s} is not a valid compressed I.Sicily element ID.`
+            )
+        }
+    }
+
     /**
      * Returns true if a string contains only digits
      * 0-9
@@ -72,10 +113,16 @@ export default class Validator {
     /**
      * 
      * @param {string} s 
+     * @param {Base} base
      * @returns {boolean}
      */
-    static iSicilyElemID(s) {
-        const m = s.match(/^[0-9]{5,5}$/)
+    static iSicilyElemID(s, base) {
+        let m = null;
+        if (base.index === 100) {
+            m = s.match(/^[0-9]{5,5}$/)
+        } else if (base.index === 52) {
+            m = s.match(/^[0-9]{4,4}$/)
+        }
         return m != null
     }
 
@@ -91,11 +138,17 @@ export default class Validator {
     /**
      * Returns true if @param s is a valid I.Sicily element ID
      * @param {string} s
+     * @param {Base} base
      * @returns {boolean} 
      */
 
-    static longIDStrict(s) {
-        const m = s.match(/^ISic0[0-9]{5,5}-[0-9]{5,5}$/)
+    static longID(s, base) {
+        let m = null;
+        if (base.index == 100) {
+            m = s.match(/^ISic0[0-9]{5,5}-[0-9]{5,5}$/)
+        } else if (base.index == 52) {
+            m = s.match(/^ISic0[0-9]{5,5}-[0-9]{4,4}$/)
+        }
         return m != null
     }
 
@@ -110,21 +163,24 @@ export default class Validator {
     }
 
     /**
-     * 
-     * @param {string} x 
-     * @returns {boolean}
-     */
-
-    static longIdNonStrict = (x) => Validator.isDecimal(Format.removeISic(x))
-
-    /**
      * Returns true if input string is a valid short ISicily element ID
      * @param {string} s
      * @returns {boolean} 
      */
 
-    static shortIDBase100Strict(s) {
-        const m = s.match(/^[A-Za-zΑ-Ωα-ω]{5,5}$/)
+    /**
+     * 
+     * @param {string} s 
+     * @param {Base} base 
+     * @returns 
+     */
+    static shortID(s, base) {
+        let m = null;
+        if (base.index === 100) {
+            m = s.match(/^[A-Za-zΑ-Ωα-ω]{5,5}$/)
+        } else if (base.index === 52) {
+            m = s.match(/^[A-Za-z]{5,5}$/)
+        }
         return m != null
     }
 
@@ -138,21 +194,20 @@ export default class Validator {
         return m != null
     }
 
-    static longID = Constants.STRICT ? Validator.longIDStrict : Validator.longIdNonStrict
-    static shortID = Constants.STRICT ? Validator.shortIDBase100Strict : Validator.shortIdNonStrict
     /**
      * @param {HTMLDivElement | HTMLSpanElement} elem
+     * @param {Base} base
      */
-    static validate = (elem) => {
+    static validate = (elem, base) => {
         const text = elem.textContent
 
         if (text == null) return false
 
         const {longID, shortID} = Validator
 
-        return longID(text) 
-                || shortID(text) 
-                || longID(text.replace(/[= ]/g, ""))
+        return longID(text, base) 
+                || shortID(text, base) 
+                || longID(text.replace(/[= ]/g, ""), base)
     }
 
 

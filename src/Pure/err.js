@@ -1,4 +1,5 @@
 import Validator from "./validator.js"
+import Base from "./base.js"
 
 export default class Err {
     /**
@@ -42,13 +43,14 @@ export default class Err {
      * an error code and a string giving the
      * description of the error.
      * @param {string} text 
+     * @param {Base} base
      * @returns {[number, string]} 
      */
 
-    static getShortIDValidationIndividual = (text) => {
+    static getShortIDValidationIndividual = (text, base) => {
         let error = Err.ERR.ISVALID
         let status = ""
-        if (Validator.shortID(text)) {
+        if (Validator.shortID(text, base)) {
             status = "This ID is valid"
             error = Err.ERR.ISVALID
         } else {

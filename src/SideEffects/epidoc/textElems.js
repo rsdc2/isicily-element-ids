@@ -3,7 +3,6 @@ import TextElem from "./textElem.js"
 import NullIDBlocks from "./nullidblocks.js"
 import Compress from "../../Pure/compress.js"
 import { 
-    ExistingIDError, 
     MidpointIDError, 
     NullIDError, 
     TextElemsIndexError,

@@ -98,7 +98,7 @@ node --test
 The Element ID resolver / generator requires:
 
 1. [`http-server`](https://www.npmjs.com/package/http-server) (MIT, see LICENSES folder) to run locally;
-2. [`jsdom`](https://www.npmjs.com/package/jsdom) (MIT, see LICENSES folder) to run tests.
+2. [`jsdom`](https://github.com/jsdom/jsdom) (MIT, see LICENSES folder) to run tests.
 
 ## Acknowledgements
 

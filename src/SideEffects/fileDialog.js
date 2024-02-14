@@ -9,7 +9,7 @@ import FileValidator from "./fileValidator.js"
  */
 
 export default class FileDialog {
-    #picker 
+    #dialog 
     
     /**
      * Create a FilePicker instance 
@@ -20,11 +20,12 @@ export default class FileDialog {
 
         // cf. https://developer.mozilla.org/en-US/docs/Web/API/File_API/Using_files_from_web_applications#using_hidden_file_input_elements_using_the_click_method
         // Set up file picker
-        this.#picker = document.createElement("input")
-        this.#picker.setAttribute("type", "file")
-        this.#picker.setAttribute("accept", fileExts.join(","))     
+        this.#dialog = document.createElement("input")
+        this.#dialog.setAttribute("type", "file")
+        this.#dialog.setAttribute("accept", fileExts.join(","))     
 
-        this.#picker.onchange = this.onFileLoaded(fileReader, fileExts)
+        this.#dialog.onchange = this.onFileLoaded(fileReader, fileExts)
+        // this.#dialog.oncancel = () => console.log("Cancelled")
     }
     
     /**
@@ -46,7 +47,7 @@ export default class FileDialog {
      */
     load() {
         // cf. https://developer.mozilla.org/en-US/docs/Web/API/File_API/Using_files_from_web_applications#using_hidden_file_input_elements_using_the_click_method
-        this.#picker.click()
+        this.#dialog.click()
     }
 
     /**
@@ -98,7 +99,7 @@ export default class FileDialog {
      * Remove the file picker from the DOM
      */
     remove() {
-        this.#picker.remove()
+        this.#dialog.remove()
     }
 
 }

@@ -9,7 +9,6 @@ import { FileError } from "../Errors/file.js"
 
 import Constants from "../Pure/constants/constants.js"
 import { Config } from "../config.js"
-import { XMLParsingError } from "../Errors/xml.js"
 import XML from "./xml/xml.js"
 
 const {BASE100, BASE52} = Constants

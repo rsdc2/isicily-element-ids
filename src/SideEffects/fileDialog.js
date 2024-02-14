@@ -19,13 +19,12 @@ export default class FileDialog {
     constructor(fileExts, fileReader) {
 
         // cf. https://developer.mozilla.org/en-US/docs/Web/API/File_API/Using_files_from_web_applications#using_hidden_file_input_elements_using_the_click_method
-        // Set up file picker
+        // Set up file dialog
         this.#dialog = document.createElement("input")
         this.#dialog.setAttribute("type", "file")
         this.#dialog.setAttribute("accept", fileExts.join(","))     
 
         this.#dialog.onchange = this.onFileLoaded(fileReader, fileExts)
-        // this.#dialog.oncancel = () => console.log("Cancelled")
     }
     
     /**

@@ -63,7 +63,7 @@ export default class Convert {
             if (raw[6] !== "0" && newbase.index === 52) {
                 throw new BaseValueError(
                     `${value} cannot be converted ` +
-                    `to an ID in ${newbase.index} ` +
+                    `to an ID in base ${newbase.index} ` +
                     `because ${decompressed} has an element ID which is ` +
                     `greater than 9999.`
                 )

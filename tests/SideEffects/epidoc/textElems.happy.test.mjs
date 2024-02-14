@@ -2,8 +2,9 @@ import { test } from "node:test"
 import assert from "node:assert/strict"
 import { loadEpiDoc, writeXML } from "../../utils/xml.mjs"
 import { assertIDsEqual } from "../../utils/ids.mjs"
+import TextElems from "../../../src/SideEffects/epidoc/textElems.js"
 
-import { NullIDError } from "../../../src/Errors/ids.js"
+import { NullIDError, UniqueIDError } from "../../../src/Errors/ids.js"
 import Base from "../../../src/Pure/base.js"
 import Constants from "../../../src/Pure/constants/constants.js"
 import { Config } from "../../../src/config.js"
@@ -13,7 +14,19 @@ import { getInputPath, getOutputPath } from "../../utils/file.mjs"
 const {BASE100, BASE52} = Constants
 const base100 = Base.fromBaseChars(BASE100)
 
+test("Unique ID assertion throws error when IDs not unique", (t) => {
+    const nonUniqueIDsDoc = loadEpiDoc(
+        getInputPath(
+            "ISic000001_all_ids.xml"
+        )
+    )
 
+    assert.doesNotThrow(
+        () => {
+            TextElems.assertIDsUnique(nonUniqueIDsDoc.textElems.elems)
+        }, UniqueIDError
+    )
+})
 
 test("Put an @xml:id on all text elements", (t) => {
     const epidoc = loadEpiDoc(getInputPath("ISic000001_valid_no_ids.xml"))
@@ -45,6 +58,8 @@ test("Put an @xml:id on element subset", (t) => {
     assert.strictEqual(lbs[0].xmlid, null)
     assert.notStrictEqual(ws[0].xmlid, null)
 })
+
+
 
 
 test("IDs are the same as those assigned by PyEpiDoc", (t) => {

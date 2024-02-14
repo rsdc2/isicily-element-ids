@@ -2,10 +2,12 @@ import { test } from "node:test"
 import assert from "node:assert/strict"
 import { loadEpiDoc, writeXML } from "../../utils/xml.mjs"
 import { assertIDsEqual } from "../../utils/ids.mjs"
+import TextElems from "../../../src/SideEffects/epidoc/textElems.js"
 
 import { 
     MidpointIDError, 
-    UnexpectedIDError 
+    UnexpectedIDError, 
+    UniqueIDError
 } from "../../../src/Errors/ids.js"
 import Base from "../../../src/Pure/base.js"
 import Constants from "../../../src/Pure/constants/constants.js"
@@ -15,6 +17,24 @@ const {BASE100, BASE52} = Constants
 const base100 = Base.fromBaseChars(BASE100)
 
 import { getInputPath, getOutputPath } from "../../utils/file.mjs"
+
+test("Unique ID assertion throws error when IDs not unique", (t) => {
+    const nonUniqueIDsDoc = loadEpiDoc(
+        getInputPath(
+            "ISic000001_nonunique_ids.xml"
+        )
+    )
+
+    const elems = nonUniqueIDsDoc.textElems.elems.filter(
+        elem => elem.xmlid != null
+    )
+
+    assert.throws(
+        () => {
+            TextElems.assertIDsUnique(elems)
+        }, UniqueIDError
+    )
+})
 
 
 test("Throw error when not enough free midpoints", (t) => {

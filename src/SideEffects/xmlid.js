@@ -22,7 +22,7 @@ export default class XMLID {
     /**
      * Create a new XMLIDApplier instance that applies IDs
      * to tokens in a tokenized EpiDoc XML file.
-     * @param {"set"|"expand"|"compress"|"convert"|"setMidpoint"|"remove"} mode 
+     * @param {"set"|"expand"|"compress"|"convertFrom52"|"convertFrom100"|"setMidpoint"|"remove"} mode 
      */
     constructor(mode) {
 
@@ -67,9 +67,13 @@ export default class XMLID {
                             suffix: "_ids_removed",
                             func: () => textElems.removeXMLIDs()
                         },
-                        "convert": {
-                            suffix: "_ids_converted",
+                        "convertFrom52": {
+                            suffix: "_ids_converted_from_base_52",
                             func: () => textElems.convertXMLIDs(base52, base100)
+                        },
+                        "convertFrom100": {
+                            suffix: "_ids_converted_from_base_100",
+                            func: () => textElems.convertXMLIDs(base100, base52)
                         },
                         "setMidpoint": {
                             suffix: "_midpoints_set",
@@ -117,10 +121,10 @@ export default class XMLID {
     /**
      * Create an XMLIDApplier that downloads a file with a specific filename
      * when called
-     * @param {"set"|"expand"|"compress"|"convert"|"setMidpoint"|"remove"} mode 
+     * @param {"set"|"expand"|"compress"|"convertFrom52"|"convertFrom100"|"setMidpoint"|"remove"} mode 
      * @returns 
      */
-    static create(filename, mode) {
+    static create(mode) {
 
         function inner() {
             try {

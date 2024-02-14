@@ -1,4 +1,4 @@
-import { FileError } from "../Pure/errors.js"
+import { FileError } from "../Errors/file.js"
 
 export default class FileValidator {
 

@@ -4,12 +4,10 @@ import {newFileReader} from "./fileReader_.js"
 import Convert from "../Pure/convert.js"
 import Base from "../Pure/base.js"
 import Message from "./message.js"
-import { 
-    ISicElementIDError,
-    BaseLengthError, 
-    BaseValueError, 
-    CSVFormatError, 
-    FileError} from "../Pure/errors.js"
+
+import { ISicElementIDError } from "../Errors/isicElementIDError.js"
+import { BaseLengthError, BaseValueError } from "../Errors/base.js"
+import { CSVFormatError, FileError } from "../Errors/file.js"
 import Constants from "../Pure/constants/constants.js"
 
 

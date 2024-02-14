@@ -1,4 +1,4 @@
-import {FileError} from "../Pure/errors.js"
+import { FileError } from "../Errors/file.js"
 import Constants from "../Pure/constants/constants.js"
 import Message from "./message.js"
 import FileValidator from "./fileValidator.js"

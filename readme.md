@@ -2,6 +2,8 @@
 
 This is a resolver and generator for token IDs on token elements in the [I.Sicily](https://github.com/ISicily/ISicily) corpus of inscriptions from ancient Sicily.
 
+**NB At present full functionality is not available in Firefox.**
+
 ## I.Sicily element IDs
 
 ### Background

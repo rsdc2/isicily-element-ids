@@ -19,7 +19,6 @@ export default class Elems {
         return Array.from(document.querySelectorAll("button" + query))
     }
 
-
     /**
      * @param {string} query
      * @return {HTMLDivElement}
@@ -27,7 +26,6 @@ export default class Elems {
     static div = query => {
         return document.querySelector("div" + query)
     }
-
 
     /**
      * @param {string} query
@@ -78,6 +76,10 @@ export default class Elems {
     static convertOldXMLIDsBtn = 
         /** @type {HTMLButtonElement} */ 
         (document.getElementById("convert-old-xml-ids-btn"))
+    
+    static convertNewXMLIDsBtn = 
+        /** @type {HTMLButtonElement} */ 
+        (document.getElementById("convert-new-xml-ids-btn"))
 
     static expandXMLIDBtn = 
         /** @type {HTMLButtonElement} */ 

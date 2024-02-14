@@ -209,7 +209,8 @@ export default class Handlers {
 
 
     /**
-     * 
+     * In compression mode, flip between compressed and 
+     * expanded IDs
      */
     static handleFlip = () => {
         const { resolvedID1 } = Elems

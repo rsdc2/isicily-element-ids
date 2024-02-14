@@ -589,7 +589,8 @@ export default class Handlers {
 
         const { textInput1, textInput2 } = Elems
         /**
-         * 
+         * Get the validation text based on the validation
+         * status of the element
          * @param {HTMLDivElement} elem 
          */
         const getValidationText = (elem) => {

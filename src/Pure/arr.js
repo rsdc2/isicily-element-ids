@@ -33,7 +33,7 @@ export const Arr = {
      * @param {string} s
      * @returns {Array.<string>}
      */
-    strToArr: (s) => {
+    fromString: (s) => {
         let arr = []
 
         for (let i = 0; i < s.length; i++) {

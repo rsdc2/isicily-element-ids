@@ -56,6 +56,8 @@ export default class TextElem extends EpiDocElem {
      * @param {Base} base 
      */
     expandID (base) {
+        Validator.assertFullCompressedID(this.xmlid, base)
+
         const expanded = Compress.decompressID(base)(this.xmlid)
         this.setXMLID({
             id: expanded, 

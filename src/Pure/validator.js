@@ -3,6 +3,31 @@ import { ConversionError } from "./errors.js"
 import Base from "./base.js"
 
 export default class Validator {
+    /**
+     * 
+     * @param {string} s 
+     * @param {Base} base
+     */
+    static assertFullCompressedID(s, base) {
+        if (!Validator.shortID(s, base)) {
+            throw new ConversionError(
+                `"${s}" is not a valid compressed ID in base ${base}.`
+            )
+        }
+    }
+
+    /**
+     * 
+     * @param {string} s 
+     * @param {Base} base
+     */
+    static assertPartialCompressedID(s, base) {
+        if (!Validator.partialShortID(s, base)) {
+            throw new ConversionError(
+                `"${s}" is not a valid part of a compressed ID in base ${base}.`
+            )
+        }
+    }
 
     /**
      * 
@@ -12,7 +37,7 @@ export default class Validator {
     static assertLongID(s, base) {
         if (!Validator.longID(s, base)) {
             throw new ConversionError(
-                `ID ${s} is not a valid expanded I.Sicily element ID.`
+                `"${s}" is not a valid expanded I.Sicily element ID.`
             )
         }
     }
@@ -25,7 +50,7 @@ export default class Validator {
     static assertNotCompressedID(s, base) {
         if (Validator.shortID(s, base)) {
             throw new ConversionError(
-                `ID ${s} is already compressed.`
+                `"${s}" is already compressed.`
             )
         }
     }
@@ -38,7 +63,7 @@ export default class Validator {
     static assertShortID(s, base) {
         if (!Validator.shortID(s, base)) {
             throw new ConversionError(
-                `ID ${s} is not a valid compressed I.Sicily element ID.`
+                `"${s}" is not a valid compressed I.Sicily element ID.`
             )
         }
     }
@@ -159,6 +184,22 @@ export default class Validator {
      */
     static partialLongID(s) {
         const m = s.match(/^ISic0/)
+        return m != null
+    }
+
+    /**
+     * Returns true if the initial part of the string is consistent
+     * with a long ID
+     * @param {string} s 
+     * @param {Base} base
+     */
+    static partialShortID(s, base) {
+        let m = null;
+        if (base.index === 100) {
+            m = s.match(/^[A-Za-zΑ-Ωα-ω]{0,5}/)
+        } else if (base.index === 52) {
+            m = s.match(/^[A-Za-zΑ-Ωα-ω]{0,4}/)
+        }
         return m != null
     }
 

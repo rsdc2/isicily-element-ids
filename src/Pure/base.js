@@ -190,7 +190,7 @@ export default class Base {
      */
 
     static toDec(baseVal, base) {
-        const chars = Arr.strToArr(baseVal)
+        const chars = Arr.fromString(baseVal)
 
         /**
          * 

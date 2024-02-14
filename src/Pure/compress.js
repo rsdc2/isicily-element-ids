@@ -53,24 +53,18 @@ export default class Compress {
 
     /**
      * Decompress a compressed ID.
-     * Assumes that any HTML formatting has been removed
+     * Assumes that any HTML formatting has been removed.
      * @param {Base} base
      */
     static decompressID(base) {
 
         /**
-         * 
+         * Asserts that compressedID is a valid partial ID
          * @param {string} compressedID 
          * @returns {string}
          */
         function inner(compressedID) {
-
-            // if (compressedID.length !== 5) {
-            //     throw new BaseValueError(
-            //         "Compressed ID has the wrong length: " +
-            //         "should be 5 characters"
-            //     )
-            // }
+            Validator.assertPartialCompressedID(compressedID, base)
 
             const decompressed = base.toDec(compressedID).toString()
             return Format.padAndInsertISic(decompressed, base.index)

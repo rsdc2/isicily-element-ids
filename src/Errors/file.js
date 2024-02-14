@@ -7,7 +7,7 @@ export class CSVFormatError extends ISicElementIDError {
      */
     constructor(message) {
         super(message)
-        this.message = "Format error: " + this.message
+        this.message = "CSVFormatError: " + this.message
     }
 }
 
@@ -18,6 +18,6 @@ export class FileError extends ISicElementIDError {
      */
     constructor(message) {
         super(message)
-        this.message = "File error: " + this.message
+        this.message = "FileError: " + this.message
     }
 }

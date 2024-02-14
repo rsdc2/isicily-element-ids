@@ -4,7 +4,7 @@ import { loadEpiDoc } from "../../utils/xml.mjs"
 
 import { ISicElementIDError } from "../../../src/Errors/isicElementIDError.js"
 
-const epidocFp = "./tests/SideEffects/epidoc/files/input/ISic000001_invalid.xml"
+const epidocFp = "./tests/SideEffects/epidoc/files/input/ISic000001_invalid_ns.xml"
 
 
 test("Load and read invalid EpiDoc file with error", (t) => {

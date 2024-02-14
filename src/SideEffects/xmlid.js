@@ -9,6 +9,8 @@ import { FileError } from "../Errors/file.js"
 
 import Constants from "../Pure/constants/constants.js"
 import { Config } from "../config.js"
+import { XMLParsingError } from "../Errors/xml.js"
+import XML from "./xml/xml.js"
 
 const {BASE100, BASE52} = Constants
 
@@ -32,10 +34,7 @@ export default class XMLID {
 
                 // String because will use readAsText method to read
                 try {
-                    const xml = new DOMParser().parseFromString(
-                        contents, 
-                        'application/xml'
-                    )
+                    const xml = XML.parseFromString(new DOMParser, contents)
 
                     const base100 = Base.fromBaseChars(BASE100)
                     const base52 = Base.fromBaseChars(BASE52)

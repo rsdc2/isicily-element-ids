@@ -54,3 +54,13 @@ export class NamespaceError extends ISicElementIDError {
 export class XMLDeclarationError extends ISicElementIDError {
 
 }
+
+export class XMLParsingError extends ISicElementIDError {
+    /**
+     * 
+     * @param {string} msg 
+     */
+    constructor(msg) {
+        super("XMLParsingError: " + msg)
+    }
+}

@@ -1,3 +1,4 @@
+import { XMLParsingError as XMLParsingError } from "../../Errors/xml.js"
 
 export default class XML {
     /**
@@ -15,6 +16,39 @@ export default class XML {
             }
             return arr
         }
+    }
+
+    /**
+     * 
+     * @param {DOMParser} parser 
+     * @param {string} contents 
+     * @returns {XMLDocument}
+     */
+    static parseFromString(parser, contents) {
+        const xml = parser.parseFromString(
+            contents, 
+            'application/xml'
+        )
+
+        const error = xml.querySelector("parsererror")
+        if (error != null) {
+            const errorDivs = Array.from(error.querySelectorAll("div"))
+            const errorMsg = errorDivs.map (
+                div => {
+                    return div.textContent
+                }
+            ).join("\n")
+            
+            if (errorMsg === "") {
+                throw new XMLParsingError("Could not parse XML. " +
+                    "Please refer to the developer console for details."
+                )
+            }
+    
+            throw new XMLParsingError(errorMsg)    
+        }
+
+        return xml
     }
 
     /**

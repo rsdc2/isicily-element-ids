@@ -37,11 +37,11 @@ export default class TextElems {
     }
 
     /**
-     * 
+     * @param {TextElem[]} elems
      * @param {Base} base 
      */
-    assertAllIDsAreValidForBase(base) {
-        this.elems.forEach( (elem) => {
+    static assertAllIDsAreValidForBase(elems, base) {
+        elems.forEach( (elem) => {
             Validator.assertFullCompressedID(elem.xmlid, base)
         })
     }
@@ -67,26 +67,36 @@ export default class TextElems {
         }
         return true
     }
-
-    assertNonNullIDsUnique() {
-        const ids = this.elems.reduce( (acc, elem) => {
-            if (elem === null) {
-                return acc
-            } else {
-                acc.push(elem)
-                return acc
-            }
-        }, [])
-
+    
+    /**
+     * 
+     * @param {TextElem[]} elems 
+     */
+    static assertIDsUnique(elems) {
+        const ids = elems.map(elem => elem.xmlid)
         const set = new Set(ids)
 
         if (ids.length !== set.size) {
-            console.log(ids)
-            console.log(set.entries())
-            throw new UniqueIDError(
-                `IDs are not unique`
-            )
+            const msg = `IDs are not unique: \n` +
+                `${ids}\n` + 
+                `vs.\n` + 
+                `${Array.from(set.entries())}`
+
+            // console.log(msg)
+            
+            throw new UniqueIDError(msg)            
         }
+    }
+
+    /**
+     * 
+     * @param {TextElem[]} elems 
+     */
+    assertNonNullIDsUnique(elems) {
+        const nonNullIDElems = elems.filter(elem => elem.xmlid != null)
+
+        TextElems.assertIDsUnique(nonNullIDElems)
+
     }
 
     assertMissingIDs() {
@@ -260,7 +270,8 @@ export default class TextElems {
 
         const blocks = NullIDBlocks.fromTextElemArray(elems, base)
         const elemsWithIDs = blocks.assignIDs()
-        this.assertNonNullIDsUnique()
+        // this.assertNonNullIDsUnique()
+        // this.assertAllIDsAreValidForBase(elems.filter(elem => elem.xmlid != null), base)
         return elemsWithIDs
     }
 
@@ -291,14 +302,15 @@ export default class TextElems {
     setXMLIDs(base, docid, localNames = []) {
         this.assertNoElemsOutsideLocalNameSubsetHaveIDs(localNames)
 
-        if (localNames.length == 0) {
-            this.#setXMLIDsToElems({elems: this.elems, base: base, docId: docid})
-        } else {
-            const elemSubset = this.subset(localNames)
-            this.#setXMLIDsToElems({elems: elemSubset, base: base, docId: docid})            
+        let elems = this.elems
+
+        if (localNames.length > 0) {
+            elems = this.subset(localNames)
         }
 
-        this.assertNonNullIDsUnique()
+        this.#setXMLIDsToElems({elems: elems, base: base, docId: docid})
+        TextElems.assertIDsUnique(elems)
+        TextElems.assertAllIDsAreValidForBase(elems, base)
 
         return this
     }

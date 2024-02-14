@@ -1,4 +1,8 @@
-import { ElementAttributeError, LocalNameError, NamespaceError } from "./errors.js"
+import { 
+    ElementAttributeError, 
+    LocalNameError, 
+    NamespaceError 
+} from "../../Errors/xml.js"
 import NamedNodeMap_ from "../../Pure/namednodemap_.js"
 
 export default class HasXMLElem {

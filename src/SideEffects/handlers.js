@@ -10,8 +10,10 @@ import Attrs from "./attrs.js"
 import Status from "./status.js"
 import Message from "./message.js"
 import Elem from "./elem.js"
-import { ISicElementIDError, ValidationError } from "../Pure/errors.js"
-import { NoSelectionError } from "./errors.js"
+import { ISicElementIDError } from "../Errors/isicElementIDError.js"
+import { NoSelectionError } from "../Errors/selection.js"
+import { ValidationError
+ } from "../Errors/validation.js"
 
 const {
     BLANKCOMPRESSION,

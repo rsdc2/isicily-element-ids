@@ -1,5 +1,5 @@
 import HasXMLElem from "./hasxmlelem.js"
-import { XMLDeclarationError } from "./errors.js"
+import { XMLDeclarationError } from "../../Errors/xml.js";
 /**
  * Services for EpiDoc XML documents
  */

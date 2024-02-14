@@ -3,7 +3,10 @@ import assert from "node:assert/strict"
 import { loadEpiDoc, writeXML } from "../../utils/xml.mjs"
 import { assertIDsEqual } from "../../utils/ids.mjs"
 
-import { MidpointIDError, NullIDError, UnexpectedIDError } from "../../../src/SideEffects/epidoc/errors.js"
+import { 
+    MidpointIDError, 
+    UnexpectedIDError 
+} from "../../../src/Errors/ids.js"
 import Base from "../../../src/Pure/base.js"
 import Constants from "../../../src/Pure/constants/constants.js"
 import { Config } from "../../../src/config.js"

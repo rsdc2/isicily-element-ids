@@ -1,11 +1,11 @@
 import EpiDocElem from "./epidocElem.js";
 import Constants from "../../Pure/constants/constants.js";
-import { ExistingIDError, NullIDError } from "./errors.js";
+import { ExistingIDError, NullIDError } from "../../Errors/ids.js";
 import Base from "../../Pure/base.js";
 import Compress from "../../Pure/compress.js";
 import Convert from "../../Pure/convert.js";
 import Validator from "../../Pure/validator.js";
-import { ConversionError } from "../../Pure/errors.js";
+
 
 const {TEINS, XMLNS} = Constants
 

@@ -1,4 +1,4 @@
-import { ISicElementIDError } from "../Pure/errors.js";
+import { ISicElementIDError } from "./isicElementIDError.js";
 
 export class NoSelectionError extends ISicElementIDError {
     

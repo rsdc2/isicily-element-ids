@@ -1,5 +1,4 @@
-import Base from "../../Pure/base.js";
-import Format from "../../Pure/format.js";
+
 import HasXMLElem from "../xml/hasxmlelem.js";
 import TextElem from "./textElem.js"
 

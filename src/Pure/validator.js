@@ -1,5 +1,7 @@
 
-import { ConversionError, ValidationError } from "./errors.js"
+import { ConversionError } from "../Errors/conversion.js"
+import { ValidationError } from "../Errors/validation.js"
+
 import Base from "./base.js"
 
 export default class Validator {

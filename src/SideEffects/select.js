@@ -1,6 +1,6 @@
 import { Arr } from "../Pure/arr.js"
 import XML from "./xml/xml.js"
-import { NoSelectionError } from "./errors.js"
+import { NoSelectionError } from "../Errors/selection.js"
 
 export default class Select {
 

@@ -1,6 +1,7 @@
 import Base from "../../Pure/base.js"
 import TextElems from "./textElems.js"
-import { MidpointIDError, TextElemLengthError } from "./errors.js"
+import { MidpointIDError } from "../../Errors/ids.js"
+import { TextElemLengthError } from "../../Errors/epidoc.js"
 import BaseValue from "../../Pure/baseValue.js"
 
 /**

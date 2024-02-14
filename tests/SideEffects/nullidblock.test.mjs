@@ -4,7 +4,7 @@ import assert from "node:assert/strict"
 import NullIDBlock from "../../src/SideEffects/epidoc/nullidblock.js"
 import Base from "../../src/Pure/base.js"
 import Constants from "../../src/Pure/constants/constants.js"
-import { MidpointIDError } from "../../src/SideEffects/epidoc/errors.js"
+import { MidpointIDError } from "../../src/Errors/ids.js"
 
 const {BASE52, BASE100} = Constants
 const base = Base.fromBaseChars(BASE100)

@@ -1,7 +1,7 @@
 import NullIDBlock from "./nullidblock.js";
 import TextElem from "./textElem.js";
 import TextElems from "./textElems.js";
-import { MidpointIDError } from "./errors.js";
+import { MidpointIDError } from "../../Errors/ids.js";
 import Base from "../../Pure/base.js";
 
 /**

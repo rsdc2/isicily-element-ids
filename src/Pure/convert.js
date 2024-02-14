@@ -2,7 +2,7 @@ import Base from "./base.js"
 import Format from "./format.js"
 import Validator from "./validator.js"
 import Compress from "./compress.js"
-import { BaseIndexError, BaseLengthError, BaseValueError } from "./errors.js"
+import { BaseIndexError, BaseLengthError, BaseValueError } from "../Errors/base.js"
 
 export default class Convert {    
 

@@ -1,4 +1,4 @@
-import { ISicElementIDError } from "../../Pure/errors.js"
+import { ISicElementIDError } from "./isicElementIDError.js"
 
 export class ExistingIDError extends ISicElementIDError {
     /**
@@ -40,13 +40,7 @@ export class NullIDError extends ISicElementIDError {
     }    
 }
 
-export class TextElemLengthError extends ISicElementIDError {
-    
-}
 
-export class TextElemsIndexError extends ISicElementIDError {
-    
-}
 
 export class UniqueIDError extends ISicElementIDError {
     

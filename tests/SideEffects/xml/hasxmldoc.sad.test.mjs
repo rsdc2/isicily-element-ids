@@ -2,7 +2,7 @@ import { test } from "node:test"
 import assert from "node:assert/strict"
 
 import { getInputPath, getOutputPath } from "../../utils/file.mjs";
-import { XMLDeclarationError } from "../../../src/SideEffects/xml/errors.js";
+import { XMLDeclarationError } from "../../../src/Errors/xml.js";
 import { loadEpiDoc } from "../../utils/xml.mjs";
 
 

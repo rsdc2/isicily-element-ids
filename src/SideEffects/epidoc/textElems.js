@@ -5,12 +5,12 @@ import Compress from "../../Pure/compress.js"
 import { 
     MidpointIDError, 
     NullIDError, 
-    TextElemsIndexError,
     UnexpectedIDError,
     UniqueIDError
-} from "./errors.js"
+} from "../../Errors/ids.js"
 import Validator from "../../Pure/validator.js"
-import { ValidationError } from "../../Pure/errors.js"
+import { ValidationError } from "../../Errors/validation.js"
+import { TextElemsIndexError } from "../../Errors/epidoc.js"
 
 /**
  * Represents a collection of text elements

@@ -2,7 +2,7 @@
 import { Arr } from "./arr.js"
 import Validator from "./validator.js"
 import Constants from "./constants/constants.js"
-import { BaseIndexError } from "./errors.js"
+import { BaseIndexError } from "../Errors/base.js"
 
 
 const { FIVEBLANKS } = Constants

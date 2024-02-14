@@ -1,4 +1,4 @@
-import { ArrayLengthError } from "./errors.js"
+import { ArrayLengthError } from "../Errors/pure.js"
 
 export const Arr = {
     /**

@@ -1,5 +1,5 @@
 import Base from "./base.js"
-import { ConversionError } from "./errors.js"
+import { ConversionError } from "../Errors/conversion.js"
 import Format from "./format.js"
 import Validator from "./validator.js"
 

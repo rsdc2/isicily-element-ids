@@ -1,5 +1,5 @@
 
-import { ConversionError } from "./errors.js"
+import { ConversionError, ValidationError } from "./errors.js"
 import Base from "./base.js"
 
 export default class Validator {
@@ -10,8 +10,8 @@ export default class Validator {
      */
     static assertFullCompressedID(s, base) {
         if (!Validator.shortID(s, base)) {
-            throw new ConversionError(
-                `"${s}" is not a valid compressed ID in base ${base}.`
+            throw new ValidationError(
+                `"${s}" is not a valid compressed ID in base ${base.index}.`
             )
         }
     }
@@ -23,8 +23,8 @@ export default class Validator {
      */
     static assertPartialCompressedID(s, base) {
         if (!Validator.partialShortID(s, base)) {
-            throw new ConversionError(
-                `"${s}" is not a valid part of a compressed ID in base ${base}.`
+            throw new ValidationError(
+                `"${s}" is not a valid part of a compressed ID in base ${base.index}.`
             )
         }
     }
@@ -36,7 +36,7 @@ export default class Validator {
      */
     static assertLongID(s, base) {
         if (!Validator.longID(s, base)) {
-            throw new ConversionError(
+            throw new ValidationError(
                 `"${s}" is not a valid expanded I.Sicily element ID.`
             )
         }
@@ -49,7 +49,7 @@ export default class Validator {
      */
     static assertNotCompressedID(s, base) {
         if (Validator.shortID(s, base)) {
-            throw new ConversionError(
+            throw new ValidationError(
                 `"${s}" is already compressed.`
             )
         }
@@ -62,7 +62,7 @@ export default class Validator {
      */
     static assertShortID(s, base) {
         if (!Validator.shortID(s, base)) {
-            throw new ConversionError(
+            throw new ValidationError(
                 `"${s}" is not a valid compressed I.Sicily element ID.`
             )
         }

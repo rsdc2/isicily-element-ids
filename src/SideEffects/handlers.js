@@ -10,6 +10,8 @@ import Attrs from "./attrs.js"
 import Status from "./status.js"
 import Message from "./message.js"
 import Elem from "./elem.js"
+import { ISicElementIDError, ValidationError } from "../Pure/errors.js"
+import { NoSelectionError } from "./errors.js"
 
 const {
     BLANKCOMPRESSION,
@@ -139,53 +141,68 @@ export default class Handlers {
     static handleCompression = () => {
         const { resolvedID1,result, textInput1, textInput2 } = Elems
     
-        if (Validator.shortID(textInput1.textContent, base)) {
-            // Handle decompression
-            Message.hide()
-            resolvedID1.textContent = decompress(
-                textInput1.textContent
-            )
+        try {
+            if (Validator.shortID(textInput1.textContent, base)) {
+                // Handle decompression
+                Message.hide()
+                resolvedID1.textContent = decompress(
+                    textInput1.textContent
+                )
+            
+            } else if (textInput1.textContent.trim() === "") {
+                // Handle empty input box
+                resolvedID1.textContent = BLANKCOMPRESSION
+                Attrs.hide(result, textInput2)
+                Handlers.reset(textInput2, result)
+                Attrs.removeClasses(result, textInput2)("five", "one")  
+    
+            } else if (Validator.containsOnlyLetters(textInput1.textContent)) {
+                resolvedID1.textContent = BLANKISIC
+                Attrs.hide(result, textInput2)
+                Handlers.reset(textInput2, result)
+                Attrs.removeClasses(result, textInput2)("five", "one")   
+    
+            } else if (Validator.isDecimal(Elems.textInput1.textContent)) {
+                Message.hide()
+                textInput1.textContent = "ISic" + textInput1.textContent
+                Select.setCaretEnd(textInput1)
+                Handlers.handleCompression()
+    
+            } else if (Validator.partialLongID(textInput1.textContent)) {
+                Message.hide()
+                Elems.result.textContent = "-"
+                const inpt = textInput1.textContent + "-" + textInput2.textContent
+                Attrs.addClasses(textInput2)("five")
+                Attrs.addClasses(result)("valid", "one")
+                Attrs.show(result, textInput2)
+    
+                if (Validator.longID(inpt, base)) {
+                    resolvedID1.textContent = compress(inpt)
+                    Elem.highlightGreekInDiv(resolvedID1)
+                } else {
+                    resolvedID1.textContent = FIVEBLANKS
+                }
         
-        } else if (textInput1.textContent.trim() === "") {
-            // Handle empty input box
-            resolvedID1.textContent = BLANKCOMPRESSION
-            Attrs.hide(result, textInput2)
-            Handlers.reset(textInput2, result)
-            Attrs.removeClasses(result, textInput2)("five", "one")  
-
-        } else if (Validator.containsOnlyLetters(textInput1.textContent)) {
-            resolvedID1.textContent = BLANKISIC
-            Attrs.hide(result, textInput2)
-            Handlers.reset(textInput2, result)
-            Attrs.removeClasses(result, textInput2)("five", "one")   
-
-        } else if (Validator.isDecimal(Elems.textInput1.textContent)) {
-            Message.hide()
-            textInput1.textContent = "ISic" + textInput1.textContent
-            Select.setCaretEnd(textInput1)
-            Handlers.handleCompression()
-
-        } else if (Validator.partialLongID(textInput1.textContent)) {
-            Message.hide()
-            Elems.result.textContent = "-"
-            const inpt = textInput1.textContent + "-" + textInput2.textContent
-            Attrs.addClasses(textInput2)("five")
-            Attrs.addClasses(result)("valid", "one")
-            Attrs.show(result, textInput2)
-
-            if (Validator.longID(inpt, base)) {
-                resolvedID1.textContent = compress(inpt)
-                Elem.highlightGreekInDiv(resolvedID1)
+        
             } else {
-                resolvedID1.textContent = FIVEBLANKS
+                resolvedID1.textContent = BLANKCOMPRESSION
+                Attrs.hide(result, textInput2)
+                Handlers.reset(textInput2, result)
+                Attrs.removeClasses(result, textInput2)("five", "one")
             }
     
-    
-        } else {
-            resolvedID1.textContent = BLANKCOMPRESSION
-            Attrs.hide(result, textInput2)
-            Handlers.reset(textInput2, result)
-            Attrs.removeClasses(result, textInput2)("five", "one")
+        } catch (error) {
+            // Ignore validation errors, since these are handled 
+            // by the above routines
+            if (error instanceof ValidationError) {
+
+            } else if (error instanceof ISicElementIDError) {
+                Message.alert (error.message)
+            
+            } else {
+                Message.alert("Unknown error. Please refer to the developer console")
+                throw error
+            }
         }
     }
 
@@ -194,12 +211,20 @@ export default class Handlers {
      * Makes sure that the Flip button is disabled / enabled appropriately
      */
     static handleCheckFlip = () => {
-        const { flipBtn, resolvedID1 } = Elems
-
+        const { 
+            flipBtn, 
+            resolvedID1, 
+            textInput1, 
+            textInput2 
+        } = Elems
+        
         if (
-            (Validator.validate(Elems.textInput1, base) || 
-                Validator.longID(Elems.textInput1.textContent + "-" + Elems.textInput2.textContent, base)) 
-                && Validator.validate(resolvedID1, base)) {
+            (Validator.validate(textInput1, base) || 
+                Validator.longID(
+                    textInput1.textContent + "-" + 
+                    textInput2.textContent, base
+                )
+            ) && Validator.validate(resolvedID1, base)) {
 
             Attrs.enable(flipBtn)
         } else {
@@ -256,10 +281,18 @@ export default class Handlers {
             }
         }
 
-        const position = Select.getCaretPosition(elem.id)
-        Elem.highlightGreekInDiv(elem)
-        const [n, offset] = Select.getNodeAndOffsetFromPosition(elem, position)
-        Select.setCaretFromNodeOffset(n, offset)    
+        try {
+            const position = Select.getCaretPosition(elem.id)
+            Elem.highlightGreekInDiv(elem)
+            const [n, offset] = Select.getNodeAndOffsetFromPosition(elem, position)
+            Select.setCaretFromNodeOffset(n, offset)    
+        } catch (error) {
+            if (error instanceof NoSelectionError) {
+                // If there is no selection, nothing to do
+            } else {
+                throw error
+            }
+        }
         
     }
 

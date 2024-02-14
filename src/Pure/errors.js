@@ -6,6 +6,17 @@ export class ArrayLengthError extends ISicElementIDError {
     
 }
 
+export class ValidationError extends ISicElementIDError {
+    /**
+     * 
+     * @param {string} message 
+     */
+    constructor(message) {
+        super(message)
+        this.message = "Validation error: " + this.message
+    }    
+}
+
 export class ConversionError extends ISicElementIDError {
     /**
      * 
@@ -76,3 +87,4 @@ export class FileError extends ISicElementIDError {
         this.message = "File error: " + this.message
     }
 }
+

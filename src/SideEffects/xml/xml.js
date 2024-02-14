@@ -24,7 +24,23 @@ export default class XML {
      * @returns {Array.<Node>}
      */
     static xpath = (expr, elem) => {
-        const result = document.evaluate(expr, elem, null, XPathResult.ORDERED_NODE_ITERATOR_TYPE, null)
-        return XML.iteratorToArray(result)
+        try {
+            // Evaluate the xpath expression
+            const result = document.evaluate(
+                expr, 
+                elem, 
+                null, 
+                XPathResult.ORDERED_NODE_ITERATOR_TYPE, 
+                null
+            )
+            return XML.iteratorToArray(result)
+        } catch (error) {
+            if (error instanceof TypeError) {
+                throw error
+            } else {
+                throw error
+            }
+        }
+
     }
 } 

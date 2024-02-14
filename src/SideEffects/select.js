@@ -1,5 +1,6 @@
 import { Arr } from "../Pure/arr.js"
 import XML from "./xml/xml.js"
+import { NoSelectionError } from "./errors.js"
 
 export default class Select {
 
@@ -10,8 +11,18 @@ export default class Select {
      */
 
     static getCaretPosition = (id) => {
-        const priorTextNodes = XML.xpath(`preceding::text()[ancestor::div[@id="${id}"]]`, document.getSelection().anchorNode)
-        return priorTextNodes.map(node => node.textContent).join("").length + document.getSelection().anchorOffset
+        const anchorNode = document.getSelection().anchorNode
+        if (anchorNode === null) {
+            throw new NoSelectionError()
+        }
+
+        const priorTextNodes = XML.xpath(
+            `preceding::text()[ancestor::div[@id="${id}"]]`, 
+            anchorNode
+        )
+        return priorTextNodes.map(node => node.textContent)
+            .join("")
+            .length + document.getSelection().anchorOffset
     }
 
     /**

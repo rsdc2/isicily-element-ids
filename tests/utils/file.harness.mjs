@@ -11,7 +11,7 @@ import EpiDoc from "../../src/SideEffects/epidoc/epidoc.js";
 
 function loadFile() {
     const epidoc = loadEpiDoc(
-        "../SideEffects/epidoc/files/input/ISic000001_valid.xml"
+        "../files/input/ISic000001_valid.xml"
     )
     console.log(epidoc.processingInstructions)
     console.log(epidoc.XMLDeclaration)

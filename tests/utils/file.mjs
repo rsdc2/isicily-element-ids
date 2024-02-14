@@ -1,5 +1,5 @@
-const inputpath = "./tests/SideEffects/epidoc/files/input/"
-const outputpath = "./tests/SideEffects/epidoc/files/output/"
+const inputpath = "./tests/files/input/"
+const outputpath = "./tests/files/output/"
 
 
 /**

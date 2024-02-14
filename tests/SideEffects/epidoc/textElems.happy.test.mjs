@@ -13,6 +13,7 @@ import { getInputPath, getOutputPath } from "../../utils/file.mjs"
 
 const {BASE100, BASE52} = Constants
 const base100 = Base.fromBaseChars(BASE100)
+const base52 = Base.fromBaseChars(BASE52 )
 
 test("Unique ID assertion throws error when IDs not unique", (t) => {
     const nonUniqueIDsDoc = loadEpiDoc(
@@ -127,4 +128,22 @@ test("Remove IDs correctly", (t) => {
     doc.textElems.assertAllElementsHaveID()
     doc.textElems.removeXMLIDs()
     doc.textElems.assertNoIDs()
+})
+
+test("Roundtrip conversion IDs correctly", (t) => {
+    const origDoc = loadEpiDoc(getInputPath("ISic000001_all_ids.xml"))
+
+    const convertedDoc = loadEpiDoc(getInputPath("ISic000001_all_ids.xml"))
+    
+    convertedDoc.textElems
+        .convertXMLIDs(base100, base52)
+        .convertXMLIDs(base52, base100)
+
+    const origElems = origDoc.textElems.elems
+    const convertedElems = convertedDoc.textElems.elems
+    
+    TextElems.assertNoNullIDs(convertedElems)
+
+    assertIDsEqual(origElems, convertedElems)
+    
 })

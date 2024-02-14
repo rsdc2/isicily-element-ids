@@ -145,6 +145,18 @@ export default class TextElems {
             }
         )
     }
+    
+    /**
+     * 
+     * @param {TextElem[]} elems 
+     */
+    static assertNoNullIDs(elems) {
+        elems.forEach( elem => {
+            if (elem.xmlid == null) {
+                throw new NullIDError("Null ID found")
+            }
+        })
+    }
 
     assertLastElemHasID() {
         if (this.last.xmlid == null) {
@@ -330,4 +342,12 @@ export default class TextElems {
             elem => localNames.includes(elem.localName)
         )
     }
+
+    /**
+     * All the \@xml:id values
+     */
+    get xmlIds() {
+        return this.#elems.map( elem => elem.xmlid )
+    }
+
 }

@@ -1,4 +1,6 @@
 import Constants from "./constants/constants.js"
+import { BaseIndexError } from "../Errors/base.js"
+
 
 export default class Format {
 
@@ -21,7 +23,7 @@ export default class Format {
             return "ISic" + padded.slice(0, 6) + "-" + padded.slice(6, 10)    
         }
         else {
-            console.error("Invalid base")
+            throw new BaseIndexError(baseIdx)
         }
         
     }

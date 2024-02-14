@@ -1,9 +1,10 @@
 import Attrs from "./attrs.js"
 import Elems from "./elems.js"
+import { InvalidModeError } from "../Errors/mode.js"
 
 export default class Status {
     /**
-     * @returns {"compression"|"midpoint"|"error"} 
+     * @returns {"compression"|"midpoint"} 
      */
     static selectionMode = () => {
 
@@ -13,7 +14,7 @@ export default class Status {
             return "midpoint"
         }
 
-        console.error("Invalid selection mode")
-        return "error"
+        // This should never happen
+        throw new InvalidModeError(`Invalid selection mode`)
     }
 }

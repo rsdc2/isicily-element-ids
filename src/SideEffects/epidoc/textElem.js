@@ -163,6 +163,11 @@ export default class TextElem extends EpiDocElem {
      * <ab> or <div type="edition">
      */
     get xmlLang() {
+        const xmllang = this.elem.getAttributeNS(XMLNS, "lang")
+        if (xmllang != null) {
+            return xmllang
+        }
+
         const ab = this.ancestorAb
         if (ab == null) {
             throw new ISicElementIDError("No ancestor <ab>")

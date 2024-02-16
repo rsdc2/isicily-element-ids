@@ -250,10 +250,12 @@ export default class TextElems {
     }
 
     /**
-     * 
-     * @param {string[]} localNames 
+     * Look up the lemma of all the forms 
+     * in the text elements. Filtered by localNames
+     * if localNames is not an empty list
+     * @param {string[]} [localNames = []] 
      */
-    lemmatise(localNames) {
+    lemmatise(localNames = []) {
         const elems = this.subset(localNames)
         elems.forEach( elem => elem.lemmatise() )
     }

@@ -1,22 +1,24 @@
+import { readFile, readFileSync, writeFileSync } from "node:fs"
+
+
 /**
  * Functions for manipulating objects and string
  * representations of objects
  */
 
-import { lemmata } from "../../src/Pure/constants/lemmata.js";
-import { writeFileSync } from "node:fs"
+import { lemmataLatin } from "../../src/Pure/constants/lemmataLatin.js";
 
 
 /**
  * Deep copy object and sort alphabetically
  * @param {object} obj 
  */
-function sort(obj) {
+export function sort(obj) {
     const sortedKeys = Object.keys(obj).sort()
     const sortedObj = {}
     sortedKeys.forEach(
         (key) => {
-            sortedObj[key] = lemmata[key]
+            sortedObj[key] = lemmataLatin[key]
         }
     )
     return sortedObj
@@ -26,7 +28,7 @@ function sort(obj) {
  * 
  * @param {object} obj 
  */
-function prettyPrint(obj) {
+export function prettyPrint(obj) {
     return JSON
         .stringify(obj)
         .replace(/","/g, "\",\n\t\"")
@@ -36,22 +38,20 @@ function prettyPrint(obj) {
 
 /**
  * 
+ * @param {string} src
+ */
+export function JSONToObj(src) {
+    let json = readFileSync(src + ".json", { encoding: "utf8" })
+    return JSON.parse(json)
+}   
+
+/**
+ * 
  * @param {string} objStr 
  * @param {string} varName 
  * @param {string} varType 
  */
-function formatAsVariable(objStr, varName, varType) {
+export function formatAsVariable(objStr, varName, varType) {
     return `export ${varType} ${varName} = ` + objStr
 }
 
-/**
- * Export the lemmata object as a .js file
- */
-function lemmataToFile() {
-    const sorted = sort(lemmata)
-    const prettyPrinted = prettyPrint(sorted)
-    const variable = formatAsVariable(prettyPrinted, "lemmata", "const")
-    writeFileSync("sorted.js", variable)    
-}
-
-lemmataToFile()

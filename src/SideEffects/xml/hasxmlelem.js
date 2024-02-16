@@ -4,6 +4,7 @@ import {
     NamespaceError 
 } from "../../Errors/xml.js"
 import NamedNodeMap_ from "../../Pure/namednodemap_.js"
+import Elem from "../elem.js"
 
 export default class HasXMLElem {
     #elem 
@@ -14,6 +15,25 @@ export default class HasXMLElem {
      */
     constructor(elem) {
         this.#elem = elem
+    }
+
+    get ancestors() {
+        
+        /**
+         * @param {Element[]} acc
+         * @param {Element} elem
+         * @return {Element[]}
+         */ 
+        const getAncestors = (acc, elem) => {
+            const parent = elem.parentElement
+            if (parent == null) {
+                return acc
+            } 
+            acc.push(parent)
+            return getAncestors(acc, parent)
+        }
+
+        return getAncestors([], this.#elem)
     }
 
     /**

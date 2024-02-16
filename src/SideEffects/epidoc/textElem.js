@@ -5,7 +5,9 @@ import Base from "../../Pure/base.js";
 import Compress from "../../Pure/compress.js";
 import Convert from "../../Pure/convert.js";
 import Validator from "../../Pure/validator.js";
-import { lemmata } from "../../Pure/constants/lemmata.js"
+import "../../Types/typedefs.js"
+import { lemmataLatin } from "../../Pure/constants/lemmataLatin.js"
+import { lemmataGreek } from "../../Pure/constants/lemmataGreek.js"
 
 
 const {TEINS, XMLNS} = Constants
@@ -84,9 +86,13 @@ export default class TextElem extends EpiDocElem {
         return this.elem.getAttribute("lemma")
     }
 
-    lemmatise() {
-        if (Object.keys(lemmata).includes(this.form)) {
-            this.elem.setAttribute("lemma", lemmata[this.form])
+    /**
+     * 
+     * @param {Lang} lang 
+     */
+    lemmatise(lang) {
+        if (Object.keys(latin_lemmata).includes(this.form)) {
+            this.elem.setAttribute("lemma", latin_lemmata[this.form])
         }
     }
 

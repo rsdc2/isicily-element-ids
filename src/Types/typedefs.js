@@ -5,3 +5,7 @@
 /**
  * @typedef {"lemmatise"} LemmatiserMode
  */
+
+/**
+ * @typedef {"la"|"grc"} Lang
+ */

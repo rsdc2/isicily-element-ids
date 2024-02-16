@@ -95,7 +95,7 @@ export default class NullIDBlocks {
         function indexOfNextID(textelems, startIdx) {
 
             for (let i=startIdx; i<textelems.length; i++) {
-                const xmlid = textelems[i].xmlid
+                const xmlid = textelems[i].xmlID
                 if (xmlid != null) {
                     return i
                 }
@@ -113,20 +113,20 @@ export default class NullIDBlocks {
         // where the sequences of null IDs are
         textelems.elems.forEach(
             (elem, i, elems) => {
-                if (elem.xmlid == null) {
+                if (elem.xmlID == null) {
                     if (!NullIDBlocks.containIndex(blocks, i)) {
                         const nextIDIndex = indexOfNextID(elems, i);
                         const nullidblock = new NullIDBlock(
                             i, 
                             nextIDIndex - 1, 
                             lastXMLID, 
-                            elems[nextIDIndex].xmlid, 
+                            elems[nextIDIndex].xmlID, 
                             base
                         )
                         blocks.push(nullidblock);
                     }
                 } else {
-                    lastXMLID = elem.xmlid;
+                    lastXMLID = elem.xmlID;
                 }
             }
         )

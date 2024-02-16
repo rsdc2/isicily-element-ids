@@ -26,7 +26,7 @@ test("Unique ID assertion throws error when IDs not unique", (t) => {
     )
 
     const elems = nonUniqueIDsDoc.textElems.elems.filter(
-        elem => elem.xmlid != null
+        elem => elem.xmlID != null
     )
 
     assert.throws(

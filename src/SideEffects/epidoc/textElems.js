@@ -29,7 +29,7 @@ export default class TextElems {
 
     assertAllElementsHaveID() {
         this.elems.forEach( (elem) => {
-            if (elem.xmlid == null) {
+            if (elem.xmlID == null) {
                 throw new NullIDError(
                     "At least one text element does not have an @xml:id"
                 )
@@ -43,7 +43,7 @@ export default class TextElems {
      */
     static assertAllIDsAreValidForBase(elems, base) {
         elems.forEach( (elem) => {
-            Validator.assertFullCompressedID(elem.xmlid, base)
+            Validator.assertFullCompressedID(elem.xmlID, base)
         })
     }
 
@@ -53,8 +53,8 @@ export default class TextElems {
      */
     assertAllIDsAreCompressedOrNull(base) {
         this.elems.forEach( (elem) => {
-            if (elem.xmlid !== null) {
-                Validator.assertFullCompressedID(elem.xmlid, base)
+            if (elem.xmlID !== null) {
+                Validator.assertFullCompressedID(elem.xmlID, base)
             }  
         })        
     }
@@ -63,7 +63,7 @@ export default class TextElems {
      * @returns {boolean}
      */
     assertFirstElemHasID() {
-        if (this.first.xmlid == null) {
+        if (this.first.xmlID == null) {
             throw new MidpointIDError("First element has no @xml:id")
         }
         return true
@@ -74,7 +74,7 @@ export default class TextElems {
      * @param {TextElem[]} elems 
      */
     static assertIDsUnique(elems) {
-        const ids = elems.map(elem => elem.xmlid)
+        const ids = elems.map(elem => elem.xmlID)
         const set = new Set(ids)
 
         if (ids.length !== set.size) {
@@ -92,7 +92,7 @@ export default class TextElems {
      * @param {TextElem[]} elems 
      */
     assertNonNullIDsUnique(elems) {
-        const nonNullIDElems = elems.filter(elem => elem.xmlid != null)
+        const nonNullIDElems = elems.filter(elem => elem.xmlID != null)
 
         TextElems.assertIDsUnique(nonNullIDElems)
 
@@ -118,9 +118,9 @@ export default class TextElems {
         } 
         const elems = this.disjoint(localNames)
         elems.forEach ( elem => {
-            if (elem.xmlid != null) {
+            if (elem.xmlID != null) {
                 throw new UnexpectedIDError(
-                    `Element with ID ${elem.xmlid} ` +
+                    `Element with ID ${elem.xmlID} ` +
                     `has an @xml:id attribute. This is not expected ` + 
                     `because its localName ("${elem.localName}") is not ` +
                     `in the set of localNames that are supposed to receive ` +
@@ -136,7 +136,7 @@ export default class TextElems {
     assertNoIDs() {
         this.elems.forEach(
             (elem) => {
-                if (elem.xmlid != null) {
+                if (elem.xmlID != null) {
                     throw new NullIDError(
                         "At least one text element has an @xml:id attribute"
                     )
@@ -151,14 +151,14 @@ export default class TextElems {
      */
     static assertNoNullIDs(elems) {
         elems.forEach( elem => {
-            if (elem.xmlid == null) {
+            if (elem.xmlID == null) {
                 throw new NullIDError("Null ID found")
             }
         })
     }
 
     assertLastElemHasID() {
-        if (this.last.xmlid == null) {
+        if (this.last.xmlID == null) {
             throw new MidpointIDError("Last element has no @xml:id")
         }
         return true
@@ -186,7 +186,7 @@ export default class TextElems {
     convertXMLIDs(oldBase, newBase) {
         this.elems.forEach ( (elem) => { 
             try {
-                Validator.assertFullCompressedID(elem.xmlid, oldBase)
+                Validator.assertFullCompressedID(elem.xmlID, oldBase)
             } catch (error) {
                 if (error instanceof ValidationError) {
                     throw error
@@ -352,7 +352,7 @@ export default class TextElems {
      * All the \@xml:id values
      */
     get xmlIDs() {
-        return this.#elems.map( elem => elem.xmlid )
+        return this.#elems.map( elem => elem.xmlID )
     }
 
 }

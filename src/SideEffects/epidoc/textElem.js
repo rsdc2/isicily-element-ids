@@ -8,6 +8,7 @@ import Validator from "../../Pure/validator.js";
 import "../../Types/typedefs.js"
 import { lemmataLatin } from "../../Pure/constants/lemmataLatin.js"
 import { lemmataGreek } from "../../Pure/constants/lemmataGreek.js"
+import { ISicElementIDError } from "../../Errors/isicElementIDError.js";
 
 
 const {TEINS, XMLNS} = Constants
@@ -24,7 +25,7 @@ export default class TextElem extends EpiDocElem {
      * @param {Base} base 
      */
     compressID (base) {
-        const compressed = Compress.compressID(base)(this.xmlid)
+        const compressed = Compress.compressID(base)(this.xmlID)
         this.setXMLID({
             id: compressed, 
             override: true,
@@ -40,7 +41,7 @@ export default class TextElem extends EpiDocElem {
      * @param {Base} newBase 
      */
     convertID (oldBase, newBase) {
-        const oldID = this.xmlid
+        const oldID = this.xmlID
 
         // Only convert the ID if one is already present
         if (oldID != null) {
@@ -59,9 +60,9 @@ export default class TextElem extends EpiDocElem {
      * @param {Base} base 
      */
     expandID (base) {
-        Validator.assertFullCompressedID(this.xmlid, base)
+        Validator.assertFullCompressedID(this.xmlID, base)
 
-        const expanded = Compress.decompressID(base)(this.xmlid)
+        const expanded = Compress.decompressID(base)(this.xmlID)
         this.setXMLID({
             id: expanded, 
             override: true, 
@@ -71,7 +72,7 @@ export default class TextElem extends EpiDocElem {
     }
 
     get form() {
-        return this.elem.textContent
+        return this.elem.textContent.replace(/\s/g, "")
     }
 
     /**
@@ -87,12 +88,49 @@ export default class TextElem extends EpiDocElem {
     }
 
     /**
-     * 
-     * @param {Lang} lang 
+     * Get the @xml:lang attribute of the nearest ancestor
+     * <ab> or <div type="edition">
      */
-    lemmatise(lang) {
-        if (Object.keys(latin_lemmata).includes(this.form)) {
-            this.elem.setAttribute("lemma", latin_lemmata[this.form])
+    get xmlLang() {
+        const ab = this.ancestorAb
+        if (ab == null) {
+            throw new ISicElementIDError("No ancestor <ab>")
+        }
+
+        const abLang = this.ancestorAb.getAttributeNS(XMLNS, "lang")
+
+        if (abLang != null) {
+            return abLang
+        }
+
+        const edition = this.ancestorEdition
+
+        if (edition == null) {
+            throw new ISicElementIDError("No ancestor <edition>")
+        }
+
+        const editionLang = this.ancestorEdition.getAttributeNS(XMLNS, "lang")
+
+        return editionLang
+    }
+
+    /**
+     * Lemmatise the text element according to the 
+     * language of the closest ancestor <ab> 
+     * or <div type="edition"> 
+     */
+    lemmatise() {
+        if (this.form == null || this.form === "") {
+            return
+        }
+        if (this.xmlLang === "la") {
+            if (Object.keys(lemmataLatin).includes(this.form)) {
+                this.elem.setAttribute("lemma", lemmataLatin[this.form])
+            }    
+        } else if (this.xmlLang === "grc") {
+            if (Object.keys(lemmataGreek).includes(this.form)) {
+                this.elem.setAttribute("lemma", lemmataGreek[this.form])
+            }
         }
     }
 
@@ -121,14 +159,14 @@ export default class TextElem extends EpiDocElem {
             throw new NullIDError("Tried to add an empty ID")
         }
 
-        if (this.xmlid === null || override === true) {
+        if (this.xmlID === null || override === true) {
             // Assign ID for the first time, or override
             this.elem.setAttributeNS(XMLNS, "id", id)
 
         } else if (existingIDError) {
             // Throw an error if element already has an ID
             throw new ExistingIDError(
-                this.xmlid,
+                this.xmlID,
                 this.elem
             )
 
@@ -142,11 +180,8 @@ export default class TextElem extends EpiDocElem {
      * Get the \@xml:id attribute value
      * @returns {string | null}
      */
-    get xmlid() {
+    get xmlID() {
         return this.elem.getAttributeNS(XMLNS, "id")
     }
-    
-
-
 
 }

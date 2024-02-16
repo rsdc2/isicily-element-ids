@@ -56,8 +56,8 @@ test("Put an @xml:id on element subset", (t) => {
 
     const lbs = elems.subset(["lb"])
     const ws = elems.subset(["w"])
-    assert.strictEqual(lbs[0].xmlid, null)
-    assert.notStrictEqual(ws[0].xmlid, null)
+    assert.strictEqual(lbs[0].xmlID, null)
+    assert.notStrictEqual(ws[0].xmlID, null)
 })
 
 
@@ -105,7 +105,7 @@ test("Put midpoints on only subset of elements", (t) => {
 
     elemSubset.forEach( elem => {
         assert.notStrictEqual(
-            elem.xmlid, 
+            elem.xmlID, 
             null, 
             "Element that should have been given an @xml:id has null @xml:id"
         )
@@ -115,7 +115,7 @@ test("Put midpoints on only subset of elements", (t) => {
 
     elemDisjoint.forEach( elem => {
         assert.strictEqual(
-            elem.xmlid, 
+            elem.xmlID, 
             null, 
             "Element that should not have been given an @xml:id has been given an @xml:id"
         )

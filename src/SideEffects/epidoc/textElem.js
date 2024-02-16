@@ -5,6 +5,7 @@ import Base from "../../Pure/base.js";
 import Compress from "../../Pure/compress.js";
 import Convert from "../../Pure/convert.js";
 import Validator from "../../Pure/validator.js";
+import { lemmata } from "../../Pure/constants/lemmata.js"
 
 
 const {TEINS, XMLNS} = Constants
@@ -67,12 +68,26 @@ export default class TextElem extends EpiDocElem {
         })
     }
 
+    get form() {
+        return this.elem.textContent
+    }
+
     /**
      * Create a new TextElem from an Element
      * @param {Element} elem 
      */
     static fromElem(elem) {
         return new TextElem(elem)
+    }
+
+    get lemma() {
+        return this.elem.getAttribute("lemma")
+    }
+
+    lemmatise() {
+        if (Object.keys(lemmata).includes(this.form)) {
+            this.elem.setAttribute("lemma", lemmata[this.form])
+        }
     }
 
     removeXMLID() {

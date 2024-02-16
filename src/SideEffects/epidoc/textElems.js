@@ -12,6 +12,7 @@ import Validator from "../../Pure/validator.js"
 import { ValidationError } from "../../Errors/validation.js"
 import { TextElemsIndexError } from "../../Errors/epidoc.js"
 
+
 /**
  * Represents a collection of text elements
  */
@@ -81,8 +82,6 @@ export default class TextElems {
                 `${ids}\n` + 
                 `vs.\n` + 
                 `${Array.from(set.entries())}`
-
-            // console.log(msg)
             
             throw new UniqueIDError(msg)            
         }
@@ -250,6 +249,15 @@ export default class TextElems {
         return this.length - 1
     }
 
+    /**
+     * 
+     * @param {string[]} localNames 
+     */
+    lemmatise(localNames) {
+        const elems = this.subset(localNames)
+        elems.forEach( elem => elem.lemmatise() )
+    }
+
     get length() {
         return this.#elems.length
     }
@@ -275,10 +283,7 @@ export default class TextElems {
         this.assertAllIDsAreCompressedOrNull(base)
         this.assertNoElemsOutsideLocalNameSubsetHaveIDs(localNames)
 
-        let elems = this.#elems
-        if (localNames.length !== 0) {
-            elems = this.subset(localNames)
-        }
+        const elems = this.subset(localNames)
 
         const blocks = NullIDBlocks.fromTextElemArray(elems, base)
         const elemsWithIDs = blocks.assignIDs()
@@ -314,11 +319,7 @@ export default class TextElems {
     setXMLIDs(base, docid, localNames = []) {
         this.assertNoElemsOutsideLocalNameSubsetHaveIDs(localNames)
 
-        let elems = this.elems
-
-        if (localNames.length > 0) {
-            elems = this.subset(localNames)
-        }
+        const elems = this.subset(localNames)
 
         this.#setXMLIDsToElems({elems: elems, base: base, docId: docid})
         TextElems.assertIDsUnique(elems)
@@ -333,20 +334,24 @@ export default class TextElems {
 
     /**
      * Return those text elements whose localName 
-     * is included in localNames
+     * is included in localNames. If localNames is
+     * empty, returns all the text elements
      * @param {string[]} localNames localNames of elements required 
      * @returns {TextElem[]}
      */
     subset(localNames) {
+        if (localNames.length === 0) {
+            return this.elems
+        }
         return this.elems.filter(
             elem => localNames.includes(elem.localName)
         )
     }
-
+ 
     /**
      * All the \@xml:id values
      */
-    get xmlIds() {
+    get xmlIDs() {
         return this.#elems.map( elem => elem.xmlid )
     }
 

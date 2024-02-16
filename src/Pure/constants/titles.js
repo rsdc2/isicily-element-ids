@@ -25,6 +25,9 @@ const titles = new Map(
 
     ["flip-btn", "Swap positions of the compressed / decompressed IDs"],
 
+    ["lemmatize-file-btn", "Load an EpiDoc file and download a version with " +
+                                "lemmata added on token elements"],
+
     ["midpoint-btn", "Find the ID at the midpoint between two IDs"],
     
     ["remove-all-xml-id-btn", "Load a tokenized EpiDoc XML file with IDs and " +

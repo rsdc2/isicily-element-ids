@@ -92,6 +92,10 @@ export default class Elems {
         /** @type {HTMLButtonElement} */ 
         (document.getElementById("flip-btn"))
 
+    static lemmatizeFileBtn = 
+        /** @type {HTMLButtonElement} */ 
+        (document.getElementById("lemmatize-file-btn"))
+
     static removeAllXMLIDBtn = 
         /** @type {HTMLButtonElement} */ 
         (document.getElementById("remove-all-xml-id-btn"))

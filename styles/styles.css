@@ -16,13 +16,12 @@ body {
 }
 
 button {
-  background-color: white;
+  background-color: lightblue;
   color: black;
   padding: 10px;
   border: none;
   margin: 0px;
   font-size: medium;
-  outline: auto;
   outline-color: black;
 }
 

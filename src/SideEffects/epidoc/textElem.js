@@ -87,32 +87,6 @@ export default class TextElem extends EpiDocElem {
         return this.elem.getAttribute("lemma")
     }
 
-    /**
-     * Get the @xml:lang attribute of the nearest ancestor
-     * <ab> or <div type="edition">
-     */
-    get xmlLang() {
-        const ab = this.ancestorAb
-        if (ab == null) {
-            throw new ISicElementIDError("No ancestor <ab>")
-        }
-
-        const abLang = this.ancestorAb.getAttributeNS(XMLNS, "lang")
-
-        if (abLang != null) {
-            return abLang
-        }
-
-        const edition = this.ancestorEdition
-
-        if (edition == null) {
-            throw new ISicElementIDError("No ancestor <edition>")
-        }
-
-        const editionLang = this.ancestorEdition.getAttributeNS(XMLNS, "lang")
-
-        return editionLang
-    }
 
     /**
      * Lemmatise the text element according to the 
@@ -183,5 +157,33 @@ export default class TextElem extends EpiDocElem {
     get xmlID() {
         return this.elem.getAttributeNS(XMLNS, "id")
     }
+
+    /**
+     * Get the @xml:lang attribute of the nearest ancestor
+     * <ab> or <div type="edition">
+     */
+    get xmlLang() {
+        const ab = this.ancestorAb
+        if (ab == null) {
+            throw new ISicElementIDError("No ancestor <ab>")
+        }
+
+        const abLang = this.ancestorAb.getAttributeNS(XMLNS, "lang")
+
+        if (abLang != null) {
+            return abLang
+        }
+
+        const edition = this.ancestorEdition
+
+        if (edition == null) {
+            throw new ISicElementIDError("No ancestor <edition>")
+        }
+
+        const editionLang = this.ancestorEdition.getAttributeNS(XMLNS, "lang")
+
+        return editionLang
+    }
+
 
 }

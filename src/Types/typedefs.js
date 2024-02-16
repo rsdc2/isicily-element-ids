@@ -5,7 +5,3 @@
 /**
  * @typedef {"lemmatise"} LemmatiserMode
  */
-
-export class TypeDefs {
-
-}

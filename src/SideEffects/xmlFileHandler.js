@@ -4,7 +4,9 @@ import Message from "./message.js"
 import { FileError } from "../Errors/file.js"
 import { handleXMLIDOnLoad } from "./xmlID.js"
 import { handleLemmatiseOnLoad } from "./lemmatiser.js"
-import * as TypeDefs from "../Types/typedefs.js"
+
+// cf. https://stackoverflow.com/questions/49836644/how-to-import-a-typedef-from-one-file-to-another-in-jsdoc-using-node-js
+import "../Types/typedefs.js"
 
 
 export default class xmlFileHandler {
@@ -15,7 +17,7 @@ export default class xmlFileHandler {
      * Create a new XMLIDApplier instance that applies IDs
      * to tokens in a tokenized EpiDoc XML file.
      * @param {"lemmatise"|"xmlid"} modeType
-     * @param {TypeDefs.XMLIDMode | null} mode 
+     * @param {XMLIDMode | null} mode 
      */
     constructor(modeType, mode) {
         
@@ -40,7 +42,7 @@ export default class xmlFileHandler {
      * Create a new XMLIDApplier instance that applies IDs
      * to tokens in a tokenized EpiDoc XML file.
      * @param {"lemmatise"|"xmlid"} modeType
-     * @param {TypeDefs.XMLIDMode | null} mode 
+     * @param {XMLIDMode | null} mode 
      * @returns 
      */
     static create(modeType, mode) {

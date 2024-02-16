@@ -3,13 +3,13 @@ import EpiDoc from "./epidoc/epidoc.js"
 import FileDownloader from "./fileDownloader.js"
 import Message from "./message.js"
 import { ISicElementIDError } from "../Errors/isicElementIDError.js"
-import * as TypeDefs from "../Types/typedefs.js"
+import "../Types/typedefs.js" // cf. https://stackoverflow.com/questions/49836644/how-to-import-a-typedef-from-one-file-to-another-in-jsdoc-using-node-js
 
 
 
 /**
  * 
- * @param {TypeDefs.LemmatiserMode} mode
+ * @param {LemmatiserMode} mode
  */
 export function handleLemmatiseOnLoad (mode) {
     /**

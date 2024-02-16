@@ -287,8 +287,8 @@ export default class TextElems {
 
         const blocks = NullIDBlocks.fromTextElemArray(elems, base)
         const elemsWithIDs = blocks.assignIDs()
-        // this.assertNonNullIDsUnique()
-        // this.assertAllIDsAreValidForBase(elems.filter(elem => elem.xmlid != null), base)
+        TextElems.assertIDsUnique(elems)
+        TextElems.assertAllIDsAreValidForBase(elems, base)
         return elemsWithIDs
     }
 

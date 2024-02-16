@@ -16,6 +16,13 @@ export class Map_ {
         return NamedNodeMap_.toMap(nodemap)
     }
 
+    // /**
+    //  * 
+    //  * @param {object} obj 
+    //  */
+    // static fromObject(obj) {
+    //     const keys = 
+    // }
     
 
 }

@@ -25,7 +25,7 @@ export default class Parametrized {
                 const [orig, benchmark, name] = tuple
                 const actual = callback(orig)
                 test (name, (t) => {
-                    assert.strictEqual(actual, benchmark)
+                    assert.strictEqual(actual, benchmark, name)
                 })
             }
         ) 

@@ -9,6 +9,8 @@ import "../../Types/typedefs.js"
 import { lemmataLatin } from "../../Pure/constants/lemmataLatin.js"
 import { lemmataGreek } from "../../Pure/constants/lemmataGreek.js"
 import { ISicElementIDError } from "../../Errors/isicElementIDError.js";
+import { lemmatise } from "../../Pure/lemmatise.js";
+
 
 
 const {TEINS, XMLNS} = Constants
@@ -94,18 +96,10 @@ export default class TextElem extends EpiDocElem {
      * or <div type="edition"> 
      */
     lemmatise() {
-        if (this.form == null || this.form === "") {
-            return
-        }
-        if (this.xmlLang === "la") {
-            if (Object.keys(lemmataLatin).includes(this.form)) {
-                this.elem.setAttribute("lemma", lemmataLatin[this.form])
-            }    
-        } else if (this.xmlLang === "grc") {
-            if (Object.keys(lemmataGreek).includes(this.form)) {
-                this.elem.setAttribute("lemma", lemmataGreek[this.form])
-            }
-        }
+        this.elem.setAttribute(
+            "lemma", 
+            lemmatise(this.xmlLang)(this.form)
+        )
     }
 
     removeXMLID() {

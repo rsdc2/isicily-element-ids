@@ -9,17 +9,17 @@ const { parametrize } = Parametrized
 
 const stringEditTests = /** @type {[[string, string], number, string][]}*/ (
     [
-        // [["abc", "abd"], 1, "abc -> abd"],
-        // [["abc", "abcd"], 1, "abc -> abcd"],
-        // [["abcde", "abce"], 1, "abcde -> abce"],
-        // [["abcd", "bed"], 2, "abcd -> bed"],
-        // [["abcde", "ace"], 2, "abcd -> bed"],
-        // [["abbcd", "abcd"], 1, "abbcd -> abcd"],
-        // [["abcbd", "abcd"], 1, "abcbd -> abcd"],
+        [["abc", "abd"], 1, "abc -> abd"],
+        [["abc", "abcd"], 1, "abc -> abcd"],
+        [["abcde", "abce"], 1, "abcde -> abce"],
+        [["abcd", "bed"], 2, "abcd -> bed"],
+        [["abcde", "ace"], 2, "abcd -> bed"],
+        [["abbcd", "abcd"], 1, "abbcd -> abcd"],
+        [["abcbd", "abcd"], 1, "abcbd -> abcd"],
         // [["abczzzabc", "abcabc"], 3, "abczzzabc -> abcabc"]
     ]) 
 
-// parametrize(stringEditTests, comparison)
+parametrize(stringEditTests, comparison)
 
 
 // const findNearestZeroTests =  /** @type {[number[][], [number, number], string][]}*/ ([

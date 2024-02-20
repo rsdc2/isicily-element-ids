@@ -227,6 +227,12 @@ export function comparison([s1, s2]) {
             continue
         }
 
+        // const closestZero = findClosestZero(dists, [i, j])
+
+        // if (closestZero === null) {
+        //     cost 
+        // }
+
         if (d != null) {
             i = i + 1
             j = j + 1

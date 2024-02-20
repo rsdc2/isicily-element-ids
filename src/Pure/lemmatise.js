@@ -3,6 +3,10 @@ import { lemmataLatin } from "../Pure/constants/lemmataLatin.js"
 import { lemmataGreek } from "../Pure/constants/lemmataGreek.js"
 import { comparison } from "../Pure/stringedit.js";
 
+const latinKeys = Object.keys(lemmataLatin)
+const greekKeys = Object.keys(lemmataGreek)
+
+
 /**
  * 
  * @param {string} lang 
@@ -18,16 +22,18 @@ export const lemmatise = (lang) =>
             return null
         }
         if (lang === "la") {
-            if (Object.keys(lemmataLatin).includes(word)) {
+            if (latinKeys.includes(word)) {
                 return lemmataLatin[word]
             } else {
-                
+                latinKeys.reduce (
+                    
+                )
             }
         } else if (lang === "grc") {
-            if (Object.keys(lemmataGreek).includes(word)) {
+            if (greekKeys.includes(word)) {
                 return lemmataGreek[word]
             } else {
-                
+
             }
         } 
 } 

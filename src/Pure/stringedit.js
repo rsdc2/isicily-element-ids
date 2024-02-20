@@ -1,13 +1,15 @@
 
 import { Arr } from "./arr.js"
 
+import "../Types/typedefs.js"
+
 /**
  * 
- * @param {string} s1
- * @param {string} s2
+ * @param {StringPair} stringPair
  * @returns {number} 
  */
-function editDistance(s1, s2) {
+
+export function editDistance([s1, s2]) {
 
     /**
      * 
@@ -47,7 +49,7 @@ function editDistance(s1, s2) {
     }
 
     const lengthDiff = s1.length - s2.length
-
+    
     
 
 }

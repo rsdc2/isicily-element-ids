@@ -2,9 +2,11 @@ import { test } from "node:test"
 import assert from "node:assert/strict"
 
 /**
+ * @template T
+ * @template U
  * @callback parametrizeCallback
- * @param {string} orig
- * @returns {string} 
+ * @param {T} orig
+ * @returns {U} 
  */
 
 
@@ -12,8 +14,10 @@ export default class Parametrized {
     /**
      * Loops through each tuple and uses the parameters
      * to run a test
-     * @param {[string, string, string][]} tuples 
-     * @param {parametrizeCallback} callback
+     * @template T
+     * @template U
+     * @param {[T, U, string][]} tuples 
+     * @param {parametrizeCallback<T, U>} callback
      */
     static parametrize(tuples, callback) {
         tuples.forEach( 

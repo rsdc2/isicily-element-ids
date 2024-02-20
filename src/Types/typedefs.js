@@ -9,3 +9,7 @@
 /**
  * @typedef {"la"|"grc"} Lang
  */
+
+/**
+ * @typedef {[string, string]} StringPair
+ */

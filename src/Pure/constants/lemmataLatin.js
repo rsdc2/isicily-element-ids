@@ -106,6 +106,7 @@ export const lemmataLatin = {
 	"Decimia":"Decimia",
 	"Decimius":"Decimius",
 	"Demetrius":"Demetrius",
+	"Deus":"Deus",
 	"Dextro":"Dextro",
 	"Diadumeni":"Diadumeni",
 	"Didia":"Didius",

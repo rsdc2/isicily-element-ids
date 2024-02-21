@@ -15,7 +15,7 @@ const stringEditTests = /** @type {[[string, string], number, string][]}*/ (
         [["abcd", "bed"], 2, "abcd -> bed"],
         [["abcde", "ace"], 2, "abcd -> bed"],
         [["abbcd", "abcd"], 1, "abbcd -> abcd"],
-        [["abcbd", "abcd"], 1, "abcbd -> abcd"],
+        [["abcbd", "abcd"], 1, "abcbd -> abcd"]
         // [["abczzzabc", "abcabc"], 3, "abczzzabc -> abcabc"]
     ]) 
 

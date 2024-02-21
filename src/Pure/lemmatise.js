@@ -3,8 +3,8 @@ import { lemmataLatin } from "../Pure/constants/lemmataLatin.js"
 import { lemmataGreek } from "../Pure/constants/lemmataGreek.js"
 import { comparison } from "../Pure/stringedit.js";
 
-const latinKeys = Object.keys(lemmataLatin)
-const greekKeys = Object.keys(lemmataGreek)
+const latinForms = Object.keys(lemmataLatin)
+const greekForms = Object.keys(lemmataGreek)
 
 
 /**
@@ -14,26 +14,48 @@ const greekKeys = Object.keys(lemmataGreek)
 export const lemmatise = (lang) => 
     /**
      * 
-     * @param {string} word 
+     * @param {string} form 
      * @returns 
      */
-    (word) => {
-        if (word == null || word === "") {
+    (form) => {
+        if (form == null || form === "") {
             return null
         }
         if (lang === "la") {
-            if (latinKeys.includes(word)) {
-                return lemmataLatin[word]
+            if (latinForms.includes(form)) {
+                return lemmataLatin[form]
             } else {
-                latinKeys.reduce (
-                    
+                const editDists = latinForms.map(
+                    /**
+                     * 
+                     * @param {string} latinForm 
+                     * @returns {[string, number]}
+                     */
+                    latinForm => [latinForm, comparison([form, latinForm])]
                 )
+                
+                const sorted = editDists.sort( ( [form1, dist1], [form2, dist2]) => dist1 - dist2 )
+                const [closestForm, dist] = sorted[0]
+                return lemmataLatin[closestForm]
             }
-        } else if (lang === "grc") {
-            if (greekKeys.includes(word)) {
-                return lemmataGreek[word]
-            } else {
 
+
+        } else if (lang === "grc") {
+            if (greekForms.includes(form)) {
+                return lemmataGreek[form]
+            } else {
+                const editDists = greekForms.map(
+                    /**
+                     * 
+                     * @param {string} greekForm 
+                     * @returns {[string, number]}
+                     */
+                    greekForm => [greekForm, comparison([form, greekForm])]
+                )
+                
+                const sorted = editDists.sort( ( [form1, dist1], [form2, dist2]) => dist1 - dist2 )
+                const [closestForm, dist] = sorted[0]
+                return lemmataGreek[closestForm]
             }
         } 
 } 

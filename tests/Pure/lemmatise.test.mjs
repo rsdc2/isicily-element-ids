@@ -11,7 +11,8 @@ const lemmatiseLatinTests = /** @type {[string, string, string][]}*/ (
     [
         ["Dis", "Deus", "Lemmatise 'Dis'"],
         ["Manibus", "Manes", "Lemmatise 'Manes'"],
-        ["Deum", "Deus", "Lemmatise 'Deum'"]
+        ["Deum", "Deus", "Lemmatise 'Deum'"],
+        ["Dei", "Deus", "Lemmatise 'Dei'"]
     ]
 )
 

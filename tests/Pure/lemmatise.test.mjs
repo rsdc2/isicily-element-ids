@@ -5,7 +5,7 @@ import Parametrized from "../utils/parametrized.mjs"
 const { parametrize } = Parametrized
 import { lemmatise } from "../../src/Pure/lemmatise.js"
 
-import { comparison } from "../../src/Pure/stringedit.js"
+import { editDistance } from "../../src/Pure/stringedit.js"
 
 const lemmatiseLatinTests = /** @type {[string, string, string][]}*/ (
     [

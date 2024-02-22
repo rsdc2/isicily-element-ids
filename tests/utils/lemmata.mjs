@@ -1,6 +1,4 @@
 import { writeFileSync } from "node:fs"
-
-import { lemmataLatin } from "../../src/Pure/constants/lemmataLatin.js"
 import {sort, prettyPrint, formatAsVariable, JSONToObj} from "./object.mjs"
 
 
@@ -29,6 +27,6 @@ function writeLemmataFromJSONToJS(src, varName, dst) {
     writeLemmataFromVarToJS(lemmata, varName, dst)
 }
 
-writeLemmataFromJSONToJS("greek_lemmata", "greek_lemmata", "greek_lemmata")
-
+writeLemmataFromJSONToJS("greek_lemmata", "lemmataGreek", "lemmataGreek")
+// writeLemmataFromJSONToJS("latin_lemmata", "lemmataLatin", "lemmataLatin")
 // writeLemmataFromJSONToJS("latin_lemmata", "latin_lemmata", "latin_lemmata")

@@ -53,7 +53,7 @@ export const lemmataLatin = {
 	"Cabaria":"Cabaria",
 	"Caecinia":"Caecinia",
 	"Caepario":"Caeparius",
-	"Caesari":"Caesaris",
+	"Caesari":"Caesar",
 	"Cai":"Cai",
 	"Caia":"Gaia",
 	"Caio":"Caius",

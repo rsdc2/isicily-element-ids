@@ -31,48 +31,48 @@ function sameLength(s1, s2) {
  * @returns {number} 
  */
 
-export function editDistance([s1, s2]) {
+// export function editDistance([s1, s2]) {
 
 
-    if (s1 === s2) {
-        return 0
-    }
+//     if (s1 === s2) {
+//         return 0
+//     }
 
-    if (s1.length === 0 && s2.length !== 0) {
-        return s2.length
-    }
+//     if (s1.length === 0 && s2.length !== 0) {
+//         return s2.length
+//     }
 
-    if (s1.length !== 0 && s2.length === 0) {
-        return s1.length
-    }
+//     if (s1.length !== 0 && s2.length === 0) {
+//         return s1.length
+//     }
 
-    if (s1.length === s2.length) {
-        return sameLength(s1, s2)        
-    }
+//     if (s1.length === s2.length) {
+//         return sameLength(s1, s2)        
+//     }
 
-    const lengthDiff = s1.length - s2.length
+//     const lengthDiff = s1.length - s2.length
     
-    const arr1D = new Array(s1.length + 1)
+//     const arr1D = new Array(s1.length + 1)
     
 
-    const dist = arr1D.map(
-        (elem) => {
-            const arr = new Array(s2.length + 1)
-            arr.map( elem => elem = 0)
-            elem = arr
-        }
-    )
+//     const dist = arr1D.map(
+//         (elem) => {
+//             const arr = new Array(s2.length + 1)
+//             arr.map( elem => elem = 0)
+//             elem = arr
+//         }
+//     )
 
-    for (let i=0; i<=s1.length; i++) {
-        dist[i][0] = i
-    }
+//     for (let i=0; i<=s1.length; i++) {
+//         dist[i][0] = i
+//     }
 
-    for (let j=0; j<=s1.length; j++) {
-        dist[j][0] = j
-    }
+//     for (let j=0; j<=s1.length; j++) {
+//         dist[j][0] = j
+//     }
 
     
-}
+// }
 
 
 /**
@@ -125,7 +125,7 @@ export function findClosestZero(arr2d, [startX, startY]) {
  * 
  * @param {[string, string]} param0 
  */
-export function comparison([s1, s2]) {
+export function editDistance([s1, s2]) {
 
     if (s1 === s2) {
         return 0
@@ -157,7 +157,7 @@ export function comparison([s1, s2]) {
 
         const arr = Arr.arr2d([s1Len, s2Len], 0)
 
-        console.log(arr)
+        // console.log(arr)
         
         for (let i=0; i<s1Len; i++) {
             for (let j=0; j<s2Len; j++) {
@@ -177,9 +177,9 @@ export function comparison([s1, s2]) {
     let i = 0, j = 0;
     let cost = 0;
 
-    console.log("x: ", s2Len, ", y: ", s1Len)
-    console.log(dists)
-    console.log(i, j, cost)
+    // console.log("x: ", s2Len, ", y: ", s1Len)
+    // console.log(dists)
+    // console.log(i, j, cost)
 
     while (i < s1Len && j < s2Len) {
 
@@ -204,7 +204,7 @@ export function comparison([s1, s2]) {
             }
             
             i = i + 1
-            console.log(i, j, cost, r, b, d)
+            // console.log(i, j, cost, r, b, d)
             continue
         } 
 
@@ -216,14 +216,14 @@ export function comparison([s1, s2]) {
             }
     
             j = j + 1
-            console.log(i, j, cost, r, b, d)
+            // console.log(i, j, cost, r, b, d)
             continue
         }
 
         if (d === 0) {
             i = i + 1
             j = j + 1
-            console.log(i, j, cost, r, b, d)
+            // console.log(i, j, cost, r, b, d)
             continue
         }
 
@@ -236,19 +236,19 @@ export function comparison([s1, s2]) {
         if (d != null) {
             i = i + 1
             j = j + 1
-            console.log(i, j, cost, r, b, d)
+            // console.log(i, j, cost, r, b, d)
             continue
         }
 
         if (b == null) {
             i = i + 1
-            console.log(i, j, cost, r, b, d)
+            // console.log(i, j, cost, r, b, d)
             continue
         }
 
         if (r == null) {
             j = j + 1
-            console.log(i, j, cost, r, b, d)
+            // console.log(i, j, cost, r, b, d)
             continue
         }
 

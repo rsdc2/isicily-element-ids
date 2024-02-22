@@ -6,8 +6,6 @@ import Compress from "../../Pure/compress.js";
 import Convert from "../../Pure/convert.js";
 import Validator from "../../Pure/validator.js";
 import "../../Types/typedefs.js"
-import { lemmataLatin } from "../../Pure/constants/lemmataLatin.js"
-import { lemmataGreek } from "../../Pure/constants/lemmataGreek.js"
 import { ISicElementIDError } from "../../Errors/isicElementIDError.js";
 import { lemmatise } from "../../Pure/lemmatise.js";
 
@@ -96,10 +94,15 @@ export default class TextElem extends EpiDocElem {
      * or <div type="edition"> 
      */
     lemmatise() {
-        this.elem.setAttribute(
-            "lemma", 
-            lemmatise(this.xmlLang)(this.form)
-        )
+        const lemma = lemmatise(this.xmlLang)(this.form)
+
+        if (lemma != null) {
+            this.elem.setAttribute(
+                "lemma", 
+                lemmatise(this.xmlLang)(this.form)
+            )
+        }
+
     }
 
     removeXMLID() {

@@ -1,6 +1,6 @@
 
 import Parametrized from "../utils/parametrized.mjs"
-import { comparison, findClosestZero } from "../../src/Pure/stringedit.js"
+import { editDistance, findClosestZero } from "../../src/Pure/stringedit.js"
 import { test } from "node:test"
 import assert from "node:assert/strict"
 
@@ -19,7 +19,7 @@ const stringEditTests = /** @type {[[string, string], number, string][]}*/ (
         // [["abczzzabc", "abcabc"], 3, "abczzzabc -> abcabc"]
     ]) 
 
-parametrize(stringEditTests, comparison)
+parametrize(stringEditTests, editDistance)
 
 
 // const findNearestZeroTests =  /** @type {[number[][], [number, number], string][]}*/ ([

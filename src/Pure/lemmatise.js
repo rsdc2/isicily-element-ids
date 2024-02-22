@@ -4,7 +4,8 @@ import { editDistance } from "../Pure/stringedit.js";
 
 const latinForms = Object.keys(lemmataLatin)
 const greekForms = Object.keys(lemmataGreek)
-
+const stringEditThreshold = 1
+const formLengthThreshold = 2
 
 /**
  * 
@@ -25,7 +26,7 @@ export const lemmatise = (lang) =>
                 return lemmataLatin[form]
             } else {
 
-                if (form.length < 4) {
+                if (form.length <= formLengthThreshold) {
                     return null
                 }
                 const editDists = latinForms.map(
@@ -40,7 +41,7 @@ export const lemmatise = (lang) =>
                 const sorted = editDists.sort( ( [form1, dist1], [form2, dist2]) => dist1 - dist2 )
                 const [closestForm, dist] = sorted[0]
 
-                if (dist <= 1) {
+                if (dist <= stringEditThreshold) {
                     return lemmataLatin[closestForm]
                 } 
 
@@ -53,7 +54,7 @@ export const lemmatise = (lang) =>
             if (greekForms.includes(form)) {
                 return lemmataGreek[form]
             } else {
-                if (form.length < 4) {
+                if (form.length < formLengthThreshold) {
                     return
                 }
                 const editDists = greekForms.map(
@@ -68,7 +69,7 @@ export const lemmatise = (lang) =>
                 const sorted = editDists.sort( ( [form1, dist1], [form2, dist2]) => dist1 - dist2 )
                 const [closestForm, dist] = sorted[0]
 
-                if (dist <= 1) {
+                if (dist <= stringEditThreshold) {
                     return lemmataGreek[closestForm]
                 }
 

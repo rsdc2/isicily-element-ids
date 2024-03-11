@@ -128,10 +128,13 @@ export const Arr = {
     },
 
     /**
+     * Returns an array of the the coordinates in a 2d array of type T
+     * of all the entities of type T matching the value of toFind
      * @template T
      * @param {T[][]} arr 
      * @param {T} toFind 
      * @param {[number, number]} [start = [0, 0]]
+     * @returns {[number, number][]}
      */
     find2d: (arr, toFind, [startX, startY] = [0, 0]) => {
         const coords = /** @type {[number, number][]} */ ([])

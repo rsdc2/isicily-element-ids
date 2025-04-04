@@ -15,6 +15,8 @@ export default class EpiDoc extends HasXMLDoc {
      */
     constructor(doc) {
         super(doc)
+
+        // Check that correct namespace
         this.assertTEINameAndNS()
     }
 

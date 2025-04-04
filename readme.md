@@ -1,4 +1,14 @@
-# Element ID generator and resolver for I.Sicily (α, currently under active development)
+<div>
+  <img align="left" valign="center" src="assets/ISicily.jpg?raw=true" alt="isicily logo" height="80" >
+  <img align="left" valign="center" src="assets/oxford.png?raw=true" alt="oxford logo" height="80"  style="padding-top: 80px" >
+  <img align="left" valign="center" src="assets/EU_ERC.jpg?raw=true" alt="erc logo" height="80" >
+</div>
+<br clear="all">
+
+![Alt text](assets/screenshot.png "Screenshot")
+
+
+# Element ID generator and resolver for I.Sicily
 
 This is a resolver and generator for token IDs on token elements in the [I.Sicily](https://github.com/ISicily/ISicily) corpus of inscriptions from ancient Sicily.
 

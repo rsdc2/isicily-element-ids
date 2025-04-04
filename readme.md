@@ -5,8 +5,6 @@
 </div>
 <br clear="all">
 
-
-
 # Element ID generator and resolver for I.Sicily
 
 This is a resolver and generator for token IDs on token elements in the [I.Sicily](https://github.com/ISicily/ISicily) corpus of inscriptions from ancient Sicily.

@@ -112,3 +112,5 @@ The Element ID resolver / generator requires:
 ## Acknowledgements
 
 The software for the ISicily Element ID resolver / generator was written by Robert Crellin as part of the Crossreads project at the Faculty of Classics, University of Oxford, and is licensed under the MIT license. This project has received funding from the European Research Council (ERC) under the European Union’s Horizon 2020 research and innovation programme (grant agreement No 885040, “Crossreads”).
+
+Example and test ```.xml``` files contained in ```tests/``` subfolders, as well as elsewhere in the source code, are either directly form, or derived for testing purposes from, the [I.Sicily corpus](https://github.com/ISicily/ISicily), which are made available under the [CC-BY-4.0 licence](https://creativecommons.org/licenses/by/4.0/) (see [LICENSES/LICENSE-texts](LICENSES/LICENSE-texts)).

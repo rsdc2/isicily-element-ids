@@ -51,12 +51,6 @@ The CSV file must adhere to the following format:
 
 ## Running and building
 
-### On Github Pages
-
-Follow this link:
-
-[https://rsdc2.github.io/isicily-element-ids/](https://rsdc2.github.io/isicily-element-ids/)
-
 ### Running locally
 
 - Clone the repository:
